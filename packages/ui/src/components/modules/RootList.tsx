@@ -32,32 +32,32 @@ const RootListItems = React.forwardRef<
     <ScrollArea
       ref={ref}
       className={clsx(
-        "ui--mx-6 ui--mb-6 ui-max-h-[360px] ui-overflow-auto ui-px-6 ui-pb-6",
-        className
+        "-mx-6 -mb-6 max-h-[350px] min-h-[350px] overflow-auto px-6 pb-6",
+        className,
       )}
       {...props}
     >
-      <ColumnWithDividers className="ui-gap-y-2">
+      <ColumnWithDividers className="gap-y-2">
         {!items.length ? (
-          <div className="ui-flex ui-items-center ui-justify-center ui-p-2">
-            <span className="ui-text-lg ui-text-muted-foreground">
-              No results found
+          <div className="absolute inset-0 flex items-center justify-center p-2">
+            <span className="text-muted-foreground text-lg">
+              No results found.
             </span>
           </div>
         ) : (
           items.map((item, index) => (
             <div
               key={index}
-              className="ui-flex ui-items-center ui-justify-between ui-rounded-lg ui-p-2 ui-px-4 ui-hover:bg-accent"
+              className="hover:bg-accent flex items-center justify-between rounded-lg p-2 px-4"
             >
-              <div className="ui-flex ui-items-center ui-space-x-4">
+              <div className="flex items-center space-x-4">
                 <Badge>{item.lexemes} Lexemes</Badge>
-                <Avatar className="ui-h-8 ui-w-8">
+                <Avatar className="h-8 w-8">
                   <AvatarImage src={item.avatar} alt="Avatar" />
                   <AvatarFallback>AV</AvatarFallback>
                 </Avatar>
               </div>
-              <span className="ui-text-xl ui-font-semibold">{item.root}</span>
+              <span className="text-xl font-semibold">{item.root}</span>
             </div>
           ))
         )}
@@ -87,14 +87,14 @@ const RootListSearchBar = React.forwardRef<
         <>
           <Search
             className={clsx(
-              "ui-h-5 ui-w-5 ui-text-muted-foreground ui-transition-all",
-              isEmpty ? "ui-rotate-0 ui-scale-100" : "ui--rotate-90 ui-scale-0"
+              "text-muted-foreground h-4 w-4 transition-all",
+              isEmpty ? "rotate-0 scale-100" : "-rotate-90 scale-0",
             )}
           />
           <Button
             className={clsx(
-              "ui-absolute ui-h-5 ui-w-5 ui-text-muted-foreground ui-transition-all",
-              isEmpty ? "ui--rotate-90 ui-scale-0" : "ui-rotate-0 ui-scale-100"
+              "text-muted-foreground absolute h-5 w-5 transition-all",
+              isEmpty ? "-rotate-90 scale-0" : "rotate-0 scale-100",
             )}
             size="icon"
             variant="ghost"
@@ -120,25 +120,25 @@ const RootList = React.forwardRef<HTMLDivElement, RootListProps>(
 
     return (
       <Card ref={ref} className={clsx("", className)} {...props}>
-        <CardHeader className="ui-flex ui-flex-row ui-items-center ui-justify-between ui-space-y-0 ui-pb-2">
-          <CardTitle className="ui-text-2xl ui-font-bold">Root List</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0">
+          <CardTitle className="text-2xl font-bold">Root List</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="ui-flex ui-items-center ui-space-x-2 ui-pb-2">
+          <div className="flex items-center space-x-2 mb-4">
             <RootListSearchBar
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onClear={() => setQuery("")}
             />
             <Button variant="outline" size="icon">
-              <Filter className="ui-h-4 ui-w-4 ui-text-muted-foreground" />
+              <Filter className="text-muted-foreground h-4 w-4" />
             </Button>
           </div>
           <RootListItems items={filteredItems} />
         </CardContent>
       </Card>
     );
-  }
+  },
 );
 RootList.displayName = "RootList";
 

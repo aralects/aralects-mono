@@ -28,15 +28,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div
-        className={cn("ui-relative", full && "ui-w-full", containerClassName)}
+        className={cn("relative", full && "w-full", containerClassName)}
         {...otherContainerProps}
       >
         <input
           type={type}
           className={cn(
-            "ui-flex ui-h-10 ui-w-full ui-rounded-md ui-border ui-border-input ui-bg-background ui-px-3 ui-py-2 ui-text-sm ui-ring-offset-background ui-file:border-0 ui-file:bg-transparent ui-file:text-sm ui-file:font-medium ui-file:text-foreground ui-placeholder:text-muted-foreground ui-focus-visible:outline-none ui-focus-visible:ring-2 ui-focus-visible:ring-ring ui-focus-visible:ring-offset-2 ui-disabled:cursor-not-allowed ui-disabled:opacity-50",
-            icon && iconPosition === "left" && "ui-pl-10",
-            icon && iconPosition === "right" && "ui-pr-10",
+            "border-input bg-background ring-offset-background file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+            icon && iconPosition === "left" && "pl-10",
+            icon && iconPosition === "right" && "pr-10",
             className,
           )}
           ref={ref}
@@ -45,8 +45,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {icon && (
           <div
             className={cn(
-              "ui-absolute ui-top-1/2 ui-flex ui--translate-y-1/2 ui-transform ui-items-center ui-justify-center ui-text-muted-foreground",
-              iconPosition === "left" ? "ui-left-3" : "ui-right-3",
+              "text-muted-foreground absolute top-1/2 flex -translate-y-1/2 transform items-center justify-center",
+              iconPosition === "left" ? "left-3" : "right-3",
             )}
             aria-hidden="true"
           >

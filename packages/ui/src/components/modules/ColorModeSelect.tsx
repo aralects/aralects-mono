@@ -33,10 +33,10 @@ const ColorModeSelect = React.forwardRef<
 
   return (
     <Select {...props} value={theme} onValueChange={setTheme}>
-      <SelectTrigger className="ui-relative ui-w-auto" ref={ref}>
-        <Sun className="ui-mr-1 ui-h-5 ui-w-5 ui-rotate-0 ui-scale-100 ui-transition-all dark:ui--rotate-90 dark:ui-scale-0" />
-        <Moon className="ui-absolute ui-mr-1 ui-h-5 ui-w-5 ui-rotate-90 ui-scale-0 ui-transition-all dark:ui-rotate-0 dark:ui-scale-100" />
-        <span className="ui-sr-only">Toggle theme</span>
+      <SelectTrigger className="relative w-auto" ref={ref}>
+        <Sun className="mr-1 h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Moon className="absolute mr-1 h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <span className="sr-only">Toggle theme</span>
       </SelectTrigger>
       <SelectContent align="center">
         <SelectItem value="light">Light</SelectItem>

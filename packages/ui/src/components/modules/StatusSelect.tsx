@@ -28,13 +28,9 @@ const StatusSelect = React.forwardRef<HTMLButtonElement, StatusSelectProps>(
         <SelectTrigger ref={ref}>
           <SelectValue placeholder="Status">
             {value !== undefined && STATUS_LOOKUP[value] !== undefined ? (
-              <div
-                className={clsx("ui-flex ui-flex-row ui-items-center ui-gap-1")}
-              >
+              <div className={clsx("flex flex-row items-center gap-1")}>
                 <div
-                  className={clsx(
-                    "ui-mr-1 ui-h-4 ui-w-4 ui-shrink-0 ui-rounded-full"
-                  )}
+                  className={clsx("mr-1 h-4 w-4 shrink-0 rounded-full")}
                   style={{ backgroundColor: STATUS_LOOKUP[value].color }}
                 />
                 {STATUS_LOOKUP[value].label}
@@ -49,9 +45,7 @@ const StatusSelect = React.forwardRef<HTMLButtonElement, StatusSelectProps>(
               value={status.value}
               auxiliary={
                 <div
-                  className={clsx(
-                    "ui-mr-1 ui-h-4 ui-w-4 ui-shrink-0 ui-rounded-full"
-                  )}
+                  className={clsx("mr-1 h-4 w-4 shrink-0 rounded-full")}
                   style={{ backgroundColor: status.color }}
                 />
               }
@@ -62,7 +56,7 @@ const StatusSelect = React.forwardRef<HTMLButtonElement, StatusSelectProps>(
         </SelectContent>
       </Select>
     );
-  }
+  },
 );
 StatusSelect.displayName = "StatusSelect";
 
