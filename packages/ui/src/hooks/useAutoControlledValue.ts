@@ -22,7 +22,7 @@ export type UseAutoControlledProps<T = unknown> = {
   state?: string;
 };
 
-export default function useAutoControlledValue<T>({
+export function useAutoControlledValue<T>({
   controlledValue,
   defaultValue,
   name,

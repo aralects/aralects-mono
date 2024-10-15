@@ -124,7 +124,7 @@ const RootList = React.forwardRef<HTMLDivElement, RootListProps>(
           <CardTitle className="text-2xl font-bold">Root List</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center space-x-2 mb-4">
+          <div className="mb-4 flex items-center space-x-2">
             <RootListSearchBar
               value={query}
               onChange={(e) => setQuery(e.target.value)}

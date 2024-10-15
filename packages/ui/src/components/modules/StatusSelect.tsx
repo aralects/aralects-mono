@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../core/select";
-import useAutoControlledValue from "~/hooks/useAutoControlledValue";
+import { useAutoControlledValue } from "~/hooks/useAutoControlledValue";
 
 import { STATUSES, STATUS_LOOKUP } from "~/constants/status";
 

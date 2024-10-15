@@ -22,4 +22,4 @@ function useUrlQueryParam(paramName: string, defaultValue?: string) {
   return defaultValue;
 }
 
-export default useUrlQueryParam;
+export { useUrlQueryParam };
