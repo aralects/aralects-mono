@@ -11,7 +11,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src/",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "export": "node export.js --input src/components --input src/hooks --output index.ts"
   },
   "peerDependencies": {
     "react": "^18.2.0"
@@ -20,6 +21,8 @@
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@types/react": "^18.2.61",
+    "minimist": "^1.2.8",
+    "ts-morph": "^24.0.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
