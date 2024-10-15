@@ -105,7 +105,6 @@ export {
   type RootListProps,
   RootList,
 } from "./src/components/modules/RootList";
-
 export {
   type StatusSelectProps,
   StatusSelect,
