@@ -12,7 +12,7 @@
   "scripts": {
     "lint": "eslint src/",
     "type-check": "tsc --noEmit",
-    "export": "node export.js --input src/components --input src/hooks --output index.ts"
+    "export": "node scripts/export.js --input src/components --input src/hooks --output index.ts"
   },
   "peerDependencies": {
     "react": "^18.2.0"
