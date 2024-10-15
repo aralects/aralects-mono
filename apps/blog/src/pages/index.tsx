@@ -1,24 +1,11 @@
-import localFont from "next/font/local";
-
+import * as React from "react";
+import type { HeadProps, PageProps } from "gatsby";
 import {
-  ColorModeSelect,
   InputWithHistory,
   RootList,
   RootListItem,
   StatusSelect,
 } from "@repo/ui";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 const rootItems: RootListItem[] = [
   { lexemes: 24, avatar: "", root: "ك.و.ن" },
@@ -35,12 +22,11 @@ const rootItems: RootListItem[] = [
   { lexemes: 12, avatar: "", root: "ن.و.ك" },
 ];
 
-export default function Home() {
+function IndexPage(_: PageProps): JSX.Element {
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20`}
+      className={`grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20`}
     >
-      <ColorModeSelect />
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
         <InputWithHistory history="Some previous text" full />
         <StatusSelect />
@@ -48,4 +34,10 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export default IndexPage;
+
+export function Head(_: HeadProps): JSX.Element {
+  return <title>Home Page</title>;
 }

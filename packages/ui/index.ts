@@ -3,7 +3,6 @@ export {
   useAutoControlledValue,
 } from "./src/hooks/useAutoControlledValue";
 export { useEventListener } from "./src/hooks/useEventListener";
-export { useUrlQueryParam } from "./src/hooks/useUrlQueryParam";
 export {
   Avatar,
   AvatarImage,
