@@ -379,6 +379,13 @@
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.1.1.tgz#1ec17e2edbec25c8306d424ecfbf13c7de1aaa31"
   integrity sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==
 
+"@prettier/sync@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@prettier/sync/-/sync-0.5.2.tgz#f8401e45b667e8d6207015fd03619ea2c2e3e680"
+  integrity sha512-Yb569su456XNx5BsH/Vyem7xD6g/y9iLmLUzRKM1a/dhU/D7HqqvkAG72znulXlMXztbV0iiu9O5AL8K98TzZQ==
+  dependencies:
+    make-synchronized "^0.2.8"
+
 "@radix-ui/number@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@radix-ui/number/-/number-1.1.0.tgz#1e95610461a09cdf8bb05c152e76ca1278d5da46"
@@ -2722,6 +2729,11 @@ lucide-react@^0.452.0:
   version "0.452.0"
   resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.452.0.tgz#94794523bdfc3498ccbc0e7c8d4a07a66c6d8750"
   integrity sha512-kNefjOUOGm+Mu3KDiryONyPba9r+nhcrz5oJs3N6JDzGboQNEXw5GB3yB8rnV9/FA4bPyggNU6CRSihZm9MvSw==
+
+make-synchronized@^0.2.8:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/make-synchronized/-/make-synchronized-0.2.9.tgz#edcbe2d8e7aeac8e0f41a0bb25b05cc7a7e2e8e4"
+  integrity sha512-4wczOs8SLuEdpEvp3vGo83wh8rjJ78UsIk7DIX5fxdfmfMJGog4bQzxfvOwq7Q3yCHLC4jp1urPHIxRS/A93gA==
 
 merge-stream@^2.0.0:
   version "2.0.0"

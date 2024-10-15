@@ -2,6 +2,7 @@ const { Project } = require("ts-morph");
 const fs = require("fs");
 const path = require("path");
 const minimist = require("minimist");
+const prettier = require("@prettier/sync"); // Import Prettier
 
 // Parse command-line arguments
 const args = minimist(process.argv.slice(2));
@@ -71,5 +72,28 @@ sourceFiles.forEach((sourceFile) => {
   }
 });
 
-fs.writeFileSync(outputFile, exportStatements);
-console.log(`Index file for exporting UI library generated at ${outputFile}`);
+const format = async (content) => {
+  try {
+    const prettierOptions = prettier.resolveConfig(outputFile) ?? {};
+
+    // Ensure the parser is set to 'typescript'
+    prettierOptions.parser = "typescript";
+
+    const formatted = prettier.format(exportStatements, prettierOptions);
+
+    // Write the formatted content to the output file
+    fs.writeFileSync(outputFile, formatted);
+    console.log(
+      `Index file for exporting UI library generated and formatted at ${outputFile}`,
+    );
+  } catch (error) {
+    console.error("Error formatting with Prettier:", error);
+    // Even if formatting fails, write the unformatted content to the file
+    fs.writeFileSync(outputFile, exportStatements);
+    console.log(
+      `Index file for exporting UI library generated at ${outputFile} (unformatted due to Prettier error)`,
+    );
+  }
+};
+
+format(outputFile);
