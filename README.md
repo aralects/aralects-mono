@@ -1,58 +1,31 @@
-# Turborepo Tailwind CSS starter
+# Aralects monorepo
 
-This is an official starter Turborepo.
+This is a [monorepo](https://monorepo.tools/) that houses the following apps and packages for Aralects:
 
-## Using this example
+- apps
+  - `admin`: a Next.js app that serves as the admin dashboard for Aralects
+  - `blog`: a Gatsby app that serves as the blog for Aralects
+  - `website`: a Next.js app that serves as the main website for Aralects (to be implemented)
+- packages
+  - `ui`: a React component library built with [shadcn](https://ui.shadcn.com/docs) components and [Tailwind CSS](https://tailwindcss.com/docs/installation)
+  - `eslint-config`: shared linting configurations - shared because it simplifies dependency management
+  - `tailwind-config`: `tailwindcss` configurations - shared separately from the UI library due to the `content` property needing to be updated for each app as well as for the UI library itself
+  - `typescript-config`: configuration files for Typescript used throughout the monorepo
 
-Run the following command:
+## Getting started
 
-```sh
-npx create-turbo@latest -e with-tailwind
-```
+This monorepo uses Turborepo to manage dependencies and scripts. You can find the documentation [here](https://turborepo.dev/docs/getting-started/installation).
 
-## What's inside?
+To get started with local development, make sure you have [Node.js](https://nodejs.org/en/download/) (v20 - recommend using [nvm](https://github.com/nvm-sh/nvm)) as well as [Yarn](https://yarnpkg.com/getting-started/install) installed.
 
-This Turborepo includes the following packages/apps:
+1. Clone the repo
+2. Run `yarn` to install dependencies
+3. Run `yarn dev` to start the development server
 
-### Apps and Packages
+This will spin up both apps at the same time. You can access the admin dashboard at `http://localhost:3001` and the blog at `http://localhost:8000`.
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Alternatively, you can run `yarn dev` in the `apps/admin` or `apps/blog` directories to start only one of the apps.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Deployment
 
-### Building packages/ui
-
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.js`. This was chosen for several reasons:
-
-- Make sharing one `tailwind.config.js` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.js` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
-
-For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
-```
-
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+This monorepo is currently set up to be deployed automatically to [Vercel](https://vercel.com/docs/) on pushes to the `main` branch.
