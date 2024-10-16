@@ -7,10 +7,10 @@ This is a [monorepo](https://monorepo.tools/) that houses the following apps and
   - `blog`: a Gatsby app that serves as the blog for Aralects
   - `website`: a Next.js app that serves as the main website for Aralects (to be implemented)
 - packages
-  - `ui`: a React component library built with [shadcn](https://ui.shadcn.com/docs) components and [Tailwind CSS](https://tailwindcss.com/docs/installation)
-  - `eslint-config`: shared linting configurations - shared because it simplifies dependency management
-  - `tailwind-config`: `tailwindcss` configurations - shared separately from the UI library due to the `content` property needing to be updated for each app as well as for the UI library itself
-  - `typescript-config`: configuration files for Typescript used throughout the monorepo
+  - `ui`: a React component library built with [shadcn](https://ui.shadcn.com/docs) components and [Tailwind CSS](https://tailwindcss.com/docs/installation). Shared across all apps.
+  - `eslint-config`: linting configs - shared because simplifies dependency management
+  - `tailwind-config`: `tailwindcss` configs - shared separately from the UI library due to the `content` property needing to be updated for each app as well as for the UI library itself
+  - `typescript-config`: config files for Typescript used throughout the monorepo
 
 ## Getting started
 
@@ -29,3 +29,9 @@ Alternatively, you can run `yarn dev` in the `apps/admin` or `apps/blog` directo
 ## Deployment
 
 This monorepo is currently set up to be deployed automatically to [Vercel](https://vercel.com/docs/) on pushes to the `main` branch.
+
+## Knowledge base
+
+- How are UI components being exported?
+  - The UI components are being exported from the `ui` package as a single entry point (`/packages/ui/index.ts`), allowing for a single import statement to be used in the apps that consume the UI components. This file is generated automatically as part of the build step.
+  - @TODO - make sure [tree shaking](https://webpack.js.org/guides/tree-shaking/) is working as expected
