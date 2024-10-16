@@ -10,9 +10,12 @@
     "lint": "eslint src/ --max-warnings 0"
   },
   "dependencies": {
+    "@mdx-js/react": "^3.0.1",
     "@repo/ui": "*",
     "gatsby": "^5.13.3",
     "gatsby-plugin-alias-imports": "^1.0.5",
+    "gatsby-plugin-mdx": "^5.13.1",
+    "gatsby-source-filesystem": "^5.13.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -25,6 +28,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "gatsby-plugin-compile-es6-packages": "^2.1.1",
+    "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-postcss": "^6.13.1",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",

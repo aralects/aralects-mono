@@ -8,6 +8,7 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     "gatsby-plugin-postcss",
+    "gatsby-plugin-mdx",
     {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
@@ -21,6 +22,14 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-compile-es6-packages`,
       options: {
         modules: [`@repo/ui`],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        // Adjusted path to point to the correct directory
+        path: path.join(__dirname, "content/posts/"), // Change made here
       },
     },
   ],
