@@ -2,24 +2,35 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./global.css";
 
-import { ClerkProvider } from "@clerk/clerk-react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./contexts/Theme";
-import App from "./app/App";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+import RootLayout from "./layouts/root-layout";
+import DashboardLayout from "./layouts/dashboard-layout";
 
-if (!PUBLISHABLE_KEY) {
-  throw new Error(
-    "Clerk Publishable Key is missing. Please add it to your .env.local file.",
-  );
-}
+import IndexRoute from "./routes";
+import SignUpRoute from "./routes/sign-up";
+import SignInRoute from "./routes/sign-in";
+
+const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      { path: "/sign-up/*", element: <SignUpRoute /> },
+      { path: "/sign-in/*", element: <SignInRoute /> },
+      {
+        element: <DashboardLayout />,
+        path: "/",
+        children: [{ path: "/", element: <IndexRoute /> }],
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider attribute="class">
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-        <App />
-      </ClerkProvider>
+      <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>,
 );
