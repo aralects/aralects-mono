@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import baseConfig from "@repo/tailwind-config";
 
 const config: Pick<Config, "content" | "presets"> = {
   content: [
@@ -6,7 +7,7 @@ const config: Pick<Config, "content" | "presets"> = {
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
   ],
 
-  presets: [require("@repo/tailwind-config")],
+  presets: [baseConfig],
 };
 
 export default config;
