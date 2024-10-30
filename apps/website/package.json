@@ -27,6 +27,7 @@
     "@astrolib/analytics": "^0.6.1",
     "@astrolib/seo": "^1.0.0-beta.8",
     "@fontsource-variable/inter": "^5.1.0",
+    "@jam-comments/astro": "^2.8.1",
     "@repo/ui": "*",
     "astro": "^4.16.2",
     "astro-embed": "^0.7.4",
