@@ -3,6 +3,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:admin": "turbo dev --filter=admin",
+    "dev:website": "turbo dev --filter=website",
+    "dev:ui": "turbo dev --filter=@repo/ui",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
