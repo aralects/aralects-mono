@@ -12,6 +12,14 @@ import FAQs from '@/components/widgets/FAQs.astro';
 import Stats from '@/components/widgets/Stats.astro';
 import CallToAction from '@/components/widgets/CallToAction.astro';
 import { InputWithHistory, RootList, StatusSelect } from '@repo/ui';
+import AnnotatorFilter from '../components/blog/Author'
+
+import PosSelect from '../components/blog/PosSelect'
+import Lemma from '@/components/blog/Lemma';
+import InflectId from '@/components/blog/InflectId';
+import Notes from '@/components/blog/Notes';
+import Comment from '@/components/blog/Comment';
+
 
 const metadata = {
   title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
@@ -41,6 +49,32 @@ const rootItems = [
       <InputWithHistory history="Some previous text" full client:visible />
       <StatusSelect client:visible />
       <RootList items={rootItems} client:visible />
+      <div class="p-4">
+        <PosSelect client:load />
+      </div>
+
+      <div class="p-4">
+      <Lemma client:load/>
+      </div>
+      <div class="p-4">
+        <Notes client:load/>
+        </div>
+      
+      <div class="p-4">
+        <InflectId client:load/>
+      </div>
+
+
+
+
+      <div class="p-4">
+        <AnnotatorFilter client:load />
+      </div>
+
+      <div class="p-4">
+        <Comment />
+      </div>
+
     </main>
   </div>
   <!-- Hero Widget ******************* -->
