@@ -1,3 +1,4 @@
+export { useIsMobile } from "./src/hooks/use-mobile";
 export {
   type UseAutoControlledProps,
   useAutoControlledValue,
@@ -61,6 +62,7 @@ export {
 } from "./src/components/core/form";
 export { type InputProps, Input } from "./src/components/core/input";
 export { Label } from "./src/components/core/label";
+export { Logo } from "./src/components/core/logo";
 export { ScrollArea, ScrollBar } from "./src/components/core/scroll-area";
 export {
   Select,
@@ -75,6 +77,45 @@ export {
   SelectScrollDownButton,
 } from "./src/components/core/select";
 export { Separator } from "./src/components/core/separator";
+export {
+  Sheet,
+  SheetPortal,
+  SheetOverlay,
+  SheetTrigger,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+} from "./src/components/core/sheet";
+export {
+  SIDEBAR_KEYBOARD_SHORTCUT,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInput,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSkeleton,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarSeparator,
+  SidebarTrigger,
+  useSidebar,
+} from "./src/components/core/sidebar";
 export { Skeleton } from "./src/components/core/skeleton";
 export { Toaster } from "./src/components/core/sonner";
 export { Switch } from "./src/components/core/switch";

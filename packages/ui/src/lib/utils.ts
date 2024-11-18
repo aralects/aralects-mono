@@ -13,3 +13,7 @@ export type PropsOf<T> =
       : T extends HTMLElement
         ? React.HTMLAttributes<T>
         : never;
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
