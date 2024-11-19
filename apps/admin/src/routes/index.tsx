@@ -1,3 +1,8 @@
+import InflectId from "@/components/modules/InflectId";
+import Lemma from "@/components/modules/Lemma";
+import Notes from "@/components/modules/Notes";
+import PosSelect from "@/components/modules/PosSelect";
+import { RootWithAuthor } from "@/components/modules/rootwithauthor";
 import { InputWithHistory, RootList, StatusSelect } from "@repo/ui";
 
 export default function IndexRoute() {
@@ -6,6 +11,11 @@ export default function IndexRoute() {
       <InputWithHistory history="Some previous text" full />
       <StatusSelect />
       <RootList items={[]} />
+      <RootWithAuthor />
+      <InflectId />
+      <Notes />
+      <Lemma />
+      <PosSelect />
     </main>
   );
 }
