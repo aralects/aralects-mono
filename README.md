@@ -8,7 +8,6 @@ This is a [monorepo](https://monorepo.tools/) that houses the following apps and
   - `website`: a Next.js app that serves as the main website for Aralects (to be implemented)
 - packages
   - `ui`: a React component library built with [shadcn](https://ui.shadcn.com/docs) components and [Tailwind CSS](https://tailwindcss.com/docs/installation). Shared across all apps.
-  - `eslint-config`: linting configs - shared because simplifies dependency management
   - `tailwind-config`: `tailwindcss` configs - shared separately from the UI library due to the `content` property needing to be updated for each app as well as for the UI library itself
   - `typescript-config`: config files for Typescript used throughout the monorepo
 
