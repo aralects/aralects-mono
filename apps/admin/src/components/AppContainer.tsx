@@ -1,7 +1,12 @@
 import { Fragment } from "react/jsx-runtime";
 import { Helmet } from "react-helmet";
 import { capitalize, cn } from "~/lib/utils";
-import { Separator, SIDEBAR_KEYBOARD_SHORTCUT, SidebarTrigger } from "@repo/ui";
+import {
+  ColorModeSelect,
+  Separator,
+  SIDEBAR_KEYBOARD_SHORTCUT,
+  SidebarTrigger,
+} from "@repo/ui";
 import { UserMenu } from "./UserMenu";
 
 const AppContainer = ({
@@ -46,7 +51,7 @@ const AppHeader = ({
       )}
       {...rest}
     >
-      <div className="flex h-10 items-center gap-4 px-4">
+      <div className="flex h-12 items-center gap-4 px-4">
         <div className="flex items-center gap-2">
           <SidebarTrigger className="h-4 w-4" />
           <kbd className="border-border text-muted-foreground/70 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-xs font-medium">
@@ -56,6 +61,7 @@ const AppHeader = ({
         <Separator orientation="vertical" className="h-4" />
         <nav className="ml-auto flex items-center gap-4">
           {children}
+          <ColorModeSelect />
           <UserMenu />
         </nav>
       </div>

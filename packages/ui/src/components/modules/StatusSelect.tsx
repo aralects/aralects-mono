@@ -13,10 +13,12 @@ import { useAutoControlledValue } from "~/hooks/useAutoControlledValue";
 
 import { STATUSES, STATUS_LOOKUP } from "~/constants/status";
 
-export type StatusSelectProps = SelectProps & {};
+export type StatusSelectProps = SelectProps & {
+  className?: string;
+};
 
 const StatusSelect = React.forwardRef<HTMLButtonElement, StatusSelectProps>(
-  ({ value: controlledValue, defaultValue, ...props }, ref) => {
+  ({ className, value: controlledValue, defaultValue, ...props }, ref) => {
     const [value, setValue] = useAutoControlledValue({
       name: "StatusSelect",
       controlledValue,
@@ -25,7 +27,7 @@ const StatusSelect = React.forwardRef<HTMLButtonElement, StatusSelectProps>(
 
     return (
       <Select value={value} onValueChange={setValue} {...props}>
-        <SelectTrigger ref={ref}>
+        <SelectTrigger className={className} ref={ref}>
           <SelectValue placeholder="Status">
             {value !== undefined && STATUS_LOOKUP[value] !== undefined ? (
               <div className={clsx("flex flex-row items-center gap-1")}>

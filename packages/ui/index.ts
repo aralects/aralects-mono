@@ -5,6 +5,14 @@ export {
 } from "./src/hooks/useAutoControlledValue";
 export { useEventListener } from "./src/hooks/useEventListener";
 export {
+  type AccordionSingleProps,
+  type AccordionTriggerProps,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "./src/components/core/accordion";
+export {
   Avatar,
   AvatarImage,
   AvatarFallback,
@@ -63,7 +71,12 @@ export {
 export { type InputProps, Input } from "./src/components/core/input";
 export { Label } from "./src/components/core/label";
 export { Logo } from "./src/components/core/logo";
-export { ScrollArea, ScrollBar } from "./src/components/core/scroll-area";
+export {
+  ScrollArea,
+  FancyScrollArea,
+  ScrollBar,
+} from "./src/components/core/scroll-area";
+export { Search } from "./src/components/core/search";
 export {
   Select,
   SelectGroup,
