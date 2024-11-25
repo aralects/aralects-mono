@@ -54,6 +54,18 @@ async function copyDirectory(
         continue;
       }
 
+      // Skip package.json
+      if (entry.name === "package.json") {
+        console.log("Skipping package.json");
+        continue;
+      }
+
+      // Skip yarn.lock
+      if (entry.name === "yarn.lock") {
+        console.log("Skipping yarn.lock");
+        continue;
+      }
+
       if (await shouldIgnore(relativePath, ignorePatterns)) {
         console.log(`Skipping ignored path: ${relativePath}`);
         continue;
