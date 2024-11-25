@@ -3,15 +3,25 @@ import clsx from "clsx";
 import { PropsOf } from "~/lib/utils";
 import { ScrollAreaProps } from "@radix-ui/react-scroll-area";
 
-import { NavLink } from "react-router-dom";
-import { Filter, Plus } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../core/avatar";
-import { Badge } from "../core/badge";
-import { Button } from "../core/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../core/card";
-import { ColumnWithDividers } from "../core/column";
-import { FancyScrollArea } from "../core/scroll-area";
-import { Search } from "../core/search";
+import { NavLink, useSearchParams } from "react-router-dom";
+import { ArrowUpRight, Filter, Plus } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  ColumnWithDividers,
+  FancyScrollArea,
+  Search,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@repo/ui";
 
 export type RootListItem = {
   lexemes: number;
@@ -29,6 +39,30 @@ const RootListItems = React.forwardRef<
     items: RootListItem[];
   }
 >(({ className, items, ...props }, ref) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const roots = searchParams.getAll("root");
+
+  const rootsLookup = useMemo(
+    () =>
+      roots.reduce(
+        (acc, root) => {
+          acc[root] = true;
+          return acc;
+        },
+        {} as Record<string, boolean>,
+      ),
+    [roots],
+  );
+
+  // append root to search params
+  const handleOpenInTab = (e: React.MouseEvent, root: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (roots.includes(root)) return;
+    searchParams.append("root", root);
+    setSearchParams(searchParams);
+  };
+
   return (
     <FancyScrollArea
       ref={ref}
@@ -45,18 +79,38 @@ const RootListItems = React.forwardRef<
         ) : (
           items.map((item, index) => (
             <NavLink
-              to={`/app/root-annotator/${item.root}`}
+              to={{
+                search: "?root=" + item.root + "&activeRoot=" + item.root,
+              }}
               key={index}
-              className="hover:bg-accent flex items-center justify-between rounded-lg p-2 cursor-pointer"
+              className={clsx(
+                "hover:bg-accent flex cursor-pointer items-center rounded-lg p-2",
+                rootsLookup[item.root]
+                  ? "bg-accent/80 text-accent-foreground"
+                  : "has-[button:hover]:bg-transparent",
+              )}
             >
-              <div className="mx-1 flex items-center space-x-2">
+              <div className="flex items-center space-x-2">
                 <Badge size="sm">{item.lexemes} Lexemes</Badge>
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={item.avatar} alt="Avatar" />
                   <AvatarFallback>AV</AvatarFallback>
                 </Avatar>
               </div>
-              <span className="mx-1 text-xl font-semibold">{item.root}</span>
+              <span className="ml-auto text-xl font-semibold">{item.root}</span>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    disabled={!!rootsLookup[item.root]}
+                    variant="ghost"
+                    onClick={(e) => handleOpenInTab(e, item.root)}
+                    className="hover:bg-accent/60 h-auto w-auto shrink-0 rounded-full p-2"
+                  >
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Open in tab</TooltipContent>
+              </Tooltip>
             </NavLink>
           ))
         )}
