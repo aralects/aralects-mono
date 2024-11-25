@@ -3,6 +3,7 @@ import { LexemeDetails } from "@/components/LexemeDetails";
 import { RootHeader } from "@/components/RootHeader";
 import { RootList } from "@/components/RootList";
 import { Logo, RootListItem } from "@repo/ui";
+import { AnimatePresence, motion } from "motion/react";
 import { useSearchParams } from "react-router-dom";
 
 const rootItems: RootListItem[] = [
@@ -11,6 +12,29 @@ const rootItems: RootListItem[] = [
   { lexemes: 20, avatar: "", root: "و.ك.ن" },
   { lexemes: 33, avatar: "", root: "و.ن.ك" },
   { lexemes: 28, avatar: "", root: "ن.ك.و" },
+];
+
+const LEXEMES = [
+  "كان",
+  "يكون",
+  "كانت",
+  "كانوا",
+  "كانون",
+  "كانوات",
+  "كانوني",
+  "كانواتي",
+  "كانوان",
+  "كانواتن",
+  "كانواته",
+  "كانواني",
+  "كانواتين",
+  "كانواتها",
+  "كانوانه",
+  "كانواتهم",
+  "كانواتهما",
+  "كانوانها",
+  "كانواتهمي",
+  "كانواتهمان",
 ];
 
 const RootAnnotatorEmpty = () => {
@@ -27,37 +51,35 @@ const RootAnnotatorEmpty = () => {
 const RootAnnotatorDetails = () => {
   const [searchParams] = useSearchParams();
   const roots = searchParams.getAll("root");
+  const lexeme = searchParams.get("lexeme");
 
   if (roots.length === 0) return <RootAnnotatorEmpty />;
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
-      <RootHeader
-        roots={roots}
-        lexemes={[
-          "كان",
-          "يكون",
-          "كانت",
-          "كانوا",
-          "كانون",
-          "كانوات",
-          "كانوني",
-          "كانواتي",
-          "كانوان",
-          "كانواتن",
-          "كانواته",
-          "كانواني",
-          "كانواتين",
-          "كانواتها",
-          "كانوانه",
-          "كانواتهم",
-          "كانواتهما",
-          "كانوانها",
-          "كانواتهمي",
-          "كانواتهمان",
-        ]}
-      />
-      <LexemeDetails />
+    <div className="flex flex-col gap-y-4 overflow-hidden py-4">
+      <RootHeader roots={roots} lexemes={LEXEMES} />
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={lexeme}
+          initial={{
+            // scale: 0.9,
+            translateX: 25,
+            opacity: 0,
+          }}
+          animate={{
+            // scale: 1,
+            translateX: 0,
+            opacity: 1,
+          }}
+          exit={{
+            // scale: 0.9,
+            translateX: -50,
+            opacity: 0,
+          }}
+        >
+          <LexemeDetails lexeme={lexeme} />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

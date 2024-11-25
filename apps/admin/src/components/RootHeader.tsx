@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import {
-  Badge,
   Button,
   FancyScrollArea,
   Separator,
@@ -12,6 +11,7 @@ import {
 import { cn } from "~/lib/utils";
 import { Search } from "~/components/core/search";
 import { useSearchParams } from "react-router-dom";
+import { AnimatePresence, motion } from "motion/react";
 import clsx from "clsx";
 
 export type RootHeaderProps = {
@@ -24,6 +24,7 @@ const RootHeader = React.forwardRef<HTMLDivElement, RootHeaderProps>(
     const [query, setQuery] = useState("");
     const [searchParams, setSearchParams] = useSearchParams();
     const activeRoot = searchParams.get("activeRoot");
+    const rootTabs = searchParams.getAll("root");
     const lexeme = searchParams.get("lexeme");
 
     const filteredLexemes = useMemo(() => {
@@ -45,20 +46,24 @@ const RootHeader = React.forwardRef<HTMLDivElement, RootHeaderProps>(
       e.stopPropagation();
       const roots = searchParams.getAll("root");
       const newRoots = roots.filter((r) => r !== root);
-      setSearchParams({ root: newRoots });
+      searchParams.delete("root");
+      newRoots.forEach((r) => searchParams.append("root", r));
+      setSearchParams(searchParams);
     };
 
     // make sure there is always an active root
     useEffect(() => {
-      if (activeRoot) return;
+      if (activeRoot && rootTabs.includes(activeRoot)) return;
 
-      searchParams.append("activeRoot", roots[0]);
+      searchParams.delete("activeRoot");
+      const newActiveRoot = rootTabs[0];
+      searchParams.append("activeRoot", newActiveRoot);
       setSearchParams(searchParams);
-    }, [activeRoot, roots, searchParams, setSearchParams]);
+    }, [activeRoot, rootTabs, searchParams, setSearchParams]);
 
     // make sure there is always an lexeme
     useEffect(() => {
-      if (lexeme) return;
+      if (lexemes.find((l) => l === lexeme)) return;
 
       searchParams.append("lexeme", lexemes[0]);
       setSearchParams(searchParams);
@@ -71,32 +76,60 @@ const RootHeader = React.forwardRef<HTMLDivElement, RootHeaderProps>(
         {...props}
       >
         <div className="flex w-fit items-center">
-          {roots.map((rootName) => (
-            <button
-              key={rootName}
-              className={clsx(
-                "cursor-pointer rounded-t-lg border border-b-0 py-2 pl-4 pr-2",
-                "hover:bg-accent/60 has-[button:hover]:bg-transparent",
-                rootName === activeRoot &&
-                  "bg-accent/80 text-accent-foreground",
-              )}
-              onClick={(e) => handleSelectRoot(e, rootName)}
-            >
-              <span className="mr-2 text-xl font-bold" dir="rtl">
-                {rootName}
-              </span>
-              <Button
-                variant="ghost"
-                onClick={(e) => handleCloseRoot(e, rootName)}
-                className="hover:bg-accent/60 pointer-events-auto h-auto w-auto rounded-full p-2"
+          <AnimatePresence mode="popLayout" initial={false}>
+            {roots.map((rootName) => (
+              <motion.button
+                layout
+                key={rootName}
+                className={clsx(
+                  "cursor-pointer rounded-t-lg border border-b-0 py-2 pl-4 pr-2",
+                  "hover:bg-accent/60 has-[button:hover]:bg-transparent",
+                  rootName === activeRoot &&
+                    "bg-accent/80 text-accent-foreground",
+                )}
+                onClick={(e) => handleSelectRoot(e, rootName)}
+                initial={{ translateY: "100%", opacity: 0 }}
+                animate={{
+                  translateY: 0,
+                  opacity: 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 1000,
+                    damping: 45,
+                  },
+                }}
+                exit={{
+                  scale: 0.8,
+                  opacity: 0,
+                  transition: { duration: 0.2 },
+                }}
+                onMouseUp={(e) => {
+                  // middle mouse button (button 1)
+                  if (e.button === 1) {
+                    e.preventDefault();
+                    handleCloseRoot(e, rootName);
+                  }
+                }}
               >
-                <X className="h-3 w-3" />
-              </Button>
-            </button>
-          ))}
+                <span className="mr-2 text-xl font-bold" dir="rtl">
+                  {rootName}
+                </span>
+                <Button
+                  asChild
+                  variant="ghost"
+                  onClick={(e) => handleCloseRoot(e, rootName)}
+                  className="hover:bg-accent/60 pointer-events-auto h-auto w-auto rounded-full p-2"
+                >
+                  <span>
+                    <X className="h-3 w-3" />
+                  </span>
+                </Button>
+              </motion.button>
+            ))}
+          </AnimatePresence>
         </div>
 
-        <div className="relative h-[74px] rounded-b-lg rounded-tr-lg border">
+        <div className="bg-background relative z-[1] h-[74px] rounded-b-lg rounded-tr-lg border">
           <div className="absolute inset-0 flex items-center gap-x-2 px-4">
             <Search
               value={query}
@@ -111,17 +144,15 @@ const RootHeader = React.forwardRef<HTMLDivElement, RootHeaderProps>(
               className="flex items-center gap-x-2 px-2 py-4"
             >
               {filteredLexemes.map((lex, index) => (
-                <Badge
+                <Button
                   variant={lexeme === lex ? "default" : "secondary"}
-                  size="md"
                   key={index}
                   dir="rtl"
-                  className="cursor-pointer"
-                  role="button"
                   onClick={(e) => handleSelectLexeme(e, lex)}
+                  className="rounded-full text-lg font-semibold"
                 >
                   {lex}
-                </Badge>
+                </Button>
               ))}
             </FancyScrollArea>
 

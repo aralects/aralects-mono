@@ -27,7 +27,6 @@ import { AppFooter } from "./AppContainer";
 import { useFieldArray, useForm, useFormContext } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "react-router-dom";
 
 // ----------------------------------------
 // Form Schema
@@ -661,17 +660,20 @@ const LexemeForm = React.forwardRef<HTMLDivElement, LexemeFormProps>(
 );
 LexemeForm.displayName = "LexemeForm";
 
-export type LexemeDetailsProps = {} & React.HTMLAttributes<HTMLDivElement>;
+export type LexemeDetailsProps = {
+  lexeme: string | null;
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const LexemeDetails = React.forwardRef<HTMLDivElement, LexemeDetailsProps>(
-  ({ className, ...props }, ref) => {
-    const [searchParams] = useSearchParams();
-    const lexeme = searchParams.get("lexeme");
-
+  ({ className, lexeme, ...props }, ref) => {
     if (!lexeme) return null;
 
     return (
-      <div ref={ref} className={cn("rounded-lg border", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("bg-background rounded-lg border", className)}
+        {...props}
+      >
         <LexemeHeader lexemeName={lexeme} />
         <LexemeForm />
       </div>
