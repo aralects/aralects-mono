@@ -23,12 +23,12 @@ export const router = createBrowserRouter([
       { path: "/sign-up/*", element: <SignUpRoute /> },
       { path: "/sign-in/*", element: <SignInRoute /> },
       {
+        path: "/app",
         element: (
           <ProtectedLayout>
             <AppLayout />
           </ProtectedLayout>
         ),
-        path: "/app",
         children: [
           {
             path: "/app/root-annotator",
