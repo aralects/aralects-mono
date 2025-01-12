@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const data = [
   {
@@ -25,23 +25,16 @@ const data = [
 
 function Index() {
   return (
-    <div className="w-full text-5xl py-8 inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)] bg-[#8262b0] md:py-8 sm:flex justify-center items-center">
+    <div className="inline-flex w-full flex-nowrap items-center justify-center overflow-hidden bg-[#8262b0] py-8 text-5xl [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)] sm:flex md:py-8">
       {[1, 2, 3, 4, 5].map((_, index) => (
         <ul
           key={index}
-          className="flex items-center justify-center md:justify-start sm:[&_li]:mx-8 [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll font-medium h-full flex-1 text-white border-b-2 border-transparent hover:border-purple-600 cursor-pointer"
+          className="animate-infinite-scroll flex h-full flex-1 items-center justify-center font-medium text-white md:justify-start [&_img]:max-w-none [&_li]:mx-4 sm:[&_li]:mx-8"
         >
-          {data.map((item, itemIndex) => (
-            <React.Fragment key={itemIndex}>
-              <li>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={item.link}
-                  className="bg-primary text-primary-foreground sm:grid hidden place-content-center p-2 rounded-md text-center Melodrama text-lg md:text-5xl"
-                >
-                  {item.text}
-                </a>
+          {data.map((item, index) => (
+            <React.Fragment key={index}>
+              <li className="bg-primary text-primary-foreground Melodrama hidden place-content-center rounded-md p-2 text-center text-lg sm:grid md:text-5xl">
+                {item.text}
               </li>
               <li>
                 <img
@@ -49,7 +42,7 @@ function Index() {
                   alt={`${item.text} icon`}
                   width={35}
                   height={35}
-                  className="md:w-[18px] h-[20px] lg:h-[35px] lg:w-[35px]"
+                  className="h-[20px] md:w-[18px] lg:h-[35px] lg:w-[35px]"
                 />
               </li>
             </React.Fragment>
