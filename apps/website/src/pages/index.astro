@@ -1,34 +1,28 @@
 ---
-import Marquee from '@components/sections/Home/marquee/Marquee';
-import ArabicAsComunity from '../components/sections/Home/ArabicAsComunity/ArabicAsComunity';
-import ExperienceAralects from '../components/sections/Home/ExperienceAralects/ExperienceAralects';
-import FAQs from '../components/sections/Home/Faqs/Faqs';
-import HeroSection from '../components/sections/Home/HeroSection/HeroSection';
-import OurTeam from '../components/sections/Home/ourTeam/OurTeam';
-import SocialSidebar from '../components/sections/Home/SocialSidebar/SocialSidebar';
-import TextSection from '../components/sections/Home/textSection/TextSection';
-import WhyAralects from '../components/sections/Home/WhyAralects/WhyAralects';
-import Layout from '../layouts/Layout.astro';
-
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Marquee from "@components/sections/Home/marquee/Marquee";
+import ArabicAsComunity from "../components/sections/Home/ArabicAsComunity/ArabicAsComunity";
+import ExperienceAralects from "../components/sections/Home/ExperienceAralects/ExperienceAralects";
+import FAQs from "../components/sections/Home/Faqs/Faqs";
+import HeroSection from "../components/sections/Home/HeroSection/HeroSection";
+import OurTeam from "../components/sections/Home/ourTeam/OurTeam";
+import SocialSidebar from "../components/sections/Home/SocialSidebar/SocialSidebar";
+import TextSection from "../components/sections/Home/textSection/TextSection";
+import WhyAralects from "../components/sections/Home/WhyAralects/WhyAralects";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	
-	<div class="relative max-w-[1500px]  mx-auto">
-		<SocialSidebar />
-		<HeroSection />
-		<TextSection />
-		<div class='bg-[#8262b0] bg-opacity-90 rounded-t-[2rem]'>
-			<WhyAralects />
-			<ArabicAsComunity />
-			<OurTeam />
-		   <Marquee/>
-
-		</div>
-		<FAQs />
-		<ExperienceAralects />
-	</div>
+  <div class="relative max-w-[1500px] mx-auto">
+    <SocialSidebar />
+    <HeroSection />
+    <TextSection />
+    <div class="bg-[#8262b0] bg-opacity-90 rounded-t-[2rem]">
+      <WhyAralects />
+      <ArabicAsComunity />
+      <OurTeam />
+      <Marquee />
+    </div>
+    <FAQs client:idle />
+    <ExperienceAralects />
+  </div>
 </Layout>
