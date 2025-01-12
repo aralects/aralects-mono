@@ -3,7 +3,7 @@ import Footer from "@components/layout/Footer/Footer";
 import Header from "../components/layout/Header/Header";
 
 import "./global.css";
-const { title = "موقعي", lang = "ar" } = Astro.props;
+const { title = "Aralects" } = Astro.props;
 
 const isUnderConstruction = Astro.url.pathname === "/under-construction";
 const demo = Astro.url.pathname === "/demo";
@@ -11,13 +11,16 @@ const contact = Astro.url.pathname === "/contact";
 const careers = Astro.url.pathname === "/careers";
 const blog = Astro.url.pathname === "/blog";
 const home = Astro.url.pathname === "/";
-
 ---
+
 <!doctype html>
 <html lang="ar">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap"
