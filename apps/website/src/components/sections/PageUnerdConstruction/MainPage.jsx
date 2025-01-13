@@ -29,8 +29,6 @@ const UnderConstruction = () => {
               className="w-[40%] sm:w-[30%] lg:w-52 h-auto object-contain"
             />
           </div>
-
-      
         </div>
 
         {/* Main Content Section */}

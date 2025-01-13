@@ -1,6 +1,5 @@
-import React from 'react';
-import { FaFacebook, FaTwitter,FaTelegramPlane } from 'react-icons/fa';
-
+import React from "react";
+import { FaFacebook, FaTwitter, FaTelegramPlane } from "react-icons/fa";
 
 const SocialSidebar = () => {
   return (

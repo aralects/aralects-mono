@@ -8,29 +8,29 @@ const { title = "موقعي", lang = "ar" } = Astro.props;
 
 <!doctype html>
 <html lang="ar">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="/starry-saturn/src/layouts/global.css" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap"
-			rel="stylesheet"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<title></title>
-	</head>
-	<body>
-		<Header client:load />
-		<slot />
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/starry-saturn/src/layouts/global.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title></title>
+  </head>
+  <body>
+    <Header client:load />
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
 </style>

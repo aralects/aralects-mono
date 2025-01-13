@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="w-full relative m-auto flex justify-center">
       <header
-        className={`fixed z-30 min-w-screen max-w-[1500px] header mx-auto w-screen bg-white rounded-full shadow-md ${
+        className={`fixed z-30 min-w-screen header mx-auto w-screen bg-white rounded-full shadow-md ${
           isMobileMenuOpen && "rounded-none"
         }`}
       >
