@@ -9,18 +9,23 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "prepare": "husky"
+    "prepare": "husky",
+    "copy": "ts-node copy.ts  ../aralects-mono"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "ignore": "^6.0.2"
   },
   "devDependencies": {
     "@prettier/sync": "^0.5.2",
+    "@types/node": "^22.9.3",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "turbo": "^2.1.3"
-  },
-  "resolutions": {
-    "strip-ansi": "6.0.1"
+    "ts-node": "^10.9.2",
+    "turbo": "^2.1.3",
+    "typescript": "^5.7.2"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,md}": [

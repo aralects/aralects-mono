@@ -1,11 +1,26 @@
-import { InputWithHistory, RootList, StatusSelect } from "@repo/ui";
+import { SignIn } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
+import { Logo } from "@repo/ui";
 
-export default function IndexRoute() {
+const IndexRoute = () => {
   return (
-    <main className="row-start-2 mx-auto flex flex-col items-center gap-8 sm:items-start">
-      <InputWithHistory history="Some previous text" full />
-      <StatusSelect />
-      <RootList items={[]} />
-    </main>
+    <div className="flex min-h-svh flex-col items-center justify-center gap-y-8">
+      <Link to="/">
+        <Logo size="lg" />
+      </Link>
+      <div className="min-h-[430px]">
+        <SignIn
+          forceRedirectUrl="/app"
+          routing="hash"
+          appearance={{
+            elements: {
+              footer: "hidden",
+            },
+          }}
+        />
+      </div>
+    </div>
   );
-}
+};
+
+export default IndexRoute;
