@@ -3,22 +3,25 @@ import { MdArrowRightAlt } from "react-icons/md";
 
 const OurTeam = () => {
   return (
-    <section className="bg-[#272727] w-full rounded-t-[2rem] pb-10 pt-10 text-white ">
+    <section className="bg-[#272727] w-full rounded-t-[2rem] pt-2 md:pt-10  text-white ">
       {/* New Content Section */}
-      <div className="mt-16 text-center mx-auto">
-        <div className="md:px-20 px-10">
-          <div className="bg-[#222222] py-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] shadow-gray-600 lg:h-[150px] md:h-[150px] overflow-hidden relative flex justify-between items-center text-start rounded-[2rem]">
-            <p className="lg:text-[1.5rem]  text-gray-300 font-thin ml-5 align-middle lg:w-[80%] w-full font-SpaceGrotesk">
+      <div className="md:mt-16 text-center mx-auto">
+        <div className="md:px-20 ">
+          <div className="bg-[#222222] m-1 md:shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] shadow-sm md:border-2 md:border-[#8262B0] shadow-[#C8AED340] lg:h-[180px] md:h-[200px] overflow-hidden relative flex justify-between items-center text-start rounded-[2rem]">
+            <p className="lg:text-[1.5rem] m-5 text-[22px] text-gray-300 font-thin md:ml-10 align-middle w-full font-SpaceGroteskLight">
               <span className="lg:text-[2rem] font-Melodrama">50%</span> of
-              learners struggle to find quality resources for Arabic dialects,
-              compared to just{" "}
-              <span className="lg:text-[2rem] Melodrama">25%</span> for Standard
-              Arabic (Fusha).
+              learners struggle to find quality resources for{" "}
+              <span className="md:font-semibold">
+                Arabic <br className="hidden md:block"/> dialects
+              </span>{" "}
+              , compared to just{" "}
+              <span className="lg:text-[2rem] Melodrama">25%</span> for{" "}
+              <span className="md:font-semibold">Standard Arabic</span> (Fusha).
             </p>
             <img
               src="/images/art221.png"
               alt="Our Team"
-              className="mt-4 md:mt-0 md:mx-auto absolute md:relative top-0 end-0 object-contain max-w-xs md:max-w-md rounded-lg"
+              className=" md:mt-0 md:w-[30%] md:mx-auto h-full absolute md:relative top-0 end-0 object-contain  md:max-w-md rounded-lg"
             />
           </div>
 
@@ -27,28 +30,35 @@ const OurTeam = () => {
             alt="image12"
             width={700}
             height={300}
-            className="w-full mt-10 object-cover rounded-lg"
+            className="md:w-full w-[98%] m-auto mt-10 object-cover rounded-lg"
           />
 
-          <div className="flex flex-col md:flex-row items-center justify-between w-full overflow-hidden h-auto gap-6">
-            <div className="text-start md:w-[60%] w-full">
-              <h3 className="text-3xl md:text-5xl mt-5 font-SpaceGrotesk font-bold">
+          <div className="flex flex-col md:flex-row items-center px-5 md:px-0 justify-between w-full overflow-hidden h-auto gap-6">
+            <div className="text-start md:w-[50%] w-full">
+              <h3 className="text-[25px] md:text-[72px] py-5 md:py-0 mt-3 md:mt-0 mb-5 font-SpaceGrotesk font-bold">
                 Our Team
               </h3>
-              <p className="mt-4 font-SpaceGrotesk md:text-[20px] text-gray-400">
-                Aralects is being designed by a team of experts in linguistics,
-                education, and software engineering who are determined to make
-                Arabic learning engaging and authentic.
+              <p className="mt:5 md:mt-5 font-SpaceGroteskLight text-[16px] md:text-[24px] font-[300] md:leading-8 text-[#D6D6D6]">
+                Aralects is being designed by a team of experts <br className="hidden md:block"/> in{" "}
+                <span className="font-[500] font-SpaceGroteskBold md:text-white">
+                  linguistics, generative AI
+                </span>{" "}
+                , and{" "}
+                <span className="font-[500] font-SpaceGroteskBold md:text-white">
+                  contextual learning
+                </span>{" "}
+                who are determined to make Arabic learning engaging and
+                authentic.
               </p>
-              <p className="mt-4 md:text-[20px] font-SpaceGrotesk text-purple-300">
+              <p className="mt-4 text-[16px] text-glow md:text-[25px] font-[300] md:leading-8 font-SpaceGroteskLight text-[#EADFFF]">
                 We believe the best way to learn a language is to live it—and
-                that’s exciting. The journey we’re creating is for you.
+                that’s exactly the journey we’re creating for you.
               </p>
             </div>
             <img
               src="/images/art222.png"
               alt="artimage"
-              className="w-full md:w-[30%]  md:h-full object-contain"
+              className="w-full md:w-[40%] hidden md:block md:h-full object-contain"
             />
           </div>
         </div>
@@ -56,30 +66,36 @@ const OurTeam = () => {
         <img
           src="/images/art223.png"
           alt=""
-          className="mt-8 w-full object-cover rounded-lg"
+          className="mt-8 w-[90%] m-auto md:w-full  object-cover rounded-lg"
         />
 
-        <div className="px-10 md:px-20 ">
-          <div className="mt-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] shadow-[#313338] bg-[#222222] relative flex justify-between md:flex-row py-5 lg:h-[350px] rounded-3xl overflow-hidden border border-gray-700 text-center items-center">
+        <div className="px-2 md:px-20 ">
+          <div className="mt-5 h-fit relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] bg-[#222222] flex justify-between md:flex-row py-3 rounded-3xl overflow-hidden border border-gray-700 text-center items-center">
+            <div className="w-1/2 hidden md:block"></div>
             <img
               src="/images/art224.png"
               alt=""
-              className="h-[150px] left-0 md:h-full absolute md:static  object-contain"
+              className="h-[150px] absolute hidden md:block left-0 md:h-full object-contain"
             />
-            <div className="md:w-[50%] flex-1 float-right lg:ml-[100px] w-full h-full justify-center text-start flex flex-col gap-4 px-4 md:px-10">
-              <h4 className=" text-lg md:text-5xl font-SpaceGrotesk font-bold">
+
+            <div className=" flex-1 md:w-[60%] relative float-right w-full h-full justify-center text-start flex flex-col gap-4 px-4 md:px-5">
+              <img src="/images/imgUnav2.png" alt="" className=" absolute md:hidden -top-3 -left-3 w-[120px] opacity-60 rotate-45"/>
+              <img src="/images/imgUnav2.png" alt="" className=" absolute md:hidden -bottom-12 -right-12 w-[120px] opacity-60 -rotate-90"/>
+
+              <h4 className=" text-lg md:text-[65px] leading-tight font-SpaceGrotesk font-bold">
                 We’re not just teaching Arabic
               </h4>
-              <p className="text-gray-400 md:text-xl font-SpaceGrotesk">
-                We’re building a global community where learners feel at home,
-                connect, share stories, and dive into the Arabic-speaking world.
+              <p className="text-gray-400 md:text-[24px] font-[300] font-SpaceGrotesk">
+                We’re building a global community where learners from all
+                backgrounds can connect, share stories, and dive into the
+                language in all its forms.
               </p>
-              <p className=" text-purple-300 md:text-xl font-SpaceGrotesk">
+              <p className=" text-[#EADFFF] text-glow md:text-[24px] font-[300] font-SpaceGrotesk">
                 Start learning Arabic for free, with access to all the tools and
-                lessons you need.
+                lessons you need!
               </p>
-              <button className="border font-SpaceGrotesk flex items-center justify-between space-x-2 border-purple-400 w-fit text-purple-300 px-6 py-2 rounded-full">
-                Sign up for free{" "}
+              <button className="border font-SpaceGrotesk mt-10 flex items-center justify-between space-x-2 border-purple-400 w-fit text-purple-300 px-6 py-2 rounded-full">
+                Join waiting list
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -90,10 +106,10 @@ const OurTeam = () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="lucide lucide-move-right ml-2"
+                  class="lucide lucide-arrow-right"
                 >
-                  <path d="M18 8L22 12L18 16" />
-                  <path d="M2 12H22" />
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
                 </svg>
               </button>
             </div>

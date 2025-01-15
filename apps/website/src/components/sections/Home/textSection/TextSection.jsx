@@ -3,56 +3,37 @@ import { CiCirclePlus } from "react-icons/ci";
 
 function TextSection() {
   return (
-    <div className=" w-full flex  relative flex-col gap-3 items-center m-auto mt-10 px-5">
+    <div className=" md:w-full flex rounded-2xl  relative shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] md:shadow-none w-[90%] flex-col gap-3 items-center m-auto md:px-5">
       <img
         src="/images/art123.png"
         alt=""
-        className=" absolute -z-10 -top-20"
+        className=" absolute -z-10 -top-[100px]"
       />
       {/* Sign-Up Button */}
-      <button className="bg-[#9e9e9e] text-gray-100 flex items-center py-2 px-4 rounded-full hover:bg-gray-700 transition-all">
-        Sign Up
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-circle-plus ml-2"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 12h8" />
-          <path d="M12 8v8" />
-        </svg>
-      </button>
+    
 
       {/* Heading */}
-      <h1 className="text-[1.2rem] md:text-[2rem] leading-5 mt-5 text-gray-600 font-Melodrama text-center font-medium ">
-        Arabic is a world of dialects, stories, and connections
+      <h1 className="text-[25px] md:text-[30px] leading-5 mt-5 text-gray-600 font-Melodrama font-[700] md:font-UnboundedRegular text-center md:font-[400] ">
+        Arabic is a world of dialects, <br className="md:hidden"/> stories, and connections
       </h1>
 
       {/* Subheading */}
-      <h2 className="font-SpaceGrotesk text-center md:mb-10 text-[0.7rem] md:mt-5 md:text-[1.4rem] leading-6 font-normal text-gray-600  md:max-w-[700px]">
-        While learners focus on Standard Arabic{" "}
+      <h2 className="font-SpaceGrotesk text-center md:mb-10 text-[15px] md:mt-5 md:text-[1.4rem] md:leading-6 font-normal text-gray-600  md:max-w-[700px]">
+        While learners focus on Standard Arabic{" "}<br className="md:hidden"/>
         <span
-          className={`bg-[url("/public/images/FushaBG.png")] font-SpaceGrotesk bg-no-repeat bg-center bg-contain inline-block w-fit px-4 py-1 text-white`}
+          className={`bg-[url("/images/FushaBG.png")] font-SpaceGrotesk bg-no-repeat bg-center bg-contain inline-block w-fit px-1 md:px-4 py-1 text-white`}
         >
           Fusha
         </span>
-        <br /> the real <span className="Melodrama">magic</span> lies in spoken
-        Arabic{" "}
+        <br className="hidden md:block" /> the real magic lies in spoken
+        Arabic{" "}<br className="md:hidden"/>
         <span
-          className={`bg-[url("/public/images/AmmiyyaBG.png")] font-SpaceGrotesk bg-no-repeat bg-center bg-contain inline-block w-fit px-4 py-2 text-white`}
+          className={`bg-[url("/images/AmmiyyaBG.png")] font-SpaceGrotesk bg-no-repeat bg-center bg-contain inline-block w-fit px-1 md:px-4 py-2 text-white`}
         >
           Ammiyya
         </span>
-        –<br />
-        the <span className="font-Melodrama ">jokes, slang</span>, and{" "}
-        <span className="font-Melodrama">warmth</span> of everyday life
+        –<br className="hidden md:block"/>
+        the jokes, slang, and warmth of <br className="md:hidden"/> everyday life
       </h2>
     </div>
   );

@@ -2,28 +2,130 @@
 import Footer from "@components/layout/Footer/Footer";
 import Header from "../components/layout/Header/Header";
 
-import "../styles.css/global.css";
+import "./global.css";
 const { title = "موقعي", lang = "ar" } = Astro.props;
----
 
+const isUnderConstruction = Astro.url.pathname === "/under-construction";
+const demo = Astro.url.pathname === "/demo";
+const contact = Astro.url.pathname === "/contact";
+const careers = Astro.url.pathname === "/careers";
+const blog = Astro.url.pathname === "/blog";
+const home = Astro.url.pathname === "/";
+
+---
 <!doctype html>
 <html lang="ar">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/starry-saturn/src/layouts/global.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <style is:global>
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      @font-face {
+        font-family: Melodrama;
+        src: url("/fonts/Melodrama-Semibold.ttf");
+      }
+
+      .Melodrama {
+        font-family: Melodrama;
+      }
+
+      @font-face {
+        font-family: SpaceGrotesk;
+        src: url("/fonts/SpaceGrotesk-Regular.ttf");
+      }
+
+      .SpaceGrotesk {
+        font-family: SpaceGrotesk;
+      }
+
+      @font-face {
+        font-family: SpaceGroteskBold;
+        src: url("/fonts/SpaceGrotesk-Bold.ttf");
+      }
+
+      .SpaceGroteskBold {
+        font-family: SpaceGroteskBold;
+      }
+
+      @font-face {
+        font-family: UnboundedRegular;
+        src: url("/fonts/Unbounded-Regular.ttf");
+      }
+      .UnboundedRegular {
+        font-family: UnboundedRegular;
+      }
+
+      @font-face {
+        font-family: SpaceGroteskLight;
+        src: url("/fonts/SpaceGrotesk-Light.ttf");
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+      .SpaceGroteskLight {
+        font-family: SpaceGroteskLight;
+      }
+
+      @font-face {
+        font-family: Satoshi;
+        src: url("/fonts/Satoshi-Variable.ttf");
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+      .Satoshi {
+        font-family: Satoshi;
+      }
+      body {
+        font-family: "Amiri", serif;
+      }
+      .glow {
+        text-shadow:
+          0 0 10px #a07ed1,
+          0 0 20px #a07ed1,
+          0 0 30px #a07ed1;
+      }
+
+      /* scroll bar styling */
+      /* width */
+      ::-webkit-scrollbar {
+        width: 3px;
+        margin-right: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #c3c1c7;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #a07ed1;
+        border-radius: 5px;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    </style>
     <meta name="generator" content={Astro.generator} />
-    <title></title>
+    <title>{title}</title>
   </head>
   <body>
     <Header client:load />
     <slot />
-    <Footer />
+    {home && <Footer />}
   </body>
 </html>
 

@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: Melodrama;
+    src: url('../public/fonts/Melodrama-Semibold.ttf');
+  }
+  
+  .Melodrama{
+    font-family: Melodrama;
+  }
+  
+  @font-face {
+    font-family: 
+    SpaceGrotesk;
+    src: url('../public//fonts/SpaceGrotesk-Regular.ttf');
+  }
+  
+  .SpaceGrotesk{
+    font-family: SpaceGrotesk;
+  }
+  
+  @font-face {
+    font-family: 
+    SpaceGroteskBold;
+    src: url('../public//fonts/SpaceGrotesk-Bold.ttf');
+  }
+  
+  .SpaceGroteskBold{
+    font-family: SpaceGroteskBold;
+  }
+    
+  @font-face {
+    font-family: 
+    UnboundedRegular;
+    src: url('../public//fonts/Unbounded-Regular.ttf');
+  }
+  .UnboundedRegular
+  {
+    font-family: SpaceGroteskBold;
+  }
+  
+  @font-face {
+    font-family: 
+    SpaceGroteskLight;
+    src: url('../public//fonts/SpaceGrotesk-Light.ttf');
+  }
+  *{
+    padding: 0px;
+    margin: 0px;
+  }
+  .SpaceGroteskLight{
+    font-family: SpaceGroteskLight;
+  }
+  body {
+    font-family: 'Amiri', serif;
+  }
+  .glow {
+    text-shadow: 0 0 10px #a07ed1, 0 0 20px #a07ed1, 0 0 30px #a07ed1;
+  }
+  
+  /* scroll bar styling */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 3px;
+    margin-right: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #c3c1c7;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #a07ed1;
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
