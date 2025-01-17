@@ -47,7 +47,7 @@ const HeroSection = () => {
         at a time.
       </h1>
 
-      <div className="absolute -end-5 top-[60%] -z-[1] flex w-screen justify-between md:end-[10%] md:top-[52%] lg:w-[70%] ">
+      <div className="absolute bottom-0 top-0 -z-[1] flex w-screen justify-between md:end-[10%] lg:w-[70%] ">
         <img
           src="/img/imgUhero1.png"
           alt=""
@@ -56,7 +56,7 @@ const HeroSection = () => {
         <img
           src="/img/imgUhero2.png"
           alt=""
-          className="-z-[1] h-[200px] w-auto object-contain md:h-[260px]"
+          className="absolute -bottom-8 right-0 -z-[1] h-[200px] w-auto object-contain md:h-[260px]"
         />
       </div>
 
