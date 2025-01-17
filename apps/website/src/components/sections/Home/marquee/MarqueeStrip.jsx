@@ -86,7 +86,7 @@ const data = [
 
 function MarqueeStrip() {
   return (
-    <div className="group inline-flex w-full flex-nowrap items-center justify-center overflow-hidden border-y-2 border-[#8262b0] bg-[#8262b0] text-5xl transition-all [perspective:1000px] hover:bg-[#F3F3F3] sm:flex">
+    <div className="group inline-flex w-full select-none flex-nowrap items-center justify-center overflow-hidden border-y-2 border-[#8262b0] bg-[#8262b0] text-5xl transition-all [perspective:1000px] hover:bg-[#F3F3F3] sm:flex">
       {[1, 2, 3, 4, 5].map((_, index) => (
         <ul
           key={index}
@@ -107,7 +107,7 @@ function MarqueeStrip() {
                 </h1>
                 <h1
                   rel="noopener noreferrer"
-                  className="font-Rubbama text-primary-foreground p-2 text-center text-3xl transition-all duration-300  [backface-visibility:hidden] [transform-style:preserve-3d] [transform:rotateX(180deg)_translateY(-8px)] group-hover:[transform:rotateX(0deg)_translateY(-8px)] md:text-7xl md:group-hover:[transform:rotateX(0deg)_translateY(-18px)]"
+                  className="font-Rubbama text-primary-foreground p-2 text-center text-3xl transition-all duration-300  [backface-visibility:hidden] [transform-style:preserve-3d] [transform:rotateX(180deg)] group-hover:[transform:rotateX(0deg)] md:text-7xl md:group-hover:[transform:rotateX(0deg)_translateY(-18px)]"
                   style={gridAreaStyle}
                 >
                   {item.arabic}
