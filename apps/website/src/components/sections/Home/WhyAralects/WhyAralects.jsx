@@ -95,13 +95,19 @@ const WhyAralects = () => {
           >
             <span className="absolute bottom-[35%] left-[36%] hidden h-full w-full scale-0 rounded-full bg-[#a07ed1] transition-transform duration-500 ease-out group-hover:scale-[250%] xl:block"></span>
 
-            <img
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
               className="absolute right-2 top-2 hidden object-contain md:right-5 md:top-5 md:block"
-              src="/img/ThoughtBubble.png"
-              alt=""
-              width={30}
-              height={30}
-            />
+            >
+              <path
+                d="M0.375 15.2829V29.9104H5.20541L7.36068 27.7552C9.58661 29.118 12.2012 29.9104 15.0025 29.9104C23.0734 29.9104 29.625 23.3639 29.625 15.2829C29.625 7.20194 23.0734 0.655396 14.9975 0.655396C6.92155 0.655396 0.375 7.20194 0.375 15.2829Z"
+                fill="#A07ED1"
+              />
+            </svg>
             <h3 className="font-SpaceGrotesk z-20 min-h-16 max-w-[80%] text-2xl font-bold transition-all xl:group-hover:-translate-y-6 xl:group-hover:opacity-0">
               {feature.title}
             </h3>
