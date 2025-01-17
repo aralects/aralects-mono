@@ -61,7 +61,7 @@ const OurTeam = () => {
         </div>
       </div>
 
-      <Blobs className="mx-auto w-[95%] object-cover md:my-12" />
+      <Blobs className="-my-6 mx-auto w-[95%] object-cover md:my-12" />
 
       <div className="px-2 md:px-20">
         <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-t-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
