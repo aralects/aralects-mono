@@ -1,20 +1,35 @@
-import React from "react";
-import { FaFacebook, FaTwitter, FaTelegramPlane } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { cn } from "@repo/ui";
 
-const SocialSidebar = () => {
+const SocialSidebar = ({ className, ...props }) => {
   return (
-    <div className=" absolute left-4  top-[200px] hidden flex-col space-y-8 md:flex">
-      <a href="#" className="text-[#a07ed1] hover:text-[#946bcc]">
-        <FaFacebook size={20} />
+    <div
+      className={cn(
+        "hidden flex-col gap-y-4 text-[#a07ed1] hover:text-[#946bcc] md:flex",
+        className,
+      )}
+      {...props}
+    >
+      <a
+        href="https://www.facebook.com/people/Aralects/61566846125986/100010877281558"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <FaFacebook size={28} />
       </a>
-      <a href="#" className="text-[#a07ed1] hover:text-[#946bcc]">
-        <FaTwitter size={20} />
+      <a
+        href="https://www.instagram.com/aralects.learn/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <FaInstagram size={28} />
       </a>
-      <a href="#" className="text-[#a07ed1] hover:text-[#946bcc]">
-        <img src="/img/Vkontakte.png" alt="" width={20} height={20} />
-      </a>
-      <a href="#" className="text-[#a07ed1] hover:text-[#946bcc]">
-        <FaTelegramPlane size={20} />
+      <a
+        href="https://www.linkedin.com/company/105135861/admin/dashboard/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <FaLinkedin size={28} />
       </a>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import Blob from "src/assets/blob";
 import Blobs from "src/assets/blobs";
 import { smoothScrollTo } from "src/utils/newsletter";
@@ -63,8 +62,8 @@ const OurTeam = () => {
 
       <Blobs className="-my-6 mx-auto w-[95%] object-cover md:my-12" />
 
-      <div className="px-2 md:px-20">
-        <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-t-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
+      <div className="px-2 pb-2 md:px-20 md:pb-12">
+        <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
           <div className="hidden w-1/3 md:block"></div>
           <img
             src="/img/art224.png"

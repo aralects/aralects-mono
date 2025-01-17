@@ -38,8 +38,9 @@ const UnderConstructionMarquee = ({ className }) => {
 const PhoneMockup = () => {
   return (
     // py is 24px in reality (the iphone has an invisible margin)
-    <div className="relative isolate py-[5px]">
-      <IphoneSvg className="h-[756px] w-96" />
+    <div className="relative isolate ml-4 py-[5px]">
+      {/* lg:h-[756px] lg:w-96 */}
+      <IphoneSvg className="h-[620px] w-80" />
       <div className="absolute inset-6 -z-[1] flex overflow-hidden rounded-[4rem] bg-white shadow-[0px_10px_10px_rgb(0_0_0_/_0.4)]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +79,7 @@ function ArabicAsComunity() {
 
       {/* Text Content */}
       <div className="z-30 flex w-full flex-col justify-center text-white md:w-[60%]">
-        <h2 className="font-SpaceGrotesk max-w-[540px] text-2xl font-bold md:text-6xl">
+        <h2 className="font-SpaceGrotesk max-w-[540px] text-2xl font-bold md:text-5xl lg:text-6xl">
           Arabic, as a community, for the community.
         </h2>
 
@@ -110,7 +111,7 @@ function ArabicAsComunity() {
       </div>
 
       {/* Mobile Image */}
-      <div className="hidden justify-center md:flex">
+      <div className="mx-auto hidden justify-center md:flex">
         <PhoneMockup />
       </div>
     </div>

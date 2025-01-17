@@ -1,5 +1,3 @@
-import { MoveRight } from "lucide";
-import React from "react";
 import { smoothScrollTo } from "src/utils/newsletter";
 
 const HeroSection = () => {

@@ -48,7 +48,7 @@ const WhyAralects = () => {
     <section className="m-auto mt-10 w-full overflow-hidden rounded-[2rem] bg-[#272727] text-white">
       {/* Header Section */}
       <div className="px-4 pt-4">
-        <AralectsIllustration className="glow-xl max-h-[440px] w-full rounded-2xl object-cover md:max-h-[unset] md:rounded-[2rem] md:object-cover md:shadow-[rgba(0,0,0,0.25)_0px_0px_20px]" />
+        <AralectsIllustration className="glow-xl max-h-[400px] w-full rounded-2xl object-cover sm:max-h-[440px] md:max-h-[unset] md:rounded-[2rem] md:object-cover md:shadow-[rgba(0,0,0,0.25)_0px_0px_20px]" />
       </div>
 
       {/* Why Aralects Content */}
