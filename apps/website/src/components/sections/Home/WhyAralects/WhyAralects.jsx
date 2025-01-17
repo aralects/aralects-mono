@@ -54,7 +54,7 @@ const WhyAralects = () => {
       {/* Why Aralects Content */}
       <div className="my-[30px] flex w-full flex-col items-center justify-between gap-8 px-5 text-start md:my-[60px] md:flex-row md:px-20">
         <div className="md:w-1/2">
-          <h2 className="font-SpaceGroteskBold text-2xl font-bold md:text-7xl">
+          <h2 className="font-SpaceGrotesk text-2xl font-bold md:text-7xl">
             Why <span className="text-glow-xl text-purple-200">Aralects</span>?
           </h2>
           <p className="font-SpaceGroteskLight mt-6 font-thin text-gray-300 md:text-2xl">
