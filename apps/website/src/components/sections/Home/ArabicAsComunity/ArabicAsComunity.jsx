@@ -36,9 +36,10 @@ const UnderConstructionMarquee = ({ className }) => {
 
 const PhoneMockup = () => {
   return (
-    <div className="relative isolate">
-      <IphoneSvg className="w-96" />
-      <div className="absolute inset-x-8 inset-y-[7.5rem] -z-[1] flex overflow-hidden rounded-[2.85rem] bg-white">
+    // py is 24px in reality (the iphone has an invisible margin)
+    <div className="relative isolate py-[5px]">
+      <IphoneSvg className="h-[756px] w-96" />
+      <div className="absolute inset-x-8 inset-y-8 -z-[1] flex overflow-hidden rounded-[2.85rem] bg-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="141"
@@ -66,7 +67,7 @@ const PhoneMockup = () => {
 
 function ArabicAsComunity() {
   return (
-    <div className="relative flex w-full flex-col justify-between px-5 py-10 md:flex-row md:px-20 md:py-16 lg:px-20">
+    <div className="relative flex w-full flex-col justify-between px-5 md:flex-row md:px-20 lg:px-20">
       {/* Background Image */}
       <img
         src="/img/ArabicAsComunityBg.jpg"
@@ -75,16 +76,16 @@ function ArabicAsComunity() {
       />
 
       {/* Text Content */}
-      <div className="z-30 flex w-full flex-col justify-center gap-4 text-white md:w-[60%]">
-        <h2 className="font-SpaceGrotesk text-4xl font-bold md:text-7xl">
+      <div className="z-30 flex w-full flex-col justify-center text-white md:w-[60%]">
+        <h2 className="font-SpaceGrotesk max-w-[640px] text-2xl font-bold md:text-7xl">
           Arabic, as a community, for the community.
         </h2>
 
-        <p className="font-SpaceGroteskLight w-full font-thin md:w-[80%] md:text-2xl">
+        <p className="font-SpaceGroteskLight mt-6 w-full font-thin md:w-[80%] md:text-2xl">
           Want to be the first to experience Aralects? Sign up now to be among
           the first to explore Aralects as we get ready to launch!
         </p>
-        <button className="font-SpaceGrotesk mt-6 flex w-fit items-center rounded-full bg-gray-100 px-5 py-2 font-medium text-[#8262B0] md:text-xl">
+        <button className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-white/90 md:text-2xl">
           Join waiting list
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -96,16 +97,16 @@ function ArabicAsComunity() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="ml-2"
+            className="ml-2 -translate-x-1 transition-transform group-hover:translate-x-0"
           >
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
           </svg>
         </button>
       </div>
 
       {/* Mobile Image */}
-      <div className="mt-8 hidden justify-center md:mt-0 md:flex">
+      <div className="hidden justify-center md:flex">
         <PhoneMockup />
       </div>
     </div>
