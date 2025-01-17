@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@repo/ui";
+import Blobs from "src/assets/blobs";
 
 const faqs = [
   {
@@ -43,18 +44,15 @@ const faqs = [
 
 const FAQs = () => {
   return (
-    <section className="relative m-auto px-5 py-12 text-gray-900 md:w-[90%] md:px-20">
-      <img
-        src="/img/faqbgimage.png"
-        alt=""
-        className="absolute -left-5 top-[100px] -z-[1] hidden md:block"
+    <section className="relative m-auto px-5 py-[90px] text-gray-900 md:w-[90%] md:px-20">
+      <Blobs
+        filled={false}
+        className="absolute left-32 -z-[1] hidden origin-top-left rotate-90 opacity-15 md:block"
       />
       {/* FAQ Header */}
-      <div className="text-start">
-        <h2 className="font-SpaceGrotesk mt-8 text-2xl font-bold text-gray-700 md:text-7xl">
-          FAQs
-        </h2>
-      </div>
+      <h2 className="font-SpaceGrotesk text-start text-2xl font-bold text-gray-700 md:text-7xl">
+        FAQs
+      </h2>
 
       {/* FAQ Items */}
       <Accordion

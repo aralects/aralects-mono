@@ -39,7 +39,7 @@ const PhoneMockup = () => {
     // py is 24px in reality (the iphone has an invisible margin)
     <div className="relative isolate py-[5px]">
       <IphoneSvg className="h-[756px] w-96" />
-      <div className="absolute inset-x-8 inset-y-8 -z-[1] flex overflow-hidden rounded-[2.85rem] bg-white">
+      <div className="absolute inset-6 -z-[1] flex overflow-hidden rounded-[4rem] bg-white shadow-[0px_10px_10px_rgb(0_0_0_/_0.4)]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="141"
@@ -67,7 +67,7 @@ const PhoneMockup = () => {
 
 function ArabicAsComunity() {
   return (
-    <div className="relative flex w-full flex-col justify-between px-5 md:flex-row md:px-20 lg:px-20">
+    <div className="relative my-[6px] flex w-full flex-col justify-between px-5 md:my-9 md:flex-row md:px-20 lg:px-20">
       {/* Background Image */}
       <img
         src="/img/ArabicAsComunityBg.jpg"
@@ -77,7 +77,7 @@ function ArabicAsComunity() {
 
       {/* Text Content */}
       <div className="z-30 flex w-full flex-col justify-center text-white md:w-[60%]">
-        <h2 className="font-SpaceGrotesk max-w-[640px] text-2xl font-bold md:text-7xl">
+        <h2 className="font-SpaceGrotesk max-w-[540px] text-2xl font-bold md:text-6xl">
           Arabic, as a community, for the community.
         </h2>
 

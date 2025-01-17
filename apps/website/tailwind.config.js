@@ -15,7 +15,6 @@ module.exports = {
         SpaceGroteskBold: ["SpaceGroteskBold", "sans-serif"],
         SpaceGroteskLight: ["SpaceGroteskLight", "sans-serif"],
         UnboundedRegular: ["UnboundedRegular", "sans-serif"],
-        Satoshi: ["Satoshi", "sans-serif"],
         Rubbama: ["KoRubbama", "sans-serif"],
       },
 

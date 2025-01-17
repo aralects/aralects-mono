@@ -62,7 +62,7 @@ const WhyAralects = () => {
             lessons and miss the immersive, life-scenario conversations that
             bring Arabic to life.
           </p>
-          <p className="text-glow font-SpaceGroteskLight mt-4 font-light text-purple-300 md:text-2xl">
+          <p className="text-glow font-SpaceGroteskLight mt-4 font-light text-[#EADFFF] md:text-2xl">
             Aralects is changing that. We’re creating an app that transforms how
             you connect with the language.
           </p>
