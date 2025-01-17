@@ -1,49 +1,29 @@
 ---
-import '@repo/ui/styles.css'
-// import '@/assets/styles/tailwind.css';
+import Footer from "@components/layout/Footer";
+import Header from "../components/layout/Header";
 
-import { I18N } from 'astrowind:config';
+import "./global.css";
+const { title = "Aralects" } = Astro.props;
 
-import CommonMeta from '@/components/common/CommonMeta.astro';
-import Favicons from '@/components/Favicons.astro';
-import CustomStyles from '@/components/CustomStyles.astro';
-import ApplyColorMode from '@/components/common/ApplyColorMode.astro';
-import Metadata from '@/components/common/Metadata.astro';
-import SiteVerification from '@/components/common/SiteVerification.astro';
-import Analytics from '@/components/common/Analytics.astro';
-import BasicScripts from '@/components/common/BasicScripts.astro';
-
-// Comment the line below to disable View Transitions
-import { ViewTransitions } from 'astro:transitions';
-
-import type { MetaData as MetaDataType } from '@/types';
-
-export interface Props {
-  metadata?: MetaDataType;
-}
-
-const { metadata = {} } = Astro.props;
-const { language, textDirection } = I18N;
+const home = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+<html lang="ar">
   <head>
-    <CommonMeta />
-    <Favicons />
-    <CustomStyles />
-    <ApplyColorMode />
-    <Metadata {...metadata} />
-    <SiteVerification />
-    <Analytics />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Comment the line below to disable View Transitions -->
-    <ViewTransitions fallback="swap" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
   </head>
-
-  <body class="antialiased text-default bg-page">
+  <body>
+    <Header client:load />
     <slot />
-
-    <BasicScripts />
+    {home && <Footer client:visible />}
   </body>
 </html>

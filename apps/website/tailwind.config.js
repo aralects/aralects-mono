@@ -1,46 +1,49 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import plugin from 'tailwindcss/plugin';
-import typographyPlugin from '@tailwindcss/typography';
-import baseConfig from '@repo/tailwind-config';
+import baseConfig from "@repo/tailwind-config";
 
-export default {
-  darkMode: 'class',
+module.exports = {
   content: [
-    './src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}',
-    '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
+    "./src/**/*.{astro,html,js,jsx,ts,tsx}",
+    "./components/**/*.{astro,html,js,jsx,ts,tsx}",
+    "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
   ],
+
   theme: {
     extend: {
-      colors: {
-        primary: 'var(--aw-color-primary)',
-        secondary: 'var(--aw-color-secondary)',
-        accent: 'var(--aw-color-accent)',
-        default: 'var(--aw-color-text-default)',
-        muted: 'var(--aw-color-text-muted)',
-      },
       fontFamily: {
-        sans: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
-        serif: ['var(--aw-font-serif, ui-serif)', ...defaultTheme.fontFamily.serif],
-        heading: ['var(--aw-font-heading, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
+        Melodrama: ["Melodrama", "sans-serif"],
+        SpaceGrotesk: ["SpaceGrotesk", "sans-serif"],
+        SpaceGroteskBold: ["SpaceGroteskBold", "sans-serif"],
+        SpaceGroteskLight: ["SpaceGroteskLight", "sans-serif"],
+        UnboundedRegular: ["UnboundedRegular", "sans-serif"],
+        Satoshi: ["Satoshi", "sans-serif"],
+        Rubbama: ["KoRubbama", "sans-serif"],
       },
 
       animation: {
-        fade: 'fadeInUp 1s both',
+        "infinite-scroll": "infinite-scroll 45s linear infinite",
       },
-
       keyframes: {
-        fadeInUp: {
-          '0%': { opacity: 0, transform: 'translateY(2rem)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
         },
       },
     },
   },
   plugins: [
-    typographyPlugin,
-    plugin(({ addVariant }) => {
-      addVariant('intersect', '&:not([no-intersect])');
-    }),
+    function ({ addUtilities }) {
+      addUtilities({
+        ".text-glow": {
+          textShadow:
+            "0 0 16.3px rgba(128, 59, 227, 0.5), 0 0 2px rgba(189, 158, 235, 1)",
+        },
+        ".text-glow-xl": {
+          textShadow:
+            "-0.8px -0.8px 0 #8262B0, 0.8px -0.8px 0 #8262B0, -0.8px 0.8px 0 #8262B0, 0.8px 0.8px 0 #8262B0, 0 0 16.3px rgba(128, 59, 227, 0.5), 0 0 2px rgba(189, 158, 235, 1)",
+        },
+      });
+    },
   ],
+
   presets: [baseConfig],
 };
