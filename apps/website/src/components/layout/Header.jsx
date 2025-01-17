@@ -15,11 +15,11 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-2 right-2 top-2 z-50 flex items-center ${
+      className={`fixed left-2 right-2 top-2 z-50 flex flex-col md:flex-row md:items-center ${
         isMobileMenuOpen && "rounded-none"
       }`}
     >
-      <div className="flex w-full items-center justify-between rounded-full bg-white/70 px-5 py-3 shadow-md backdrop-blur 2xl:container 2xl:mx-auto">
+      <div className="flex w-full items-center justify-between rounded-full bg-white/70 px-8 py-3 shadow-md backdrop-blur 2xl:container 2xl:mx-auto">
         {/* Logo */}
         <a className="flex items-center" href="/">
           <img src="/svg/logo.svg" alt="logo" className="h-10" />

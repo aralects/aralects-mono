@@ -50,7 +50,7 @@ const FAQs = () => {
         className="absolute left-32 top-16 -z-[1] hidden origin-top-left rotate-90 opacity-15 md:block"
       />
       {/* FAQ Header */}
-      <h2 className="font-SpaceGrotesk text-start text-2xl font-bold text-gray-700 md:text-7xl">
+      <h2 className="font-SpaceGrotesk text-start text-2xl font-bold text-gray-700 md:text-5xl">
         FAQs
       </h2>
 
@@ -67,7 +67,7 @@ const FAQs = () => {
             className="border-gray-300 pb-2"
           >
             <AccordionTrigger className="hover:no-underline [&[data-state=open]>h3]:text-purple-600">
-              <h3 className="font-SpaceGrotesk text-left text-lg font-bold text-gray-900 transition-colors duration-200 hover:text-purple-600 md:text-2xl">
+              <h3 className="font-SpaceGrotesk text-left text-lg font-bold text-gray-900 transition-colors duration-200 hover:text-purple-600 md:text-xl">
                 {faq.question}
               </h3>
             </AccordionTrigger>

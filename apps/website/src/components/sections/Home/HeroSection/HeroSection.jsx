@@ -27,23 +27,23 @@ const HeroSection = () => {
       </div>
 
       {/* Heading */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-7xl">
+      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-5xl">
         Connecting cultures,
       </h1>
 
       {/* Subheading with Arabic and Dialect */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:py-5 md:text-7xl">
+      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:py-5 md:text-5xl">
         one
-        <span className="font-SpaceGrotesk ml-5 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5  md:text-7xl md:text-white">
+        <span className="font-SpaceGrotesk ml-5 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5  md:text-5xl md:text-white">
           Arabic
         </span>
-        <span className="font-SpaceGrotesk ml-3 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5 md:text-7xl md:text-white">
+        <span className="font-SpaceGrotesk ml-3 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5 md:text-5xl md:text-white">
           dialect
         </span>
       </h1>
 
       {/* Closing Line */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-7xl">
+      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-5xl">
         at a time.
       </h1>
 
@@ -63,7 +63,7 @@ const HeroSection = () => {
       {/* Button */}
       <button
         onClick={() => smoothScrollTo("newsletter", 80)}
-        className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-2xl"
+        className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-xl"
       >
         Join waiting list
         <svg
