@@ -44,10 +44,10 @@ const faqs = [
 
 const FAQs = () => {
   return (
-    <section className="relative m-auto px-5 py-[90px] text-gray-900 md:w-[90%] md:px-20">
+    <section className="relative m-auto px-5 py-[60px] text-gray-900 md:w-[90%] md:px-20 md:py-[90px]">
       <Blobs
         filled={false}
-        className="absolute left-32 -z-[1] hidden origin-top-left rotate-90 opacity-15 md:block"
+        className="absolute left-32 top-16 -z-[1] hidden origin-top-left rotate-90 opacity-15 md:block"
       />
       {/* FAQ Header */}
       <h2 className="font-SpaceGrotesk text-start text-2xl font-bold text-gray-700 md:text-7xl">
