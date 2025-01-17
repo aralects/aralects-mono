@@ -1,3 +1,4 @@
+import { smoothScrollTo } from "src/utils/newsletter";
 import IphoneSvg from "../../../../assets/iphone-svg";
 import { cn } from "@repo/ui";
 
@@ -85,7 +86,10 @@ function ArabicAsComunity() {
           Want to be the first to experience Aralects? Sign up now to be among
           the first to explore Aralects as we get ready to launch!
         </p>
-        <button className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-white/90 md:text-2xl">
+        <button
+          onClick={() => smoothScrollTo("newsletter", 80)}
+          className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-white/90 md:text-2xl"
+        >
           Join waiting list
           <svg
             xmlns="http://www.w3.org/2000/svg"

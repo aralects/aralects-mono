@@ -1,5 +1,6 @@
 import { MoveRight } from "lucide";
 import React from "react";
+import { smoothScrollTo } from "src/utils/newsletter";
 
 const HeroSection = () => {
   return (
@@ -62,7 +63,10 @@ const HeroSection = () => {
       </div>
 
       {/* Button */}
-      <button className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-2xl">
+      <button
+        onClick={() => smoothScrollTo("newsletter", 80)}
+        className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-2xl"
+      >
         Join waiting list
         <svg
           xmlns="http://www.w3.org/2000/svg"

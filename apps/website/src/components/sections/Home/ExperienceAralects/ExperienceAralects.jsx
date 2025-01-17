@@ -44,7 +44,7 @@ const ExperienceAralects = () => {
   };
 
   return (
-    <div className="px-4 md:px-20">
+    <div id="newsletter" className="px-4 md:px-20">
       <section className="relative isolate flex flex-col items-center justify-around overflow-hidden rounded-2xl bg-[#393939]  text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -14,12 +14,12 @@ import Layout from "../layouts/Layout.astro";
 <Layout>
   <SocialSidebar />
   <div class="relative xl:container xl:mx-auto">
-    <HeroSection />
+    <HeroSection client:visible />
     <TextSection />
     <div class="bg-[#8262b0] bg-opacity-90 rounded-t-[2rem]">
       <WhyAralects />
-      <ArabicAsComunity />
-      <OurTeam />
+      <ArabicAsComunity client:visible />
+      <OurTeam client:visible />
     </div>
   </div>
   <MarqueeStrip />
