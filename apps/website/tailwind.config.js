@@ -33,6 +33,14 @@ module.exports = {
   plugins: [
     function ({ addUtilities }) {
       addUtilities({
+        ".glow": {
+          boxShadow:
+            "0 0 16.3px rgba(128, 59, 227, 0.5), 0 0 2px rgba(189, 158, 235, 1)",
+        },
+        ".glow-xl": {
+          boxShadow:
+            "-0.8px -0.8px 0 #8262B0, 0.8px -0.8px 0 #8262B0, -0.8px 0.8px 0 #8262B0, 0.8px 0.8px 0 #8262B0, 0 0 16.3px rgba(128, 59, 227, 0.5), 0 0 2px rgba(189, 158, 235, 1)",
+        },
         ".text-glow": {
           textShadow:
             "0 0 16.3px rgba(128, 59, 227, 0.5), 0 0 2px rgba(189, 158, 235, 1)",
