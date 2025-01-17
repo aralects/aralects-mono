@@ -1,29 +1,7 @@
 const UnderConstruction = () => {
   return (
     <>
-      {/* Add meta viewport tag to prevent unwanted zooming */}
-
       <div className="relative -z-30 mx-auto flex min-h-screen flex-col overflow-hidden bg-[#8262b0] pb-[160px] text-white md:pt-[100px] lg:min-h-[110vh]">
-        {/* Header Section */}
-        <div className="mt-5 flex w-full items-center justify-between px-4 sm:px-6 lg:px-[150px]">
-          {/* Back Button */}
-          {/* <button
-            className="w-[40px] aspect-auto  lg:w-24 lg:h-24 flex items-center justify-center bg-white text-[#8262b0] rounded-full"
-            aria-label="Back"
-          >
-            <IoIosArrowRoundBack size={25} />
-          </button> */}
-
-          {/* Logo */}
-          {/* <div className="flex justify-center flex-grow lg:justify-center">
-            <img
-              src="/images/logoundercons.svg"
-              alt="Aralects Logo"
-              className="w-[40%] sm:w-[30%] lg:w-52 h-auto object-contain"
-            />
-          </div> */}
-        </div>
-
         {/* Main Content Section */}
         <div className="mt-[100px] flex flex-col items-center justify-between gap-8 px-6 sm:px-10 lg:mt-0 lg:flex-row lg:px-[150px]">
           {/* Text Content */}
@@ -51,7 +29,7 @@ const UnderConstruction = () => {
           {/* Mobile Image */}
           <div className="flex w-full items-center justify-center lg:flex-1 lg:justify-end">
             <img
-              src="/images/Mobile.png"
+              src="/img/Mobile.png"
               alt="Mobile App Mockup"
               className="z-30 h-auto w-full sm:w-[50%] lg:w-[300px]"
             />
@@ -61,12 +39,12 @@ const UnderConstruction = () => {
         {/* Diagonal Construction Tape */}
 
         <img
-          src="/images/strip.png"
+          src="/img/strip.png"
           alt=""
           className="absolute -right-[130px] bottom-0 h-auto w-full -rotate-3"
         />
         <img
-          src="/images/strip2.png"
+          src="/img/strip2.png"
           alt=""
           className="absolute top-10 -z-10 h-auto w-full"
         />

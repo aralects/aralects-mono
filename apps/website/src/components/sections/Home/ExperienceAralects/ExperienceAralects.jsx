@@ -2,45 +2,51 @@ import React from "react";
 
 const ExperienceAralects = () => {
   return (
-    <div className="mb-10">
-      {/* Top Section: Sign-Up Prompt */}
-      <section className="bg-[#393939] mx-2 md:mx-20 py-5 relative text-white flex flex-col  justify-around items-center rounded-2xl overflow-hidden">
-
-      <img src="/images/imgUnav2.png" alt="" className=" absolute md:hidden -top-3 -left-3 w-[120px] opacity-60 rotate-45"/>
-      <img src="/images/imgUnav2.png" alt="" className=" absolute md:hidden -bottom-12 -right-12 w-[120px] opacity-60 -rotate-90"/>
+    <div className="rounded-2xl bg-[#393939] md:mx-20">
+      <section className="relative isolate flex flex-col items-center justify-around overflow-hidden text-white">
+        <img
+          src="/img/imgUnav2.png"
+          alt=""
+          className=" absolute -left-3 -top-3 w-[120px] rotate-45 opacity-60 md:hidden"
+        />
+        <img
+          src="/img/imgUnav2.png"
+          alt=""
+          className=" absolute -bottom-12 -right-12 w-[120px] -rotate-90 opacity-60 md:hidden"
+        />
         {/* Background Image */}
         <img
-          src="/images/letters33.png"
+          src="/img/letters33.png"
           alt=""
-          className="absolute w-[60%]  hidden md:block top-20 left-0 h-full object-contain"
+          className="absolute bottom-0 left-0 -z-[1] hidden object-contain xl:block"
         />
 
-        <div className="flex flex-row items-start w-full px-5 md:px-12 lg:px-20">
+        <div className="flex w-full flex-row items-start px-5 py-16 md:px-12 xl:px-16">
           {/* Content Section */}
-          <div className="w-full md:w-[70%]  md:py-10">
-            <h2 className="text-[24px] md:text-[60px] md:leading-[3rem] font-SpaceGroteskBold font-bold text md:text-left">
+          <div className="w-full lg:w-[70%]">
+            <h2 className="font-SpaceGroteskBold text text-2xl font-bold md:text-left md:text-6xl">
               Want to be the first to experience Aralects?
             </h2>
 
-            <div className="md:w-[70%] flex flex-col md:gap-3">
-              <p className="mt-4 text-[15px] md:w-[90%] font-SpaceGrotesk md:text-[20px]  md:text-left">
+            <div className="mt-4 flex flex-col gap-4 md:w-[70%]">
+              <p className="font-SpaceGrotesk md:w-[90%] md:text-left md:text-xl">
                 Step into a world where Arabic learning is real, personal, and
                 alive.
               </p>
-              <p className="md:mt-2 text-[15px] md:w-[90%] font-SpaceGrotesk md:text-[20px] text-[#EADFFF] text-glow md:text-left">
+              <p className="font-SpaceGrotesk text-glow text-[#EADFFF] md:w-[90%] md:text-left md:text-xl">
                 Sign up today and be part of our community as we prepare to
                 launch!
               </p>
 
-              <div className="relative mt-5  md:w-[90%] h-[50px] md:h-[40px] flex rounded-full justify-between text-[10px] md:text-[12px]  border border-purple-400 md:flex-row items-stretch ">
+              <div className="relative mt-8 flex w-fit flex-row items-stretch justify-between rounded-full border border-purple-400 text-xs">
                 <input
                   type="email"
-                  placeholder="Email here"
-                  className=" bg-transparent w-[50%] font-Satoshi text-[17px] text-gray-900 px-4 py-2 rounded-full focus:outline-none"
+                  placeholder="Your email"
+                  className="font-Satoshi w-60 rounded-full bg-transparent px-4 py-2 text-white focus:outline-none"
                 />
 
-                <button className="bg-[#a07ed1] w-[50%] md:w-fit h-full text-[17px] font-SpaceGrotesk text-white md:px-5 rounded-full font-medium">
-                Join waiting list
+                <button className="font-SpaceGrotesk whitespace-nowrap rounded-full bg-[#a07ed1] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#a07ed1]/90 md:w-fit">
+                  Join waiting list
                 </button>
               </div>
             </div>
@@ -48,13 +54,11 @@ const ExperienceAralects = () => {
 
           {/* Side Image */}
           <img
-            src="/images/art225.png"
+            src="/img/art225.png"
             alt=""
-            className=" absolute right-0 top-0 h-full hidden md:block object-contain ml-auto"
+            className="absolute right-0 top-0 -z-[1] ml-auto hidden h-full object-contain lg:block"
           />
         </div>
-
-        {/* Email Input & Button */}
       </section>
     </div>
   );

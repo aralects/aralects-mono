@@ -1,66 +1,128 @@
-import React, { useState } from "react";
+import { Fragment } from "react";
+
+const gridAreaTemplateStyle = {
+  gridTemplateAreas: "'stack'",
+};
+const gridAreaStyle = { gridArea: "stack" };
 
 const data = [
   {
-    text: "YAMANI",
-    arabic: "يمني",
-    link: "",
-    imgSrc: "/images/icon102.png",
+    english: "Standard",
+    arabic: "فصحى",
   },
   {
-    text: "EGYPTIAN",
-    arabic: "مصرية",
-    link: "",
-    imgSrc: "/images/icon102.png",
+    english: "Egyptian",
+    arabic: "مصري",
   },
   {
-    text: "LEBANESE",
+    english: "Syrian",
+    arabic: "سوري",
+  },
+  {
+    english: "Moroccan",
+    arabic: "مغربي",
+  },
+  {
+    english: "Lebanese",
     arabic: "لبناني",
-    link: "",
-    imgSrc: "/images/icon102.png",
   },
   {
-    text: "EMARATI",
+    english: "Iraqi",
+    arabic: "عراقي",
+  },
+  {
+    english: "Palestinian",
+    arabic: "فلسطيني",
+  },
+  {
+    english: "Saudi",
+    arabic: "سعودي",
+  },
+  {
+    english: "Algerian",
+    arabic: "جزائري",
+  },
+  {
+    english: "Tunisian",
+    arabic: "تونسي",
+  },
+  {
+    english: "Sudanese",
+    arabic: "سوداني",
+  },
+  {
+    english: "Yemeni",
+    arabic: "يمني",
+  },
+  {
+    english: "Kuwaiti",
+    arabic: "كويتي",
+  },
+  {
+    english: "Jordanian",
+    arabic: "أردني",
+  },
+  {
+    english: "Libyan",
+    arabic: "ليبي",
+  },
+  {
+    english: "Emirati",
     arabic: "إماراتي",
-    link: "",
-    imgSrc: "/images/icon102.png",
+  },
+  {
+    english: "Qatari",
+    arabic: "قطري",
+  },
+  {
+    english: "Bahraini",
+    arabic: "بحريني",
+  },
+  {
+    english: "Omani",
+    arabic: "عماني",
   },
 ];
 
 function MarqueeStrip() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
   return (
-    <div className="w-full text-5xl inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)] bg-[#8262b0] sm:flex justify-center items-center">
+    <div className="group inline-flex w-full flex-nowrap items-center justify-center overflow-hidden bg-[#8262b0] text-5xl [perspective:1000px] sm:flex">
       {[1, 2, 3, 4, 5].map((_, index) => (
         <ul
           key={index}
-          className="flex items-center justify-center md:justify-start sm:[&_li]:mx-8 [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll font-medium h-full flex-1 text-white border-b-2 border-transparent"
+          className="animate-infinite-scroll flex h-full flex-1 items-center justify-center border-b-2 border-transparent font-medium text-white md:justify-start [&_img]:max-w-none [&_li]:mx-4 sm:[&_li]:mx-8"
         >
           {data.map((item, itemIndex) => (
-            <React.Fragment key={itemIndex}>
+            <Fragment key={itemIndex}>
               <li
-                onMouseEnter={() => setHoveredIndex(itemIndex)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="h-full md:w-[200px] md:py-8"
+                className="relative grid overflow-hidden py-6"
+                style={gridAreaTemplateStyle}
               >
                 <h1
                   rel="noopener noreferrer"
-                  className="bg-primary text-primary-foreground grid place-content-center p-2 rounded-md text-center Melodrama text-2xl md:text-5xl"
+                  className="text-primary-foreground Melodrama translate-y-3 p-2 text-center text-2xl uppercase transition-all duration-300 [backface-visibility:hidden] [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)] md:text-5xl"
+                  style={gridAreaStyle}
                 >
-                  {hoveredIndex === itemIndex ? item.arabic : item.text}
+                  {item.english}
+                </h1>
+                <h1
+                  rel="noopener noreferrer"
+                  className="font-Rubbama text-primary-foreground p-2 text-center text-2xl transition-all  duration-300 [backface-visibility:hidden] [transform-style:preserve-3d] [transform:rotateX(180deg)]  group-hover:[transform:rotateX(0deg)_translateY(-18px)] md:text-7xl"
+                  style={gridAreaStyle}
+                >
+                  {item.arabic}
                 </h1>
               </li>
               <li>
                 <img
-                  src={item.imgSrc}
-                  alt={`${item.text} icon`}
+                  src="/img/icon102.png"
+                  alt=""
                   width={35}
                   height={35}
-                  className="md:w-[18px] h-[20px] lg:h-[35px] object-contain lg:w-[35px]"
+                  className="h-[20px] object-contain md:w-[18px] lg:h-[35px] lg:w-[35px]"
                 />
               </li>
-            </React.Fragment>
+            </Fragment>
           ))}
         </ul>
       ))}

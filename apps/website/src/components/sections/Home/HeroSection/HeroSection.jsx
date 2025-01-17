@@ -3,55 +3,66 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <section className="text-center relative pb-[80px] md:pb-0 leading-10 w-full pt-[100px] overflow-hidden flex flex-col px-5 md:px-10 items-center justify-between md:space-y-11 ">
-
+    <section className="relative flex w-full flex-col items-center justify-between overflow-hidden px-5 pb-20 pt-40 text-center md:px-10 md:pb-0">
       {/* Background 2 images under navbar */}
-      <div className="mt-0 absolute flex w-screen lg:w-1/2 justify-around lg:justify-between -end-[80px] lg:left-[45%] top-10 lg:-top-[30px]">
-        <img src="/images/imgUnav1.png" alt="" className="lg:h-[100%] self-end md:self-auto mb-5 md:mb-0 h-[60px] object-contain opacity-40" />
+      <div className="absolute -end-[80px] top-10 -z-[1] mt-0 flex w-screen justify-around lg:-top-[30px] lg:left-[45%] lg:w-1/2 lg:justify-between">
         <img
-          src="/images/imgUnav2.png"
+          src="/img/imgUnav1.png"
           alt=""
-          className="mt-10 lg:h-[130px] h-[80px] object-contain opacity-50"
+          className="mb-5 h-[60px] self-end object-contain opacity-40 md:mb-0 md:self-auto lg:h-[100%]"
+        />
+        <img
+          src="/img/imgUnav2.png"
+          alt=""
+          className="mt-10 h-[80px] object-contain opacity-50 lg:h-[130px]"
         />
       </div>
 
       {/* Background Image in the middle */}
-      <div className="absolute top-[45%] lg:top-[25%] -left-8 lg:left-[4%] w-full h-full">
-        <img src="/images/art222.png" alt="" className="w-[130px] object-contain lg:w-[210px]" />
+      <div className="absolute -left-8 top-[45%] -z-[1] h-full w-full lg:left-[4%] lg:top-[25%]">
+        <img
+          src="/img/art222.png"
+          alt=""
+          className="w-[130px] object-contain lg:w-[210px]"
+        />
       </div>
-      
+
       {/* Heading */}
-      <h1 className="text-[34px] md:text-[80px] text-[#393939] mt-[4rem]  font-[400] font-Melodrama md:font-UnboundedRegular">
+      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-7xl">
         Connecting cultures,
       </h1>
 
       {/* Subheading with Arabic and Dialect */}
-      <h1 className="text-[34px] md:text-[80px] text-[#393939]  md:py-5 font-[400] font-Melodrama md:font-UnboundedRegular">
+      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:py-5 md:text-7xl">
         one
-        <span className="md:text-white text-[#8262b0] ml-5 text-[34px] md:text-[80px] md:bg-[#8262b0] font-SpaceGrotesk font-[600]  md:px-5 rounded-lg">
+        <span className="font-SpaceGrotesk ml-5 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5  md:text-7xl md:text-white">
           Arabic
         </span>
-        <span className="md:text-white text-[#8262b0] font-SpaceGrotesk font-[600] ml-3 text-[34px] md:text-[80px] md:bg-[#8262b0] md:px-5 rounded-lg">
+        <span className="font-SpaceGrotesk ml-3 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5 md:text-7xl md:text-white">
           dialect
         </span>
       </h1>
 
       {/* Closing Line */}
-      <h1 className="text-[34px] md:text-[70px] text-[#393939] md:mt-[7rem] font-[400] font-Melodrama md:font-UnboundedRegular">
+      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-7xl">
         at a time.
       </h1>
 
-      <div className="lg:w-[70%] w-screen absolute top-[60%] md:top-[52%] -end-5 md:end-[10%] flex justify-between ">
+      <div className="absolute -end-5 top-[60%] -z-[1] flex w-screen justify-between md:end-[10%] md:top-[52%] lg:w-[70%] ">
         <img
-          src="/images/imgUhero1.png"
+          src="/img/imgUhero1.png"
           alt=""
-          className=" md:h-[140px] h-[100px] object-contain self-end mb-10"
+          className="-z-[1] mb-10 h-[100px] self-end object-contain md:h-[140px]"
         />
-        <img src="/images/imgUhero2.png" alt="" className="md:h-[260px] h-[200px]  w-auto object-contain" />
+        <img
+          src="/img/imgUhero2.png"
+          alt=""
+          className="-z-[1] h-[200px] w-auto object-contain md:h-[260px]"
+        />
       </div>
 
       {/* Button */}
-      <button className="mt-6 border font-SpaceGrotesk tex-[17px] lg:text-[29px] flex gap-2 items-center border-[#8262b0] text-[#8262b0] w-fit px-5 md:px-5 md:py-2 rounded-full shadow-md transition-all">
+      <button className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-2xl">
         Join waiting list
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,19 +71,14 @@ const HeroSection = () => {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-arrow-right"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="ml-2 -translate-x-1 transition-transform group-hover:translate-x-0"
         >
           <path d="M5 12h14" />
           <path d="m12 5 7 7-7 7" />
         </svg>
-      </button>
-
-      <button className="md:bg-[#9e9e9e] w-[150px] text-[14px] md:text-gray-100 text-start font-SpaceGrotesk  px-5 rounded-full">
-      Join waiting list
-        
       </button>
     </section>
   );

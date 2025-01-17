@@ -4,22 +4,22 @@ const data = [
   {
     text: "YAMANI",
     link: "https://x.com/naymur_dev",
-    imgSrc: "/images/icon102.png",
+    imgSrc: "/img/icon102.png",
   },
   {
     text: "EGYPTIAN",
     link: "https://www.youtube.com/naymurweb",
-    imgSrc: "/images/icon102.png",
+    imgSrc: "/img/icon102.png",
   },
   {
     text: "LEBANESE",
     link: "https://github.com/ui-layouts/uilayouts",
-    imgSrc: "/images/icon102.png",
+    imgSrc: "/img/icon102.png",
   },
   {
     text: "EMARATI",
     link: "https://x.com/naymur_dev",
-    imgSrc: "/images/icon102.png",
+    imgSrc: "/img/icon102.png",
   },
 ];
 

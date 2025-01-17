@@ -9,23 +9,20 @@ import SocialSidebar from "../components/sections/Home/SocialSidebar/SocialSideb
 import TextSection from "../components/sections/Home/textSection/TextSection";
 import WhyAralects from "../components/sections/Home/WhyAralects/WhyAralects";
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-  <div class="relative mx-auto">
-    <SocialSidebar />
+  <SocialSidebar />
+  <div class="relative xl:container xl:mx-auto">
     <HeroSection />
-    <TextSection/>
+    <TextSection />
     <div class="bg-[#8262b0] bg-opacity-90 rounded-t-[2rem]">
       <WhyAralects />
       <ArabicAsComunity />
       <OurTeam />
-      <MarqueeStrip client:load/>
     </div>
-    <FAQs client:load/>
-    <ExperienceAralects/>
   </div>
+  <MarqueeStrip client:load />
+  <FAQs client:load />
+  <ExperienceAralects />
 </Layout>
