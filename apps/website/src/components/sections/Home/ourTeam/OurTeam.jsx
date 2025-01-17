@@ -36,7 +36,7 @@ const OurTeam = () => {
         />
 
         <div className="flex h-auto w-full flex-col items-center justify-between gap-6 overflow-hidden px-5 md:flex-row md:px-0">
-          <div className="flex w-full flex-col py-[60px] text-start md:w-[50%]">
+          <div className="flex w-full flex-col py-5 text-start md:w-[50%] md:py-[60px]">
             <h3 className="font-SpaceGrotesk text-2xl font-bold md:text-7xl">
               Our Team
             </h3>
@@ -60,10 +60,10 @@ const OurTeam = () => {
         </div>
       </div>
 
-      <Blobs className="mx-auto my-12 w-[95%] object-cover" />
+      <Blobs className="mx-auto w-[95%] object-cover md:my-12" />
 
       <div className="px-2 md:px-20">
-        <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-t-3xl border border-gray-700 bg-[#222222] py-[60px] text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row">
+        <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-t-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
           <div className="hidden w-1/3 md:block"></div>
           <img
             src="/img/art224.png"
@@ -71,31 +71,70 @@ const OurTeam = () => {
             className="absolute bottom-0 left-0 hidden h-[750px] object-contain md:block lg:h-full"
           />
 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="115"
+            height="96"
+            viewBox="0 0 115 96"
+            fill="none"
+            className="absolute left-0 top-0 w-[120px] md:hidden"
+          >
+            <g opacity="0.25">
+              <path
+                d="M-0.289822 28.511C-0.687584 43.9067 5.62138 58.8094 14.7673 69.3352C23.9132 79.8611 35.6555 86.4214 47.672 90.7739C58.9584 94.8619 71.1125 97.1319 82.4464 93.2475C102.8 86.272 116.288 58.6828 113.678 32.9009C111.067 7.11924 93.9832 -14.7866 73.5946 -21.6044C46.1268 -30.7895 0.794383 -13.4514 -0.289822 28.511Z"
+                fill="#6C49A7"
+                stroke="#1F1F1F"
+                stroke-width="0.173713"
+                stroke-miterlimit="10"
+              />
+              <path
+                d="M79.9632 58.9722C80.7052 55.4699 80.8928 51.7018 80.7004 48.1133C79.4705 25.1773 61.1511 -1.65727 40.8113 -0.528801C24.3699 0.383385 2.57435 15.6496 5.60047 38.2158C7.27107 50.6737 15.6057 60.5821 25.0487 65.7642C34.4916 70.9463 45.0173 72.2045 55.3269 73.395C61.9958 74.1651 69.4103 74.6835 74.6558 69.6052C77.4084 66.9405 79.0792 63.1449 79.9632 58.9722Z"
+                fill="#222222"
+                stroke="#1F1F1F"
+                stroke-width="0.173713"
+                stroke-miterlimit="10"
+              />
+            </g>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="67"
+            height="97"
+            viewBox="0 0 67 97"
+            fill="none"
+            className="absolute bottom-0 right-0 w-[120px] md:hidden"
+          >
+            <g opacity="0.25">
+              <path
+                d="M115.29 53.511C115.688 68.9067 109.379 83.8094 100.233 94.3352C91.0868 104.861 79.3445 111.421 67.328 115.774C56.0416 119.862 43.8875 122.132 32.5536 118.248C12.2002 111.272 -1.28772 83.6828 1.32248 57.9009C3.93265 32.1192 21.0168 10.2134 41.4054 3.39559C68.8732 -5.78954 114.206 11.5486 115.29 53.511Z"
+                fill="#6C49A7"
+                stroke="#1F1F1F"
+                stroke-width="0.173713"
+                stroke-miterlimit="10"
+              />
+              <path
+                d="M35.0368 83.9722C34.2948 80.4699 34.1072 76.7018 34.2996 73.1133C35.5295 50.1773 53.8489 23.3427 74.1887 24.4712C90.6301 25.3834 112.426 40.6496 109.4 63.2158C107.729 75.6737 99.3943 85.5821 89.9513 90.7642C80.5084 95.9463 69.9827 97.2045 59.6731 98.395C53.0042 99.1651 45.5897 99.6835 40.3442 94.6052C37.5916 91.9405 35.9208 88.1449 35.0368 83.9722Z"
+                fill="#222222"
+                stroke="#1F1F1F"
+                stroke-width="0.173713"
+                stroke-miterlimit="10"
+              />
+            </g>
+          </svg>
           <div className="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[60%] md:px-12">
-            <img
-              src="/img/imgUnav2.png"
-              alt=""
-              className=" absolute -left-3 -top-3 w-[120px] rotate-45 opacity-60 md:hidden"
-            />
-            <img
-              src="/img/imgUnav2.png"
-              alt=""
-              className=" absolute -bottom-12 -right-12 w-[120px] -rotate-90 opacity-60 md:hidden"
-            />
-
             <h4 className="font-SpaceGrotesk text-2xl font-bold md:text-6xl">
               We’re not just teaching Arabic
             </h4>
-            <p className="font-SpaceGrotesk mt-6 font-thin text-gray-300 md:text-2xl">
+            <p className="font-SpaceGrotesk font-thin text-gray-300 md:mt-6 md:text-2xl">
               We’re building a global community where learners from all
               backgrounds can connect, share stories, and dive into the language
               in all its forms.
             </p>
-            <p className="text-glow font-SpaceGrotesk mt-4 font-light text-[#EADFFF] md:text-2xl">
+            <p className="text-glow font-SpaceGrotesk font-light text-[#EADFFF] md:mt-4 md:text-2xl">
               Start learning Arabic for free, with access to all the tools and
               lessons you need!
             </p>
-            <button className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-2xl">
+            <button className="font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:mt-6 md:text-2xl">
               Join waiting list
               <svg
                 xmlns="http://www.w3.org/2000/svg"
