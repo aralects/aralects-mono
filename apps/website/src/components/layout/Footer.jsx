@@ -83,7 +83,7 @@ const Footer = () => {
   };
 
   return (
-    <section className="mx-4 mt-[60px] flex overflow-hidden rounded-t-3xl bg-gray-100 text-gray-900">
+    <section className="mx-4 mt-5 flex overflow-hidden rounded-t-3xl bg-gray-100 text-gray-900 md:mt-[60px]">
       <div className="container relative mx-auto px-8 py-10">
         <FooterSocials />
         <div className="flex max-w-6xl flex-col">

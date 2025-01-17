@@ -26,13 +26,17 @@ const ExperienceAralects = () => {
       );
 
       if (!response.ok) {
+        const error = await response.json();
+        if (error?.error === "Subscriber already exists") {
+          setError("This email is already subscribed.");
+          return;
+        }
         throw new Error("Failed to subscribe");
       }
 
       setSuccess(true);
       setEmail("");
     } catch (err) {
-      console.log(err);
       setError("Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
