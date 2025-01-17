@@ -67,12 +67,12 @@ const PhoneMockup = () => {
 
 function ArabicAsComunity() {
   return (
-    <div className="relative my-[6px] flex w-full flex-col justify-between px-5 md:my-9 md:flex-row md:px-20 lg:px-20">
+    <div className="relative my-10 flex w-full flex-col justify-between px-5 md:my-9 md:flex-row md:px-20 lg:px-20">
       {/* Background Image */}
       <img
         src="/img/ArabicAsComunityBg.jpg"
         alt=""
-        className="absolute bottom-0 left-0 -z-10 w-[150%]"
+        className="absolute bottom-0 left-0 -z-10 hidden w-[150%] md:block"
       />
 
       {/* Text Content */}

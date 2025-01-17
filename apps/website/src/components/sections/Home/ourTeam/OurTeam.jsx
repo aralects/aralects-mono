@@ -4,9 +4,9 @@ import Blobs from "src/assets/blobs";
 
 const OurTeam = () => {
   return (
-    <section className="w-full rounded-t-[2rem] bg-[#272727] pt-2 text-white md:pt-[120px]">
-      <div className="md:px-20 ">
-        <div className="glow relative flex items-center justify-between overflow-hidden rounded-[2rem] border border-[#8262B0] bg-[#222222] text-start md:h-[200px] md:border-2 lg:h-[160px]">
+    <section className="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[120px]">
+      <div className="px-2 md:px-20 ">
+        <div className="md:glow relative flex items-center justify-between overflow-hidden rounded-2xl border-[#8262B0] bg-[#222222] text-start shadow-[0px_0px_8px_#C8AED340] md:h-[200px] md:border-2 lg:h-[160px]">
           <p className="font-SpaceGroteskLight m-5 w-full align-middle text-lg font-thin text-gray-300 md:ml-10 lg:text-2xl">
             <span className="font-Melodrama lg:text-3xl">50%</span> of learners
             struggle to find quality resources for{" "}
@@ -32,7 +32,7 @@ const OurTeam = () => {
           alt="image12"
           width={700}
           height={300}
-          className="mt-[60px] w-[98%] rounded-lg object-cover md:w-full"
+          className="mt-2 w-full rounded-2xl object-cover md:mt-[60px]"
         />
 
         <div className="flex h-auto w-full flex-col items-center justify-between gap-6 overflow-hidden px-5 md:flex-row md:px-0">

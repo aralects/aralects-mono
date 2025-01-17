@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-2 right-2 top-2 z-30 flex items-center ${
+      className={`fixed left-2 right-2 top-2 z-50 flex items-center ${
         isMobileMenuOpen && "rounded-none"
       }`}
     >

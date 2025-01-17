@@ -58,20 +58,20 @@ const FAQs = () => {
       <Accordion
         type="single"
         collapsible
-        className="mt-10 grid grid-cols-1 gap-y-6"
+        className="mt-10 grid grid-cols-1 gap-y-2"
       >
         {faqs.map((faq, index) => (
           <AccordionItem
             key={index}
             value={faq.question}
-            className="border-gray-300 pb-4"
+            className="border-gray-300 pb-2"
           >
             <AccordionTrigger className="hover:no-underline [&[data-state=open]>h3]:text-purple-600">
               <h3 className="font-SpaceGrotesk text-left text-lg font-bold text-gray-900 transition-colors duration-200 hover:text-purple-600 md:text-2xl">
                 {faq.question}
               </h3>
             </AccordionTrigger>
-            <AccordionContent className="font-SpaceGrotesk mt-4 text-gray-700 md:text-xl">
+            <AccordionContent className="font-SpaceGrotesk mt-2 text-gray-700 md:text-xl">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>
