@@ -14,7 +14,7 @@ const OurTeam = () => {
               Arabic dialects
             </span>{" "}
             , compared to just{" "}
-            <span className="Melodrama lg:text-3xl">25%</span> for{" "}
+            <span className="Melodrama lg:text-3xl">16%</span> for{" "}
             <span className="font-SpaceGroteskBold font-bold">
               Standard Arabic
             </span>{" "}

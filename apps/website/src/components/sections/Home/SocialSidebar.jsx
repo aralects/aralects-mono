@@ -11,21 +11,21 @@ const SocialSidebar = ({ className, ...props }) => {
       {...props}
     >
       <a
-        href="https://www.facebook.com/people/Aralects/61566846125986/100010877281558"
+        href="https://www.facebook.com/people/Aralects/61572407105723/"
         target="_blank"
         rel="noreferrer"
       >
         <FaFacebook size={28} />
       </a>
       <a
-        href="https://www.instagram.com/aralects.learn/"
+        href="https://www.instagram.com/ara.lects/"
         target="_blank"
         rel="noreferrer"
       >
         <FaInstagram size={28} />
       </a>
       <a
-        href="https://www.linkedin.com/company/105135861/admin/dashboard/"
+        href="https://www.linkedin.com/company/105135861/"
         target="_blank"
         rel="noreferrer"
       >

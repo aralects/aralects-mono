@@ -13,12 +13,12 @@ function TextSection() {
 
       {/* Heading */}
       <h1 className="font-Melodrama md:font-UnboundedRegular max-w-[340px] text-center text-2xl font-bold text-[#393939] md:max-w-[unset] md:text-xl">
-        Arabic is a world of dialects, stories, and connections
+        Arabic is a world of dialects, stories, and connections.
       </h1>
 
       {/* Subheading */}
       <h2 className="font-SpaceGrotesk mt-8 max-w-[360px] text-center text-gray-600 md:max-w-[740px] md:text-xl">
-        While learners focus on Standard Arabic{" "}
+        While the focus is generally on Standard Arabic{" "}
         <span
           className={`font-SpaceGrotesk inline-block w-fit bg-[url("/img/FushaBG.png")] bg-contain bg-center bg-no-repeat px-1 py-1 text-white md:px-4`}
         >

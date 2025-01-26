@@ -13,7 +13,7 @@ const WhyAralects = () => {
         "Engage with other users, track your progress on leaderboards, and share cultural insights along the way.",
     },
     {
-      title: "Self-Paced & Customized Learning",
+      title: "AI-Powered Customization",
       description:
         "Move at your own speed with customizable lessons and the ability to create flashcard decks from what you learned.",
     },

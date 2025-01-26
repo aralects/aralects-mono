@@ -10,7 +10,7 @@ const faqs = [
   {
     question: "Can I learn for free?",
     answer:
-      "Lorem ipsum dolor sit amet consectetur. Euismod ac id in placerat et massa massa est egestas",
+      "Absolutely! We’re here to make Arabic learning accessible to everyone, one dialect at a time. Aralects would be the only mobile app on the market offering this—for free! No hidden fees, no premium paywalls—just straightforward, high-quality language-learning at your fingertips.",
   },
   {
     question: "When will the app be available?",
@@ -24,11 +24,11 @@ const faqs = [
   },
   {
     question: "Will Aralects help me with both spoken and written Arabic?",
-    answer: "",
+    answer: "Absolutely! Whether you’re here for the spoken vibes, the written poetry, or just want to impress someone with “Arabic in English characters”, we’ve got you. Your goals = our mission.",
   },
   {
     question: "What makes Aralects different from other Arabic learning apps?",
-    answer: "",
+    answer: "We’re redefining the game with free, culture-infused, gamified, and frequency-based learning that actually tracks your progress. Also, we’re designing it with heritage speakers in mind too! Plus, we have a passionate team of experts who live and breathe Arabic. Honestly, why settle for anything less? 😉",
   },
   {
     question: "Can I access Aralects on multiple devices?",
