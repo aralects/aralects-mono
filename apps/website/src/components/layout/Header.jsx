@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
 
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/demo", label: "Demo" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact Us" },
+  {
+    href: "https://www.careers-page.com/aralects",
+    label: "Careers",
+    target: "_blank",
+  },
+];
+
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
@@ -27,19 +39,14 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center space-x-6 md:flex">
-          {[
-            { href: "/", label: "Home" },
-            { href: "/demo", label: "Demo" },
-            { href: "/blog", label: "Blog" },
-            { href: "/contact", label: "Contact Us" },
-            { href: "/careers", label: "Careers" },
-          ].map(({ href, label }) => (
+          {links.map(({ href, label, ...rest }) => (
             <a
               key={href}
               href={href}
               data-active={activeLink === href}
               onClick={() => handleSetActive(href)}
               className={`SpaceGrotesk hover:text-glow data-[active=true]:text-glow text-[#676767] transition-all hover:text-[#3a2363] data-[active=true]:font-medium data-[active=true]:text-[#3a2363]`}
+              {...rest}
             >
               {label}
             </a>
@@ -73,27 +80,20 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <nav className="bg-white shadow-lg md:hidden">
+        <nav className="mt-2 overflow-hidden rounded-lg bg-white shadow-lg md:hidden">
           <ul className="flex flex-col space-y-4 px-5 py-3">
-            {[
-              { href: "/", label: "Home" },
-              { href: "/demo", label: "Demo" },
-              { href: "/blog", label: "Blog" },
-              { href: "/contact", label: "Contact Us" },
-              { href: "/careers", label: "Careers" },
-            ].map(({ href, label }) => (
+            {links.map(({ href, label, ...rest }) => (
               <li key={href}>
                 <a
+                  key={href}
                   href={href}
+                  data-active={activeLink === href}
+                  className={`SpaceGrotesk hover:text-glow data-[active=true]:text-glow text-[#676767] transition-all hover:text-[#3a2363] data-[active=true]:font-medium data-[active=true]:text-[#3a2363]`}
+                  {...rest}
                   onClick={() => {
                     handleSetActive(href);
                     setIsMobileMenuOpen(false); // Close menu after selecting a link
                   }}
-                  className={`font-SpaceGrotesk block font-medium text-[#676767] ${
-                    activeLink === href
-                      ? "text-glow font-semibold text-[#3a2363]"
-                      : ""
-                  }`}
                 >
                   {label}
                 </a>

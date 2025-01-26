@@ -4,7 +4,7 @@ import { smoothScrollTo } from "src/utils/newsletter";
 
 const OurTeam = () => {
   return (
-    <section className="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[120px]">
+    <section className="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
       <div className="px-2 md:px-20 ">
         <div className="md:glow relative flex items-center justify-between overflow-hidden rounded-2xl border-[#8262B0] bg-[#222222] text-start shadow-[0px_0px_8px_#C8AED340] md:h-[200px] md:border-2 lg:h-[160px]">
           <p className="font-SpaceGroteskLight m-5 w-full align-middle text-lg font-thin text-gray-300 md:ml-10 lg:text-2xl">
@@ -64,7 +64,7 @@ const OurTeam = () => {
 
       <div className="px-2 pb-2 md:px-20 md:pb-12">
         <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
-          <div className="hidden w-1/3 md:block"></div>
+          <div className="hidden w-1/2 md:block"></div>
           <img
             src="/img/art224.png"
             alt=""
@@ -121,7 +121,7 @@ const OurTeam = () => {
               />
             </g>
           </svg>
-          <div className="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[60%] md:px-12">
+          <div className="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[50%] md:px-12">
             <h4 className="font-SpaceGrotesk text-2xl font-bold md:text-6xl">
               We’re not just teaching Arabic
             </h4>

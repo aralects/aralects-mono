@@ -1,0 +1,73 @@
+---
+import WipPhoneMockup from "@components/wip-phone-mockup.astro";
+---
+
+<!-- ArabicAsComunity.astro -->
+<div
+  class="relative my-10 flex w-full flex-col justify-between px-5 md:my-9 md:flex-row md:px-20 lg:px-20"
+>
+  <!-- Background Image -->
+  <img
+    src="/img/ArabicAsComunityBg.jpg"
+    alt=""
+    class="absolute bottom-0 left-0 -z-10 hidden w-[150%] md:block"
+  />
+
+  <!-- Text Content -->
+  <div class="z-30 flex w-full flex-col justify-center text-white md:w-[60%]">
+    <h2
+      class="font-SpaceGrotesk max-w-[540px] text-2xl font-bold md:text-5xl lg:text-6xl"
+    >
+      Arabic, as a community, for the community.
+    </h2>
+
+    <p
+      class="font-SpaceGroteskLight mt-6 w-full font-thin md:w-[80%] md:text-xl"
+    >
+      Want to be the first to experience Aralects? Sign up now to be among the
+      first to explore Aralects as we get ready to launch!
+    </p>
+
+    <button
+      id="joinWaitingList"
+      class="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2
+             rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md
+             transition-all hover:bg-white/90 md:text-xl"
+    >
+      Join waiting list
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="ml-2 -translate-x-1 transition-transform group-hover:translate-x-0"
+      >
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- phone mockup -->
+  <div class="mx-auto hidden justify-center md:flex">
+    <WipPhoneMockup class="ml-4" withWipMarquees />
+  </div>
+</div>
+
+<script>
+  import { smoothScrollTo } from "src/utils/newsletter";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("joinWaitingList");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        smoothScrollTo("newsletter", 80);
+      });
+    }
+  });
+</script>

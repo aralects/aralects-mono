@@ -1,4 +1,4 @@
-import SocialSidebar from "@components/sections/Home/SocialSidebar/SocialSidebar";
+import SocialSidebar from "@components/sections/Home/SocialSidebar";
 
 const Footer = () => {
   const scrollToTop = () => {

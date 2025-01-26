@@ -1,0 +1,51 @@
+---
+import { WipMarquee } from "./wip-marquee";
+import WipPhoneMockup from "./wip-phone-mockup.astro";
+---
+
+<!-- UnderConstruction.astro -->
+<div
+  class="relative min-h-full flex overflow-hidden bg-[#8262b0] px-20 2xl:px-40 pb-4 pt-[78px] text-white"
+>
+  <!-- Rotating marquee backgrounds -->
+  <div
+    class="absolute -inset-x-32 top-[35%] z-0 h-fit origin-bottom-right rotate-[20deg] opacity-50 lg:top-[60%]"
+  >
+    <WipMarquee client:only />
+  </div>
+  <div
+    class="absolute -inset-x-32 top-[20%] z-0 h-fit origin-top-right -rotate-[20deg] lg:top-1/3"
+  >
+    <WipMarquee client:only />
+  </div>
+
+  <!-- Main text content -->
+  <div class="container mx-auto grid grid-cols-1 gap-8 lg:grid-cols-2">
+    <div
+      class="z-[1] order-2 mx-auto mb-8 flex max-w-[580px] flex-col items-center justify-center gap-8 text-center lg:order-none lg:mb-0 lg:text-left"
+    >
+      <h1 class="font-SpaceGroteskLight text-4xl font-semibold md:text-7xl">
+        Page Under Construction
+      </h1>
+      <p class="font-SpaceGrotesk text-xl">
+        But don’t worry, we’re not just learning the vocabulary for “patience”
+        in 10 different dialects — we’re also busy building something amazing
+        for you!
+      </p>
+      <p class="font-SpaceGrotesk text-xl">
+        At Aralects, we’re crafting the ultimate gamified, self-paced language
+        learning experience to make mastering Arabic dialects as fun as
+        binge-watching your favorite series (but way more productive).
+      </p>
+      <p class="font-SpaceGrotesk text-xl">
+        Stay tuned, and don’t forget to brush up on your “صبر” (patience) skills
+        while you wait. 😉
+      </p>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="flex items-center justify-center lg:justify-end">
+      <WipPhoneMockup />
+    </div>
+  </div>
+</div>

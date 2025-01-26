@@ -95,19 +95,19 @@ function MarqueeStrip() {
           {data.map((item, itemIndex) => (
             <Fragment key={itemIndex}>
               <li
-                className="relative grid overflow-hidden py-4 md:py-6"
+                className="relative grid overflow-hidden py-2"
                 style={gridAreaTemplateStyle}
               >
                 <h1
                   rel="noopener noreferrer"
-                  className="text-primary-foreground Melodrama translate-y-0.5 p-2 text-center text-2xl uppercase transition-all duration-300 [backface-visibility:hidden] [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)] md:translate-y-3 md:text-5xl"
+                  className="text-primary-foreground Melodrama translate-y-0.5 p-2 text-center text-xl uppercase transition-all duration-300 [backface-visibility:hidden] [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)] md:translate-y-3 md:text-5xl"
                   style={gridAreaStyle}
                 >
                   {item.english}
                 </h1>
                 <h1
                   rel="noopener noreferrer"
-                  className="font-Rubbama text-primary-foreground p-2 text-center text-3xl transition-all duration-300  [backface-visibility:hidden] [transform-style:preserve-3d] [transform:rotateX(180deg)] group-hover:[transform:rotateX(0deg)] md:text-7xl md:group-hover:[transform:rotateX(0deg)_translateY(-18px)]"
+                  className="font-Rubbama text-primary-foreground p-2 text-center text-2xl transition-all duration-300  [backface-visibility:hidden] [transform-style:preserve-3d] [transform:rotateX(180deg)] group-hover:[transform:rotateX(0deg)] md:text-7xl md:group-hover:[transform:rotateX(0deg)_translateY(-18px)]"
                   style={gridAreaStyle}
                 >
                   {item.arabic}
