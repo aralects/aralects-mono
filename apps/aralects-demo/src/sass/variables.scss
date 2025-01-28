@@ -1,0 +1,53 @@
+// Fonts
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('../assets/fonts/SpaceGrotesk-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: 'NextRounded';
+    src: url('../assets/fonts/DIN-Next-Rounded-LT-W01-Regular.ttf');
+}
+@font-face {
+    font-family: 'SFPRO';
+    src: url('../assets/fonts/SFPRODISPLAYREGULAR.OTF');
+}
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../assets/fonts/Satoshi-Variable.ttf');
+}
+@font-face {
+    font-family: 'SFCompact';
+    src: url('../assets/fonts/sf-compact-display-medium-5864711817c30.otf');
+}
+    
+$mainFont: 'SpaceGrotesk';
+$secondaryFont: 'NextRounded';
+$thirdFont: 'SFPRO';
+$satoshiFont: 'Satoshi';
+$SFCompactFont: 'SFCompact';
+
+
+// Colors Palette
+$white: #FFFFFF;
+$black: #000000;
+$primaryColor: #9764DB;
+$secondary200: #8262B0;
+$secondary100: #EADFFF;
+
+// Media queries
+$minimobile: "(max-width: 345px)";
+$smallmobile: "(max-width: 359px)";
+$mediummobile: "(max-width: 390px)";
+$mobile: "(max-width: 768px)";
+$mobileP: "(max-width: 479px)"; //Mobile - Portrait
+$mobileL: "(min-width: 480px) and (max-width: 768px)"; //Mobile - Landscape
+$nonMob: "(min-width: 768px)";
+$nonPortable: "(min-width: 992px)";
+$tablet: "(min-width: 768px) and (max-width: 991px)";
+$smallDesktop: "(min-width: 992px) and (max-width: 1199px)";
+$desktop: "(min-width: 1200px)";
+$largeDesktop: "(min-width: 1366px)";
+$mobTab: "(max-width: 991px)";
+$tabDesk: "(min-width: 768px) and (max-width: 1199px)";
+$nonDesk: "(max-width: 1199px)";
+$ipad: "(device-width: 768px) and (device-height: 1024px)";

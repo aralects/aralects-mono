@@ -1,0 +1,45 @@
+@mixin middle_align() {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+@mixin center_align() {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+@mixin center_middle_align() {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+@mixin flex($direction: row, $wrap: nowrap, $justify_content: center, $justify_item: center, $align_items: center, $align_content: center) {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+    flex-direction: $direction;
+    -webkit-flex-wrap: $wrap;
+    -ms-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+
+    justify-content: $justify_content;
+    justify-items: $justify_item;
+    -webkit-align-content: $align_content;
+    -ms-flex-line-pack: $align_content;
+    align-content: $align_content;
+    -webkit-align-items: $align_items;
+    -ms-flex-align: $align_items;
+    align-items: $align_items;
+}
