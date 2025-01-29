@@ -1,0 +1,9 @@
+---
+import UnsubscribePage from "@components/unsubscribe-page.astro";
+import UnsubscribeNewsletter from "@components/sections/Home/UnsubscribeNewsletter.jsx";
+import Layout from "@layouts/Layout.astro";
+---
+<Layout>
+    <UnsubscribePage />
+    <UnsubscribeNewsletter client:visible />
+</Layout>
