@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AlertCircle } from "lucide-react";
+import { isValidEmail } from "src/helper/isValidEmail";
 
 const ExperienceAralects = () => {
   const [email, setEmail] = useState("");
@@ -9,9 +10,16 @@ const ExperienceAralects = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
     setSuccess(false);
+
+    // Validate email before making the request
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -120,7 +128,7 @@ const ExperienceAralects = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="mt-6">
-              <div className="relative flex w-fit flex-col items-stretch justify-between  gap-y-2 rounded-full sm:flex-row sm:border sm:border-[#8262B0]">
+              <div className="relative flex w-fit flex-col items-stretch justify-between gap-y-2 rounded-full sm:flex-row sm:border sm:border-[#8262B0]">
                 <input
                   type="email"
                   placeholder="Your email"
@@ -148,12 +156,12 @@ const ExperienceAralects = () => {
 
               {success && (
                 <p className="mt-4 text-sm text-purple-400">
-                  You’re all set! We’ll keep you updated by email. Thank you for joining the waitlist!
+                  You’re all set! We’ll keep you updated by email. Thank you for
+                  joining the waitlist!
                 </p>
               )}
             </form>
           </div>
-
           <img
             src="/img/art225.png"
             alt=""
