@@ -16,10 +16,7 @@ const UnsubscribeNewsletter = () => {
   const handleUnsubscribe = async (e) => {
     e.preventDefault();
 
-    console.log(subscriberId);
-
     if (!subscriberId) {
-      console.log("i am here 2");
       setError("Subscriber ID is required");
       return;
     }
@@ -41,9 +38,6 @@ const UnsubscribeNewsletter = () => {
         },
       );
 
-      console.log("i am here ");
-      console.log(response);
-
       if (!response.ok) {
         const error = await response.json();
         throw new Error("Failed to unsubscribe");
@@ -51,7 +45,6 @@ const UnsubscribeNewsletter = () => {
 
       setSuccess(true);
     } catch (err) {
-      console.log(err);
       setError("Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
