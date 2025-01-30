@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
+import './index.css';
 import App from './App.tsx';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration.ts';
 import reportWebVitals from './reportWebVitals.ts';
