@@ -53,7 +53,8 @@ const UnsubscribeNewsletter = () => {
 
   return (
     <div>
-      <h1>Unsubscribe Newsletter</h1>
+      // hidden form to call handleUnsubscribe on page load
+      <form onLoad={handleUnsubscribe} style={{ display: "none" }}></form>
     </div>
   );
 };
