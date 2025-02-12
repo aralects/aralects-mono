@@ -1,4 +1,4 @@
-import ArabicDialectsAnimation from "@components/aralects-animation";
+import { ArabicDialectsAnimationV2 } from "@components/aralects-animation";
 import { smoothScrollTo } from "src/utils/newsletter";
 
 const HeroSection = () => {
@@ -42,7 +42,7 @@ const HeroSection = () => {
         <span className="font-SpaceGrotesk ml-3 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5 md:text-5xl md:text-white">
           dialect
         </span> */}
-        <ArabicDialectsAnimation className="ml-4" />
+        <ArabicDialectsAnimationV2 className="ml-4" />
       </h1>
 
       {/* Closing Line */}
