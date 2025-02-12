@@ -1,3 +1,4 @@
+import ArabicDialectsAnimation from "@components/aralects-animation";
 import { smoothScrollTo } from "src/utils/newsletter";
 
 const HeroSection = () => {
@@ -27,23 +28,25 @@ const HeroSection = () => {
       </div>
 
       {/* Heading */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-5xl">
+      <h1 className="font-Melodrama md:font-UnboundedRegular select-none text-4xl text-[#393939] md:text-5xl">
         Connecting cultures,
       </h1>
 
       {/* Subheading with Arabic and Dialect */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:py-5 md:text-5xl">
+
+      <h1 className="font-Melodrama md:font-UnboundedRegular select-none text-4xl text-[#393939] md:py-5 md:text-5xl">
         one
-        <span className="font-SpaceGrotesk ml-5 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5  md:text-5xl md:text-white">
+        {/* <span className="font-SpaceGrotesk ml-5 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5  md:text-5xl md:text-white">
           Arabic
         </span>
         <span className="font-SpaceGrotesk ml-3 rounded-lg text-4xl font-[600] text-[#8262b0] md:bg-[#8262b0] md:px-5 md:text-5xl md:text-white">
           dialect
-        </span>
+        </span> */}
+        <ArabicDialectsAnimation className="ml-4" />
       </h1>
 
       {/* Closing Line */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular text-4xl text-[#393939] md:text-5xl">
+      <h1 className="font-Melodrama md:font-UnboundedRegular select-none text-4xl text-[#393939] md:text-5xl">
         at a time.
       </h1>
 
