@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@repo/ui";
 
@@ -21,7 +21,7 @@ export const ArabicDialectsAnimationV1 = ({ className }) => {
       />
 
       <div className="flex items-center justify-center">
-        <span>ara</span>
+        <span>Ara</span>
 
         <AnimatePresence>
           {!isHovered && (
@@ -58,7 +58,27 @@ export const ArabicDialectsAnimationV1 = ({ className }) => {
 };
 
 export const ArabicDialectsAnimationV2 = ({ className }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsToggled(true);
+      } else {
+        setIsToggled(false);
+      }
+    };
+
+    // Listen to scroll events
+    window.addEventListener("scroll", handleScroll);
+
+    // Check scroll position on mount in case the user is already scrolled down
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -67,22 +87,14 @@ export const ArabicDialectsAnimationV2 = ({ className }) => {
         className,
       )}
     >
-      {/* this guy is very important */}
-      {/* without it, the animation will stutter when hovering at the edges */}
-      <div
-        className={cn("absolute z-[1]", isHovered ? "-inset-20" : "-inset-4")}
-        onPointerEnter={() => setIsHovered(true)}
-        onPointerLeave={() => setIsHovered(false)}
-      />
-
       {/* text wrapper */}
       <div className="flex items-center justify-center gap-x-3">
         {/* arabic */}
         <span className="overflow-hidden bg-[#8262b0] py-2 pl-2 text-white">
-          <span className="inline-block">ara</span>
+          <span className="inline-block">Ara</span>
 
           <AnimatePresence>
-            {!isHovered && (
+            {!isToggled && (
               <motion.span
                 className="inline-block whitespace-nowrap"
                 transition={{
@@ -107,7 +119,7 @@ export const ArabicDialectsAnimationV2 = ({ className }) => {
             )}
 
             {/* variable padding */}
-            {!isHovered && (
+            {!isToggled && (
               <motion.span
                 initial={{ opacity: 0, width: 0, scale: 0 }}
                 animate={{ opacity: 1, width: 8, scale: 1 }}
@@ -130,12 +142,12 @@ export const ArabicDialectsAnimationV2 = ({ className }) => {
         <motion.span
           className="overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
           initial={{ x: -12 }}
-          animate={{ x: isHovered ? -12 : 0 }}
+          animate={{ x: isToggled ? -12 : 0 }}
           transition={{ type: "spring", stiffness: 100, damping: 12 }}
         >
           <AnimatePresence>
             {/* variable padding */}
-            {!isHovered && (
+            {!isToggled && (
               <motion.span
                 initial={{ opacity: 0, width: 0, scale: 0 }}
                 animate={{ opacity: 1, width: 8, scale: 1 }}
@@ -151,7 +163,7 @@ export const ArabicDialectsAnimationV2 = ({ className }) => {
                 className="inline-block h-full"
               />
             )}
-            {!isHovered && (
+            {!isToggled && (
               <motion.span
                 className="inline-block whitespace-nowrap"
                 transition={{
@@ -189,7 +201,7 @@ export const ArabicDialectsAnimationV2 = ({ className }) => {
               },
             }}
             initial="show"
-            animate={isHovered ? "show" : "hide"}
+            animate={isToggled ? "show" : "hide"}
             exit={{ opacity: 0, width: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 12 }}
             className="inline-block whitespace-nowrap"
