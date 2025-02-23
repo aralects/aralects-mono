@@ -1,5 +1,5 @@
 import { Fragment } from "react/jsx-runtime";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { capitalize, cn } from "~/lib/utils";
 import {
   ColorModeSelect,
@@ -47,7 +47,7 @@ const AppHeader = ({
   return (
     <header
       className={cn(
-        "sticky top-0 z-10 border-border/60 bg-muted/20 supports-[backdrop-filter]:bg-muted/20 border-b backdrop-blur [grid-area:app-header]",
+        "border-border/60 bg-muted/20 supports-[backdrop-filter]:bg-muted/20 sticky top-0 z-10 border-b backdrop-blur [grid-area:app-header]",
         className,
       )}
       {...rest}
@@ -55,9 +55,7 @@ const AppHeader = ({
       <div className="flex h-12 items-center gap-4 px-4">
         <div className="flex items-center gap-2">
           <SidebarTrigger className="h-4 w-4" />
-          <Kbd>
-            ⌘ {capitalize(SIDEBAR_KEYBOARD_SHORTCUT)}
-          </Kbd>
+          <Kbd>⌘ {capitalize(SIDEBAR_KEYBOARD_SHORTCUT)}</Kbd>
         </div>
         <Separator orientation="vertical" className="h-4" />
         <nav className="ml-auto flex items-center gap-4">
