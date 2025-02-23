@@ -167,7 +167,7 @@ const WhyAralects = () => {
         ))}
       </div>
 
-      <style jsx={true}>{`
+      <style jsx>{`
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
         }
