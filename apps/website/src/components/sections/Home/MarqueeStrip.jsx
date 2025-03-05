@@ -84,9 +84,15 @@ const data = [
   },
 ];
 
-function MarqueeStrip() {
+function MarqueeStrip({ backgroundColor = "#8262b0" }) {
   return (
-    <div className="group inline-flex w-full select-none flex-nowrap items-center justify-center overflow-hidden border-y-2 border-[#8262b0] bg-[#8262b0] text-5xl transition-all [perspective:1000px] hover:bg-[#F3F3F3] sm:flex">
+    <div 
+      className="group inline-flex w-full select-none flex-nowrap items-center justify-center overflow-hidden border-y-2 text-5xl transition-all [perspective:1000px] hover:bg-[#F3F3F3] sm:flex"
+      style={{
+        backgroundColor,
+        borderColor: backgroundColor
+      }}
+    >
       {[1, 2, 3, 4, 5].map((_, index) => (
         <ul
           key={index}

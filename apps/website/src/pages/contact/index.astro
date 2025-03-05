@@ -1,8 +1,43 @@
 ---
-import UnderConstructionPage from "@components/under-construction-page.astro";
+import MarqueeStrip from "@components/sections/Home/MarqueeStrip";
 import Layout from "@layouts/Layout.astro";
+import ContactInfoCard from "@components/sections/Contact/ContactInfoCard";
+import ContactIllustration from "@components/sections/Contact/ContactIllustration.astro";
 ---
 
 <Layout>
-  <UnderConstructionPage />
+  <main class="flex flex-col min-h-screen">
+    {/* Main content container */}
+    <div class="flex-1 flex flex-col">
+      {/* White section - 40% */}
+      <div class="w-full mt-16 bg-white relative">
+        {/* Background Pattern */}
+        <span class="contact-bg-pattern" />
+        {/* Hero Section */}
+        <div class="xl:container xl:mx-auto xl:px-24 p-8 md:px-16 z-10">
+          <h1 class="text-3xl md:text-5xl font-bold text-[#3D2B66] mb-4">Get In Touch</h1>
+          <p class="text-gray-600 text-md md:text-xl lg:w-[50%] md:w-[60%]">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+            turpis molestie, dictum est a, mattis tellus. Sed dig.
+          </p>
+        </div>
+      </div>
+
+      {/* Purple section - Secondary/500 */}
+      <div class="w-full bg-[#8262B0] flex-1 relative">
+        <div class="h-full xl:container xl:mx-auto xl:px-24 p-8 md:p-16">
+          <ContactInfoCard
+            client:load
+            email="Doehhaj@gmail.com"
+            phoneNumber="+1 012 3456 789"
+            location="Emirates kjajsx"
+          />
+        </div>
+      </div>
+
+      {/* Illustration */}
+      <ContactIllustration />
+    </div>
+    <MarqueeStrip client:load backgroundColor="#BDA3E2" />
+  </main>
 </Layout>
