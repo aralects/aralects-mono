@@ -1,8 +1,41 @@
 ---
-import UnderConstructionPage from "@components/under-construction-page.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout>
-  <UnderConstructionPage />
+  <main class="w-full h-screen">
+    <iframe 
+      src="https://preview.webflow.com/preview/christians-dapper-site-bc153b?utm_medium=preview_link&utm_source=dashboard&utm_content=christians-dapper-site-bc153b&preview=d598e9376607782b26e0b263f0eeb2b8&workflow=preview" 
+      class="w-full h-full border-0"
+      title="Blog Content"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+      loading="lazy"
+    />
+  </main>
 </Layout>
+
+<script>
+  // Disable right click and keyboard shortcuts to prevent direct access to the source code
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  document.addEventListener('keydown', (e) => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<style>
+  iframe {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+</style>

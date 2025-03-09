@@ -1,8 +1,109 @@
 ---
-import UnderConstructionPage from "@components/under-construction-page.astro";
+import SocialSidebar from "@components/sections/Home/SocialSidebar";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout>
-  <UnderConstructionPage />
+  <main class="flex flex-col min-h-screen ">
+    <div class="flex flex-col flex-1">
+      {/* White section - 30% */}
+      <div class="h-full w-full mt-16 bg-white relative">
+        <div class="xl:container xl:mx-auto xl:px-24 p-8 md:px-16 md:pl-24 z-10 mb-4">
+          <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#3D2B66]">
+            <div class="mb-6 font-SpaceGrotesk">Get a hint of</div>
+            <div class="font-SpaceGrotesk">Aralects</div>
+          </h1>
+        </div>
+      </div>
+
+      {/* Purple section */}
+      <div class="w-full bg-[#8262B0] flex-1 relative">
+        <div class="xl:container xl:mx-auto">
+          <SocialSidebar 
+          className="absolute left-4 z-10 top-[10%]"
+          iconClassName="text-white hover:text-gray-200 opacity-50 hover:opacity-100" 
+          />
+          <div class="h-full max-w-[50%] sm:max-w-[45%] md:max-w-[55%] w-full xl:container xl:px-24 p-8 md:p-16 md:pl-24 lg:max-w-[60%] xl:max-w-[65%]">
+            <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
+              Let's be honest, learning Arabic today is challenging. Most apps focus on rigid lessons and miss the immersive, real-world conversations that bring Arabic to life.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Phone Frame - Adjusted positioning and scaling */}
+      <div class="absolute right-[5%] md:right-[10%] lg:right-[15%] top-[16%] lg:top-[15%] w-[200px] sm:w-[250px] md:w-[280px] lg:w-[320px]">
+        <div class="relative">
+          <div class="relative">
+            <img 
+              src="/img/svg/Iphone-13-frame.svg" 
+              alt="iPhone Frame" 
+              class="w-full h-full object-contain"
+            />
+            <div class="w-[90%] h-[95%] absolute inset-[5px] left-[5%] top-[2.5%] bg-white rounded-[20px] sm:rounded-[30px] md:rounded-[40px] lg:rounded-[50px] flex flex-col">
+              {/* Logo centered vertically and horizontally */}
+              <div class="flex-1 flex items-center justify-center">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
+                  <img 
+                    src="/img/svg/letter-logo.svg" 
+                    alt="Aralects Logo" 
+                    class="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+            
+              <div class="flex justify-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+                <button
+                  id="start-demo-btn"
+                  class="bg-[#8262B0] text-white px-4 py-2 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-[6px] sm:rounded-[8px] md:rounded-[10px] hover:bg-[#6B4E9E] transition-colors duration-300 text-sm sm:text-base md:text-lg"
+                >
+                  Start Demo!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hidden initially */}
+      <div id="demo-container" class="fixed inset-0 bg-white hidden z-30">
+        {/* Back button */}
+        <button
+          id="close-demo-btn"
+          class="absolute top-24 left-4 z-40 bg-[#8262B0] text-white px-4 py-2 rounded-lg hover:bg-[#6B4E9E] transition-colors duration-300 flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-path="evenodd" />
+          </svg>
+          Back
+        </button>
+        
+          <iframe 
+          src="http://localhost:4321/"
+          class="w-full h-full border-0"
+          title="Demo Content"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; microphone"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          loading="lazy"
+          />
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<script>
+  const startDemoBtn = document.getElementById('start-demo-btn');
+  const closeDemoBtn = document.getElementById('close-demo-btn');
+  const demoContainer = document.getElementById('demo-container');
+
+  if (startDemoBtn && demoContainer && closeDemoBtn) {
+    startDemoBtn.addEventListener('click', () => {
+      demoContainer.classList.remove('hidden');
+    });
+
+    closeDemoBtn.addEventListener('click', () => {
+      demoContainer.classList.add('hidden');
+    });
+  }
+</script>

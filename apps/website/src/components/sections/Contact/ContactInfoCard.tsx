@@ -1,4 +1,8 @@
 import { type FC } from 'react';
+import SocialSidebar from '../Home/SocialSidebar';
+// import AppBar from '@mui/material/AppBar'
+// import Toolbar from '@mui/material/Toolbar'
+// import Typography from '@mui/material/Typography'
 
 interface ContactInfoCardProps {
   email: string;
@@ -13,6 +17,7 @@ interface ContactField {
   };
   label: string;
   value: string;
+  isEmail?: boolean;
 }
 
 interface SocialLink {
@@ -30,12 +35,12 @@ interface SocialIconProps {
 
 const SocialIcon: FC<SocialIconProps> = ({ platform, path, isImage }) => {
   if (isImage) {
-    return <img src="/img/Vkontakte.png" alt={platform} className="w-4 h-4" />;
+    return <img src="/img/Vkontakte.png" alt={platform} className="w-4 h-4 md:w-6 md:h-6" />;
   }
 
   return (
     <svg
-      className="w-4 h-4 text-[#3A2363]"
+      className="w-4 h-4 md:w-6 md:h-6 text-[#8262B0]"
       viewBox="0 0 16 16"
       fill="currentColor"
     >
@@ -51,7 +56,8 @@ const ContactInfoCard: FC<ContactInfoCardProps> = ({ email, phoneNumber, locatio
         path: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
       },
       label: "Email",
-      value: email
+      value: email,
+      isEmail: true
     },
     {
       icon: {
@@ -71,6 +77,8 @@ const ContactInfoCard: FC<ContactInfoCardProps> = ({ email, phoneNumber, locatio
       value: location
     }
   ];
+
+  
 
   const socialLinks: SocialLink[] = [
     {
@@ -102,8 +110,8 @@ const ContactInfoCard: FC<ContactInfoCardProps> = ({ email, phoneNumber, locatio
       {/* Background Pattern */}
       <span className="info-card-bg-pattern rounded-[9px] overflow-hidden" />
       <div className="grid grid-cols-[85%_15%] z-10 relative">
-        <div className="grid grid-cols-1 md:gap-4 gap-8">
-          {contactFields.map(({ icon, label, value }, index) => (
+        <div className="grid grid-cols-1 gap-4">
+          {contactFields.map(({ icon, label, value, isEmail }, index) => (
             <div key={index} className="flex flex-col gap-2">
               <div className="flex items-center gap-1">
                 <svg
@@ -133,26 +141,35 @@ const ContactInfoCard: FC<ContactInfoCardProps> = ({ email, phoneNumber, locatio
                   )}
                 </svg>
                 <span
-                  className="font-['Space_Grotesk'] text-md md:text-lg leading-[20px] font-light text-[#393939]"
+                  className="font-SpaceGrotesk text-md md:text-lg leading-[20px] font-light text-[#393939]"
                 >
                   {label}
                 </span>
               </div>
-              <span
-                className="font-['Space_Grotesk'] text-md md:text-lg leading-[20px] font-light text-[#393939] pl-1"
-              >
-                {value}
-              </span>
+              {isEmail ? (
+                <a 
+                  href={`mailto:${value}`}
+                  className="font-SpaceGrotesk text-md md:text-lg leading-[20px] font-light text-[#393939] pl-1 hover:text-[#8262B0] transition-colors"
+                >
+                  {value}
+                </a>
+              ) : (
+                <span
+                  className="font-SpaceGrotesk text-md md:text-lg leading-[20px] font-light text-[#393939] pl-1"
+                >
+                  {value}
+                </span>
+              )}
             </div>
           ))}
         </div>
         <div className="flex justify-end items-center">
-          <div className="flex flex-col gap-8 items-center">
+          <div className="flex flex-col gap-5 lg:gap-6 md:gap-5 sm:gap-4 items-center">
             {socialLinks.map(({ platform, href, path, isImage }, index) => (
               <a
                 key={index}
                 href={href}
-                className="cursor-pointer hover:opacity-80 transition-opacity"
+                className="cursor-pointer hover:opacity-70 transition-opacity"
                 aria-label={`Visit our ${platform} page`}
                 target="_blank"
                 rel="noreferrer"
