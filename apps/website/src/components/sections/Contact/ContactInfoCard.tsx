@@ -105,7 +105,7 @@ const ContactInfoCard: FC<ContactInfoCardProps> = ({ email, phoneNumber, locatio
 
   return (
     <div
-      className="max-w-[559px] max-h-[285px] h-full mt-4 bg-white rounded-[9px] border-[6px] border-[#F2F0F6] shadow-lg pt-6 pr-4 pb-6 pl-4 relative z-20"
+      className="flex flex-col justify-center max-w-[559px] max-h-[285px] h-[fit-content] bg-white rounded-[9px] border-[6px] border-[#F2F0F6] shadow-lg pt-6 pr-4 pb-6 pl-4 relative z-20"
     >
       {/* Background Pattern */}
       <span className="info-card-bg-pattern rounded-[9px] overflow-hidden" />
