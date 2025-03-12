@@ -1,9 +1,12 @@
-const APP_URL = 'https://demo.aralects.com';
-const DEMO_PATH = import.meta.env.PUBLIC_DEMO_PATH || '/?iframe=true';
+const APP_URL = import.meta.env.PUBLIC_APP_URL;
+const DEMO_PATH = import.meta.env.PUBLIC_DEMO_PATH || 'https://demo.aralects.com';
 
 export const URLS = {
   DEMO: {
-    IFRAME: `${APP_URL}${DEMO_PATH}`,
+    IFRAME: `${DEMO_PATH}`,
+  },
+  WEB:{
+    APP: `${APP_URL}`,
   },
   SOCIAL: {
     FACEBOOK: 'https://www.facebook.com/people/Aralects/61572407105723/',

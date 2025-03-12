@@ -3,23 +3,27 @@
     font-family: 'SpaceGrotesk';
     src: url('../assets/fonts/SpaceGrotesk-VariableFont_wght.ttf');
 }
+
 @font-face {
     font-family: 'NextRounded';
     src: url('../assets/fonts/DIN-Next-Rounded-LT-W01-Regular.ttf');
 }
+
 @font-face {
     font-family: 'SFPRO';
     src: url('../assets/fonts/SFPRODISPLAYREGULAR.OTF');
 }
+
 @font-face {
     font-family: 'Satoshi';
     src: url('../assets/fonts/Satoshi-Variable.ttf');
 }
+
 @font-face {
     font-family: 'SFCompact';
     src: url('../assets/fonts/sf-compact-display-medium-5864711817c30.otf');
 }
-    
+
 $mainFont: 'SpaceGrotesk';
 $secondaryFont: 'NextRounded';
 $thirdFont: 'SFPRO';
@@ -33,6 +37,15 @@ $black: #000000;
 $primaryColor: #9764DB;
 $secondary200: #8262B0;
 $secondary100: #EADFFF;
+$secondary50: #393939; // Media queries
+$Purple:#D3BCF4;
+$highLightColor:#E7B05859;
+$greys800:#393939;
+$succesColor:#CD2629;
+$loseColor:#4B8737;
+$popUpBorderColor:#BC8FF6;
+$exitPopUpColor:#9968DB;
+
 
 // Media queries
 $minimobile: "(max-width: 345px)";

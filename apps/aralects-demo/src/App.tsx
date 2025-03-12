@@ -1,25 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import './App.scss';
+import homeIndicator from './assets/images/homeIndicator(black).png';
+import statusBar from './assets/images/StatusBar(black).png';
+import { MainLayout } from './layouts/mainLayout.tsx';
+import { SecondeLayout } from './layouts/secondLayout.tsx';
+import PronounceSwipeComponent from './components/PromptComponent/PromptSwipeComponent.tsx';
+import SplashScreen from './components/SplashScreen/SplashScreen.tsx';
+import BackImage from "./assets/pronounceImages/bg.png";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className='Background'>
+        <span className="background-images"/>
+        <span className="top-left-image"/>
+        <div className={`App`}>
+          {isLoading ? (
+            <SplashScreen />
+          ) : (
+            <>
+              <img src={statusBar} alt="Status Bar" className="status-bar" />
+              <img src={homeIndicator} alt="Home Indicator" className="home-indicator" />
+              <img src={BackImage} alt="upper background" className="middleImageStyle" />
+            </>
+          )}
+
+          <Routes>
+            <Route path="/" element={<MainLayout />} />
+            <Route path="/choose-theme" element={<SecondeLayout />} />
+            <Route path="/prompt" element={<PronounceSwipeComponent />} />
+          </Routes>
+
+       
+        </div>
+      </div>
+    </Router>
   );
 }
 

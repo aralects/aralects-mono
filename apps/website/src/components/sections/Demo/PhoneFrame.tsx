@@ -8,10 +8,7 @@ interface PhoneFrameProps {
 
 const PhoneFrame: FC<PhoneFrameProps> = ({ className }) => {
   const handleStartDemo = () => {
-    const demoContainer = document.getElementById('demo-container');
-    if (demoContainer) {
-      demoContainer.classList.remove('hidden');
-    }
+    window.location.href = 'https://demo.aralects.com';
   };
 
   return (

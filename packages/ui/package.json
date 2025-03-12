@@ -26,7 +26,7 @@
     "@types/react": "^18.2.61",
     "@vercel/style-guide": "^6.0.0",
     "minimist": "^1.2.8",
-    "ts-morph": "^24.0.0",
+    "ts-morph": "^25.0.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {

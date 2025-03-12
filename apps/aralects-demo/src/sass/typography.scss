@@ -1,4 +1,6 @@
-@mixin main_btn($color: $white, $backgroundColor: $primaryColor, $font-size: 20px, $border-radius: 10px, $width: 335px, $height: 50px) {
+@use "variables";
+
+@mixin main_btn($color: variables.$white, $backgroundColor: variables.$primaryColor, $font-size: 20px, $border-radius: 10px, $width: 335px, $height: 50px) {
     
     display: block;
     width: $width;
@@ -7,7 +9,34 @@
     color: $color;
     background-color: $backgroundColor;
     font-size: $font-size;
-    font-family: $thirdFont;
+    font-family: variables.$thirdFont;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border: 0;
+    border-radius: $border-radius;
+    transition: all 150ms ease-in-out;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0px 3px 0px 0px rgba(88, 54, 133, 1);
+
+
+    &:hover,
+    &.active {
+        background-color: $color;
+        color: $backgroundColor;
+    }
+}
+@mixin secondary_btn($color: variables.$primaryColor, $backgroundColor: variables.$white, $font-size: 20px, $border-radius: 10px, $width: 335px, $height: 50px) {
+    
+    display: block;
+    width: $width;
+    height: $height;
+    line-height: $height;
+    color: $color;
+    background-color: $backgroundColor;
+    font-size: $font-size;
+    font-family: variables.$thirdFont;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
@@ -26,66 +55,66 @@
     }
 }
 
-@mixin title($font-size: 20px, $color: $black, $text-align: start,) {
+@mixin title($font-size: 20px, $color: variables.$black, $text-align: start,) {
     width: 100%;
     height: 24px;
     line-height: 24px;
     text-align: $text-align;
-    font-family: $mainFont;
+    font-family: variables.$mainFont;
     font-weight: 700;
     font-size: $font-size;
     color: $color;
 }
 
-@mixin subTitle($font-size: 17px, $color: $black, $text-align: start,) {
+@mixin subTitle($font-size: 17px, $color: variables.$black, $text-align: start,) {
     width: 100%;
-    height: 20px;
+    // height: 20px;
     line-height: 20px;
     text-align: $text-align;
-    font-family: $secondaryFont;
+    font-family: variables.$secondaryFont;
     font-weight: 400;
     font-size: $font-size;
     color: $color;
 }
 
 @mixin dialectTitle($font-size: 20px) {
-    font-family: $mainFont;
+    font-family: variables.$mainFont;
     font-weight: 600;
     font-size: $font-size;
     text-align: start;
-    color: $black;
+    color: variables.$black;
 }
 
 @mixin themeTitle($font-size: 17px) {
-    font-family: $satoshiFont;
+    font-family: variables.$satoshiFont;
     font-weight: 700;
     font-size: $font-size;
     text-align: start;
-    color: $white;
+    color: variables.$white;
 }
 
 @mixin themeText($font-size: 14px) {
-    font-family: $secondaryFont;
+    font-family: variables.$secondaryFont;
     font-weight: 700;
     font-size: $font-size;
     text-align: start;
-    color: $white;
+    color: variables.$white;
 }
 
-@mixin mainText($font-size: 20px, $color: $black) {
-    font-family: $mainFont;
+@mixin mainText($font-size: 20px, $color: variables.$black) {
+    font-family: variables.$mainFont;
     font-weight: 600;
     font-size: $font-size;
     text-align: start;
     color: $color;
 
     &.arabic {
-        font-family: $SFCompactFont;
+        font-family: variables.$SFCompactFont;
     }
 }
 
-@mixin translationText($font-size: 20px, $color: $secondary200) {
-    font-family: $mainFont;
+@mixin translationText($font-size: 20px, $color: variables.$secondary200) {
+    font-family: variables.$mainFont;
     font-weight: 500;
     font-size: $font-size;
     text-align: start;

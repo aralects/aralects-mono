@@ -80,7 +80,7 @@ self.addEventListener("message", (event) => {
 
 // Any other custom service worker logic can go here.
 
-self.addEventListener('install', (event: any) => {
+self.addEventListener('install', () => {
 	console.log('Service Worker installing...');
   });
   

@@ -1,0 +1,509 @@
+@use "../../sass/style.scss";
+@use "../../sass/variables.scss";
+@use "../../sass/typography.scss";
+@use "../../sass/mixins.scss";
+@use "sass:color";
+
+.allComponent {
+    width: 335px;
+    margin: auto;
+}
+
+.screenWrapper {
+    position: relative;
+    top: 50px;
+}
+
+.pronounceTable {
+    margin: auto;
+    background-color: variables.$white;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 4px 0 variables.$secondary200;
+    height: auto;
+    width: 335px;
+
+}
+
+
+.titleContainer {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, 
+    variables.$Purple, 
+    color.scale(variables.$Purple, $lightness: -10%));
+    border-radius: 16px 16px 0 0;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+    }
+}
+
+.titleStyle {
+    @include typography.subTitle();
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.lineSeperate {
+    background-color: variables.$secondary200;
+    height: 1.5px;
+}
+
+.secondPartCont {
+    width: 90%;
+    margin: auto;
+    padding: 16px 0 16px 0;
+
+}
+
+.dataInside {
+    width: calc(100% - 40px);
+    margin-left: auto;
+}
+
+.volumeCont {
+    position: absolute;
+    background: linear-gradient(135deg, 
+    variables.$secondary200, 
+    color.scale(variables.$secondary200, $lightness: -5%));
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.05);
+    }
+    
+    &:active {
+        transform: translateY(1px);
+    }
+}
+
+.imageStyle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.highLightText {
+    background-color: variables.$highLightColor;
+    color: variables.$greys800;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+    position: relative;
+    display: inline-block;
+    margin-left: 1px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1.5px;
+        width: 100%;
+        height: 1.5px;
+        background: radial-gradient(circle, #8262B0 10%, transparent 50%);
+        background-size: 4px 4px;
+        background-repeat: repeat-x;
+    }
+}
+
+
+.sentenceClass {
+    color: variables.$greys800;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+    position: relative;
+    display: inline-block;
+    margin-left: 2px;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1.5px;
+        width: 100%;
+        height: 1.5px;
+        background: radial-gradient(circle, #8262B0 10%, transparent 50%);
+        background-size: 4px 4px;
+        background-repeat: repeat-x;
+    }
+}
+
+.noPunctuationClass{
+    color: variables.$greys800;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+    position: relative;
+    display: inline-block;
+    margin-left: 2px;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1.5px;
+        width: 100%;
+        height: 1.5px;
+        background: radial-gradient(circle, #8262B0 10%, transparent 50%);
+        background-size: 4px 4px;
+        background-repeat: repeat-x;
+    }
+}
+
+.highLightTextNew {
+    background-color: variables.$highLightColor;
+    color: variables.$secondary200;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+}
+
+
+.highLightTextBtn {
+    background-color: variables.$highLightColor;
+    color: variables.$greys800;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 8px;
+    padding: 0 15px;
+}
+
+.messageHighligths {
+    margin-bottom: 10px;
+}
+
+.allText {
+    color: variables.$greys800;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+    cursor: pointer;
+    direction: ltr;
+    // position: relative;
+}
+
+.allText1 {
+    color: variables.$secondary200;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+}
+
+.secondText {
+    background-color: white;
+    padding-left: 5px;
+}
+
+
+
+.secondLineSeperate {
+    background-color: variables.$secondary200;
+    height: 1px;
+    width: 100%;
+    margin-left: auto;
+    margin-top: 8px;
+}
+
+.tranlationLanguageContainer {
+    @include mixins.flex($justify-content: space-between, );
+    margin: 12.5px auto 4px auto;
+}
+
+
+.translationTitle {
+    @include typography.themeTitle(14px);
+    font-weight: 500;
+    color: variables.$greys800;
+}
+
+.languageCont {
+    @include typography.main_btn($backgroundColor: variables.$white, $border-radius: 6px);
+    box-shadow: 0px 1px 4px 0px rgba(12, 12, 13, 0.05);
+    width: 85px;
+    height: 28px;
+    @include mixins.flex();
+    gap: 8px;
+}
+
+.LanguageInside {
+    @include typography.mainText(14px);
+    font-weight: 600;
+}
+
+.imageLanguage {
+    width: 18px;
+    height: 18px;
+}
+
+.secondHighLights {
+    background-color: variables.$highLightColor;
+    color: variables.$secondary200;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: variables.$mainFont;
+    border-radius: 4px;
+
+}
+
+.allSwipeCont {
+    padding-top: 60px;
+
+    @media #{variables.$mobile} {
+        padding-top: 16px;
+    }
+}
+
+.onTouchScreen {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.numberBarCont {
+    @include mixins.flex();
+    width: 335px;
+    gap: 10px;
+    position: absolute;
+    margin-top: 16px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 10;
+
+}
+
+.numberStyle {
+    font-size: 13px;
+    font-weight: 600;
+    color: variables.$greys800;
+    font-family: variables.$thirdFont;
+}
+
+.progressBar {
+    max-width: 295px;
+    width: 100%;
+    height: 12px;
+    background-color: #F8F8F8;
+    border-radius: 100px;
+    border: 0.5px solid variables.$secondary200;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.progressFill {
+    border-radius: 100px;
+    height: 100%;
+    background: linear-gradient(90deg, 
+    #8262B0,
+    color.scale(variables.$Purple, $lightness: 10%));
+    transition: width 0.3s ease-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
+.screen {
+    height: 100vh;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.downText {
+    text-align: center;
+    width: 95%;
+    margin: 50px auto auto auto;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.successText {
+    font-weight: 700;
+    font-size: 21px;
+    font-family: variables.$mainFont;
+    color: variables.$loseColor;
+}
+
+.errorText {
+    font-weight: 700;
+    font-size: 21px;
+    font-family: variables.$mainFont;
+    color: variables.$succesColor;
+}
+
+.swipeSentenceStyle {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: variables.$secondaryFont;
+    color: #393939;
+    text-align: center;
+    display: block;
+    @include mixins.center_align();
+    position: absolute;
+    bottom: 220px;
+
+    @media #{variables.$mobile} {
+        bottom: 160px;
+    }
+}
+.tooltipContainer {
+    position: relative;
+    display: inline-block;
+
+    .tooltipText {
+        width: fit-content;
+        height: auto;
+        visibility: hidden;
+        background: linear-gradient(135deg, #eadfff, #f5efff);
+        color: #8262b0;
+        text-align: center;
+        border-radius: 12px;
+        position: absolute;
+        top: 20px;  
+        left: 50%;  
+        transform: translateX(-50%);  
+        white-space: nowrap;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        z-index: 10;
+        box-shadow:
+            0 4px 12px rgba(130, 98, 176, 0.15),
+            0 2px 4px rgba(130, 98, 176, 0.1);
+
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+            border-width: 15px;
+            border-style: solid;
+            border-color: #eadfff transparent transparent transparent;
+        }
+    }
+
+    &.tooltipVisible .tooltipText {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+
+.spansWords {
+    @include mixins.flex(row, nowrap, space-between, start);
+    margin: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: variables.$mainFont;
+    // color: variables.$black;
+}
+
+
+.lineSeperate {
+    width: 100%;
+    height: 1px;
+    // background-color: variables.$black;
+    // margin: 8px auto;
+
+}
+
+.secondword {
+    margin: 10px;
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: variables.$mainFont;
+    // color: variables.$black;
+
+}
+
+.firstInfo{
+    @include mixins.flex(row, nowrap, space-between, start);
+}
+
+.thirdword{
+    margin: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: variables.$mainFont;
+    // color: variables.$black;
+}
+
+.lineColumn{
+    height: 40px;
+    width: 1px;
+    background-color: variables.$primaryColor;
+}
+
+.underlinedWords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Space between words */
+}
+
+.underlinedWord {
+    text-decoration: underline;
+    padding-bottom: 2px;
+}
+
+
+.recordingBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // height: 50%;
+    border-radius: 30px;
+    pointer-events: none;
+    animation: pulse 2s infinite ease-in-out;
+    transition: padding 0.15s ease-out;
+    border: 1px solid transparent;
+    background: linear-gradient(transparent, transparent) padding-box,
+    linear-gradient(to right,#8262B1 0%,transparent 6%, transparent 94%, #8262B1 100%) border-box,
+    linear-gradient(to bottom, #8262B1 0%,transparent 5%, transparent 95%, #8262B1 100%) border-box,
+    radial-gradient(
+        ellipse at center,
+        transparent 88%,
+        #8262B0 97%
+    );
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+}
+
+.offsetIframe {
+    // offset for the iframe
+        @media #{variables.$mobile} {
+            padding-top: 80px;
+        }
+}

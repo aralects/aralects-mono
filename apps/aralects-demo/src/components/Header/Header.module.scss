@@ -1,0 +1,59 @@
+@use "../../sass/style.scss";
+@use "../../sass/variables.scss";
+@use "../../sass/mixins.scss";
+@use "../../sass/typography.scss";
+
+.Header {
+    height: auto;
+    width: 335px;
+    // background-color: variables.$white;
+    margin: auto;
+    @include mixins.flex($justify-content: space-between);
+}
+
+.logoStyle{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btnExitStyle {
+    @include typography.main_btn($backgroundColor: variables.$white, $font-size: 0);
+    box-shadow: 0px 1px 0px 1px rgba(130, 98, 176, 1);
+    width: 36px;
+    height: 34px;
+    border-top: 1px solid variables.$secondary200 ;
+    border-left: 1.5px solid variables.$secondary200 ;
+    border-right: 1.5px solid variables.$secondary200 ;
+    border-bottom: 1px solid variables.$secondary200 ;
+}
+
+.exitStyle {
+    font-size: 32px;
+    line-height: 0px;
+    text-align: center;
+    font-family: variables.$mainFont;
+    color: variables.$secondary200;
+    font-weight: 600;
+    box-sizing: border-box;
+
+}
+
+.languageCont {
+    @include typography.main_btn($backgroundColor: variables.$white, $border-radius: 6px);
+    box-shadow: 0px 1px 4px 0px rgba(12, 12, 13, 0.05);
+    width: 85px;
+    height: 28px;
+    @include mixins.flex();
+    gap: 8px;
+}
+
+.LanguageInside {
+    @include typography.mainText(14px);
+    font-weight: 600;
+}
+
+.imageLanguage {
+    width: 18px;
+    height: 18px;
+}

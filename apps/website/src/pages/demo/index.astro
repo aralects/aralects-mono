@@ -4,13 +4,10 @@ import Layout from "@layouts/Layout.astro";
 import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
 import PhoneFrame from "@components/sections/Demo/PhoneFrame";
 import { DEMO_CONTENT, DEMO_COLORS } from "../../constants/demo";
-import { URLS } from "../../config/urls";
 import SectionHeader from "@components/common/SectionHeader";
 ---
 
 <Layout>
-  <!-- <main class="flex flex-col h-full">
-    <div class="flex flex-col flex-1"> -->
     <ContactLayout>
       <WhiteSection>
         <SectionHeader
@@ -37,45 +34,16 @@ import SectionHeader from "@components/common/SectionHeader";
       </PurpleSection>
 
       <PhoneFrame client:load />
-
-      {/* Hidden initially */}
-      <div id="demo-container" class="fixed inset-0 bg-white hidden z-30">
-        <button
-          id="close-demo-btn"
-          class="absolute top-24 left-4 z-40 bg-[#8262B0] text-white px-4 py-2 rounded-lg hover:bg-[#6B4E9E] transition-colors duration-300 flex items-center gap-2"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-path="evenodd" />
-          </svg>
-          {DEMO_CONTENT.BUTTON.BACK}
-        </button>
-        <iframe 
-          src={URLS.DEMO.IFRAME}
-          class="w-full h-full border-0"
-          title="Demo Content"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; microphone"
-          allowfullscreen
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-          loading="lazy"
-        />
-      </div>
-    </ContactLayout>
-    <!-- </div>
-  </main> -->
+    </div>
+  </main>
 </Layout>
 
 <script>
   const startDemoBtn = document.getElementById('start-demo-btn');
-  const closeDemoBtn = document.getElementById('close-demo-btn');
-  const demoContainer = document.getElementById('demo-container');
-
-  if (startDemoBtn && demoContainer && closeDemoBtn) {
+  
+  if (startDemoBtn) {
     startDemoBtn.addEventListener('click', () => {
-      demoContainer.classList.remove('hidden');
-    });
-
-    closeDemoBtn.addEventListener('click', () => {
-      demoContainer.classList.add('hidden');
+      window.location.href = import.meta.env.PUBLIC_DEMO_URL;
     });
   }
 </script>

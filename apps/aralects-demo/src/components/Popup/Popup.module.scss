@@ -1,0 +1,135 @@
+@use '../../sass/style.scss';
+@use '../../sass/mixins.scss';
+@use '../../sass/variables.scss';
+@use "../../sass/typography.scss";
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup {
+    width: 337px;
+}
+
+.btnExitStyle {
+    @include typography.main_btn($backgroundColor: variables.$exitPopUpColor, $font-size: 19px);
+    box-shadow: 0px 1px 0px 1px rgba(130, 98, 176, 1);
+    width: 36px;
+    height: 34px;
+    border-radius: 8px;
+    color: #EADFFF;
+    line-height: 34px;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    margin-top: 35px;
+    margin-left: 16px;
+    left: 16px;
+    display: flex;         
+    justify-content: center;
+    align-items: center;     
+    text-align: center;
+}
+
+.iconImage {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.firstPart {
+    height: 200px;
+    background: rgba(202, 190, 217, 1);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 34px 0 0 0;
+    position: relative;
+}
+
+.BackImage {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+
+.secondPart {
+    height: 165px;
+    background-color: variables.$primaryColor;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 24px 0 15px 0;
+    display: block;
+    text-align: center;
+}
+
+.secondPartheight {
+    height: 255px;
+    background-color: variables.$primaryColor;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 24px 0 15px 0;
+    display: block;
+    text-align: center;
+}
+
+.titleStyle {
+    font-weight: 700;
+    font-size: 24px;
+    font-family: variables.$mainFont;
+    display: block;
+    color: variables.$white;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-weight: 700;
+    font-size: 17px;
+    font-family: variables.$mainFont;
+    color: variables.$white;
+}
+
+
+.btnStyle {
+    @include typography.main_btn( $font-size: 17px);
+    margin: 25px auto;
+    background-color: transparent;
+    border-radius: 10px;
+    border-top: 1.5px solid variables.$popUpBorderColor ;
+    border-left: 1.5px solid variables.$popUpBorderColor ;
+    border-right: 1.5px solid variables.$popUpBorderColor ;
+    border-bottom: 2px solid variables.$popUpBorderColor ;
+    height: 48px;
+    width: 304px;
+    box-shadow: 0px 3px 0px 0px rgba(188, 143, 246, 1);
+    color: variables.$white;
+    font-weight: 700;
+    font-family: variables.$secondaryFont;
+    cursor: pointer;
+    display: flex;         
+    justify-content: center;
+    align-items: center;     
+    text-align: center;
+}
+
+.secondStyle {
+    background-color: variables.$white;
+    color: variables.$black;
+
+    &:hover,
+    &.active {
+        background-color: transparent;
+        color: variables.$white;
+    }
+}
