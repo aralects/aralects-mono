@@ -41,8 +41,7 @@ export const PurpleSection: FC<SectionProps> = ({
 }) => (
   <div 
     className={clsx(
-      'h-[60%] w-full flex-1 relative',
-      `bg-[${CONTACT_COLORS.BACKGROUND}]`,
+      'h-[60%] w-full flex-1 relative bg-[#8262B0]',
       className
     )}
   >
