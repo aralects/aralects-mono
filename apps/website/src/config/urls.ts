@@ -1,4 +1,4 @@
-const APP_URL = import.meta.env.PUBLIC_APP_URL || 'http://localhost:4321';
+const APP_URL = 'https://demo.aralects.com';
 const DEMO_PATH = import.meta.env.PUBLIC_DEMO_PATH || '/?iframe=true';
 
 export const URLS = {
