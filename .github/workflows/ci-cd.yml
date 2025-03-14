@@ -60,14 +60,14 @@ jobs:
 
             # Deploy Landing Page (Port 80)
             docker pull $LANDING_IMAGE:${{ github.sha }}
-            docker stop aralects-landing || true
-            docker rm aralects-landing || true
+            # Stop and remove the container only if it exists
+            docker ps -a --filter "name=aralects-landing" -q | grep -q . && docker stop aralects-landing && docker rm aralects-landing
             docker run -d -p 80:80 --name aralects-landing $LANDING_IMAGE:${{ github.sha }}
 
             # Deploy Demo (Port 3000)
             docker pull $DEMO_IMAGE:${{ github.sha }}
-            docker stop aralects-demo || true
-            docker rm aralects-demo || true
+            # Stop and remove the container only if it exists
+            docker ps -a --filter "name=aralects-demo" -q | grep -q . && docker stop aralects-demo && docker rm aralects-demo
             docker run -d -p 3000:3000 --name aralects-demo $DEMO_IMAGE:${{ github.sha }}
 
             # Verify that both containers are running
