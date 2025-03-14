@@ -1,0 +1,124 @@
+@use '../../sass/style.scss';
+@use '../../sass/mixins.scss';
+@use '../../sass/variables.scss';
+
+// :root{
+//     --vh: 1vh;
+// }
+
+.container {
+    // position: absolute;
+    width: 100%;
+    // bottom: calc(100vh - 560px);
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    // flex: 1;
+    // margin-bottom: env(safe-area-inset-bottom);
+    // min-height: -webkit-fill-available;
+    margin-bottom: env(safe-area-inset-bottom);
+    // padding: 20px 0;
+
+    @media #{variables.$mobile} {
+        // position: absolute;
+        // bottom: calc(env(safe-area-inset-bottom) + 190px);
+        gap: 4px;
+        // padding-bottom: env(safe-area-inset-bottom);
+        margin-bottom: env(safe-area-inset-bottom);
+
+        
+    }
+    // touch-action: none;  
+    // -webkit-tap-highlight-color: transparent;
+}
+
+// .recordingBackground {
+//     position: absolute;
+//     width: 100vw;
+//     height: 2000px;
+//     top: -1500px;
+//     background-color: black;
+//     opacity: 0.1;
+//     z-index: 99999;
+// }
+
+.mic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #8262B0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none; 
+    user-select: none; 
+    -webkit-user-select: none; 
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &.recording {
+        z-index: 1000;
+        transition: all ease-in-out 0.2s;    
+        width: 100px;
+        height: 100px;
+        animation: pulse 2s infinite;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+    // touch-action: none;
+    // -webkit-user-select: none;
+    // user-select: none;
+    
+    // &:focus {
+    //     outline: none;
+    // }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 75, 75, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(255, 75, 75, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 75, 75, 0);
+    }
+}
+
+.micTitle {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    min-height: 24px;
+    text-align: center;
+}
+
+.barsContainer {
+    width: 100%;
+    @include mixins.flex($direction: row, $justify_content: center);
+}
+
+.bar {
+    width: 15px;
+    min-height: 15px;
+    margin: 0 5px;
+    background-color: variables.$white;
+    border-radius: 25px;
+}

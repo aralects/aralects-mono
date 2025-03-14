@@ -105,3 +105,33 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.contact-bg-pattern {
+  background-image: url('/img/svg/Get_in_touch_bg.svg');
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: 50% 100%;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.info-card-bg-pattern {
+  background-image: url('/img/svg/info_card_bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}

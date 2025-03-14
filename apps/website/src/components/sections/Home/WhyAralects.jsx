@@ -6,41 +6,49 @@ const WhyAralects = () => {
       title: "All-in-one learning hub",
       description:
         "Say goodbye to switching between apps and resources — everything you need to master Arabic is in one place.",
+      image: "/img/svg/all-in-one-learning.svg",
     },
     {
       title: "Interactive Challenges",
       description:
         "Engage with other users, track your progress on leaderboards, and share cultural insights along the way.",
+      image: "/img/svg/interactive-challenges.svg",
     },
     {
       title: "AI-Powered Customization",
       description:
         "Move at your own speed with customizable lessons and the ability to create flashcard decks from what you learned.",
-    },
+      image: "/img/svg/customized-learning.svg",
+      },
     {
       title: "Spoken Content",
       description:
         "Experience Arabic through high-quality audio; click on words, hear their pronounciation, and immerse yourself in authentic speech.",
-    },
+        image: "/img/svg/spoken-content.svg",
+      },
     {
       title: "Cultural Immersion",
       description:
         "Dive into the heart of Arabic culture with phrases and stories that locals use every day.",
-    },
+        image: "/img/svg/cultural-immersion.svg",
+      },
     {
       title: "Life-Situations 101",
       description:
         "Master the essentials of everyday conversations - whether it's ordering coffee, haggling at the market, or navigating those tricky in-law interactions.",
-    },
+        image: "/img/svg/life-situations.svg",
+      },
     {
       title: "Community-Centered Approach",
       description:
         "Connect with fellow learners, native speakers, and cultural enthusiasts for shared growth.",
-    },
+        image: "/img/svg/community-centered-approach.svg",
+      },
     {
       title: "Fun & Effective",
       description:
         "Enjoy gamified challenges that keep you motivated while learning Arabic - practical, fun, and focused on real progress. ",
+        image: "/img/svg/fun-effective-learning.svg",
     },
   ];
 
@@ -55,9 +63,7 @@ const WhyAralects = () => {
       <div className="my-[30px] flex w-full flex-col items-center justify-between gap-8 px-5 text-start md:my-[60px] md:flex-row md:px-20">
         <div className="md:w-1/2">
           <h2 className="font-SpaceGrotesk text-2xl font-bold md:text-5xl">
-            Why{" "}
-            <span className="md:text-glow-xl md:text-purple-200">Aralects</span>
-            ?
+            Why Aralects?
           </h2>
           <p className="font-SpaceGroteskLight mt-6 font-thin text-gray-300 md:text-xl">
             Learning Arabic today is challenging. Most apps focus on rigid
@@ -160,9 +166,16 @@ const WhyAralects = () => {
             <h3 className="font-SpaceGrotesk absolute top-6 z-20 hidden max-w-[80%] translate-x-6 scale-125 text-lg font-extrabold opacity-0 transition-all group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 xl:block">
               {feature.title}
             </h3>
-            <p className="font-SpaceGrotesk z-20 mt-10 font-light leading-5 text-white transition-all xl:mt-0 xl:translate-x-4 xl:scale-110 xl:opacity-0 xl:group-hover:translate-x-0 xl:group-hover:scale-100 xl:group-hover:opacity-100">
+            <p className="font-SpaceGrotesk z-20 mt-4 font-light leading-5 text-white transition-all xl:mt-0 xl:translate-x-4 xl:scale-110 xl:opacity-0 xl:group-hover:translate-x-0 xl:group-hover:scale-100 xl:group-hover:opacity-100">
               {feature.description}
             </p>
+            <div className="h-25 w-25 hidden xl:absolute xl:bottom-0 xl:left-1/2 xl:block xl:opacity-25 xl:group-hover:hidden xl:-translate-x-1/2">
+              <img 
+                src={feature.image}
+                alt={feature.title}
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
         ))}
       </div>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "absolute right-0 top-[18%] md:flex lg:w-[60%] md:w-[45%] justify-end hidden z-10" } = Astro.props;
+---
+
+<div class={className}>
+  <img
+    src="/img/svg/personal_information_illustration.svg"
+    alt="Personal Information Illustration"
+    class="max-w-[800px] lg:w-[70%] md:w-[80%] w-auto h-auto object-contain pointer-events-none"
+  />
+</div> 

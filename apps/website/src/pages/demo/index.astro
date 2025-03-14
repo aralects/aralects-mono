@@ -1,8 +1,49 @@
 ---
-import UnderConstructionPage from "@components/under-construction-page.astro";
+import SocialSidebar from "@components/sections/Home/SocialSidebar";
 import Layout from "@layouts/Layout.astro";
+import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
+import PhoneFrame from "@components/sections/Demo/PhoneFrame";
+import { DEMO_CONTENT, DEMO_COLORS } from "../../constants/demo";
+import SectionHeader from "@components/common/SectionHeader";
 ---
 
 <Layout>
-  <UnderConstructionPage />
+    <ContactLayout>
+      <WhiteSection>
+        <SectionHeader
+          title={DEMO_CONTENT.TITLE.MAIN}
+          description={DEMO_CONTENT.TITLE.SUB}
+          titleClassName={`text-[${DEMO_COLORS.TITLE}]`}
+          descriptionClassName={DEMO_COLORS.DESCRIPTION}
+          useDefaultDescriptionClasses={false}
+        />
+      </WhiteSection>
+
+      <PurpleSection>
+        <div class="xl:container xl:mx-auto">
+          <SocialSidebar 
+            className="absolute left-4 z-10 top-[10%]"
+            iconClassName="text-white hover:text-gray-200 opacity-50 hover:opacity-100" 
+          />
+          <div class="h-full max-w-[45%] sm:max-w-[45%] md:max-w-[50%] w-full xl:container lg:max-w-[55%] xl:max-w-[60%]">
+            <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
+              {DEMO_CONTENT.DESCRIPTION}
+            </p>
+          </div>
+        </div>
+      </PurpleSection>
+
+      <PhoneFrame client:load />
+    </div>
+  </main>
 </Layout>
+
+<script>
+  const startDemoBtn = document.getElementById('start-demo-btn');
+  
+  if (startDemoBtn) {
+    startDemoBtn.addEventListener('click', () => {
+      window.location.href = import.meta.env.PUBLIC_DEMO_URL;
+    });
+  }
+</script>

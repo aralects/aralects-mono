@@ -1,8 +1,33 @@
 ---
-import UnderConstructionPage from "@components/under-construction-page.astro";
+import MarqueeStrip from "@components/sections/Home/MarqueeStrip";
 import Layout from "@layouts/Layout.astro";
+import ContactInfoCard from "@components/sections/Contact/ContactInfoCard";
+import ContactIllustration from "@components/sections/Contact/ContactIllustration.astro";
+import SectionHeader from "@components/common/SectionHeader";
+import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
+import { CONTACT_CONTENT, CONTACT_COLORS } from "../../constants/contact";
 ---
 
 <Layout>
-  <UnderConstructionPage />
+  <ContactLayout>
+    <WhiteSection withPattern>
+      <SectionHeader
+        title={CONTACT_CONTENT.TITLE}
+        description={CONTACT_CONTENT.DESCRIPTION}
+        titleClassName={`text-[${CONTACT_COLORS.TITLE}]`}
+      />
+    </WhiteSection>
+
+    <PurpleSection>
+      <ContactInfoCard
+        client:load
+        email="Doehhaj@gmail.com"
+        phoneNumber="+1 012 3456 789"
+        location="Emirates kjajsx"
+      />
+    </PurpleSection>
+    
+    <ContactIllustration />
+    <MarqueeStrip client:load backgroundColor="#BDA3E2" />
+  </ContactLayout>
 </Layout>
