@@ -189,7 +189,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
         const currentPromptIndex = promptStatusArray.findIndex(
             (item) => item.prompt_id === currentPromptId
         );
-
+        
         if (currentPromptIndex !== -1) {
             const currentPrompt = promptStatusArray[currentPromptIndex];
             if (isPerfect && currentPrompt.status === false) {

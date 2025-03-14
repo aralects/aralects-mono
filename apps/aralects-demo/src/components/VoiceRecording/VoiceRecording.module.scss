@@ -2,10 +2,14 @@
 @use '../../sass/mixins.scss';
 @use '../../sass/variables.scss';
 
+// :root{
+//     --vh: 1vh;
+// }
+
 .container {
-    position: absolute;
+    // position: absolute;
     width: 100%;
-    bottom: calc(100vh - 560px);
+    // bottom: calc(100vh - 560px);
     text-align: center;
     box-sizing: border-box;
     z-index: 100000;
@@ -14,10 +18,20 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
-    margin-top: 24px;
+    // flex: 1;
+    // margin-bottom: env(safe-area-inset-bottom);
+    // min-height: -webkit-fill-available;
+    margin-bottom: env(safe-area-inset-bottom);
+    // padding: 20px 0;
 
     @media #{variables.$mobile} {
-        bottom: calc(100vh + -660px);
+        // position: absolute;
+        // bottom: calc(env(safe-area-inset-bottom) + 190px);
+        gap: 4px;
+        // padding-bottom: env(safe-area-inset-bottom);
+        margin-bottom: env(safe-area-inset-bottom);
+
+        
     }
     // touch-action: none;  
     // -webkit-tap-highlight-color: transparent;
@@ -46,6 +60,10 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none; 
+    user-select: none; 
+    -webkit-user-select: none; 
 
     &:disabled {
         opacity: 0.5;

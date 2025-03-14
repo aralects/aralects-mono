@@ -7,13 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import BackArrow from "../assets/images/back-arrow.png"
 import classes from './layouts.module.scss';
-
-interface Theme {
-    theme_id: number;
-    theme_name: string;
-    subtitle: string;
-    logo_url: string;
-}
+import { Theme } from '../types/secondLayoutInterface.ts';
 
 export const SecondeLayout = () => {
     let navigate = useNavigate();
@@ -27,7 +21,7 @@ export const SecondeLayout = () => {
     const [error, setError] = useState<string | null>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const [topShadowOpacity, setTopShadowOpacity] = useState(0);
-    const [bottomShadowOpacity, setBottomShadowOpacity] = useState(themes.length > 3 ? 1 : 0);
+    const [bottomShadowOpacity, setBottomShadowOpacity] = useState(1);
 
     useEffect(() => {
         const fetchThemes = async () => {

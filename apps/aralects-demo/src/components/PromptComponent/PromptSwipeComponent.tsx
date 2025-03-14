@@ -8,29 +8,7 @@ import Header from "../Header/Header.tsx";
 import Popup from "../Popup/Popup.tsx";
 import congratsImage from "../../assets/PopupImages/congratsImage.png";
 import bothMans from "../../assets/PopupImages/bothMans.png";
-
-
-interface HighlightedText {
-	HighlightedTextLatin: string;
-	HighlightedTextReferenceAudio: string;
-	HighlightedTextArabic: string;
-}
-
-interface PromptData {
-	prompt_id: number;
-	sentence_id: number;
-	prompt_text_latin: string;
-	literate_translation: string;
-	figurative_translation: string;
-	prompt_audio: string;
-	prompt_text_arabic: string;
-	highlighted_text: { [key: string]: HighlightedText };
-	screenLength: number;
-}
-
-interface ApiResponse {
-	[key: string]: PromptData;
-}
+import { ApiResponse } from "../../types/promptInterfaces.ts";
 
 function PronounceSwipeComponent() {
 	const location = useLocation();
@@ -255,7 +233,7 @@ function PronounceSwipeComponent() {
 						transition: 'all 0.05s ease-out',
 						padding: `${Math.min(levelHeight * 3, 24)}px`,
 						opacity: Math.max(0.4, Math.min(1, levelHeight * 0.2)),
-						transform: `scale(${1 + Math.min(levelHeight * 0.01, 0.03)})`, // More noticeable scale
+						transform: `scale(${1 + Math.min(levelHeight * 0.01, 0.03)})`,
 					
 					}} />
 			}
@@ -280,7 +258,7 @@ function PronounceSwipeComponent() {
 				className={classes.onTouchScreen}
 			>
 				<div 
-					className={classes.screenWrapper} 
+					className={classes.screenWrapper}
 					style={{ 
 						transform: `translateY(-${index * 100}vh)`,
 						transition: `transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)`
@@ -288,7 +266,7 @@ function PronounceSwipeComponent() {
 				>
 					{screens.map((screen, i) => (
 						<div key={i} className={classes.screen}>
-							<PronounceComponent {...screen} index={index} isArabic={isArabic} toggleLanguage={toggleLanguage} setIsRecording={setIsRecording} setLevelsHeight={setLevelHeight} />
+							<PronounceComponent {...screen} index={index} isArabic={isArabic} toggleLanguage={toggleLanguage} setIsRecording={setIsRecording} setLevelsHeight={setLevelHeight} screenLength={screens.length} screens={screens} setPromptStatusArray={setPromptStatusArray} promptStatusArray={promptStatusArray} resetState={{}} />
 						</div>
 					))}
 				</div>

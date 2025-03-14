@@ -9,65 +9,7 @@ import axios from "axios";
 import classes from './layouts.module.scss';
 import Popup from '../components/Popup/Popup.tsx';
 import maskImage from "../assets/PopupImages/MaskGroup.png";
-import defaultFlag from '../assets/images/logo.svg'; // Use any default image you have
-
-interface Dialect {
-    dialect_id: number;
-    dialect_name: string;
-    logo_url: string;
-    subtitle: string;
-}
-
-const defaultDialects: Dialect[] = [
-    {
-        dialect_id: 1,
-        dialect_name: "Egyptian",
-        logo_url: defaultFlag,
-        subtitle: "Masry - مصري"
-    },
-    {
-        dialect_id: 2,
-        dialect_name: "Levantine",
-        logo_url: defaultFlag,
-        subtitle: "Shami - شامي"
-    },
-    {
-        dialect_id: 3,
-        dialect_name: "Gulf",
-        logo_url: defaultFlag,
-        subtitle: "Khaliji - خليجي"
-    },
-    {
-        dialect_id: 4,
-        dialect_name: "Moroccan",
-        logo_url: defaultFlag,
-        subtitle: "Maghrebi - مغربي"
-    },
-    {
-        dialect_id: 5,
-        dialect_name: "Iraqi",
-        logo_url: defaultFlag,
-        subtitle: "Iraqi - عراقي"
-    },
-    {
-        dialect_id: 6,
-        dialect_name: "Iraqi",
-        logo_url: defaultFlag,
-        subtitle: "Iraqi - عراقي"
-    },
-    {
-        dialect_id: 7,
-        dialect_name: "Iraqi",
-        logo_url: defaultFlag,
-        subtitle: "Iraqi - عراقي"
-    },
-    {
-        dialect_id: 8,
-        dialect_name: "Iraqi",
-        logo_url: defaultFlag,
-        subtitle: "Iraqi - عراقي"
-    }
-];
+import { Dialect } from '../types/mainLayoutInterface.ts';
 
 export const MainLayout = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -78,7 +20,7 @@ export const MainLayout = () => {
     const [isPopupOpen, setPopupOpen] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
     const [topShadowOpacity, setTopShadowOpacity] = useState(0);
-    const [bottomShadowOpacity, setBottomShadowOpacity] = useState(dialects.length > 4 ? 1 : 0);
+    const [bottomShadowOpacity, setBottomShadowOpacity] = useState(1);
 
     let navigate = useNavigate();
 
@@ -89,7 +31,6 @@ export const MainLayout = () => {
                 setDialects(response.data);
                 setLoading(false);
             } catch (err) {
-                setDialects(defaultDialects);
                 setError("Failed to fetch data");
                 setLoading(false);
             }

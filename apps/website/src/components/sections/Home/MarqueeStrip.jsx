@@ -87,9 +87,9 @@ const data = [
 function MarqueeStrip({ backgroundColor = "#8262b0" }) {
   return (
     <div 
-      className="group inline-flex w-full select-none flex-nowrap items-center justify-center overflow-hidden border-y-2 text-5xl transition-all [perspective:1000px] hover:bg-[#F3F3F3] sm:flex"
+      className="group inline-flex w-full select-none flex-nowrap items-center justify-center overflow-hidden border-y-2 text-5xl transition-colors duration-300 [perspective:1000px] hover:bg-[#F3F3F3] sm:flex [background-color:var(--initial-bg)]"
       style={{
-        backgroundColor,
+        '--initial-bg': backgroundColor,
         borderColor: backgroundColor
       }}
     >
