@@ -4,7 +4,12 @@ services:
   website:
     build:
         context: .
-        dockerfile: Dockerfile
+        dockerfile: Dockerfile-website
     ports:
       - "80:80"
-      - "3001:3001"
+  admin:
+    build:
+        context: .
+        dockerfile: Dockerfile-demo
+    ports:
+      - "3000:3000"
