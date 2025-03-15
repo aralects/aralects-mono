@@ -52,13 +52,13 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
             # Stop and remove the container only if it exists
             docker ps -a --filter "name=aralects-landing" -q | grep -q . && docker stop aralects-landing && docker rm aralects-landing
-            docker run -d -p 88:80 --name aralects-landing ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
+            docker run -d -p 88:80 --env-file /app/mono-repo/.env --name aralects-landing ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
 
             # Deploy Demo (Port 3000)
             docker pull ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }}
             # Stop and remove the container only if it exists
             docker ps -a --filter "name=aralects-demo" -q | grep -q . && docker stop aralects-demo && docker rm aralects-demo
-            docker run -d -p 3000:3000 --name aralects-demo ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }}
+            docker run -d -p 3000:3000 --env-file /app/mono-repo/.env --name aralects-demo ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }}
 
             # Verify that both containers are running
             if ! docker ps -q --filter name=aralects-landing | grep -q .; then
