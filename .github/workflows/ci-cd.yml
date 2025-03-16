@@ -24,12 +24,12 @@ jobs:
 
       - name: Build and Push Landing Page (Port 88 STAGING)
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }} -f Dockerfile-website .
+          docker build --env-file /app/mono-repo/.env -t ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }} -f Dockerfile-website .
           docker push ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
 
       - name: Build and Push Demo (Port 3000)
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }} -f Dockerfile-demo .
+          docker build --env-file /app/mono-repo/.env -t ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }} -f Dockerfile-demo .
           docker push ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }}
 
   deploy:
