@@ -7,7 +7,7 @@ services:
         dockerfile: Dockerfile-website
     ports:
       - "80:80"
-  admin:
+  demo:
     build:
         context: .
         dockerfile: Dockerfile-demo
