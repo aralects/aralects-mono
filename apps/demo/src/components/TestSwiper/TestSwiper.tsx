@@ -17,7 +17,6 @@ import 'swiper/css';
 import 'swiper/css/mousewheel';
 import 'swiper/css/virtual';
 import 'swiper/css/keyboard';
-import { defaultFormattedScreens, defaultPromptStatusArray } from '../../testing-data/data';
 
 interface HighlightedText {
     HighlightedTextLatin: string;

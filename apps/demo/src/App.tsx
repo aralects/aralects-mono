@@ -4,7 +4,6 @@ import homeIndicator from "./assets/images/homeIndicator(black).png";
 import statusBar from "./assets/images/StatusBar(black).png";
 import { MainLayout } from "./layouts/mainLayout.tsx";
 import { SecondeLayout } from "./layouts/secondLayout.tsx";
-import PronounceSwipeComponent from "./components/PromptComponent/PromptSwipeComponent.tsx";
 import SplashScreen from "./components/SplashScreen/SplashScreen.tsx";
 import BackImage from "./assets/pronounceImages/bg.png";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
