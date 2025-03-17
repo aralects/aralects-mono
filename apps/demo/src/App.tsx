@@ -8,6 +8,7 @@ import PronounceSwipeComponent from "./components/PromptComponent/PromptSwipeCom
 import SplashScreen from "./components/SplashScreen/SplashScreen.tsx";
 import BackImage from "./assets/pronounceImages/bg.png";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import TestSwiper from "./components/TestSwiper/TestSwiper.tsx";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +65,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainLayout />} />
             <Route path="/choose-theme" element={<SecondeLayout />} />
-            <Route path="/prompt" element={<PronounceSwipeComponent />} />
+            <Route path="/prompt" element={<TestSwiper />} />
           </Routes>
         </div>
       </div>

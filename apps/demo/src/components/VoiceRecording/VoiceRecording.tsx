@@ -33,10 +33,21 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   const recordingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Hook from @ricky0123/vad-react
-  const { userSpeaking } = useMicVAD({
-    onSpeechStart: () => console.log("Speech started"),
-    onSpeechEnd: () => console.log("Speech ended"),
+  const vad = useMicVAD({
+    onSpeechStart: () => {
+      if (isHolding) {
+        console.log("Speech started");
+      }
+    },
+    onSpeechEnd: () => {
+      if (isHolding) {
+        console.log("Speech ended");
+      }
+    },
+    startOnLoad: false // Don't start VAD immediately
   });
+
+  const { userSpeaking } = vad;
 
   // Start/Stop recording logic
   const startRecording = () => {
@@ -167,34 +178,28 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   }, [isListening]);
 
   useEffect(() => {
-    if (!isListening) {
-      stopRecording();
+    if (!isHolding) {
+      setLevels(new Array(10).fill(3));
+      setLevelsHeight(0);
       return;
     }
 
-    const newLevels = levels.map(() =>
-      userSpeaking ? Math.random() * 20 + 5 : 3,
-    );
-    setLevels(newLevels);
+    // Create an interval to continuously update levels
+    const interval = setInterval(() => {
+      if (userSpeaking) {
+        // When speaking, create dynamic levels
+        const newLevel = Math.random() * 20 + 5; // Random between 5 and 25
+        setLevels(new Array(10).fill(newLevel));
+        setLevelsHeight(newLevel);
+      }else {
+        // When not speaking but holding, maintain a base level
+        setLevels(new Array(10).fill(0));
+        setLevelsHeight(0);
+      }
+    }, 50); // Update every 50ms for smooth animation
 
-    // Stop recording after 2 second of silence
-    let silenceTimeout: string | number | NodeJS.Timeout | undefined;
-    // if (!userSpeaking) {
-    //     silenceTimeout = setTimeout(() => {
-    //         stopRecording();
-    //         setIsListening(false);
-    //     }, 2000);
-    // }
-
-    // Cleanup timeout if user starts speaking again before 1 second
-    return () => clearTimeout(silenceTimeout);
-  }, [userSpeaking, isListening]);
-
-  useEffect(() => {
-    if (!isListening) {
-      setLevels(new Array(10).fill(3)); // Reset to dots when not listening
-    }
-  }, [isListening]);
+    return () => clearInterval(interval);
+  }, [userSpeaking, isHolding]);
 
   // Stop microphone when the app is not visible
   useEffect(() => {
@@ -214,27 +219,27 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     };
   }, []);
 
-  // useEffect(() => {
-  //     if (!isListening) return;
-  // }, [userSpeaking, isListening]);
-
+  // Add a new effect to control VAD start/stop
   useEffect(() => {
-    if (levels) {
-      setLevelsHeight(levels[0]);
-      console.log("LEVEL", levels[0]);
+    if (isHolding) {
+      vad.start(); // Start VAD when holding
+    } else {
+      vad.pause(); // Pause VAD when not holding
     }
-  }, [levels]);
+  }, [isHolding]);
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    e.preventDefault(); // Prevent default browser behavior
-    // e.stopPropagation();
+    e.preventDefault();
+    setIsHolding(true);
     setIsListening(true);
+    startRecording();
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    e.preventDefault(); // Prevent default browser behavior
-    // e.stopPropagation();
+    e.preventDefault();
+    setIsHolding(false);
     setIsListening(false);
+    stopRecording();
   };
 
   // Prevent context menu from appearing

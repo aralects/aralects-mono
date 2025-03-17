@@ -8,6 +8,7 @@ import axios from "axios";
 import BackArrow from "../assets/images/back-arrow.png";
 import classes from "./layouts.module.scss";
 import { Theme } from "../types/secondLayoutInterface.ts";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.tsx";
 
 export const SecondeLayout = () => {
   let navigate = useNavigate();
@@ -96,7 +97,7 @@ export const SecondeLayout = () => {
             onScroll={handleScroll}
           >
             {loading ? (
-              <p>Loading themes...</p>
+              <LoadingSpinner />
             ) : error ? (
               <p>{error}</p>
             ) : (

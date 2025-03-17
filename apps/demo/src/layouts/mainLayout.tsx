@@ -10,6 +10,7 @@ import classes from "./layouts.module.scss";
 import Popup from "../components/Popup/Popup.tsx";
 import maskImage from "../assets/PopupImages/MaskGroup.png";
 import { Dialect } from "../types/mainLayoutInterface.ts";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.tsx";
 
 export const MainLayout = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -106,16 +107,16 @@ export const MainLayout = () => {
         </div>
 
         {/* Loading and Error Handling */}
-        {loading ? (
-          <div className="loading-indicator">Loading...</div>
-        ) : error ? (
-          <div className="error-message">{error}</div>
-        ) : (
-          <div className="nationality-list-container">
-            <div
-              className="shadow--top shadow"
-              style={{ opacity: topShadowOpacity }}
-            />
+        <div className="nationality-list-container">
+          <div
+            className="shadow--top shadow"
+            style={{ opacity: topShadowOpacity }}
+          />
+          {loading ? (
+            <LoadingSpinner />
+          ) : error ? (
+            <div className="error-message">{error}</div>
+          ) : (
             <div
               className="nationality-list"
               ref={contentRef}
@@ -143,12 +144,12 @@ export const MainLayout = () => {
                 <p>No results found</p>
               )}
             </div>
-            <div
-              className="shadow--bottom shadow"
-              style={{ opacity: bottomShadowOpacity }}
-            />
-          </div>
-        )}
+          )}
+          <div
+            className="shadow--bottom shadow"
+            style={{ opacity: bottomShadowOpacity }}
+          />
+        </div>
       </Main>
       <CustomButton>
         <button

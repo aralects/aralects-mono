@@ -24,12 +24,16 @@
     margin-bottom: env(safe-area-inset-bottom);
     // padding: 20px 0;
 
+    // testing this can work without it can work with it
+    ////////////
     @media #{variables.$mobile} {
-        // position: absolute;
-        // bottom: calc(env(safe-area-inset-bottom) + 190px);
+        position: absolute;
+        bottom: calc(env(safe-area-inset-bottom) + 4rem);
         gap: 4px;
         // padding-bottom: env(safe-area-inset-bottom);
-        margin-bottom: env(safe-area-inset-bottom);
+        // margin-bottom: env(safe-area-inset-bottom);
+        // position: fixed;
+        // bottom: env(safe-area-inset-bottom);
 
         
     }
