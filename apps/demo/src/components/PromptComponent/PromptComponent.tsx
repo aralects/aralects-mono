@@ -245,9 +245,9 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
     const cleanWord = (word: string) => {
       const isArabic = /[\u0600-\u06FF]/.test(word);
       const cleaned = isArabic
-        ? word.replace(/[^أ-ي0-9a-zA-Z\u0600-\u06FF\s]/g, "").toLowerCase()
-        : word.replace(/^[^\w'Ꜥħ]+|[^\w'Ꜥħ]+$/g, "").toLowerCase();
-      return cleaned.trim() === "" ? null : cleaned; // Return null for empty words
+        ? word.replace(/[^أ-ي0-9a-zA-Z\u0600-\u06FF\u064B-\u065F\s]/g, "").toLowerCase()
+        : word.replace(/^[^\w'\u0295ħ]+|[^\w'\u0295ħ]+$/g, "").toLowerCase();
+      return cleaned.trim() === "" ? null : cleaned;
     };
     const wordsWithoutPunctuation = wordsWithPunctuation
       .map(cleanWord) // Clean words and filter out nulls
@@ -446,7 +446,19 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
       | null
       | undefined,
   ) => {
-    return <span className={classes.highLightTextBtn}>{highlightWord}</span>;
+    const isArabicText = typeof highlightWord === 'string' && /[\u0600-\u06FF]/.test(highlightWord);
+    return (
+      <span 
+        className={classes.highLightTextBtn}
+        style={{
+          direction: isArabicText ? "rtl" : "ltr",
+          textAlign: isArabicText ? "right" : "left",
+          unicodeBidi: "isolate" // This helps with mixed direction text
+        }}
+      >
+        {highlightWord}
+      </span>
+    );
   };
 
   useEffect(() => {
@@ -472,18 +484,26 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
               {isPerfect ? "Mumtaz!" : "Try Again!"}
             </span>
           </div>
-          <span className={classes.highLightTextBtn}>
+          <span 
+            className={classes.highLightTextBtn}
+            style={{
+              direction: isArabic ? "rtl" : "ltr",
+              textAlign: isArabic ? "right" : "left",
+              unicodeBidi: "isolate"
+            }}
+          >
             {isArabic
               ? payload.highlighted_text_arabic_payload &&
                 Array.isArray(payload.highlighted_text_arabic_payload)
                 ? payload.highlighted_text_arabic_payload.map(
-                    (
-                      item: { result: any; letter: string },
-                      index: React.Key | null | undefined,
-                    ) => (
+                    (item: { result: any; letter: string }, index: React.Key | null | undefined) => (
                       <span
                         key={index}
-                        style={{ color: item.result ? "green" : "red" }}
+                        style={{ 
+                          color: item.result ? "green" : "red",
+                          direction: "rtl",
+                          unicodeBidi: "isolate"
+                        }}
                       >
                         {item.letter}
                       </span>
@@ -499,7 +519,11 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                     ) => (
                       <span
                         key={index}
-                        style={{ color: item.result ? "green" : "red" }}
+                        style={{ 
+                          color: item.result ? "green" : "red",
+                          direction: "ltr",
+                          unicodeBidi: "isolate"
+                        }}
                       >
                         {item.letter}
                       </span>
