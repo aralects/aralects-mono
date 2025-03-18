@@ -4,7 +4,6 @@ export const DEMO_CONTENT = {
     SUB: 'Aralects'
   },
   DESCRIPTION: "Let's be honest, learning Arabic today is challenging. Most apps focus on rigid lessons and miss the immersive, real-world conversations that bring Arabic to life.",
-  SECOND_DESCRIPTION: "Aralects is a new way to learn Arabic. It's a voice-based learning app that uses your voice to teach you Arabic. It's like having a personal Arabic tutor in your pocket.",
   BUTTON: {
     START: 'Start Demo!',
     BACK: 'Back'
@@ -35,7 +34,7 @@ export const DEMO_LAYOUT = {
         LG: 'lg:right-[15%]'
       },
       TOP: {
-        DEFAULT: 'top-[15%]',
+        DEFAULT: 'top-[20%]',
         SM: 'sm:top-[15%]',
         MD: 'md:top-[15%]',
         LG: 'lg:top-[15%]'

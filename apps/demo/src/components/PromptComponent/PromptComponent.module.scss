@@ -111,7 +111,7 @@
     color: variables.$greys800;
     font-size: 22px;
     font-weight: 700;
-    font-family: variables.$mainFont, "Noto Sans Arabic", "Times New Roman", serif;
+    font-family: variables.$mainFont;
     border-radius: 4px;
     position: relative;
     display: inline-block;
@@ -180,7 +180,7 @@
     color: variables.$secondary200;
     font-size: 20px;
     font-weight: 600;
-    font-family: variables.$mainFont, "Noto Sans Arabic", "Times New Roman", serif;
+    font-family: variables.$mainFont;
     border-radius: 4px;
 }
 
@@ -190,7 +190,7 @@
     color: variables.$greys800;
     font-size: 1.5rem;
     font-weight: 600;
-    font-family: variables.$mainFont, "Noto Sans Arabic", "Times New Roman", serif;
+    font-family: variables.$mainFont;
     border-radius: 8px;
     padding: 0 15px;
 }
