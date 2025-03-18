@@ -34,14 +34,15 @@ export const WhiteSection: FC<SectionProps> = ({
   </div>
 );
 
-export const PurpleSection: FC<SectionProps> = ({ 
+export const PurpleSection: FC<SectionProps & { withBottomPadding?: boolean }> = ({ 
   children, 
   className,
-  containerClassName 
+  containerClassName,
+  withBottomPadding = true
 }) => (
   <div 
     className={clsx(
-      'h-[60%] w-full flex-1 relative bg-[#8262B0]',
+      `h-[100%] w-full flex-1 relative bg-[#8262B0] ${withBottomPadding && 'pb-[10%]'}`,
       className
     )}
   >
