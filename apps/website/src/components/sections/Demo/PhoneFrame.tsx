@@ -4,18 +4,12 @@ import { DEMO_LAYOUT, DEMO_COLORS, DEMO_CONTENT } from '../../../constants/demo'
 
 interface PhoneFrameProps {
   className?: string;
+  onStartDemo?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const PhoneFrame: FC<PhoneFrameProps> = ({ className }) => {
-  const handleStartDemo = () => {
-    window.location.href = 'https://demo.aralects.com';
-  };
-
+const PhoneFrame: FC<PhoneFrameProps> = ({ className, onStartDemo }) => {
   return (
-    <div className={`${clsx(
-      DEMO_LAYOUT.PHONE_FRAME.WIDTH.DEFAULT,
-      className
-    )}`}>
+    <div className={`${DEMO_LAYOUT.PHONE_FRAME.WIDTH.DEFAULT}`}>
       <div className="relative">
         <div className="relative">
           <img 
@@ -42,7 +36,7 @@ const PhoneFrame: FC<PhoneFrameProps> = ({ className }) => {
             <div className="flex justify-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
               <button
                 id="start-demo-btn"
-                onClick={handleStartDemo}
+                onClick={onStartDemo}
                 className={clsx(
                   `bg-[${DEMO_COLORS.BACKGROUND}]`,
                   'text-white px-4 py-2 sm:px-6 sm:py-2 md:px-8 md:py-3',

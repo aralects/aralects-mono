@@ -2,10 +2,10 @@
 import SocialSidebar from "@components/sections/Home/SocialSidebar";
 import Layout from "@layouts/Layout.astro";
 import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
-import PhoneFrame from "@components/sections/Demo/PhoneFrame";
 import { DEMO_CONTENT, DEMO_COLORS } from "../../constants/demo";
 import SectionHeader from "@components/common/SectionHeader";
 import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
+import DemoSection from "@components/sections/Demo/DemoSection";
 ---
 
 <Layout>
@@ -37,9 +37,7 @@ import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
                 </p>
               }
             </div>
-            <div class="flex flex-col items-center justify-center w-full">
-              <PhoneFrame client:load />
-            </div>
+            <DemoSection client:load />
           </div>
         </div>
       </PurpleSection>
@@ -48,13 +46,3 @@ import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
       </div>
     </ContactLayout>
 </Layout>
-
-<script>
-  const startDemoBtn = document.getElementById('start-demo-btn');
-  
-  if (startDemoBtn) {
-    startDemoBtn.addEventListener('click', () => {
-      window.location.href = import.meta.env.PUBLIC_DEMO_URL;
-    });
-  }
-</script>
