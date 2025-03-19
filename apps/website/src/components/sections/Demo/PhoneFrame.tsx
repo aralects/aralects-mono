@@ -12,19 +12,10 @@ const PhoneFrame: FC<PhoneFrameProps> = ({ className }) => {
   };
 
   return (
-    <div className={clsx(
-      'absolute',
-      DEMO_LAYOUT.PHONE_FRAME.POSITION.RIGHT.DEFAULT,
-      DEMO_LAYOUT.PHONE_FRAME.POSITION.RIGHT.MD,
-      DEMO_LAYOUT.PHONE_FRAME.POSITION.RIGHT.LG,
-      DEMO_LAYOUT.PHONE_FRAME.POSITION.TOP.DEFAULT,
-      DEMO_LAYOUT.PHONE_FRAME.POSITION.TOP.LG,
+    <div className={`${clsx(
       DEMO_LAYOUT.PHONE_FRAME.WIDTH.DEFAULT,
-      DEMO_LAYOUT.PHONE_FRAME.WIDTH.SM,
-      DEMO_LAYOUT.PHONE_FRAME.WIDTH.MD,
-      DEMO_LAYOUT.PHONE_FRAME.WIDTH.LG,
       className
-    )}>
+    )}`}>
       <div className="relative">
         <div className="relative">
           <img 
