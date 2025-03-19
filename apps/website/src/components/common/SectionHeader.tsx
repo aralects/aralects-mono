@@ -19,7 +19,7 @@ const SectionHeader: FC<SectionHeaderProps> = ({
   useDefaultDescriptionClasses = true
 }) => {
   return (
-    <div className={clsx('flex flex-col gap-4 pt-12', containerClassName)}>
+    <div className={clsx('flex flex-col gap-4 pt-14', containerClassName)}>
       <h1 
         className={clsx(
           'text-3xl font-SpaceGrotesk md:text-5xl font-bold',
