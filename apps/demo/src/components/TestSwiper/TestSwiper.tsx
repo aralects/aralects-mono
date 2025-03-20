@@ -100,7 +100,7 @@ function TestSwiper() {
                         const highlightedTexts = Object.values(prompt.highlighted_text) as HighlightedText[];
                         if (highlightedTexts.length > 0) {
                             const allLatinHighlights = highlightedTexts
-                                .map((ht) => ht.HighlightedTextLatin)
+                                .map((ht) => ht.HighlightedTextLatin.replace(/Ꜥ/g, '3'))
                                 .join(' ');
                             const allArabicHighlights = highlightedTexts
                                 .map((ht) => ht.HighlightedTextArabic)
@@ -110,7 +110,7 @@ function TestSwiper() {
                             formattedScreens.push({
                                 sentenceId: prompt.sentence_id,
                                 languageHighLight: allLatinHighlights,
-                                languagesentence: prompt.prompt_text_latin,
+                                languagesentence: prompt.prompt_text_latin.replace(/Ꜥ/g, '3'),
                                 translationHighLight: prompt.literate_translation,
                                 promptTranslation: prompt.figurative_translation,
                                 Highlightedaudio: firstHighlightAudio,
