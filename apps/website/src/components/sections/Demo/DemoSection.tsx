@@ -11,7 +11,7 @@ const DemoSection = () => {
     setIsAnimating(true);
 
     setTimeout(() => {
-      window.location.href = import.meta.env.PUBLIC_DEMO_URL;
+      window.location.href = 'https://demo.aralects.com';
     }, 800);
   };
 
