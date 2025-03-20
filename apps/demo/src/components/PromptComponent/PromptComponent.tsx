@@ -198,15 +198,45 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
     }
   }, [promptStatusArray, screens, isPerfect]);
 
-  const handleVolumeClick = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
+  const setupAudio = (audioElement: HTMLAudioElement) => {
+    audioElement.setSinkId?.('');
+    audioElement.setAttribute('playsinline', 'true');
+    audioElement.setAttribute('webkit-playsinline', 'true');
+    audioElement.volume = 1.0;
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => {
+        audioElement.play();
+      });
     }
   };
 
-  const handlePromptAudioClick = () => {
+  const handleVolumeClick = async () => {
+    if (audioRef.current) {
+      try {
+        setupAudio(audioRef.current);
+        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        if (audioContext.state === 'suspended') {
+          await audioContext.resume();
+        }
+        await audioRef.current.play();
+      } catch (error) {
+        console.error('Error playing audio:', error);
+      }
+    }
+  };
+
+  const handlePromptAudioClick = async () => {
     if (promptAudioRef.current) {
-      promptAudioRef.current.play();
+      try {
+        setupAudio(promptAudioRef.current);
+        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        if (audioContext.state === 'suspended') {
+          await audioContext.resume();
+        }
+        await promptAudioRef.current.play();
+      } catch (error) {
+        console.error('Error playing audio:', error);
+      }
     }
   };
 
@@ -215,7 +245,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
     highlightWord: string,
     isArabic: boolean,
   ) => {
-    const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null); // Track active word index
+    const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null);
     const tooltipRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -223,7 +253,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
         tooltipRef.current &&
         !tooltipRef.current.contains(event.target as Node)
       ) {
-        setActiveWordIndex(null); // Close tooltip when clicking outside
+        setActiveWordIndex(null);
       }
     };
 
@@ -247,10 +277,10 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
       const cleaned = isArabic
         ? word.replace(/[^أ-ي0-9a-zA-Z\u0600-\u06FF\s]/g, "").toLowerCase()
         : word.replace(/^[^\w'Ꜥħ]+|[^\w'Ꜥħ]+$/g, "").toLowerCase();
-      return cleaned.trim() === "" ? null : cleaned; // Return null for empty words
+      return cleaned.trim() === "" ? null : cleaned;
     };
     const wordsWithoutPunctuation = wordsWithPunctuation
-      .map(cleanWord) // Clean words and filter out nulls
+      .map(cleanWord)
       .filter((word) => word !== null);
     const isSentenceArabic = /[\u0600-\u06FF]/.test(sentence);
 
@@ -258,14 +288,14 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
       <div
         style={{
           direction: isSentenceArabic ? "rtl" : "ltr",
-          textAlign: isSentenceArabic ? "left" : "left",
+          textAlign: isSentenceArabic ? "right" : "left",
         }}
+        lang={isSentenceArabic ? "ar" : "en"}
       >
         {wordsWithPunctuation.map((word, index) => {
           const cleanWordResult = cleanWord(word);
           const isPunctuation = /^[\p{P}]+$/u.test(word);
 
-          // Skip punctuation (just render the punctuation with a different class)
           if (isPunctuation) {
             return (
               <span key={index} className={classes.punctuationClass}>
@@ -292,6 +322,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                   direction: isArabic && !isPunctuation ? "rtl" : "ltr",
                   textAlign: isArabic && !isPunctuation ? "right" : "left",
                 }}
+                lang={isArabic ? "ar" : "en"}
               >
                 {word}
               </span>
@@ -311,12 +342,11 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                         style={{ direction: isArabic ? "rtl" : "ltr" }}
                       >
                         <div className={classes.spansWords}>
-                          {/* Split and display the parts of the span, but filter out empty strings */}
                           {(isArabic ? wordDataArabic : wordData)[
                             wordIndex
                           ].definition_span
                             .split(" ")
-                            .filter((part) => part.trim() !== "") // This filters out empty or whitespace-only parts
+                            .filter((part) => part.trim() !== "")
                             .map((part, partIndex) => (
                               <span
                                 key={partIndex}
@@ -436,17 +466,20 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
     ));
   };
 
-  const renderHighlightedPart = (
-    highlightWord:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | Iterable<React.ReactNode>
-      | null
-      | undefined,
-  ) => {
-    return <span className={classes.highLightTextBtn}>{highlightWord}</span>;
+  const renderHighlightedPart = (highlightWord: string | number | boolean | React.ReactElement | Iterable<React.ReactNode> | null | undefined) => {
+    const isArabicText = typeof highlightWord === 'string' && /[\u0600-\u06FF]/.test(highlightWord);
+    return (
+      <span 
+        className={classes.highLightTextBtn}
+        style={{
+          direction: isArabicText ? "rtl" : "ltr",
+          textAlign: isArabicText ? "right" : "left",
+        }}
+        lang={isArabicText ? "ar" : "en"}
+      >
+        {highlightWord}
+      </span>
+    );
   };
 
   useEffect(() => {
@@ -464,7 +497,14 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
   useEffect(() => {
     if (payload) {
       setFeedbackContent(
-        <div className={classes.feedbackContainer}>
+        <div 
+          className={classes.feedbackContainer}
+          style={{
+            direction: isArabic ? "rtl" : "ltr",
+            textAlign: isArabic ? "right" : "left"
+          }}
+          lang={isArabic ? "ar" : "en"}
+        >
           <div className={classes.messageHighligths}>
             <span
               className={`${classes.feedbackMessage} ${isPerfect ? classes.successText : classes.errorText}`}
@@ -472,7 +512,13 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
               {isPerfect ? "Mumtaz!" : "Try Again!"}
             </span>
           </div>
-          <span className={classes.highLightTextBtn}>
+          <span 
+            className={classes.highLightTextBtn}
+            style={{
+              direction: isArabic ? "rtl" : "ltr",
+              textAlign: isArabic ? "right" : "left"
+            }}
+          >
             {isArabic
               ? payload.highlighted_text_arabic_payload &&
                 Array.isArray(payload.highlighted_text_arabic_payload)
@@ -483,7 +529,12 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                     ) => (
                       <span
                         key={index}
-                        style={{ color: item.result ? "green" : "red" }}
+                        style={{ 
+                          color: item.result ? "green" : "red",
+                          direction: "rtl",
+                          textAlign: "right"
+                        }}
+                        lang="ar"
                       >
                         {item.letter}
                       </span>
@@ -499,7 +550,12 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                     ) => (
                       <span
                         key={index}
-                        style={{ color: item.result ? "green" : "red" }}
+                        style={{ 
+                          color: item.result ? "green" : "red",
+                          direction: "ltr",
+                          textAlign: "left"
+                        }}
+                        lang="en"
                       >
                         {item.letter}
                       </span>
@@ -507,7 +563,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                   )
                 : null}
           </span>
-        </div>,
+        </div>
       );
     }
   }, [payload, isArabic]);
@@ -556,19 +612,21 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
 
         <audio
           ref={audioRef}
-          src={
-            promptAudio
-              ? promptAudio
-              : "https://audio.aralects.com/promt1_highlighted_word.wav"
-          }
+          src={promptAudio || "https://audio.aralects.com/promt1_highlighted_word.wav"}
+          preload="auto"
+          playsInline
+          x-webkit-airplay="allow"
+          x-webkit-playsinline="true"
+          controlsList="nodownload"
         />
         <audio
           ref={promptAudioRef}
-          src={
-            Highlightedaudio
-              ? Highlightedaudio
-              : "https://audio.aralects.com/promt1_highlighted_word.wav"
-          }
+          src={Highlightedaudio || "https://audio.aralects.com/promt1_highlighted_word.wav"}
+          preload="auto"
+          playsInline
+          x-webkit-airplay="allow"
+          x-webkit-playsinline="true"
+          controlsList="nodownload"
         />
       </div>
 

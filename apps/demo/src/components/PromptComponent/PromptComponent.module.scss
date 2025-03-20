@@ -162,6 +162,18 @@
     position: relative;
     display: inline-block;
     margin-left: 2px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+
+    &[lang="ar"] {
+        font-family: 'Noto Sans Arabic', 'Amiri', variables.$mainFont;
+        letter-spacing: 0;
+        word-spacing: 0.1em;
+    }
+
     &::after {
         content: "";
         position: absolute;
@@ -193,6 +205,17 @@
     font-family: variables.$mainFont;
     border-radius: 8px;
     padding: 0 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+
+    &[lang="ar"] {
+        font-family: 'Noto Sans Arabic', 'Amiri', variables.$mainFont;
+        letter-spacing: 0;
+        word-spacing: 0.1em;
+    }
 }
 
 .messageHighligths {
@@ -206,8 +229,17 @@
     font-family: variables.$mainFont;
     border-radius: 4px;
     cursor: pointer;
-    direction: ltr;
-    // position: relative;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+
+    &[lang="ar"] {
+        font-family: 'Noto Sans Arabic', 'Amiri', variables.$mainFont;
+        letter-spacing: 0;
+        word-spacing: 0.1em;
+    }
 }
 
 .allText1 {
