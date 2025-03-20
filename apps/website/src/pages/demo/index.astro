@@ -2,15 +2,15 @@
 import SocialSidebar from "@components/sections/Home/SocialSidebar";
 import Layout from "@layouts/Layout.astro";
 import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
-import PhoneFrame from "@components/sections/Demo/PhoneFrame";
 import { DEMO_CONTENT, DEMO_COLORS } from "../../constants/demo";
 import SectionHeader from "@components/common/SectionHeader";
 import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
+import DemoSection from "@components/sections/Demo/DemoSection";
 ---
 
 <Layout>
     <ContactLayout>
-      <WhiteSection>
+      <WhiteSection >
         <SectionHeader
           title={DEMO_CONTENT.TITLE.MAIN}
           description={DEMO_CONTENT.TITLE.SUB}
@@ -20,37 +20,33 @@ import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
         />
       </WhiteSection>
 
-      <PurpleSection className="pb-[2.5%] lg:pb-[10%]">
+      <PurpleSection>
         <div class="xl:container xl:mx-auto">
           <SocialSidebar 
-            className="absolute left-4 z-10 top-[10%]"
+            className="fixed left-6 z-10 top-[35%]"
             iconClassName="text-white hover:text-gray-200 opacity-50 hover:opacity-100" 
           />
-          <div class="h-full max-w-[45%] sm:max-w-[50%] md:max-w-[50%] w-full xl:container lg:max-w-[55%] xl:max-w-[60%]">
-            <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
-              {DEMO_CONTENT.DESCRIPTION}
-            </p>
-            {DEMO_CONTENT.SECOND_DESCRIPTION && <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal mt-6">
-              {DEMO_CONTENT.SECOND_DESCRIPTION}
-            </p>}
+          <div class="md:w-[60%] flex flex-col lg:flex-row items-center justify-center gap-10 w-full bg-[#8262B0]">
+            <div>
+              <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
+                {DEMO_CONTENT.DESCRIPTION}
+              </p>
+              {DEMO_CONTENT.SECOND_DESCRIPTION &&
+                <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal mt-6">
+                  {DEMO_CONTENT.SECOND_DESCRIPTION}
+                </p>
+              }
+            </div>
+            <div class="md:absolute md:top-[-20%] md:right-[10%] lg:right-[15%]">
+              <DemoSection client:load />
+            </div>
           </div>
         </div>
       </PurpleSection>
-
-      <div class="bg-[#8262B0] w-full pb-[2.5%] lg:pb-[10%]">
-        <ExperienceAralects />
+      <div class="bg-[#8262B0] w-full pb-[2.5%] md:pt-[2.5%] ">
+        <div class="xl:container xl:mx-auto">
+          <ExperienceAralects />
+        </div>
       </div>
-
-      <PhoneFrame client:load />
     </ContactLayout>
 </Layout>
-
-<script>
-  const startDemoBtn = document.getElementById('start-demo-btn');
-  
-  if (startDemoBtn) {
-    startDemoBtn.addEventListener('click', () => {
-      window.location.href = import.meta.env.PUBLIC_DEMO_URL;
-    });
-  }
-</script>

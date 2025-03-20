@@ -25,23 +25,7 @@ export const DEMO_COLORS = {
 export const DEMO_LAYOUT = {
   PHONE_FRAME: {
     WIDTH: {
-      DEFAULT: "w-[180px]",
-      SM: "sm:w-[250px]",
-      MD: "md:w-[250px]",
-      LG: "lg:w-[320px]",
-    },
-    POSITION: {
-      RIGHT: {
-        DEFAULT: "right-[5%]",
-        MD: "md:right-[10%]",
-        LG: "lg:right-[15%]",
-      },
-      TOP: {
-        DEFAULT: "top-[15%]",
-        SM: "sm:top-[15%]",
-        MD: "md:top-[15%]",
-        LG: "lg:top-[15%]",
-      },
+      DEFAULT: "w-[250px]",
     },
   },
   LOGO: {
