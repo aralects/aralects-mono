@@ -81,95 +81,96 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
   const [result, setResult] = useState<PronunciationFeedbackItem | any>(null);
   const [payload, setPayload] = useState<any>([]);
 
-  const wordData = [
-    {
-      span: "1",
-      word_ar: "الحَمْدُ",
-      word_lat: "il-Hamdu",
-      definition_lit: "the praise",
-      definition_fig: "praise",
-      definition_span: "A term ",
-      pronunciation: "il-Hamdu",
-      notes: "This is often used in Islamic prayers",
-      highlighted: true,
-      translation: "5",
-    },
-    {
-      span: "2",
-      word_ar: "الله",
-      word_lat: "Allah",
-      definition_lit: "God (in Arabic)",
-      definition_fig: "the supreme ",
-      definition_span: "",
-      pronunciation: "Allah",
-      notes: "The central concept in Islam",
-      highlighted: true,
-      translation: "6",
-    },
-  ];
+  // TEMPORARY DISABLED
+  // const wordData = [
+  //   {
+  //     span: "1",
+  //     word_ar: "الحَمْدُ",
+  //     word_lat: "il-Hamdu",
+  //     definition_lit: "the praise",
+  //     definition_fig: "praise",
+  //     definition_span: "A term ",
+  //     pronunciation: "il-Hamdu",
+  //     notes: "This is often used in Islamic prayers",
+  //     highlighted: true,
+  //     translation: "5",
+  //   },
+  //   {
+  //     span: "2",
+  //     word_ar: "الله",
+  //     word_lat: "Allah",
+  //     definition_lit: "God (in Arabic)",
+  //     definition_fig: "the supreme ",
+  //     definition_span: "",
+  //     pronunciation: "Allah",
+  //     notes: "The central concept in Islam",
+  //     highlighted: true,
+  //     translation: "6",
+  //   },
+  // ];
 
-  const wordDataArabic = [
-    {
-      span: "1",
-      word_ar: "كتاب",
-      word_lat: "Kitab",
-      definition_lit: "كتاب",
-      definition_fig: "عمل مكتوب",
-      definition_span: "كتاب الله",
-      pronunciation: "Ki-tab",
-      notes: "شائع الاستخدام",
-      highlighted: true,
-      translation: "1",
-    },
-    {
-      span: "2",
-      word_ar: "شمس",
-      word_lat: "Shams",
-      definition_lit: "شمس",
-      definition_fig: "النجم في ",
-      definition_span: "الشمس ساطعة",
-      pronunciation: "Shams",
-      notes: "رمز للحياة",
-      highlighted: false,
-      translation: "2",
-    },
-    {
-      span: "3",
-      word_ar: "قمر",
-      word_lat: "Qamar",
-      definition_lit: "قمر",
-      definition_fig: " للأرض",
-      definition_span: "",
-      pronunciation: "Qa-mar",
-      notes: "يظهر ليلاً",
-      highlighted: true,
-      translation: "3",
-    },
-    {
-      span: "4",
-      word_ar: "جبل",
-      word_lat: "Jabal",
-      definition_lit: "جبل",
-      definition_fig: "شكل طبيعية",
-      definition_span: "الجبل مرتفع",
-      pronunciation: "Ja-bal",
-      notes: "موجود في سلاسل الجبال",
-      highlighted: false,
-      translation: "4",
-    },
-    {
-      span: "5",
-      word_ar: "نهر",
-      word_lat: "Nahr",
-      definition_lit: "نهر",
-      definition_fig: "  يتدفق طبيعيًا",
-      definition_span: "النهر يجري",
-      pronunciation: "Na-hr",
-      notes: "يصب في البحر أو المحيط",
-      highlighted: true,
-      translation: "5",
-    },
-  ];
+  // const wordDataArabic = [
+  //   {
+  //     span: "1",
+  //     word_ar: "كتاب",
+  //     word_lat: "Kitab",
+  //     definition_lit: "كتاب",
+  //     definition_fig: "عمل مكتوب",
+  //     definition_span: "كتاب الله",
+  //     pronunciation: "Ki-tab",
+  //     notes: "شائع الاستخدام",
+  //     highlighted: true,
+  //     translation: "1",
+  //   },
+  //   {
+  //     span: "2",
+  //     word_ar: "شمس",
+  //     word_lat: "Shams",
+  //     definition_lit: "شمس",
+  //     definition_fig: "النجم في ",
+  //     definition_span: "الشمس ساطعة",
+  //     pronunciation: "Shams",
+  //     notes: "رمز للحياة",
+  //     highlighted: false,
+  //     translation: "2",
+  //   },
+  //   {
+  //     span: "3",
+  //     word_ar: "قمر",
+  //     word_lat: "Qamar",
+  //     definition_lit: "قمر",
+  //     definition_fig: " للأرض",
+  //     definition_span: "",
+  //     pronunciation: "Qa-mar",
+  //     notes: "يظهر ليلاً",
+  //     highlighted: true,
+  //     translation: "3",
+  //   },
+  //   {
+  //     span: "4",
+  //     word_ar: "جبل",
+  //     word_lat: "Jabal",
+  //     definition_lit: "جبل",
+  //     definition_fig: "شكل طبيعية",
+  //     definition_span: "الجبل مرتفع",
+  //     pronunciation: "Ja-bal",
+  //     notes: "موجود في سلاسل الجبال",
+  //     highlighted: false,
+  //     translation: "4",
+  //   },
+  //   {
+  //     span: "5",
+  //     word_ar: "نهر",
+  //     word_lat: "Nahr",
+  //     definition_lit: "نهر",
+  //     definition_fig: "  يتدفق طبيعيًا",
+  //     definition_span: "النهر يجري",
+  //     pronunciation: "Na-hr",
+  //     notes: "يصب في البحر أو المحيط",
+  //     highlighted: true,
+  //     translation: "5",
+  //   },
+  // ];
 
   useEffect(() => {
     if (!result) return;
@@ -327,7 +328,8 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                 {word}
               </span>
 
-              {activeWordIndex === wordIndex && (
+              {/* TEMPORARY DISABLED */}
+              {/* {activeWordIndex === wordIndex && (
                 <div
                   className={`${classes.tooltipContainer} ${classes.tooltipVisible}`}
                   ref={tooltipRef}
@@ -441,7 +443,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
                       </div>
                     ))}
                 </div>
-              )}
+              )} */}
             </React.Fragment>
           );
         })}
@@ -473,7 +475,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
         className={classes.highLightTextBtn}
         style={{
           direction: isArabicText ? "rtl" : "ltr",
-          textAlign: isArabicText ? "right" : "left",
+          textAlign: "center",
         }}
         lang={isArabicText ? "ar" : "en"}
       >
@@ -501,7 +503,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
           className={classes.feedbackContainer}
           style={{
             direction: isArabic ? "rtl" : "ltr",
-            textAlign: isArabic ? "right" : "left"
+            textAlign: "center"
           }}
           lang={isArabic ? "ar" : "en"}
         >
@@ -516,7 +518,7 @@ const PromptComponent: React.FC<PromptComponentProps> = ({
             className={classes.highLightTextBtn}
             style={{
               direction: isArabic ? "rtl" : "ltr",
-              textAlign: isArabic ? "right" : "left"
+              textAlign: "center"
             }}
           >
             {isArabic
