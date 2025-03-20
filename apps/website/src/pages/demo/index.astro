@@ -10,7 +10,7 @@ import DemoSection from "@components/sections/Demo/DemoSection";
 
 <Layout>
     <ContactLayout>
-      <WhiteSection>
+      <WhiteSection >
         <SectionHeader
           title={DEMO_CONTENT.TITLE.MAIN}
           description={DEMO_CONTENT.TITLE.SUB}
@@ -26,7 +26,7 @@ import DemoSection from "@components/sections/Demo/DemoSection";
             className="fixed left-6 z-10 top-[35%]"
             iconClassName="text-white hover:text-gray-200 opacity-50 hover:opacity-100" 
           />
-          <div class="flex flex-col lg:flex-row items-center justify-center gap-10 w-full bg-[#8262B0]">
+          <div class="md:w-[60%] flex flex-col lg:flex-row items-center justify-center gap-10 w-full bg-[#8262B0]">
             <div>
               <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
                 {DEMO_CONTENT.DESCRIPTION}
@@ -37,11 +37,13 @@ import DemoSection from "@components/sections/Demo/DemoSection";
                 </p>
               }
             </div>
-            <DemoSection client:load />
+            <div class="md:absolute md:top-[-20%] md:right-[10%] lg:right-[15%]">
+              <DemoSection client:load />
+            </div>
           </div>
         </div>
       </PurpleSection>
-      <div class="bg-[#8262B0] w-full pb-[2.5%] ">
+      <div class="bg-[#8262B0] w-full pb-[2.5%] md:pt-[2.5%] ">
         <div class="xl:container xl:mx-auto">
           <ExperienceAralects />
         </div>
