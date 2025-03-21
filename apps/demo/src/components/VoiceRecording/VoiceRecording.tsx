@@ -68,7 +68,7 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       try {
         // Directly request microphone access
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        stream.getTracks().forEach(track => track.stop()); // Stop the stream immediately
+        stream.getAudioTracks().forEach(track => track.stop());
         setHasPermission(true);
       } catch (error) {
         console.warn('Failed to request microphone permission:', error);
