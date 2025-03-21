@@ -2,7 +2,7 @@ import classes from "./VoiceRecording.module.scss";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mic } from "lucide-react";
-import { useGradio } from "../../services/GradioContext";
+import { useGradio, useGradioLoading } from "../../services/GradioContext";
 
 interface VoiceRecordingProps {
   setResult: any;
@@ -18,6 +18,8 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   setLevelsHeight,
 }) => {
   const client = useGradio();
+  // Added loading state to insure gradio loaded before using it
+  const isGradioLoading = useGradioLoading();
   const [isHolding, setIsHolding] = useState<boolean>(false);
   const [recordingDuration, setRecordingDuration] = useState<number>(0);
   const [levels, setLevels] = useState(new Array(10).fill(3));
@@ -456,13 +458,15 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   return (
     <div className={classes.container}>
       <p className={classes.micTitle}>
-        {loadingGradio
-          ? "Processing..."
-          : isHolding
-            ? isInitializing
-              ? "Initializing..." 
-              : `Recording${".".repeat(Math.floor(recordingDuration / 500) % 4)}`
-            : "Hold to record"}
+        {isGradioLoading 
+          ? "Connecting to server..."
+          : loadingGradio
+            ? "Processing..."
+            : isHolding
+              ? isInitializing
+                ? "Initializing..." 
+                : `Recording${".".repeat(Math.floor(recordingDuration / 500) % 4)}`
+              : "Hold to record"}
       </p>
       <div className="flex flex-col items-center space-y-4">
         <motion.button
@@ -471,7 +475,7 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
           onPointerLeave={handlePointerUp}
           onContextMenu={preventContextMenu}
           className={`${classes.mic} ${isHolding ? classes.recording : ""} ${isInitializing ? classes.initializing : ""}`}
-          disabled={loadingGradio}
+          disabled={loadingGradio || isGradioLoading}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
