@@ -90,7 +90,7 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   useEffect(() => {
     if (isHolding) {
-        startLevelMonitoring();
+        startRealLevelMonitoring();
     }
   }, [isHolding]);
 
@@ -192,7 +192,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       // Start recording
       mediaRecorder.start();
 
-      startLevelMonitoring();
       
     } catch (error) {
       console.error("Error in recording setup:", error);
@@ -252,33 +251,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     
   };
 
-  const startLevelMonitoring = () => {
-    
-    // If analyzer isn't available yet, use fake data until it is
-    if (!analyserRef.current) {
-      // Use fake data until analyzer is ready
-      const fakeLevelUpdate = () => {
-        if (!isHolding) return;
-        
-        // Create a gentle "waiting" animation
-        const randomVariation = Math.random() * 0.5 + 4.5; // 4.5-5 range
-        setLevels(new Array(10).fill(randomVariation));
-        setLevelsHeight(randomVariation);
-        
-        // Continue until analyzer is ready or recording stops
-        if (analyserRef.current) {
-          startRealLevelMonitoring();
-        } else if (isHolding) {
-          setTimeout(fakeLevelUpdate, 100);
-        }
-      };
-      
-      fakeLevelUpdate();
-      return;
-    }
-    
-    startRealLevelMonitoring();
-  };
   
   const startRealLevelMonitoring = () => {
     if (!analyserRef.current) return;
