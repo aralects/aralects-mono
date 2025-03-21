@@ -56,7 +56,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
         analyserRef.current.maxDecibels = -10;
         analyserRef.current.smoothingTimeConstant = 0.85;
         
-        console.log('Audio context pre-initialized');
       } catch (error) {
         console.warn('Failed to pre-initialize audio context:', error);
       }
@@ -89,10 +88,8 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   useEffect(() => {
     if (isHolding) {
-        console.log('isHolding is true, starting level monitoring');
         startLevelMonitoring();
     }
-    console.log('isHolding:', isHolding);
   }, [isHolding]);
 
   useEffect(() => {
@@ -165,9 +162,12 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       sourceRef.current.connect(analyserRef.current);
 
       // Set up media recorder
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'audio/webm;codecs=opus'
-      });
+      // const mediaRecorder = new MediaRecorder(stream, {
+      //   mimeType: 'audio/webm;codecs=opus'
+      // });
+      // Replaced the mimeType with the default browser one
+      const mediaRecorder = new MediaRecorder(stream);
+
       mediaRecorderRef.current = mediaRecorder;
 
       mediaRecorder.ondataavailable = (event) => {
@@ -190,7 +190,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       // Start recording
       mediaRecorder.start();
 
-      console.log('Audio setup complete');
       startLevelMonitoring();
       
     } catch (error) {
@@ -249,11 +248,9 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     // Reset audio chunks
     audioChunksRef.current = [];
     
-    // Don't close AudioContext to save initialization time on next recording
   };
 
   const startLevelMonitoring = () => {
-    console.log('startLevelMonitoring function is called');
     
     // If analyzer isn't available yet, use fake data until it is
     if (!analyserRef.current) {
@@ -289,7 +286,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     const updateLevels = () => {
       // Check if we should continue monitoring
       if (!isHolding) {
-        console.log('Not holding anymore, stopping level monitoring');
         return;
       }
       
@@ -419,7 +415,9 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     setResult(null);
     try {
       const file = new File([audioBlob], "recording.webm", {
-        type: "audio/webm",
+        // type: "audio/webm",
+        // Replaced the mimeType with the default browser one
+        type: audioBlob.type,
       });
 
       const result = await client.predict("/run_demo", {
@@ -431,7 +429,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
       const data: [] | any = result?.data;
 
-      console.log("Gradio API Response:", data[0]);
       setResult(data[0]);
     } catch (error) {
       console.error("Error calling Gradio API:", error);
@@ -441,7 +438,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   const handlePointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
-    console.log('handlePointerDown called, starting recording');
     startRecording();
   };
 
