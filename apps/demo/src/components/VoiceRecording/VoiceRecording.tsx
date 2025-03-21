@@ -1,6 +1,5 @@
 import classes from "./VoiceRecording.module.scss";
 import { useState, useEffect, useRef } from "react";
-import { useMicVAD } from "@ricky0123/vad-react";
 import { motion } from "framer-motion";
 import { Mic } from "lucide-react";
 import { useGradio } from "../../services/GradioContext";
@@ -19,91 +18,361 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   setLevelsHeight,
 }) => {
   const client = useGradio();
-
-  const [isListening, setIsListening] = useState<boolean>(false);
   const [isHolding, setIsHolding] = useState<boolean>(false);
   const [recordingDuration, setRecordingDuration] = useState<number>(0);
   const [levels, setLevels] = useState(new Array(10).fill(3));
-  const [_, setAudioURL] = useState<string | null>(null); // Store the audio URL for download
-  const [loadingGradio, setLoadingGradio] = useState<boolean>(false); // Store the audio URL for download
+  const [_, setAudioURL] = useState<string | null>(null);
+  const [loadingGradio, setLoadingGradio] = useState<boolean>(false);
+  const [isInitializing, setIsInitializing] = useState<boolean>(false);
+  const [_hasPermission, setHasPermission] = useState<boolean>(false);
 
-  // Create refs for managing the media recorder
+  // Refs for audio handling
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const recordingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
 
-  // Hook from @ricky0123/vad-react
-  const vad = useMicVAD({
-    onSpeechStart: () => {
-      if (isHolding) {
-        console.log("Speech started");
+  // Pre-initialize audio context and request permissions on component mount
+  useEffect(() => {
+    // Create audio context early to reduce delay on first click
+    if (!audioContextRef.current) {
+      try {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        
+        // For iOS, we need user interaction to resume, so we'll do this later
+        if (audioContextRef.current.state === 'suspended' && 
+            !(/iPad|iPhone|iPod/.test(navigator.userAgent))) {
+          audioContextRef.current.resume().catch(console.error);
+        }
+        
+        // Pre-create analyzer
+        analyserRef.current = audioContextRef.current.createAnalyser();
+        analyserRef.current.fftSize = 1024;
+        analyserRef.current.minDecibels = -90;
+        analyserRef.current.maxDecibels = -10;
+        analyserRef.current.smoothingTimeConstant = 0.85;
+        
+        console.log('Audio context pre-initialized');
+      } catch (error) {
+        console.warn('Failed to pre-initialize audio context:', error);
       }
-    },
-    onSpeechEnd: () => {
-      if (isHolding) {
-        console.log("Speech ended");
+    }
+
+    // Pre-request microphone permissions
+    const requestPermission = async () => {
+      try {
+        // Directly request microphone access
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop()); // Stop the stream immediately
+        setHasPermission(true);
+      } catch (error) {
+        console.warn('Failed to request microphone permission:', error);
       }
-    },
-    startOnLoad: false // Don't start VAD immediately
-  });
+    };
 
-  const { userSpeaking } = vad;
+    requestPermission();
+    
+    // Check for MediaRecorder API support
+    if (!window.MediaRecorder) {
+      console.warn('MediaRecorder API is not supported on this browser.');
+    }
+    
+    // Clean up on unmount
+    return () => {
+      stopRecording();
+    };
+  }, []);
 
-  // Start/Stop recording logic
-  const startRecording = () => {
-    setAudioURL(null); // Reset the audio URL before starting a new recording
-    audioChunksRef.current = []; // Clear previous audio chunks
-    setIsHolding(true);
-    setRecordingDuration(0);
+  useEffect(() => {
+    if (isHolding) {
+        console.log('isHolding is true, starting level monitoring');
+        startLevelMonitoring();
+    }
+    console.log('isHolding:', isHolding);
+  }, [isHolding]);
 
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then((stream) => {
-        const mediaRecorder = new MediaRecorder(stream);
-        mediaRecorderRef.current = mediaRecorder;
-
-        mediaRecorder.ondataavailable = (event) => {
-          audioChunksRef.current.push(event.data);
-        };
-
-        mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunksRef.current);
-          const audioUrl = URL.createObjectURL(audioBlob);
-          setAudioURL(audioUrl); // Set the audio URL for download
-          if (audioChunksRef.current.length > 0) {
-            callGradioApi(audioBlob); // Call Gradio API with the recorded audio
-          }
-        };
-
-        mediaRecorder.start();
-
-        // Start the recording duration timer
-        recordingTimerRef.current = setInterval(() => {
-          setRecordingDuration((prev) => prev + 100);
-        }, 100);
-      })
-      .catch((error) => {
-        console.error("Error accessing microphone: ", error);
+  useEffect(() => {
+    // Handle audio interruptions (iOS specific)
+    const handleVisibilityChange = () => {
+      if (document.hidden && isHolding) {
+        // Page is hidden or app switched, stop recording
         setIsHolding(false);
-        setIsListening(false);
+        setIsRecording(false);
+        stopRecording();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isHolding]);
+
+  // Immediately start capturing audio on press
+  const startRecording = async () => {
+    // Set state immediately for instant feedback
+    setIsHolding(true);
+    setIsRecording(true);
+    setIsInitializing(true);
+    
+    // Set initial visual feedback values
+    setLevels(new Array(10).fill(3));
+    setLevelsHeight(3);
+    
+    // Start timer immediately for visual feedback
+    recordingTimerRef.current = setInterval(() => {
+      setRecordingDuration((prev) => prev + 100);
+    }, 100);
+    
+    try {
+      // Clean up any existing resources first - do this quickly
+      cleanupExistingResources();
+
+      // Reset states
+      setAudioURL(null);
+      audioChunksRef.current = [];
+      setRecordingDuration(0);
+
+      // Get audio stream - this should now be instant since we pre-requested permission
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+      
+      // Setup audio context if not already initialized
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      
+      // iOS Safari often initializes AudioContext in suspended state
+      if (audioContextRef.current.state === 'suspended') {
+        await audioContextRef.current.resume();
+      }
+      
+      // Setup analyzer if not already initialized
+      if (!analyserRef.current) {
+        analyserRef.current = audioContextRef.current.createAnalyser();
+        analyserRef.current.fftSize = 1024;
+        analyserRef.current.minDecibels = -90;
+        analyserRef.current.maxDecibels = -10;
+        analyserRef.current.smoothingTimeConstant = 0.85;
+      }
+      
+      // Connect source to analyzer
+      sourceRef.current = audioContextRef.current.createMediaStreamSource(stream);
+      sourceRef.current.connect(analyserRef.current);
+
+      // Set up media recorder
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'audio/webm;codecs=opus'
       });
+      mediaRecorderRef.current = mediaRecorder;
+
+      mediaRecorder.ondataavailable = (event) => {
+        audioChunksRef.current.push(event.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        try {
+          if (audioChunksRef.current.length > 0) {
+            const audioBlob = new Blob(audioChunksRef.current);
+            const audioUrl = URL.createObjectURL(audioBlob);
+            setAudioURL(audioUrl);
+            callGradioApi(audioBlob);
+          }
+        } catch (error) {
+          console.error('Error handling recorded audio:', error);
+        }
+      };
+
+      // Start recording
+      mediaRecorder.start();
+
+      console.log('Audio setup complete');
+      startLevelMonitoring();
+      
+    } catch (error) {
+      console.error("Error in recording setup:", error);
+      setIsHolding(false);
+      setIsRecording(false);
+    } finally {
+      setIsInitializing(false);
+    }
   };
 
-  const stopRecording = () => {
-    setIsHolding(false);
-    if (
-      mediaRecorderRef.current &&
-      mediaRecorderRef.current.state !== "inactive"
-    ) {
-      mediaRecorderRef.current.stop();
-      const tracks = mediaRecorderRef.current.stream.getTracks();
-      tracks.forEach((track) => track.stop());
+  // Faster cleanup method to use when starting a new recording
+  const cleanupExistingResources = () => {
+    // Stop media recorder and tracks
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+      try {
+        mediaRecorderRef.current.stop();
+      } catch (e) {
+        console.warn('Error stopping media recorder:', e);
+      }
     }
+    
+    // Release media tracks
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => {
+        track.stop();
+        track.enabled = false;
+      });
+      streamRef.current = null;
+    }
+    
+    // Disconnect but don't close audio context
+    if (sourceRef.current) {
+      try {
+        sourceRef.current.disconnect();
+      } catch (e) {
+        console.warn('Error disconnecting source:', e);
+      }
+      sourceRef.current = null;
+    }
+    
+    // Keep analyser but reset
+    
+    // Clear animation frame
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    
+    // Clear timer but create a new one immediately
     if (recordingTimerRef.current) {
       clearInterval(recordingTimerRef.current);
       recordingTimerRef.current = null;
     }
-    setRecordingDuration(0);
+    
+    // Reset audio chunks
+    audioChunksRef.current = [];
+    
+    // Don't close AudioContext to save initialization time on next recording
+  };
+
+  const startLevelMonitoring = () => {
+    console.log('startLevelMonitoring function is called');
+    
+    // If analyzer isn't available yet, use fake data until it is
+    if (!analyserRef.current) {
+      // Use fake data until analyzer is ready
+      const fakeLevelUpdate = () => {
+        if (!isHolding) return;
+        
+        // Create a gentle "waiting" animation
+        const randomVariation = Math.random() * 0.5 + 4.5; // 4.5-5 range
+        setLevels(new Array(10).fill(randomVariation));
+        setLevelsHeight(randomVariation);
+        
+        // Continue until analyzer is ready or recording stops
+        if (analyserRef.current) {
+          startRealLevelMonitoring();
+        } else if (isHolding) {
+          setTimeout(fakeLevelUpdate, 100);
+        }
+      };
+      
+      fakeLevelUpdate();
+      return;
+    }
+    
+    startRealLevelMonitoring();
+  };
+  
+  const startRealLevelMonitoring = () => {
+    if (!analyserRef.current) return;
+    
+    const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+    
+    const updateLevels = () => {
+      // Check if we should continue monitoring
+      if (!isHolding) {
+        console.log('Not holding anymore, stopping level monitoring');
+        return;
+      }
+      
+      if (!analyserRef.current) {
+        console.error('Analyser no longer available. Stopping level monitoring.');
+        return;
+      }
+
+      try {
+        analyserRef.current.getByteFrequencyData(dataArray);
+        
+        // Calculate average volume level
+        const average = dataArray.reduce((acc, value) => acc + value, 0) / dataArray.length;
+        const normalizedLevel = Math.min(20, (average / 8) * 20); // Even more sensitive normalization
+        
+        // Set a minimum level when holding but not speaking
+        const finalLevel = normalizedLevel < 4 ? 2 : normalizedLevel;
+        
+        setLevels(new Array(10).fill(finalLevel));
+        setLevelsHeight(finalLevel);
+        
+        // Continue monitoring
+        animationFrameRef.current = requestAnimationFrame(updateLevels);
+      } catch (error) {
+        console.error('Error in updateLevels:', error);
+        // Still try to continue monitoring
+        animationFrameRef.current = requestAnimationFrame(updateLevels);
+      }
+    };
+    
+    updateLevels();
+  };
+
+  const stopRecording = () => {
+    try {
+      // Stop media recorder and tracks
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+        mediaRecorderRef.current.stop();
+      }
+      
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => {
+          track.stop();
+          track.enabled = false;
+        });
+        streamRef.current = null;
+      }
+
+      // Clean up audio context and nodes
+      if (sourceRef.current) {
+        sourceRef.current.disconnect();
+        sourceRef.current = null;
+      }
+
+      // Only close AudioContext if needed
+      // We'll keep it open to improve responsiveness for the next recording
+      // if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
+      //   audioContextRef.current.close().catch(console.error);
+      //   audioContextRef.current = null;
+      // }
+
+      // Clean up animation frame
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+
+      // Clear timer
+      if (recordingTimerRef.current) {
+        clearInterval(recordingTimerRef.current);
+        recordingTimerRef.current = null;
+      }
+
+      // Reset states
+      setRecordingDuration(0);
+      setLevels(new Array(10).fill(3));
+      setLevelsHeight(0);
+      setIsInitializing(false);
+      
+      // Keep audioContextRef and analyserRef alive for faster initialization next time
+    } catch (error) {
+      console.error('Error during cleanup:', error);
+    }
   };
 
   const returnDialectAcronym = (dialectName: string | null) => {
@@ -140,20 +409,23 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   // GRADIO
   const callGradioApi = async (audioBlob: Blob) => {
+    if (!client) {
+      console.warn('Gradio client not available');
+      setLoadingGradio(false);
+      return;
+    }
+    
     setLoadingGradio(true);
     setResult(null);
     try {
       const file = new File([audioBlob], "recording.webm", {
         type: "audio/webm",
       });
-      // const response = await fetch(referenceAudioUrl ?? 'https://audio.aralects.com/promt1_highlighted_word.wav');
-      // const referenceAudioBlob = await response.blob();
 
       const result = await client.predict("/run_demo", {
         dialect: returnDialectAcronym(localStorage.getItem("dialectName")),
         theme: returnThemeAcronym(localStorage.getItem("themeName")),
         sentence_id: sentenceId.toString(),
-        // reference_audio: referenceAudioBlob ?? file,
         input_audio: file,
       });
 
@@ -163,82 +435,20 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       setResult(data[0]);
     } catch (error) {
       console.error("Error calling Gradio API:", error);
-      // setResult(true);
     }
     setLoadingGradio(false);
   };
 
-  useEffect(() => {
-    setIsRecording(isListening);
-
-    // Start recording when user starts speaking
-    if (isListening) {
-      startRecording();
-    }
-  }, [isListening]);
-
-  useEffect(() => {
-    if (!isHolding) {
-      setLevels(new Array(10).fill(3));
-      setLevelsHeight(0);
-      return;
-    }
-
-    // Create an interval to continuously update levels
-    const interval = setInterval(() => {
-      if (userSpeaking) {
-        // When speaking, create dynamic levels
-        const newLevel = Math.random() * 20 + 5; // Random between 5 and 25
-        setLevels(new Array(10).fill(newLevel));
-        setLevelsHeight(newLevel);
-      }else {
-        // When not speaking but holding, maintain a base level
-        setLevels(new Array(10).fill(0));
-        setLevelsHeight(0);
-      }
-    }, 50); // Update every 50ms for smooth animation
-
-    return () => clearInterval(interval);
-  }, [userSpeaking, isHolding]);
-
-  // Stop microphone when the app is not visible
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        stopRecording();
-        setIsListening(false);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      if (recordingTimerRef.current) {
-        clearInterval(recordingTimerRef.current);
-      }
-    };
-  }, []);
-
-  // Add a new effect to control VAD start/stop
-  useEffect(() => {
-    if (isHolding) {
-      vad.start(); // Start VAD when holding
-    } else {
-      vad.pause(); // Pause VAD when not holding
-    }
-  }, [isHolding]);
-
   const handlePointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
-    setIsHolding(true);
-    setIsListening(true);
+    console.log('handlePointerDown called, starting recording');
     startRecording();
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
     e.preventDefault();
     setIsHolding(false);
-    setIsListening(false);
+    setIsRecording(false);
     stopRecording();
   };
 
@@ -249,12 +459,13 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   return (
     <div className={classes.container}>
-      {/* <div className={classes.recordingBackground} /> */}
       <p className={classes.micTitle}>
         {loadingGradio
-          ? "Loading..."
+          ? "Processing..."
           : isHolding
-            ? `Recording${".".repeat(Math.floor(recordingDuration / 500) % 4)}`
+            ? isInitializing
+              ? "Initializing..." 
+              : `Recording${".".repeat(Math.floor(recordingDuration / 500) % 4)}`
             : "Hold to record"}
       </p>
       <div className="flex flex-col items-center space-y-4">
@@ -263,29 +474,20 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
           onContextMenu={preventContextMenu}
-          className={`${classes.mic} ${isHolding ? classes.recording : ""}`}
+          className={`${classes.mic} ${isHolding ? classes.recording : ""} ${isInitializing ? classes.initializing : ""}`}
           disabled={loadingGradio}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
           {loadingGradio ? (
             <div className="loader" />
-          ) : isListening ? (
+          ) : isHolding ? (
             <div className={classes.barsContainer}>
               <div className={classes.bar}>
                 {levels.map((level, index) => (
                   <motion.div
                     key={index}
-                    animate={{ height: level / 5 }}
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                  />
-                ))}
-              </div>
-              <div className={classes.bar}>
-                {levels.map((level, index) => (
-                  <motion.div
-                    key={index}
-                    animate={{ height: level / 3 }}
+                    animate={{ height: level / 6 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                   />
                 ))}
@@ -295,6 +497,15 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
                   <motion.div
                     key={index}
                     animate={{ height: level / 5 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                  />
+                ))}
+              </div>
+              <div className={classes.bar}>
+                {levels.map((level, index) => (
+                  <motion.div
+                    key={index}
+                    animate={{ height: level / 6 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                   />
                 ))}
@@ -304,13 +515,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
             <Mic size={48} color="white" />
           )}
         </motion.button>
-
-        {/* Display download link if audio is recorded */}
-        {/* {audioURL && (
-                    <a href={audioURL} download="recording.wav">
-                        <button className="bg-blue-500 text-white px-4 py-2 rounded">Download .WAV</button>
-                    </a>
-                )} */}
       </div>
     </div>
   );
