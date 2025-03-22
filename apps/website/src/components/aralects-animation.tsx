@@ -24,8 +24,6 @@ const FIRST_LINE_WORDS = [
   { text: "cultures,", staggerStart: 0.1, staggerEnd: 0.2 },
 ];
 
-const SECOND_LINE_WORDS = [{ text: "one", staggerStart: 0.2, staggerEnd: 0.3 }];
-
 const THIRD_LINE_WORDS = [
   { text: "at", staggerStart: 0.5, staggerEnd: 0.6 },
   { text: "a", staggerStart: 0.6, staggerEnd: 0.7 },
@@ -70,6 +68,136 @@ const AnimatedWord = ({
   );
 };
 
+// Reusable component for the arabic dialect / aralects fusion animation
+const AralectsFusionAnimation = ({
+  arabicProg,
+  dialectProg,
+  fusionProgress,
+  centerX,
+}: {
+  arabicProg: any;
+  dialectProg: any;
+  fusionProgress: any;
+  centerX: any;
+}) => {
+  const fadeOut = useTransform(fusionProgress, [0, 1], [1, 0]);
+  const fadeIn = useTransform(fusionProgress, [0, 1], [0, 1]);
+  
+  const [bicRef, bicDimensions] = useMeasureOnce<HTMLSpanElement>();
+  const [diaRef, diaDimensions] = useMeasureOnce<HTMLSpanElement>();
+
+  return (
+    <motion.div
+      className="ml-2 inline-flex items-center justify-center gap-x-2"
+      style={{ x: centerX }}
+    >
+      {/* arabic */}
+      <motion.span
+        className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pl-2 text-white"
+        style={{
+          opacity: arabicProg,
+          filter: useMotionTemplate`blur(${useTransform(
+            arabicProg,
+            [0, 1],
+            [10, 0],
+          )}px)`,
+        }}
+      >
+        {/* ara */}
+        <span className="inline-block">Ara</span>
+
+        {/* bic */}
+        <motion.span
+          ref={bicRef}
+          className="inline-block whitespace-nowrap"
+          style={{
+            opacity: fadeOut,
+            scale: fadeOut,
+            width: useTransform(
+              fusionProgress,
+              [0, 1],
+              [bicDimensions.width, 0],
+            ),
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 12 }}
+        >
+          bic
+        </motion.span>
+
+        {/* variable padding */}
+        <motion.span
+          className="inline-block h-full"
+          style={{
+            opacity: fadeOut,
+            scale: fadeOut,
+            width: useTransform(fusionProgress, [0, 1], [8, 0]),
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 12 }}
+        />
+      </motion.span>
+
+      {/* dialects */}
+      <motion.span
+        className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
+        style={{
+          x: useTransform(fusionProgress, [0, 1], [0, -9]),
+          opacity: dialectProg,
+          filter: useMotionTemplate`blur(${useTransform(
+            dialectProg,
+            [0, 1],
+            [10, 0],
+          )}px)`,
+        }}
+      >
+        {/* variable padding */}
+        <motion.span
+          className="inline-block h-full"
+          style={{
+            opacity: fadeOut,
+            scale: fadeOut,
+            width: useTransform(fusionProgress, [0, 1], [8, 0]),
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 12 }}
+        />
+
+        {/* dia */}
+        <motion.span
+          ref={diaRef}
+          className="inline-block whitespace-nowrap"
+          style={{
+            opacity: fadeOut,
+            scale: fadeOut,
+            width: useTransform(
+              fusionProgress,
+              [0, 1],
+              [diaDimensions.width, 0],
+            ),
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 12 }}
+        >
+          dia
+        </motion.span>
+
+        {/* lect */}
+        <span className="inline-block">lect</span>
+
+        {/* s */}
+        <motion.span
+          style={{
+            opacity: fadeIn,
+            scale: fadeIn,
+            width: useTransform(fusionProgress, [0, 1], [0, 25.3]),
+          }}
+          transition={{ type: "spring", stiffness: 100, damping: 12 }}
+          className="inline-block whitespace-nowrap"
+        >
+          s
+        </motion.span>
+      </motion.span>
+    </motion.div>
+  );
+};
+
 export const AralectsAnimation = ({ className }: { className?: string }) => {
   const { scrollY: scrollYValue } = useScroll();
   const scrollY = useSpring(scrollYValue, { damping: 25, stiffness: 200 });
@@ -110,11 +238,6 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
     [FUSION_START, FUSION_END],
     [0, 1],
   );
-  const fadeOut = useTransform(fusionProgress, [0, 1], [1, 0]);
-  const fadeIn = useTransform(fusionProgress, [0, 1], [0, 1]);
-
-  const [bicRef, bicDimensions] = useMeasureOnce<HTMLSpanElement>();
-  const [diaRef, diaDimensions] = useMeasureOnce<HTMLSpanElement>();
 
   // Arabic/dialect animation values
   const arabicProg = useTransform(wordAppearProg, [0.3, 0.4], [0, 1]);
@@ -174,115 +297,13 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
           one
         </motion.span>
 
-        {/* arabic dialect */}
-        <motion.div
-          className="ml-2 inline-flex items-center justify-center gap-x-2"
-          style={{ x: centerX }}
-        >
-          {/* arabic */}
-          <motion.span
-            className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pl-2 text-white"
-            style={{
-              opacity: arabicProg,
-              filter: useMotionTemplate`blur(${useTransform(
-                arabicProg,
-                [0, 1],
-                [10, 0],
-              )}px)`,
-            }}
-          >
-            {/* ara */}
-            <span className="inline-block">Ara</span>
-
-            {/* bic */}
-            <motion.span
-              ref={bicRef}
-              className="inline-block whitespace-nowrap"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(
-                  fusionProgress,
-                  [0, 1],
-                  [bicDimensions.width, 0],
-                ),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            >
-              bic
-            </motion.span>
-
-            {/* variable padding */}
-            <motion.span
-              className="inline-block h-full"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(fusionProgress, [0, 1], [8, 0]),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            />
-          </motion.span>
-
-          {/* dialects */}
-          <motion.span
-            className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
-            style={{
-              x: useTransform(fusionProgress, [0, 1], [0, -9]),
-              opacity: dialectProg,
-              filter: useMotionTemplate`blur(${useTransform(
-                dialectProg,
-                [0, 1],
-                [10, 0],
-              )}px)`,
-            }}
-          >
-            {/* variable padding */}
-            <motion.span
-              className="inline-block h-full"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(fusionProgress, [0, 1], [8, 0]),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            />
-
-            {/* dia */}
-            <motion.span
-              ref={diaRef}
-              className="inline-block whitespace-nowrap"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(
-                  fusionProgress,
-                  [0, 1],
-                  [diaDimensions.width, 0],
-                ),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            >
-              dia
-            </motion.span>
-
-            {/* lect */}
-            <span className="inline-block">lect</span>
-
-            {/* s */}
-            <motion.span
-              style={{
-                opacity: fadeIn,
-                scale: fadeIn,
-                width: useTransform(fusionProgress, [0, 1], [0, 25.3]),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-              className="inline-block whitespace-nowrap"
-            >
-              s
-            </motion.span>
-          </motion.span>
-        </motion.div>
+        {/* arabic dialect fusion animation */}
+        <AralectsFusionAnimation
+          arabicProg={arabicProg}
+          dialectProg={dialectProg}
+          fusionProgress={fusionProgress}
+          centerX={centerX}
+        />
       </motion.span>
 
       {/* at a time. */}
