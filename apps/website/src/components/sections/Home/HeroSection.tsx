@@ -1,7 +1,7 @@
 import { AralectsAnimation } from "@components/aralects-animation";
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[200vh] w-full">
+    <section className="relative h-[4000px] w-full">
       {/* <img
         src="/img/imgUnav1.png"
         alt=""
