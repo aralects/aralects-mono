@@ -13,6 +13,7 @@
     "@astrojs/react": "^4.1.2",
     "astro": "^5.1.4",
     "astro-icon": "^1.1.5",
+    "lenis": "^1.2.0",
     "lucide": "^0.471.0",
     "motion": "^11.18.1",
     "react-fast-marquee": "^1.6.5",

@@ -3,6 +3,7 @@ import Footer from "@components/layout/Footer";
 import Header from "@components/layout/Header";
 import PostHog from "@components/posthog.astro";
 import Gtm from "@components/gtm.astro";
+import SmoothScroll from "@components/smooth-scroll.astro";
 
 import "./global.css";
 const { title = "Aralects" } = Astro.props;
@@ -62,9 +63,15 @@ const imageUrl = `${baseUrl}/aralects-og-image.png`;
   </head>
   <body class="min-h-dvh">
     <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLRBDC3T"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TLRBDC3T"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <SmoothScroll />
     <Header client:load />
     <slot />
     {home && <Footer client:visible />}
