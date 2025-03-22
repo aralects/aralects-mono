@@ -1,13 +1,34 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { cn } from "@repo/ui";
 import { useMeasureOnce } from "src/hooks/use-measure-once";
 
 export const AralectsAnimation = ({ className }: { className?: string }) => {
   const { scrollY } = useScroll();
-  const progress = useTransform(scrollY, [100, 400], [0, 1]);
 
-  const fadeOut = useTransform(progress, [0, 1], [1, 0]);
-  const fadeIn = useTransform(progress, [0, 1], [0, 1]);
+  // Opacity values for the surrounding text (connecting cultures, one / at a time)
+  const fadeOutProgress = useTransform(scrollY, [0, 300], [0, 1]);
+  const surroundingTextOpacity = useTransform(fadeOutProgress, [0, 1], [1, 0]);
+  const blur = useTransform(fadeOutProgress, [0, 1], [0, 10]);
+  const surroundingTextBlur = useMotionTemplate`blur(${blur}px)`;
+
+  // transform values for centering the "arabic dialect" part
+  const centeringProgress = useTransform(scrollY, [200, 400], [0, 1]);
+  const [oneRef, oneDimensions] = useMeasureOnce<HTMLSpanElement>();
+  const centerX = useTransform(
+    centeringProgress,
+    [0, 1],
+    [0, -((oneDimensions.width ?? 0) + 8) / 2],
+  );
+
+  // fusion animation values for the arabic dialect part
+  const fusionProgress = useTransform(scrollY, [400, 500], [0, 1]);
+  const fadeOut = useTransform(fusionProgress, [0, 1], [1, 0]);
+  const fadeIn = useTransform(fusionProgress, [0, 1], [0, 1]);
 
   const [bicRef, bicDimensions] = useMeasureOnce<HTMLSpanElement>();
   const [diaRef, diaDimensions] = useMeasureOnce<HTMLSpanElement>();
@@ -20,7 +41,13 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
       )}
     >
       {/* connecting cultures, */}
-      <span className="block">
+      <motion.span
+        className="block"
+        style={{
+          opacity: surroundingTextOpacity,
+          filter: surroundingTextBlur,
+        }}
+      >
         <motion.span
           className="inline-block"
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -52,11 +79,12 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
         >
           cultures,
         </motion.span>
-      </span>
+      </motion.span>
 
       {/* one arabic dialect */}
-      <span className="block py-2">
+      <motion.span className="block py-2">
         <motion.span
+          ref={oneRef}
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{
@@ -69,10 +97,17 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
             },
           }}
           className="inline-block"
+          style={{
+            opacity: surroundingTextOpacity,
+            filter: surroundingTextBlur,
+          }}
         >
           one
         </motion.span>
-        <div className="inline-flex items-center justify-center ml-2 gap-x-2">
+        <motion.div
+          className="ml-2 inline-flex items-center justify-center gap-x-2"
+          style={{ x: centerX }}
+        >
           {/* arabic */}
           <motion.span
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -95,7 +130,11 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
               style={{
                 opacity: fadeOut,
                 scale: fadeOut,
-                width: useTransform(progress, [0, 1], [bicDimensions.width, 0]),
+                width: useTransform(
+                  fusionProgress,
+                  [0, 1],
+                  [bicDimensions.width, 0],
+                ),
               }}
               transition={{ type: "spring", stiffness: 100, damping: 12 }}
             >
@@ -108,7 +147,7 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
               style={{
                 opacity: fadeOut,
                 scale: fadeOut,
-                width: useTransform(progress, [0, 1], [8, 0]),
+                width: useTransform(fusionProgress, [0, 1], [8, 0]),
               }}
               transition={{ type: "spring", stiffness: 100, damping: 12 }}
             />
@@ -117,7 +156,7 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
           {/* dialects */}
           <motion.span
             className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
-            style={{ x: useTransform(progress, [0, 1], [0, -8]) }}
+            style={{ x: useTransform(fusionProgress, [0, 1], [0, -8]) }}
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{
@@ -136,7 +175,7 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
               style={{
                 opacity: fadeOut,
                 scale: fadeOut,
-                width: useTransform(progress, [0, 1], [8, 0]),
+                width: useTransform(fusionProgress, [0, 1], [8, 0]),
               }}
               transition={{ type: "spring", stiffness: 100, damping: 12 }}
             />
@@ -146,7 +185,11 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
               style={{
                 opacity: fadeOut,
                 scale: fadeOut,
-                width: useTransform(progress, [0, 1], [diaDimensions.width, 0]),
+                width: useTransform(
+                  fusionProgress,
+                  [0, 1],
+                  [diaDimensions.width, 0],
+                ),
               }}
               transition={{ type: "spring", stiffness: 100, damping: 12 }}
             >
@@ -157,7 +200,7 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
               style={{
                 opacity: fadeIn,
                 scale: fadeIn,
-                width: useTransform(progress, [0, 1], [0, 25.3]),
+                width: useTransform(fusionProgress, [0, 1], [0, 25.3]),
               }}
               transition={{ type: "spring", stiffness: 100, damping: 12 }}
               className="inline-block whitespace-nowrap"
@@ -165,11 +208,16 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
               s
             </motion.span>
           </motion.span>
-        </div>
-      </span>
+        </motion.div>
+      </motion.span>
 
       {/* at a time */}
-      <span>
+      <motion.span
+        style={{
+          opacity: surroundingTextOpacity,
+          filter: surroundingTextBlur,
+        }}
+      >
         <motion.span
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -218,7 +266,7 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
         >
           time.
         </motion.span>
-      </span>
+      </motion.span>
     </motion.h1>
   );
 };
