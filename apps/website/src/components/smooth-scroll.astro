@@ -1,0 +1,33 @@
+---
+---
+
+<script>
+  import Lenis from 'lenis';
+
+  // Initialize Lenis smooth scrolling
+  const lenis = new Lenis();
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+  // Optional: handle anchor links smoothly
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId !== '#') {
+        lenis.scrollTo(targetId);
+      }
+    });
+  });
+
+  // Optional: Handle browser back/forward navigation
+  // This ensures smooth scroll is reset on history navigation
+  window.addEventListener('popstate', () => {
+    lenis.scrollTo(0, { immediate: true });
+  });
+</script>
