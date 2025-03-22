@@ -2,6 +2,7 @@ import {
   motion,
   useMotionTemplate,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import { cn } from "@repo/ui";
@@ -17,8 +18,61 @@ const CENTERING_END = 2000;
 const FUSION_START = 2300;
 const FUSION_END = 3000;
 
+// Word stagger configuration
+const FIRST_LINE_WORDS = [
+  { text: "Connecting", staggerStart: 0, staggerEnd: 0.1 },
+  { text: "cultures,", staggerStart: 0.1, staggerEnd: 0.2 },
+];
+
+const SECOND_LINE_WORDS = [{ text: "one", staggerStart: 0.2, staggerEnd: 0.3 }];
+
+const THIRD_LINE_WORDS = [
+  { text: "at", staggerStart: 0.5, staggerEnd: 0.6 },
+  { text: "a", staggerStart: 0.6, staggerEnd: 0.7 },
+  { text: "time.", staggerStart: 0.7, staggerEnd: 0.8 },
+];
+
+// Reusable animated word component
+const AnimatedWord = ({
+  text,
+  staggerStart,
+  staggerEnd,
+  className,
+  wordAppearProg,
+  blurOverride,
+  opacityOverride,
+}: {
+  text: string;
+  staggerStart: number;
+  staggerEnd: number;
+  className?: string;
+  wordAppearProg: any;
+  blurOverride?: any;
+  opacityOverride?: any;
+}) => {
+  const wordProg = useTransform(
+    wordAppearProg,
+    [staggerStart, staggerEnd],
+    [0, 1],
+  );
+  const wordBlur = useMotionTemplate`blur(${useTransform(wordProg, [0, 1], [10, 0])}px)`;
+
+  return (
+    <motion.span
+      className={cn("inline-block", className)}
+      style={{
+        opacity: opacityOverride ?? wordProg,
+        filter: blurOverride ?? wordBlur,
+      }}
+    >
+      {text}
+    </motion.span>
+  );
+};
+
 export const AralectsAnimation = ({ className }: { className?: string }) => {
-  const { scrollY } = useScroll();
+  const { scrollY: scrollYValue } = useScroll();
+  const scrollY = useSpring(scrollYValue, { damping: 25, stiffness: 200 });
 
   // Word appearance animation progress
   const wordAppearProg = useTransform(
@@ -26,20 +80,6 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
     [WORDS_FADE_IN_START, WORDS_FADE_IN_END],
     [0, 1],
   );
-
-  // Individual word progress values with stagger
-  const connectingProg = useTransform(wordAppearProg, [0, 0.1], [0, 1]);
-  const connectingBlur = useMotionTemplate`blur(${useTransform(connectingProg, [0, 1], [10, 0])}px)`;
-
-  const culturesProg = useTransform(wordAppearProg, [0.1, 0.2], [0, 1]);
-  const culturesBlur = useMotionTemplate`blur(${useTransform(culturesProg, [0, 1], [10, 0])}px)`;
-
-  const oneProg = useTransform(wordAppearProg, [0.2, 0.3], [0, 1]);
-  const arabicProg = useTransform(wordAppearProg, [0.3, 0.4], [0, 1]);
-  const dialectProg = useTransform(wordAppearProg, [0.4, 0.5], [0, 1]);
-  const atProg = useTransform(wordAppearProg, [0.5, 0.6], [0, 1]);
-  const aProg = useTransform(wordAppearProg, [0.6, 0.7], [0, 1]);
-  const timeProg = useTransform(wordAppearProg, [0.7, 0.8], [0, 1]);
 
   // Opacity values for the surrounding text (connecting cultures, one / at a time)
   const fadeOutProgress = useTransform(
@@ -52,12 +92,12 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
   const surroundingTextBlur = useMotionTemplate`blur(${blur}px)`;
 
   // Transform values for centering the "arabic dialect" part
+  const [oneRef, oneDimensions] = useMeasureOnce<HTMLSpanElement>();
   const centeringProg = useTransform(
     scrollY,
     [CENTERING_START, CENTERING_END],
     [0, 1],
   );
-  const [oneRef, oneDimensions] = useMeasureOnce<HTMLSpanElement>();
   const centerX = useTransform(
     centeringProg,
     [0, 1],
@@ -76,6 +116,10 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
   const [bicRef, bicDimensions] = useMeasureOnce<HTMLSpanElement>();
   const [diaRef, diaDimensions] = useMeasureOnce<HTMLSpanElement>();
 
+  // Arabic/dialect animation values
+  const arabicProg = useTransform(wordAppearProg, [0.3, 0.4], [0, 1]);
+  const dialectProg = useTransform(wordAppearProg, [0.4, 0.5], [0, 1]);
+
   return (
     <motion.h1
       className={cn(
@@ -91,24 +135,16 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
           filter: surroundingTextBlur,
         }}
       >
-        <motion.span
-          className="inline-block"
-          style={{
-            opacity: connectingProg,
-            filter: connectingBlur,
-          }}
-        >
-          Connecting
-        </motion.span>
-        <motion.span
-          className="ml-2 inline-block md:ml-4"
-          style={{
-            opacity: culturesProg,
-            filter: culturesBlur,
-          }}
-        >
-          cultures,
-        </motion.span>
+        {FIRST_LINE_WORDS.map((word, index) => (
+          <AnimatedWord
+            key={index}
+            text={word.text}
+            staggerStart={word.staggerStart}
+            staggerEnd={word.staggerEnd}
+            wordAppearProg={wordAppearProg}
+            className={index > 0 ? "ml-2 md:ml-4" : ""}
+          />
+        ))}
       </motion.span>
 
       {/* one arabic dialect */}
@@ -119,13 +155,19 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
           className="inline-block"
           style={{
             opacity: useTransform(
-              [oneProg, surroundingTextOpacity],
-              ([progress, opacity]) => progress * opacity,
+              [
+                useTransform(wordAppearProg, [0.2, 0.3], [0, 1]),
+                surroundingTextOpacity,
+              ] as const,
+              ([progress, opacity]) =>
+                (progress as number) * (opacity as number),
             ),
             filter: useMotionTemplate`blur(${useTransform(
-              [oneProg, blur],
+              [useTransform(wordAppearProg, [0.2, 0.3], [0, 1]), blur] as const,
               ([progress, blurValue]) =>
-                progress === 1 ? blurValue : 10 * (1 - progress),
+                (progress as number) === 1
+                  ? blurValue
+                  : 10 * (1 - (progress as number)),
             )}px)`,
           }}
         >
@@ -250,50 +292,16 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
           filter: surroundingTextBlur,
         }}
       >
-        {/* at */}
-        <motion.span
-          className="inline-block"
-          style={{
-            opacity: atProg,
-            filter: useMotionTemplate`blur(${useTransform(
-              atProg,
-              [0, 1],
-              [10, 0],
-            )}px)`,
-          }}
-        >
-          at
-        </motion.span>
-
-        {/* a */}
-        <motion.span
-          className="ml-2 inline-block md:ml-4"
-          style={{
-            opacity: aProg,
-            filter: useMotionTemplate`blur(${useTransform(
-              aProg,
-              [0, 1],
-              [10, 0],
-            )}px)`,
-          }}
-        >
-          a
-        </motion.span>
-
-        {/* time. */}
-        <motion.span
-          className="ml-2 inline-block md:ml-4"
-          style={{
-            opacity: timeProg,
-            filter: useMotionTemplate`blur(${useTransform(
-              timeProg,
-              [0, 1],
-              [10, 0],
-            )}px)`,
-          }}
-        >
-          time.
-        </motion.span>
+        {THIRD_LINE_WORDS.map((word, index) => (
+          <AnimatedWord
+            key={index}
+            text={word.text}
+            staggerStart={word.staggerStart}
+            staggerEnd={word.staggerEnd}
+            wordAppearProg={wordAppearProg}
+            className={index > 0 ? "ml-2 md:ml-4" : ""}
+          />
+        ))}
       </motion.span>
     </motion.h1>
   );
