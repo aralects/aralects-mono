@@ -3,6 +3,7 @@ import {
   useMotionTemplate,
   useScroll,
   useTransform,
+  MotionValue,
 } from "framer-motion";
 import { cn } from "@repo/ui";
 import { useMeasureOnce } from "src/hooks/use-measure-once";
@@ -10,14 +11,92 @@ import { useMeasureOnce } from "src/hooks/use-measure-once";
 export const AralectsAnimation = ({ className }: { className?: string }) => {
   const { scrollY } = useScroll();
 
+  // Animation sequence ranges (scroll position in pixels)
+  const WORDS_FADE_IN_START = 0;
+  const WORDS_FADE_IN_END = 300;
+  const SURROUNDING_FADE_OUT_START = 350;
+  const SURROUNDING_FADE_OUT_END = 500;
+  const CENTERING_START = 550;
+  const CENTERING_END = 700;
+  const FUSION_START = 750;
+  const FUSION_END = 900;
+
+  // Word appearance animation progress
+  const wordsAppearProgress = useTransform(
+    scrollY,
+    [WORDS_FADE_IN_START, WORDS_FADE_IN_END],
+    [0, 1],
+    { clamp: true }
+  );
+
+  // Individual word progress values with stagger
+  const connectingProgress = useTransform(
+    wordsAppearProgress,
+    [0, 0.1],
+    [0, 1],
+    { clamp: true }
+  );
+  const culturesProgress = useTransform(
+    wordsAppearProgress,
+    [0.1, 0.2],
+    [0, 1],
+    { clamp: true }
+  );
+  const oneProgress = useTransform(
+    wordsAppearProgress,
+    [0.2, 0.3],
+    [0, 1],
+    { clamp: true }
+  );
+  const arabicProgress = useTransform(
+    wordsAppearProgress,
+    [0.3, 0.4],
+    [0, 1],
+    { clamp: true }
+  );
+  const dialectProgress = useTransform(
+    wordsAppearProgress,
+    [0.4, 0.5],
+    [0, 1],
+    { clamp: true }
+  );
+  const atProgress = useTransform(
+    wordsAppearProgress,
+    [0.5, 0.6],
+    [0, 1],
+    { clamp: true }
+  );
+  const aProgress = useTransform(
+    wordsAppearProgress,
+    [0.6, 0.7],
+    [0, 1],
+    { clamp: true }
+  );
+  const timeProgress = useTransform(
+    wordsAppearProgress,
+    [0.7, 0.8],
+    [0, 1],
+    { clamp: true }
+  );
+
   // Opacity values for the surrounding text (connecting cultures, one / at a time)
-  const fadeOutProgress = useTransform(scrollY, [0, 300], [0, 1]);
+  const fadeOutProgress = useTransform(
+    scrollY,
+    [SURROUNDING_FADE_OUT_START, SURROUNDING_FADE_OUT_END],
+    [0, 1],
+    { clamp: true }
+  );
   const surroundingTextOpacity = useTransform(fadeOutProgress, [0, 1], [1, 0]);
   const blur = useTransform(fadeOutProgress, [0, 1], [0, 10]);
   const surroundingTextBlur = useMotionTemplate`blur(${blur}px)`;
 
-  // transform values for centering the "arabic dialect" part
-  const centeringProgress = useTransform(scrollY, [200, 400], [0, 1]);
+  // Transform values for centering the "arabic dialect" part
+  const centeringProgress = useTransform(
+    scrollY,
+    [CENTERING_START, CENTERING_END],
+    [0, 1],
+    { clamp: true }
+  );
   const [oneRef, oneDimensions] = useMeasureOnce<HTMLSpanElement>();
   const centerX = useTransform(
     centeringProgress,
@@ -25,13 +104,31 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
     [0, -((oneDimensions.width ?? 0) + 8) / 2],
   );
 
-  // fusion animation values for the arabic dialect part
-  const fusionProgress = useTransform(scrollY, [400, 500], [0, 1]);
+  // Fusion animation values for the arabic dialect part
+  const fusionProgress = useTransform(
+    scrollY,
+    [FUSION_START, FUSION_END],
+    [0, 1],
+    { clamp: true }
+  );
   const fadeOut = useTransform(fusionProgress, [0, 1], [1, 0]);
   const fadeIn = useTransform(fusionProgress, [0, 1], [0, 1]);
 
   const [bicRef, bicDimensions] = useMeasureOnce<HTMLSpanElement>();
   const [diaRef, diaDimensions] = useMeasureOnce<HTMLSpanElement>();
+
+  // Combine oneProgress and surroundingTextOpacity
+  const oneOpacity = useTransform(
+    oneProgress,
+    (value) => value * surroundingTextOpacity.get()
+  );
+
+  // Creating a custom blur effect for oneProgress
+  const oneBlur = useTransform(
+    oneProgress,
+    (value) => value === 1 ? blur.get() : 10 * (1 - value)
+  );
+  const oneBlurTemplate = useMotionTemplate`blur(${oneBlur}px)`;
 
   return (
     <motion.h1
@@ -50,31 +147,26 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
       >
         <motion.span
           className="inline-block"
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{
-            duration: 1.5,
-            y: {
-              delay: 0.1,
-              duration: 1,
-              ease: "easeOut",
-            },
+          style={{
+            opacity: connectingProgress,
+            filter: useMotionTemplate`blur(${useTransform(
+              connectingProgress,
+              [0, 1],
+              [10, 0]
+            )}px)`,
           }}
         >
           Connecting
         </motion.span>
         <motion.span
           className="ml-2 inline-block md:ml-4"
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{
-            delay: 0.4,
-            duration: 1.5,
-            y: {
-              delay: 0.5,
-              duration: 1,
-              ease: "easeOut",
-            },
+          style={{
+            opacity: culturesProgress,
+            filter: useMotionTemplate`blur(${useTransform(
+              culturesProgress,
+              [0, 1],
+              [10, 0]
+            )}px)`,
           }}
         >
           cultures,
@@ -85,21 +177,10 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
       <motion.span className="block py-2">
         <motion.span
           ref={oneRef}
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{
-            delay: 2,
-            duration: 1.5,
-            y: {
-              delay: 2,
-              duration: 0.5,
-              ease: "easeOut",
-            },
-          }}
           className="inline-block"
           style={{
-            opacity: surroundingTextOpacity,
-            filter: surroundingTextBlur,
+            opacity: oneOpacity,
+            filter: oneBlurTemplate,
           }}
         >
           one
@@ -110,18 +191,15 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
         >
           {/* arabic */}
           <motion.span
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{
-              delay: 2.15,
-              duration: 1.5,
-              y: {
-                delay: 2.15,
-                duration: 0.5,
-                ease: "easeOut",
-              },
-            }}
             className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pl-2 text-white"
+            style={{
+              opacity: arabicProgress,
+              filter: useMotionTemplate`blur(${useTransform(
+                arabicProgress,
+                [0, 1],
+                [10, 0]
+              )}px)`,
+            }}
           >
             <span className="inline-block">Ara</span>
             <motion.span
@@ -156,17 +234,14 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
           {/* dialects */}
           <motion.span
             className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
-            style={{ x: useTransform(fusionProgress, [0, 1], [0, -8]) }}
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{
-              delay: 2.3,
-              duration: 1.5,
-              y: {
-                delay: 2.3,
-                duration: 0.5,
-                ease: "easeOut",
-              },
+            style={{ 
+              x: useTransform(fusionProgress, [0, 1], [0, -8]),
+              opacity: dialectProgress,
+              filter: useMotionTemplate`blur(${useTransform(
+                dialectProgress,
+                [0, 1],
+                [10, 0]
+              )}px)`,
             }}
           >
             {/* variable padding */}
@@ -219,49 +294,40 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
         }}
       >
         <motion.span
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{
-            delay: 2.45,
-            duration: 1.5,
-            y: {
-              delay: 2.45,
-              duration: 0.5,
-              ease: "easeOut",
-            },
-          }}
           className="inline-block"
+          style={{
+            opacity: atProgress,
+            filter: useMotionTemplate`blur(${useTransform(
+              atProgress,
+              [0, 1],
+              [10, 0]
+            )}px)`,
+          }}
         >
           at
         </motion.span>
         <motion.span
           className="ml-2 inline-block md:ml-4"
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{
-            delay: 2.6,
-            duration: 1.5,
-            y: {
-              delay: 2.6,
-              duration: 0.5,
-              ease: "easeOut",
-            },
+          style={{
+            opacity: aProgress,
+            filter: useMotionTemplate`blur(${useTransform(
+              aProgress,
+              [0, 1],
+              [10, 0]
+            )}px)`,
           }}
         >
           a
         </motion.span>
         <motion.span
           className="ml-2 inline-block md:ml-4"
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{
-            delay: 2.75,
-            duration: 1.5,
-            y: {
-              delay: 2.75,
-              duration: 0.5,
-              ease: "easeOut",
-            },
+          style={{
+            opacity: timeProgress,
+            filter: useMotionTemplate`blur(${useTransform(
+              timeProgress,
+              [0, 1],
+              [10, 0]
+            )}px)`,
           }}
         >
           time.
