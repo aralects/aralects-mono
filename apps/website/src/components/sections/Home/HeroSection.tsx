@@ -1,35 +1,35 @@
 import { AralectsAnimation } from "@components/aralects-animation";
+
 const HeroSection = () => {
   return (
-    <section className="relative h-[4000px] w-full">
+    <section className="relative h-[5500px] w-full">
       {/* <img
-        src="/img/imgUnav1.png"
-        alt=""
-        className="absolute h-[60px] object-contain opacity-40"
-      />
-      <img
-        src="/img/imgUnav2.png"
-        alt=""
-        className="absolute h-20 object-contain opacity-50 lg:h-[130px]"
-      />
-      <img
-        src="/img/art222.png"
-        alt=""
-        className="absolute w-[130px] object-contain lg:w-[210px]"
-      />
-      <img
-        src="/img/imgUhero1.png"
-        alt=""
-        className="absolute h-[100px] object-contain md:h-[140px]"
-      />
-      <img
-        src="/img/imgUhero2.png"
-        alt=""
-        className="absolute h-[200px] w-auto object-contain md:h-[260px]"
-      /> */}
-
+          src="/img/imgUnav1.png"
+          alt=""
+          className="absolute h-[60px] object-contain opacity-40"
+        />
+        <img
+          src="/img/imgUnav2.png"
+          alt=""
+          className="absolute h-20 object-contain opacity-50 lg:h-[130px]"
+        />
+        <img
+          src="/img/art222.png"
+          alt=""
+          className="absolute w-[130px] object-contain lg:w-[210px]"
+        />
+        <img
+          src="/img/imgUhero1.png"
+          alt=""
+          className="absolute h-[100px] object-contain md:h-[140px]"
+        />
+        <img
+          src="/img/imgUhero2.png"
+          alt=""
+          className="absolute h-[200px] w-auto object-contain md:h-[260px]"
+        /> */}
       {/* Subheading with Arabic and Dialect */}
-      <div className="sticky top-1/2 -translate-y-1/2 text-center text-4xl text-[#393939] md:text-5xl">
+      <div className="sticky inset-x-0 top-0 flex h-svh items-center justify-center overflow-hidden text-center text-4xl text-[#393939] md:text-5xl">
         <AralectsAnimation />
       </div>
     </section>

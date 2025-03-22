@@ -1,5 +1,6 @@
 import {
   motion,
+  MotionValue,
   useMotionTemplate,
   useScroll,
   useSpring,
@@ -13,10 +14,12 @@ const WORDS_FADE_IN_START = 0;
 const WORDS_FADE_IN_END = 1000;
 const SURROUNDING_FADE_OUT_START = 1500;
 const SURROUNDING_FADE_OUT_END = 2000;
-const CENTERING_START = 1750;
-const CENTERING_END = 2000;
+const CENTERING_START = 2300;
+const CENTERING_END = 3000;
 const FUSION_START = 2300;
 const FUSION_END = 3000;
+const ZOOM_START = 3500;
+const ZOOM_END = 4000;
 
 // Word stagger configuration
 const FIRST_LINE_WORDS = [
@@ -68,28 +71,47 @@ const AnimatedWord = ({
   );
 };
 
-// Reusable component for the arabic dialect / aralects fusion animation
+// arabic dialect / aralects fusion animation
 const AralectsFusionAnimation = ({
-  arabicProg,
-  dialectProg,
-  fusionProgress,
-  centerX,
+  wordAppearProg,
+  scrollY,
+  horizontalOffset = 0,
 }: {
-  arabicProg: any;
-  dialectProg: any;
-  fusionProgress: any;
-  centerX: any;
+  scrollY: MotionValue<number>;
+  horizontalOffset?: number;
+  wordAppearProg: MotionValue<number>;
 }) => {
+  // Fusion animation values for the arabic dialect part
+  const fusionProgress = useTransform(
+    scrollY,
+    [FUSION_START, FUSION_END],
+    [0, 1],
+  );
+  const centeringProg = useTransform(
+    scrollY,
+    [CENTERING_START, CENTERING_END],
+    [0, 1],
+  );
+  const centerX = useTransform(centeringProg, [0, 1], [0, -horizontalOffset]);
+
+  const zoomProgress = useTransform(scrollY, [ZOOM_START, ZOOM_END], [0, 1]);
+
   const fadeOut = useTransform(fusionProgress, [0, 1], [1, 0]);
   const fadeIn = useTransform(fusionProgress, [0, 1], [0, 1]);
-  
+  const scale = useTransform(zoomProgress, [0, 1], [1, 15]);
+  const opacity = useTransform(zoomProgress, [0.5, 1], [1, 0]);
+
   const [bicRef, bicDimensions] = useMeasureOnce<HTMLSpanElement>();
   const [diaRef, diaDimensions] = useMeasureOnce<HTMLSpanElement>();
 
+  // Arabic/dialect animation values
+  const arabicProg = useTransform(wordAppearProg, [0.3, 0.4], [0, 1]);
+  const dialectProg = useTransform(wordAppearProg, [0.4, 0.5], [0, 1]);
+
   return (
     <motion.div
-      className="ml-2 inline-flex items-center justify-center gap-x-2"
-      style={{ x: centerX }}
+      className="inline-flex items-center justify-center gap-x-2 pl-2"
+      style={{ x: centerX, scale, opacity }}
     >
       {/* arabic */}
       <motion.span
@@ -221,27 +243,7 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
 
   // Transform values for centering the "arabic dialect" part
   const [oneRef, oneDimensions] = useMeasureOnce<HTMLSpanElement>();
-  const centeringProg = useTransform(
-    scrollY,
-    [CENTERING_START, CENTERING_END],
-    [0, 1],
-  );
-  const centerX = useTransform(
-    centeringProg,
-    [0, 1],
-    [0, -((oneDimensions.width ?? 0) + 8) / 2],
-  );
-
-  // Fusion animation values for the arabic dialect part
-  const fusionProgress = useTransform(
-    scrollY,
-    [FUSION_START, FUSION_END],
-    [0, 1],
-  );
-
-  // Arabic/dialect animation values
-  const arabicProg = useTransform(wordAppearProg, [0.3, 0.4], [0, 1]);
-  const dialectProg = useTransform(wordAppearProg, [0.4, 0.5], [0, 1]);
+  const oneWidth = oneDimensions.width ?? 0;
 
   return (
     <motion.h1
@@ -299,10 +301,9 @@ export const AralectsAnimation = ({ className }: { className?: string }) => {
 
         {/* arabic dialect fusion animation */}
         <AralectsFusionAnimation
-          arabicProg={arabicProg}
-          dialectProg={dialectProg}
-          fusionProgress={fusionProgress}
-          centerX={centerX}
+          wordAppearProg={wordAppearProg}
+          scrollY={scrollY}
+          horizontalOffset={oneWidth / 2}
         />
       </motion.span>
 
