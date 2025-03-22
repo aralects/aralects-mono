@@ -83,8 +83,8 @@ export const SecondeLayout = () => {
       </Header>
       <Main>
         <div className="title_1">
-          <h3>Choose your favored theme!</h3>
-          <p>So we can choose a theme personalized for you.</p>
+          <h3>Choose your theme</h3>
+          <p>Practice pronouncing words related to different topics</p>
         </div>
         <div className="favored-themest-container">
           <div

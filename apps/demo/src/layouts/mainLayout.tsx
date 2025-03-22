@@ -92,8 +92,8 @@ export const MainLayout = () => {
       </Header>
       <Main>
         <div className="title_1">
-          <h3>Pick the dialect you want!</h3>
-          <p>So we can choose a theme just for you!</p>
+          <h3>Pick your dialect of choice</h3>
+          <p>More dialects to come soon...</p>
         </div>
         <div className="search-container">
           <input
