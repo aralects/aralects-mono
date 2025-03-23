@@ -11,7 +11,7 @@ const HeroSection = () => {
         <AralectsAnimationV2 className="text-center text-3xl text-[#393939] md:text-5xl" />
       </div>
 
-      {/* <TextScrollReveal
+      <TextScrollReveal
           paragraph="Arabic is a world of dialects, stories, and connections."
           className="font-UnboundedRegular text-center mt-[3000px] container px-4 mx-auto text-3xl text-white md:text-4xl"
           offset={["start 0.9", "start 0.4"]}
@@ -21,7 +21,7 @@ const HeroSection = () => {
           paragraph="While the focus is generally on Standard Arabic (Fusha), the real magic lies in spoken Arabic (Ammiyya) - the jokes, slang, and warmth of everyday life."
           className="font-UnboundedRegular text-center container px-4 mx-auto mt-[800px] text-xl md:text-4xl text-white"
           offset={["start 0.9", "start 0.4"]}
-        /> */}
+        />
     </ScrollContextProvider>
   );
 };
