@@ -1,38 +1,28 @@
-import { AralectsAnimation } from "@components/aralects-animation";
+import { AralectsAnimationV2 } from "@components/aralects-animation";
+import { FloatingBlobs } from "@components/floating-blobs";
+import { ScrollContextProvider } from "@components/scroll-context";
+import TextScrollReveal from "@components/text-scroll-reveal";
 
 const HeroSection = () => {
   return (
-    <section className="relative h-[5500px] w-full">
-      {/* <img
-          src="/img/imgUnav1.png"
-          alt=""
-          className="absolute h-[60px] object-contain opacity-40"
-        />
-        <img
-          src="/img/imgUnav2.png"
-          alt=""
-          className="absolute h-20 object-contain opacity-50 lg:h-[130px]"
-        />
-        <img
-          src="/img/art222.png"
-          alt=""
-          className="absolute w-[130px] object-contain lg:w-[210px]"
-        />
-        <img
-          src="/img/imgUhero1.png"
-          alt=""
-          className="absolute h-[100px] object-contain md:h-[140px]"
-        />
-        <img
-          src="/img/imgUhero2.png"
-          alt=""
-          className="absolute h-[200px] w-auto object-contain md:h-[260px]"
-        /> */}
-      {/* Subheading with Arabic and Dialect */}
-      <div className="sticky inset-x-0 top-0 flex h-svh items-center justify-center overflow-hidden text-center text-4xl text-[#393939] md:text-5xl">
-        <AralectsAnimation />
+    <ScrollContextProvider>
+      <FloatingBlobs className="absolute inset-0 z-0 overflow-hidden" />
+      <div className="sticky inset-x-0 top-0 flex h-svh items-center justify-center overflow-hidden">
+        <AralectsAnimationV2 className="text-center text-3xl text-[#393939] md:text-5xl" />
       </div>
-    </section>
+
+      {/* <TextScrollReveal
+          paragraph="Arabic is a world of dialects, stories, and connections."
+          className="font-UnboundedRegular text-center mt-[3000px] container px-4 mx-auto text-3xl text-white md:text-4xl"
+          offset={["start 0.9", "start 0.4"]}
+        />
+
+        <TextScrollReveal
+          paragraph="While the focus is generally on Standard Arabic (Fusha), the real magic lies in spoken Arabic (Ammiyya) - the jokes, slang, and warmth of everyday life."
+          className="font-UnboundedRegular text-center container px-4 mx-auto mt-[800px] text-xl md:text-4xl text-white"
+          offset={["start 0.9", "start 0.4"]}
+        /> */}
+    </ScrollContextProvider>
   );
 };
 {
