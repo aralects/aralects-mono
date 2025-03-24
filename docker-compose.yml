@@ -11,5 +11,7 @@ services:
     build:
         context: .
         dockerfile: Dockerfile-demo
+        args:
+            VITE_HUGGING_FACE_TOKEN: ${VITE_HUGGING_FACE_TOKEN}
     ports:
       - "3000:3000"
