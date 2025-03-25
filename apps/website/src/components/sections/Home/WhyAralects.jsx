@@ -62,8 +62,8 @@ const WhyAralects = () => {
       {/* Why Aralects Content */}
       <div className="my-[30px] flex w-full flex-col items-center justify-between gap-8 px-5 text-start md:my-[60px] md:flex-row md:px-20">
         <div className="md:w-1/2">
-          <h2 className="font-SpaceGrotesk text-2xl font-bold text-glow-xl md:text-5xl">
-            Why Aralects?
+          <h2 className="font-SpaceGrotesk text-2xl font-bold md:text-5xl">
+            Why <span className="text-glow">Aralects?</span>
           </h2>
           <p className="font-SpaceGroteskLight mt-6 font-thin text-gray-300 md:text-xl">
             Learning Arabic today is challenging. Most apps focus on rigid
@@ -163,10 +163,10 @@ const WhyAralects = () => {
             <h3 className="font-SpaceGrotesk z-20 min-h-16 max-w-[80%] text-2xl font-bold transition-all xl:group-hover:-translate-y-6 xl:group-hover:opacity-0">
               {feature.title}
             </h3>
-            <h3 className="font-SpaceGrotesk absolute top-6 z-20 hidden max-w-[80%] font-bold translate-x-6 scale-125 text-2xl font-extrabold opacity-0 transition-all group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 xl:block">
+            <h3 className="font-SpaceGrotesk absolute top-6 z-20 hidden max-w-[80%] translate-x-6 scale-125 text-2xl font-extrabold opacity-0 transition-all group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 xl:block">
               {feature.title}
             </h3>
-            <p className="font-SpaceGrotesk z-20 !mt-4 font-light leading-5 text-white transition-all xl:mt-0 xl:translate-x-4 xl:scale-110 xl:opacity-0 xl:group-hover:translate-x-0 xl:group-hover:scale-100 xl:group-hover:opacity-100">
+            <p className="font-SpaceGrotesk z-20 mt-4 font-light leading-5 text-white transition-all xl:translate-x-4 xl:scale-110 xl:opacity-0 xl:group-hover:translate-x-0 xl:group-hover:scale-100 xl:group-hover:opacity-100">
               {feature.description}
             </p>
             <div className="h-25 w-25 hidden xl:absolute xl:bottom-0 xl:left-1/2 xl:block xl:opacity-25 xl:group-hover:hidden xl:-translate-x-1/2">

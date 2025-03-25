@@ -20,7 +20,7 @@ export const WhiteSection: FC<SectionProps> = ({
   containerClassName,
   withPattern = false 
 }) => (
-  <div className={clsx('h-[30%] w-full bg-white relative flex items-center', className)}>
+  <div className={clsx('w-full bg-white relative flex items-center', className)}>
     {withPattern && <span className="contact-bg-pattern" />}
     <div className={clsx(
       'xl:container xl:mx-auto',
@@ -41,7 +41,7 @@ export const PurpleSection: FC<SectionProps> = ({
 }) => (
   <div 
     className={clsx(
-      'h-[60%] w-full flex-1 relative bg-[#8262B0]',
+      'h-[70%] w-full flex-1 relative bg-[#8262B0]',
       className
     )}
   >

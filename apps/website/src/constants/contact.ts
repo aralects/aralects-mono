@@ -11,8 +11,8 @@ export const CONTACT_COLORS = {
 
 export const CONTACT_LAYOUT = {
   CONTAINER_PADDING: {
-    DEFAULT: "p-8",
-    MD: "md:p-16 md:pl-24",
-    XL: "xl:px-24 xl:py-12",
+    DEFAULT: "p-8 pt-24",
+    MD: " md:pl-24",
+    XL: "xl:px-24",
   },
 } as const;
