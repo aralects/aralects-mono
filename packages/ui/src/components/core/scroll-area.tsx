@@ -83,6 +83,7 @@ const FancyScrollArea = React.forwardRef<
     </ScrollArea>
   );
 });
+FancyScrollArea.displayName = "FancyScrollArea";
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,

@@ -22,12 +22,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
-    "@types/react": "^18.2.61",
+    "@prettier/sync": "^0.5.2",
+    "@repo/config-eslint": "*",
+    "@repo/config-typescript": "*",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
     "@vercel/style-guide": "^6.0.0",
     "minimist": "^1.2.8",
-    "ts-morph": "^25.0.1",
-    "typescript": "^5.3.3"
+    "ts-morph": "^24.0.0",
+    "eslint": "^9.20.0",
+    "typescript": "5.7.3"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

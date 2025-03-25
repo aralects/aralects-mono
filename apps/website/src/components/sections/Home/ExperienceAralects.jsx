@@ -44,7 +44,7 @@ const ExperienceAralects = () => {
 
       setSuccess(true);
       setEmail("");
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
@@ -156,7 +156,7 @@ const ExperienceAralects = () => {
 
               {success && (
                 <p className="mt-4 text-sm text-purple-400">
-                  You’re all set! We’ll keep you updated by email. Thank you for
+                  You're all set! We'll keep you updated by email. Thank you for
                   joining the waitlist!
                 </p>
               )}

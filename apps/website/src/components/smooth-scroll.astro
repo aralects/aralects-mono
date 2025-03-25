@@ -1,8 +1,9 @@
 ---
+
 ---
 
 <script>
-  import Lenis from 'lenis';
+  import Lenis from "lenis";
 
   // Initialize Lenis smooth scrolling
   const lenis = new Lenis();
@@ -15,11 +16,11 @@
   requestAnimationFrame(raf);
 
   // Optional: handle anchor links smoothly
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
       e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId !== '#') {
+      const targetId = this.getAttribute("href");
+      if (targetId !== "#") {
         lenis.scrollTo(targetId);
       }
     });
@@ -27,7 +28,7 @@
 
   // Optional: Handle browser back/forward navigation
   // This ensures smooth scroll is reset on history navigation
-  window.addEventListener('popstate', () => {
+  window.addEventListener("popstate", () => {
     lenis.scrollTo(0, { immediate: true });
   });
 </script>

@@ -8,7 +8,7 @@ const Flaggable = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> & {
     fieldId: string;
   }
->(({ className, children, fieldId, ...props }, ref) => {
+>(({ className, children, fieldId: _, ...props }, ref) => {
   const [isFlagged, setIsFlagged] = useState(false);
 
   const handleFlag: React.MouseEventHandler<HTMLButtonElement> = (e) => {

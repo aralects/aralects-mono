@@ -57,6 +57,7 @@
 
 html.lenis {
   height: auto;
+  position: relative;
 }
 
 .lenis.lenis-smooth {
