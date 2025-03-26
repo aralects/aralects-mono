@@ -68,7 +68,9 @@ const TextReveal = forwardRef<TextRevealRef, TextProps>(
     const [isAnimating, setIsAnimating] = useState(false);
 
     const splitIntoCharacters = (text: string): string[] => {
-      if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
+      // @ts-ignore - Intl.Segmenter might not be recognized by TypeScript
+      if (typeof Intl !== "undefined" && Intl.Segmenter) {
+        // @ts-ignore - Intl.Segmenter might not be recognized by TypeScript
         const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
         return Array.from(segmenter.segment(text), ({ segment }) => segment);
       }
