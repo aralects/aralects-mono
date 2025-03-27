@@ -14,13 +14,13 @@ const HeroSection = () => {
 
       {/* <TextScrollReveal
           paragraph="Arabic is a world of dialects, stories, and connections."
-          className="font-UnboundedRegular text-center mt-[3000px] container px-4 mx-auto text-3xl text-white md:text-4xl"
+          className="font-unbounded text-center mt-[3000px] container px-4 mx-auto text-3xl text-white md:text-4xl"
           offset={["start 0.9", "start 0.4"]}
         /> */}
 
       {/* <TextScrollReveal
           paragraph="While the focus is generally on Standard Arabic (Fusha), the real magic lies in spoken Arabic (Ammiyya) - the jokes, slang, and warmth of everyday life."
-          className="font-UnboundedRegular text-center container px-4 mx-auto mt-[800px] text-xl md:text-4xl text-white"
+          className="font-unbounded text-center container px-4 mx-auto mt-[800px] text-xl md:text-4xl text-white"
           offset={["start 0.9", "start 0.4"]}
         /> */}
     </ScrollContextProvider>
@@ -29,7 +29,7 @@ const HeroSection = () => {
 {
   /* <button
   onClick={() => smoothScrollTo("newsletter", 80)}
-  className="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-xl"
+  className="font-space tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:text-xl"
 >
   Join waiting list
   <svg

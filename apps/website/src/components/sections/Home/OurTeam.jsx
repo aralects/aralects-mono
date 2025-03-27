@@ -37,7 +37,7 @@ const OurTeam = () => {
 
         <div className="flex h-auto w-full flex-col items-center justify-between gap-6 overflow-hidden px-5 md:flex-row md:px-0">
           <div className="flex w-full flex-col py-5 text-start md:w-[50%] md:py-[60px]">
-            <h3 className="font-SpaceGrotesk text-2xl font-bold md:text-5xl">
+            <h3 className="font-space text-2xl font-bold md:text-5xl">
               Our Team
             </h3>
             <p className="font-SpaceGroteskLight mt-6 font-light text-[#D6D6D6] md:text-xl">
@@ -122,21 +122,21 @@ const OurTeam = () => {
             </g>
           </svg>
           <div className="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[50%] md:px-12">
-            <h4 className="font-SpaceGrotesk text-2xl font-bold md:text-6xl">
+            <h4 className="font-space text-2xl font-bold md:text-6xl">
               We’re not just teaching Arabic
             </h4>
-            <p className="font-SpaceGrotesk font-thin text-gray-300 md:mt-6 md:text-xl">
+            <p className="font-space font-thin text-gray-300 md:mt-6 md:text-xl">
               We’re building a global community where learners from all
               backgrounds can connect, share stories, and dive into the language
               in all its forms.
             </p>
-            <p className="text-glow font-SpaceGrotesk font-light text-[#EADFFF] md:mt-4 md:text-xl">
+            <p className="text-glow font-space font-light text-[#EADFFF] md:mt-4 md:text-xl">
               Start learning Arabic for free, with access to all the tools and
               lessons you need!
             </p>
             <button
               onClick={() => smoothScrollTo("newsletter", 80)}
-              className="font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:mt-6 md:text-xl"
+              className="font-space tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:mt-6 md:text-xl"
             >
               Join waiting list
               <svg

@@ -11,21 +11,21 @@ function TextSection() {
       {/* Sign-Up Button */}
 
       {/* Heading */}
-      <h1 className="font-Melodrama md:font-UnboundedRegular max-w-[340px] text-center text-2xl font-bold text-[#393939] md:max-w-[unset] md:text-xl">
+      <h1 className="font-Melodrama md:font-unbounded max-w-[340px] text-center text-2xl font-bold text-[#393939] md:max-w-[unset] md:text-xl">
         Arabic is a world of dialects, stories, and connections.
       </h1>
 
       {/* Subheading */}
-      <h2 className="font-SpaceGrotesk mt-8 max-w-[360px] text-center text-gray-600 md:max-w-[740px] md:text-xl">
+      <h2 className="font-space mt-8 max-w-[360px] text-center text-gray-600 md:max-w-[740px] md:text-xl">
         While the focus is generally on Standard Arabic{" "}
         <span
-          className={`font-SpaceGrotesk inline-block w-fit bg-[url("/img/FushaBG.png")] bg-contain bg-center bg-no-repeat px-1 py-1 text-white md:px-4`}
+          className={`font-space inline-block w-fit bg-[url("/img/FushaBG.png")] bg-contain bg-center bg-no-repeat px-1 py-1 text-white md:px-4`}
         >
           Fusha
         </span>
         , the real magic lies in spoken Arabic{" "}
         <span
-          className={`font-SpaceGrotesk inline-block w-fit bg-[url("/img/AmmiyyaBG.png")] bg-contain bg-center bg-no-repeat px-1 py-2 text-white md:px-4`}
+          className={`font-space inline-block w-fit bg-[url("/img/AmmiyyaBG.png")] bg-contain bg-center bg-no-repeat px-1 py-2 text-white md:px-4`}
         >
           Ammiyya
         </span>{" "}

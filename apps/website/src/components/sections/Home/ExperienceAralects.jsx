@@ -117,11 +117,11 @@ const ExperienceAralects = () => {
             </h2>
 
             <div className="mt-6 flex flex-col gap-4 md:w-[70%]">
-              <p className="font-SpaceGrotesk md:w-[90%] md:text-left md:text-xl">
+              <p className="font-space md:w-[90%] md:text-left md:text-xl">
                 Step into a world where Arabic learning is real, personal, and
                 alive.
               </p>
-              <p className="font-SpaceGrotesk text-glow text-[#EADFFF] md:w-[90%] md:text-left md:text-xl">
+              <p className="font-space text-glow text-[#EADFFF] md:w-[90%] md:text-left md:text-xl">
                 Sign up today and be part of our community as we prepare to
                 launch!
               </p>
@@ -135,13 +135,13 @@ const ExperienceAralects = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="font-SpaceGrotesk w-full rounded-full border border-[#8262B0] bg-transparent px-4 py-2 text-white focus:outline-none sm:w-60 sm:border-none xl:w-80"
+                  className="font-space w-full rounded-full border border-[#8262B0] bg-transparent px-4 py-2 text-white focus:outline-none sm:w-60 sm:border-none xl:w-80"
                 />
 
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="font-SpaceGrotesk whitespace-nowrap rounded-full bg-[#a07ed1] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#a07ed1]/90 disabled:cursor-not-allowed disabled:opacity-70 md:w-fit"
+                  className="font-space whitespace-nowrap rounded-full bg-[#a07ed1] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#a07ed1]/90 disabled:cursor-not-allowed disabled:opacity-70 md:w-fit"
                 >
                   {isLoading ? "Joining..." : "Join waiting list"}
                 </button>

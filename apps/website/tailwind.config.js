@@ -10,11 +10,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        sans: ['"Space Grotesk"', "sans-serif"],
+        space: ['"Space Grotesk"', "sans-serif"],
+        unbounded: ["Unbounded", "sans-serif"],
         Melodrama: ["Melodrama", "sans-serif"],
-        SpaceGrotesk: ["SpaceGrotesk", "sans-serif"],
-        SpaceGroteskBold: ["SpaceGroteskBold", "sans-serif"],
-        SpaceGroteskLight: ["SpaceGroteskLight", "sans-serif"],
-        UnboundedRegular: ["UnboundedRegular", "sans-serif"],
         Rubbama: ["KoRubbama", "sans-serif"],
       },
 

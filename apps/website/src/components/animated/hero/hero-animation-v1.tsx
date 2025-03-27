@@ -113,7 +113,7 @@ const AralectsFusionAnimation = ({
     >
       {/* arabic */}
       <motion.span
-        className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pl-2 text-white"
+        className="font-space overflow-hidden bg-[#8262b0] py-2 pl-2 text-white"
         style={{
           opacity: arabicProg,
           filter: useMotionTemplate`blur(${useTransform(
@@ -158,7 +158,7 @@ const AralectsFusionAnimation = ({
 
       {/* dialects */}
       <motion.span
-        className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
+        className="font-space overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
         style={{
           x: useTransform(fusionProgress, [0, 1], [0, -9]),
           opacity: dialectProg,
@@ -246,7 +246,7 @@ export const HeroAnimation = ({ className }: { className?: string }) => {
   return (
     <motion.h1
       className={cn(
-        "font-Melodrama md:font-UnboundedRegular relative isolate inline-block font-semibold",
+        "font-Melodrama md:font-unbounded relative isolate inline-block font-semibold",
         className,
       )}
     >
