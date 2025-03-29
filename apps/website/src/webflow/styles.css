@@ -1,0 +1,149 @@
+/* Import Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: SpaceGrotesk;
+  src: url("/fonts/SpaceGrotesk-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SpaceGroteskBold;
+  src: url("/fonts/SpaceGrotesk-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SpaceGroteskLight;
+  src: url("/fonts/SpaceGrotesk-Light.ttf") format("truetype");
+  font-display: swap;
+}
+
+.font-SpaceGrotesk {
+  font-family: SpaceGrotesk, sans-serif !important;
+}
+
+.font-SpaceGroteskBold {
+  font-family: SpaceGroteskBold, sans-serif !important;
+}
+
+.font-SpaceGroteskLight {
+  font-family: SpaceGroteskLight, sans-serif !important;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(234, 223, 255, 0.5) !important;
+}
+
+#newsletter,
+#aralects-footer {
+  all: initial;
+  font-family: SpaceGrotesk, sans-serif !important;
+  color: inherit;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  * {
+    all: revert;
+    box-sizing: border-box;
+  }
+}
+
+#newsletter {
+  section {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: #393939;
+    color: white;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    border-radius: 9999px;
+    border: 1px solid #8262B0;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-family: SpaceGrotesk, sans-serif;
+    outline: none;
+  }
+
+  button[type="submit"] {
+    white-space: nowrap;
+    border-radius: 9999px;
+    background-color: #a07ed1;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-family: SpaceGrotesk, sans-serif;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+
+  button[type="submit"]:hover {
+    background-color: rgba(160, 126, 209, 0.9);
+  }
+
+  button[type="submit"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+#aralects-footer {
+  section {
+    margin-top: 1.25rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    overflow: hidden;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    background-color: rgb(243, 244, 246);
+    color: rgb(17, 24, 39);
+  }
+}
+
+#newsletter button,
+#aralects-footer button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+#newsletter input,
+#aralects-footer input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 9999px;
+  outline: none;
+  font-family: inherit;
+}
+
+#newsletter svg,
+#aralects-footer svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#newsletter img,
+#aralects-footer img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+} 

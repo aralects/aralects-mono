@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AlertCircle } from "lucide-react";
-import { isValidEmail } from "src/helper/isValidEmail";
+import { isValidEmail } from "../../../helper/isValidEmail";
 
 const ExperienceAralects = () => {
   const [email, setEmail] = useState("");
