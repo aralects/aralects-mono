@@ -38,6 +38,108 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   const animationFrameRef = useRef<number | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
+  const MIN_RECORDING_TIME = 1500; // 1.5 seconds in milliseconds
+  const MAX_RECORDING_TIME = 10000; // 10 seconds in milliseconds
+  
+  const recordingStartTimeRef = useRef<number>(0);
+
+  // HTTP request to get the media with fallback
+  const requestMediaWithFallback = async () => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+    try {
+      // For Safari/iOS, we need to handle audio session differently
+      if (isIOS || isSafari) {
+        // Ensure audio context is created and resumed on user interaction
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      
+      if (audioContextRef.current.state === 'suspended') {
+        await audioContextRef.current.resume();
+      }
+      
+        // iOS Safari specific constraints
+        const constraints = {
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+            // Safari/iOS specific settings
+            sampleRate: 44100,
+            channelCount: 1
+          }
+        };
+
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        return stream;
+      }
+
+      // Standard approach for other browsers
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      return stream;
+
+      } catch (error) {
+      if (error instanceof Error && error.name === 'NotAllowedError' && !window.isSecureContext) {
+        console.warn('Running in insecure context. This should only be used for testing!');
+        
+        // Legacy fallback (mainly for older browsers)
+        if (navigator.mediaDevices === undefined) {
+          type LegacyGetUserMedia = (
+            constraints: MediaStreamConstraints,
+            successCallback: (stream: MediaStream) => void,
+            errorCallback: (error: Error) => void
+          ) => void;
+
+          const oldGetUserMedia = (
+            (navigator as any).getUserMedia ||
+            (navigator as any).webkitGetUserMedia ||
+            (navigator as any).mozGetUserMedia ||
+            (navigator as any).msGetUserMedia
+          ) as LegacyGetUserMedia | undefined;
+          
+          if (oldGetUserMedia) {
+            return new Promise<MediaStream>((resolve, reject) => {
+              oldGetUserMedia(
+                { 
+                  audio: isIOS || isSafari ? {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    autoGainControl: true,
+                    sampleRate: 44100,
+                    channelCount: 1
+                  } : true 
+                },
+                (stream) => resolve(stream),
+                (err) => reject(err)
+              );
+            });
+          }
+        }
+      }
+
+      // If it's a permission error on iOS/Safari, try to show a more helpful message
+      if (isIOS || isSafari) {
+        if (error instanceof Error) {
+          switch (error.name) {
+            case 'NotAllowedError':
+              console.error('Microphone access denied. On iOS, check your Safari settings and ensure microphone access is enabled.');
+              break;
+            case 'NotFoundError':
+              console.error('No microphone found. Please ensure your device has a working microphone.');
+              break;
+            case 'NotReadableError':
+              console.error('Microphone is already in use or not working properly.');
+              break;
+          }
+        }
+      }
+      
+      throw error;
+    }
+  };
+
   // Pre-initialize audio context and request permissions on component mount
   useEffect(() => {
     // Create audio context early to reduce delay on first click
@@ -45,7 +147,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       try {
         audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
         
-        // For iOS, we need user interaction to resume, so we'll do this later
         if (audioContextRef.current.state === 'suspended' && 
             !(/iPad|iPhone|iPod/.test(navigator.userAgent))) {
           audioContextRef.current.resume().catch(console.error);
@@ -67,7 +168,8 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     const requestPermission = async () => {
       try {
         // Directly request microphone access
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const stream = await requestMediaWithFallback();
         stream.getAudioTracks().forEach(track => track.stop());
         setHasPermission(true);
       } catch (error) {
@@ -95,10 +197,8 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   }, [isHolding]);
 
   useEffect(() => {
-    // Handle audio interruptions (iOS specific)
     const handleVisibilityChange = () => {
       if (document.hidden && isHolding) {
-        // Page is hidden or app switched, stop recording
         setIsHolding(false);
         setIsRecording(false);
         stopRecording();
@@ -113,31 +213,25 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   // Immediately start capturing audio on press
   const startRecording = async () => {
-    // Set state immediately for instant feedback
+    console.log('Starting recording...');
+    
+    cleanupExistingResources();
+    
+    recordingStartTimeRef.current = Date.now();
     setIsHolding(true);
     setIsRecording(true);
     setIsInitializing(true);
     
-    // Set initial visual feedback values
     setLevels(new Array(10).fill(3));
     setLevelsHeight(3);
     
-    // Start timer immediately for visual feedback
-    recordingTimerRef.current = setInterval(() => {
-      setRecordingDuration((prev) => prev + 100);
-    }, 100);
-    
     try {
-      // Clean up any existing resources first - do this quickly
-      cleanupExistingResources();
-
-      // Reset states
       setAudioURL(null);
       audioChunksRef.current = [];
-      setRecordingDuration(0);
 
-      // Get audio stream - this should now be instant since we pre-requested permission
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Get audio stream
+      // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const stream = await requestMediaWithFallback();
       streamRef.current = stream;
       
       // Setup audio context if not already initialized
@@ -178,6 +272,14 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
       mediaRecorder.onstop = () => {
         try {
+          const recordingDuration = Date.now() - recordingStartTimeRef.current;
+          
+          // Check duration before processing the audio
+          if (recordingDuration < MIN_RECORDING_TIME) {
+            console.log('Recording too short, discarding...');
+            return;
+          }
+
           if (audioChunksRef.current.length > 0) {
             const audioBlob = new Blob(audioChunksRef.current);
             const audioUrl = URL.createObjectURL(audioBlob);
@@ -189,10 +291,18 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
         }
       };
 
-      // Start recording
+      // Start the media recorder
       mediaRecorder.start();
 
-      
+      // Finally, start the timer AFTER everything else is set up
+      recordingTimerRef.current = setInterval(() => {
+        setRecordingDuration(prev => {
+          const newDuration = prev + 100;
+          console.log('Timer tick, updating duration to:', newDuration);
+          return newDuration;
+        });
+      }, 100);
+
     } catch (error) {
       console.error("Error in recording setup:", error);
       setIsHolding(false);
@@ -204,6 +314,17 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   // Faster cleanup method to use when starting a new recording
   const cleanupExistingResources = () => {
+    console.log('Cleaning up resources');
+    
+    // Clear timer first
+    if (recordingTimerRef.current) {
+        clearInterval(recordingTimerRef.current);
+        recordingTimerRef.current = null;
+    }
+
+    // Reset duration
+    setRecordingDuration(0);
+    
     // Stop media recorder and tracks
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
       try {
@@ -238,12 +359,6 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
-    }
-    
-    // Clear timer but create a new one immediately
-    if (recordingTimerRef.current) {
-      clearInterval(recordingTimerRef.current);
-      recordingTimerRef.current = null;
     }
     
     // Reset audio chunks
@@ -294,56 +409,94 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   };
 
   const stopRecording = () => {
-    try {
-      // Stop media recorder and tracks
-      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
-        mediaRecorderRef.current.stop();
-      }
-      
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => {
-          track.stop();
-          track.enabled = false;
-        });
-        streamRef.current = null;
-      }
-
-      // Clean up audio context and nodes
-      if (sourceRef.current) {
-        sourceRef.current.disconnect();
-        sourceRef.current = null;
-      }
-
-      // Only close AudioContext if needed
-      // We'll keep it open to improve responsiveness for the next recording
-      // if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
-      //   audioContextRef.current.close().catch(console.error);
-      //   audioContextRef.current = null;
-      // }
-
-      // Clean up animation frame
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-        animationFrameRef.current = null;
-      }
-
-      // Clear timer
-      if (recordingTimerRef.current) {
+    // Clear timer first
+    if (recordingTimerRef.current) {
         clearInterval(recordingTimerRef.current);
         recordingTimerRef.current = null;
-      }
+    }
 
-      // Reset states
-      setRecordingDuration(0);
-      setLevels(new Array(10).fill(3));
-      setLevelsHeight(0);
-      setIsInitializing(false);
-      
-      // Keep audioContextRef and analyserRef alive for faster initialization next time
+    // Reset duration immediately
+    setRecordingDuration(0);
+
+    const recordingDuration = Date.now() - recordingStartTimeRef.current;
+    
+    // If recording is too short, just cleanup
+    if (recordingDuration < MIN_RECORDING_TIME) {
+        console.log('Recording too short, discarding...');
+        // Release media tracks
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => {
+                track.stop();
+                track.enabled = false;
+            });
+            streamRef.current = null;
+        }
+        
+        // Reset visual states
+        setLevels(new Array(10).fill(3));
+        setLevelsHeight(0);
+        setIsInitializing(false);
+        return;
+    }
+
+    try {
+        // Only stop mediaRecorder if recording is long enough
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+            mediaRecorderRef.current.stop();
+        }
+        
+        // Clean up audio context and nodes
+        if (sourceRef.current) {
+            sourceRef.current.disconnect();
+            sourceRef.current = null;
+        }
+
+        // Clean up animation frame
+        if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
+            animationFrameRef.current = null;
+        }
+
+        // Reset states
+        setLevels(new Array(10).fill(3));
+        setLevelsHeight(0);
+        setIsInitializing(false);
+        
+        // Release media tracks
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => {
+                track.stop();
+                track.enabled = false;
+            });
+            streamRef.current = null;
+        }
+
+        // Keep audioContextRef and analyserRef alive for faster initialization next time
     } catch (error) {
-      console.error('Error during cleanup:', error);
+        console.error('Error during cleanup:', error);
     }
   };
+
+  // Add effect to handle max recording time
+  useEffect(() => {
+    let maxRecordingTimeout: NodeJS.Timeout;
+    
+    if (isHolding) {
+      maxRecordingTimeout = setTimeout(() => {
+        if (isHolding) {
+          setIsHolding(false);
+          setIsRecording(false);
+          stopRecording();
+        }
+      }, MAX_RECORDING_TIME);
+    }
+
+    return () => {
+      if (maxRecordingTimeout) {
+        clearTimeout(maxRecordingTimeout);
+      }
+    };
+  }, [isHolding]);
 
   const returnDialectAcronym = (dialectName: string | null) => {
     switch (dialectName?.toLowerCase()) {
@@ -417,6 +570,15 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   const handlePointerUp = (e: React.PointerEvent) => {
     e.preventDefault();
+    
+    // Clear timer and reset duration first
+    if (recordingTimerRef.current) {
+        clearInterval(recordingTimerRef.current);
+        recordingTimerRef.current = null;
+    }
+    setRecordingDuration(0);
+    
+    // Then update other states
     setIsHolding(false);
     setIsRecording(false);
     stopRecording();
@@ -427,17 +589,27 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     e.preventDefault();
   };
 
+  console.log('Render: recordingDuration =', recordingDuration);
+
   return (
     <div className={classes.container}>
       <p className={classes.micTitle}>
-        {isGradioLoading 
+        {isGradioLoading
           ? "Connecting to server..."
           : loadingGradio
             ? "Processing..."
             : isHolding
-              ? isInitializing
-                ? "Initializing..." 
-                : `Recording${".".repeat(Math.floor(recordingDuration / 500) % 4)}`
+              ? <div className={classes.recordingStatus}>
+                  {(isInitializing || recordingDuration < MIN_RECORDING_TIME) ?
+                    <span className={classes.minTimeHint}>
+                      Keep holding...
+                    </span>
+                    :
+                    <span className={classes.timer}>
+                      Recording{".".repeat(Math.floor(recordingDuration / 300) % 4)}
+                    </span>
+                  }
+                </div>
               : "Hold to record"}
       </p>
       <div className="flex flex-col items-center space-y-4">

@@ -166,8 +166,6 @@ function TestSwiper() {
                     const navEntries = window.performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
                     if (navEntries.length > 0) {
                         return navEntries[0].type === "reload";
-                    } else if (window.performance.navigation) {
-                        return window.performance.navigation.type === 1; // Deprecated but MUST keep forbackwards compatibility
                     }
                 }
                 return false;
