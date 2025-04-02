@@ -11,7 +11,6 @@ import Header from '../Header/Header';
 import Popup from '../Popup/Popup';
 import congratsImage from '../../assets/PopupImages/congratsImage.png';
 import bothMans from '../../assets/PopupImages/bothMans.png';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/mousewheel';
@@ -151,6 +150,32 @@ function TestSwiper() {
             setPopupOpen(true);
         }
     }, [promptStatusArray]);
+
+    // Handle refresh detection and redirect for /prompt page to prevent getting stuck due to gradio error
+    // and in case user access the /prompt directly without going through the /choose-theme page
+    
+    useEffect(() => {
+        if (location.pathname === "/prompt") {
+            if (!location.state?.dialect_id || !location.state?.theme_id) {
+                navigate("/", { replace: true });
+                return;
+            }
+
+            const isReload = () => {
+                if ("performance" in window) {
+                    const navEntries = window.performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+                    if (navEntries.length > 0) {
+                        return navEntries[0].type === "reload";
+                    }
+                }
+                return false;
+            };
+
+            if (isReload()) {
+                window.location.replace("/");
+            }
+        }
+    }, [location, navigate]);
 
     return (
         <div className={classes.allSwipeCont}>
