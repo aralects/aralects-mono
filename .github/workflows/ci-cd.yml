@@ -51,11 +51,11 @@ jobs:
             # Authenticate Docker on EC2
             echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-            # Deploy Landing Page (Port 80)
+            # Deploy Landing Page (Port 81)
             docker pull ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
             # Stop and remove the container only if it exists
             docker ps -a --filter "name=aralects-landing" -q | grep -q . && docker stop aralects-landing && docker rm aralects-landing
-            docker run -d -p 80:80 --env-file /app/mono-repo/.env --name aralects-landing ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
+            docker run -d -p 81:80 --env-file /app/mono-repo/.env --name aralects-landing ${{ secrets.DOCKER_USERNAME }}/aralects-landing:${{ github.sha }}
 
             # Deploy Demo (Port 3000)
             docker pull ${{ secrets.DOCKER_USERNAME }}/aralects-demo:${{ github.sha }}
