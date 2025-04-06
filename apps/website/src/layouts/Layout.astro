@@ -6,11 +6,14 @@ import Gtm from "@components/gtm.astro";
 import SmoothScroll from "@components/animated/smooth-scroll.astro";
 
 import "./global.css";
+import BasicScripts from "@/components/common/BasicScripts.astro";
 const { title = "Aralects" } = Astro.props;
 
 const home = Astro.url.pathname === "/";
-const isStaging = Astro.url.hostname.includes('staging');
-const baseUrl = isStaging ? 'http://staging.aralects.com' : 'https://www.aralects.com';
+const isStaging = Astro.url.hostname.includes("staging");
+const baseUrl = isStaging
+  ? "http://staging.aralects.com"
+  : "https://www.aralects.com";
 const imageUrl = `${baseUrl}/aralects-og-image.png`;
 ---
 
@@ -20,34 +23,48 @@ const imageUrl = `${baseUrl}/aralects-og-image.png`;
     <Gtm />
 
     <meta charset="UTF-8" />
-    
+
     <!-- Primary Meta Tags -->
     <meta name="title" content="Aralects - Learn Arabic Dialects" />
-    <meta name="description" content="Master Arabic dialects through interactive lessons and pronunciation practice" />
-    
+    <meta
+      name="description"
+      content="Master Arabic dialects through interactive lessons and pronunciation practice"
+    />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={`${baseUrl}${Astro.url.pathname}`} />
     <meta property="og:title" content="Aralects - Learn Arabic Dialects" />
-    <meta property="og:description" content="Master Arabic dialects through interactive lessons and pronunciation practice" />
+    <meta
+      property="og:description"
+      content="Master Arabic dialects through interactive lessons and pronunciation practice"
+    />
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Aralects - Learn Arabic Dialects" />
     <meta property="og:site_name" content="Aralects" />
-    
+
     <!-- WhatsApp specific -->
-    <meta property="og:image:secure_url" content={isStaging ? imageUrl : `https://www.aralects.com/aralects-og-image.png`} />
-    
+    <meta
+      property="og:image:secure_url"
+      content={isStaging
+        ? imageUrl
+        : `https://www.aralects.com/aralects-og-image.png`}
+    />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={`${baseUrl}${Astro.url.pathname}`} />
     <meta name="twitter:title" content="Aralects - Learn Arabic Dialects" />
-    <meta name="twitter:description" content="Master Arabic dialects through interactive lessons and pronunciation practice" />
+    <meta
+      name="twitter:description"
+      content="Master Arabic dialects through interactive lessons and pronunciation practice"
+    />
     <meta name="twitter:image" content={imageUrl} />
     <meta name="twitter:image:alt" content="Aralects - Learn Arabic Dialects" />
-    
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -58,9 +75,12 @@ const imageUrl = `${baseUrl}/aralects-og-image.png`;
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#8262B0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Unbounded&display=swap" rel="stylesheet">  
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Unbounded&display=swap"
+      rel="stylesheet"
+    />
 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -80,5 +100,7 @@ const imageUrl = `${baseUrl}/aralects-og-image.png`;
     <Header client:load />
     <slot />
     {home && <Footer client:visible />}
+
+    <BasicScripts />
   </body>
 </html>

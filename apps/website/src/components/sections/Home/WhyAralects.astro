@@ -1,6 +1,4 @@
 ---
-import { WhyAralectsContent } from "@/components/animated/why-aralects-content";
-
 const features = [
   {
     title: "All-in-one learning hub",
@@ -54,7 +52,23 @@ const features = [
   <div
     class="my-[30px] flex w-full flex-col items-center justify-between gap-8 px-5 text-start md:my-[60px] md:flex-row md:px-20"
   >
-    <WhyAralectsContent client:load className="md:w-1/2" />
+    <div class="md:w-1/2">
+      <h2 class="font-space text-2xl font-bold md:text-5xl intersect-once transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up">
+        Why{" "}
+        <span class="md:text-glow-xl md:text-purple-200">Aralects</span>?
+      </h2>
+      <p class="font-SpaceGroteskLight mt-6 font-thin text-gray-300 md:text-xl intersect-once transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up">
+        Learning Arabic today is challenging. Most apps focus on rigid lessons
+        and miss the immersive, life-scenario conversations that bring Arabic to
+        life.
+      </p>
+      <p
+        class="text-glow font-SpaceGroteskLight mt-4 font-light text-[#EADFFF] md:text-xl intersect-once transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up"
+      >
+        Aralects is changing that. We're creating an app that transforms how you
+        connect with the language.
+      </p>
+    </div>
 
     <div class="hidden justify-center md:flex md:w-1/2 md:justify-end">
       <svg
@@ -113,7 +127,7 @@ const features = [
       features.map((feature, index) => (
         <div
           class:list={[
-            "group relative flex h-[260px] w-[295px] shrink-0 snap-start flex-col justify-start overflow-hidden rounded-3xl border border-[#9073b9] bg-[#272727] p-5 text-start font-medium transition-all xl:w-full xl:bg-[#393939] xl:first:ml-0 xl:last:mr-0",
+            "group relative flex h-[260px] w-[295px] shrink-0 snap-start flex-col justify-start overflow-hidden rounded-3xl border border-[#9073b9] bg-[#272727] p-5 text-start font-medium transition xl:w-full xl:bg-[#393939] xl:first:ml-0 xl:last:mr-0 intersect-once motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up",
             index === 0 ? "ml-5 md:ml-10" : "",
             index === features.length - 1 ? "mr-5 md:mr-10" : "",
           ]}
@@ -157,3 +171,4 @@ const features = [
     scrollbar-width: none;
   }
 </style>
+

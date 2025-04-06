@@ -20,21 +20,21 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { LargeBlob } from "@/assets/large-blob";
 
 const BLOBS_DELAY = 0.3;
-const WORDS_FADE_OUT_START = 100;
-const WORDS_FADE_OUT_END = 1000;
-const CENTERING_START = 500;
-const CENTERING_END = 1000;
-const FUSION_START = 700;
-const FUSION_END = 1000;
-const SWITCH_START = 1000;
-const TRANSFORM_START = 1400;
-const TRANSFORM_END = 2000;
-const HIDE_START = 1400;
-const HIDE_END = 1600;
-const ZOOM_START = 1200;
-const ZOOM_END = 3000;
-const REMOVE_START = 2700;
-const REMOVE_END = 3000;
+const WORDS_FADE_OUT_START = 60;
+const WORDS_FADE_OUT_END = 600;
+const CENTERING_START = 300;
+const CENTERING_END = 600;
+const FUSION_START = 420;
+const FUSION_END = 600;
+const SWITCH_START = 600;
+const TRANSFORM_START = 840;
+const TRANSFORM_END = 1200;
+const HIDE_START = 840;
+const HIDE_END = 960;
+const ZOOM_START = 720;
+const ZOOM_END = 1800;
+// const REMOVE_START = 2700;
+// const REMOVE_END = 3000;
 
 // V2 word stagger configuration (for hiding words)
 const FIRST_LINE_WORDS = [
@@ -84,7 +84,7 @@ const AnimatedWord = ({
 
 const FloatingEllipses = (props: HTMLMotionProps<"div">) => {
   return (
-    <FloatingPlane zIndex={0} movementFactor={20} {...props}>
+    <FloatingPlane zIndex={0} movementFactor={60} {...props}>
       <motion.div
         className="absolute right-1/4 top-20 md:top-40 2xl:right-1/3"
         initial={{ y: -40, opacity: 0 }}
@@ -119,7 +119,7 @@ const FloatingEllipses = (props: HTMLMotionProps<"div">) => {
         />
       </motion.div>
       <motion.div
-        className="absolute right-1/4 top-[1400px]"
+        className="absolute right-1/4 top-[1400px] hidden md:block"
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 0.9 }}
         transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
@@ -127,6 +127,17 @@ const FloatingEllipses = (props: HTMLMotionProps<"div">) => {
         <img
           src="/img/hero/ellipse-2.png"
           className="rotate-[70deg] scale-50 opacity-50 md:opacity-100"
+        />
+      </motion.div>
+      <motion.div
+        className="absolute left-1/3 top-[900px] 2xl:left-[unset] 2xl:right-1/3"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 0.9 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img
+          src="/img/hero/ellipse-2.png"
+          className="rotate-45 scale-50 opacity-50 md:opacity-100"
         />
       </motion.div>
     </FloatingPlane>
@@ -168,6 +179,14 @@ const FloatingBlobs = (props: HTMLMotionProps<"div">) => {
           className="scale-[80%] md:scale-90"
         />
       </motion.div>
+      <motion.div
+        className="absolute left-1/3 top-[1600px]"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img src="/img/hero/blob-medium.png" className="rotate-90 scale-75" />
+      </motion.div>
     </FloatingPlane>
   );
 };
@@ -176,7 +195,7 @@ const LargeFloatingBlobs = (props: HTMLMotionProps<"div">) => {
   return (
     <FloatingPlane
       zIndex={0}
-      movementFactor={60}
+      movementFactor={20}
       // className="blur-[8px]"
       {...props}
     >
@@ -189,12 +208,28 @@ const LargeFloatingBlobs = (props: HTMLMotionProps<"div">) => {
         <LargeBlob className="opacity-15 sm:scale-150 xl:scale-[200%]" />
       </motion.div>
       <motion.div
-        className="absolute left-1/3 top-[1400px]"
+        className="absolute left-[10%] top-[1400px]"
         initial={{ opacity: 0, y: -100 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
       >
         <img src="/img/hero/blob-small.png" className="rotate-[145deg]" />
+      </motion.div>
+      <motion.div
+        className="absolute left-20 top-[1700px] 2xl:left-[unset] 2xl:right-1/3 2xl:top-[1820px]"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <LargeBlob className="rotate-45 opacity-15 sm:scale-125" />
+      </motion.div>
+      <motion.div
+        className="absolute right-[15%] top-[1800px] scale-90"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img src="/img/hero/blob-small.png" className="rotate-[105deg]" />
       </motion.div>
     </FloatingPlane>
   );
@@ -255,7 +290,7 @@ const AnimatedHeroInner = () => {
 
   return (
     <div className="relative isolate">
-      <div className="h-[4000px] w-full">
+      <div className="h-[2800px] w-full md:h-[3000px]">
         {/* -- blobs -- */}
         <FloatingEllipses />
         <FloatingBlobs />

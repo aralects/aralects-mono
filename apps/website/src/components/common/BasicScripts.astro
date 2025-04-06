@@ -1,0 +1,17 @@
+---
+---
+
+<script>
+  // Initialize the intersection observer
+  import Observer from "@/utils/intersectionObserver";
+
+  // Start observing when the DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    Observer.start();
+  });
+
+  // Re-observe after Astro view transitions
+  document.addEventListener("astro:after-swap", () => {
+    Observer.start();
+  });
+</script>

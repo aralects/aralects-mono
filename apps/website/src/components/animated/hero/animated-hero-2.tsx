@@ -1,48 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import { cn } from "@repo/ui";
-
-import { AnimatedText } from "../animated-text";
-import { useScrollContext } from "../scroll-context";
-import { motion, useTransform } from "motion/react";
-import TextScrollReveal2 from "../text-scroll-reveal-2";
-import TextScrollReveal from "../text-scroll-reveal";
 import { ScrollAnimatedText } from "../scroll-animated-text";
 
-const blurSlideVariants = {
-  container: {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.01 },
-    },
-    exit: {
-      transition: { staggerChildren: 0.01, staggerDirection: 1 },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: "blur(10px) brightness(0%)",
-      y: 0,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px) brightness(100%)",
-      transition: {
-        duration: 0.4,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -30,
-      filter: "blur(10px) brightness(0%)",
-      transition: {
-        duration: 0.4,
-      },
-    },
-  },
-};
+// import { AnimatedText } from "../animated-text";
+// import { useScrollContext } from "../scroll-context";
+// import { motion, useTransform } from "motion/react";
+// import TextScrollReveal2 from "../text-scroll-reveal-2";
+// import TextScrollReveal from "../text-scroll-reveal";
+
+// const blurSlideVariants = {
+//   container: {
+//     hidden: { opacity: 0 },
+//     visible: {
+//       opacity: 1,
+//       transition: { staggerChildren: 0.01 },
+//     },
+//     exit: {
+//       transition: { staggerChildren: 0.01, staggerDirection: 1 },
+//     },
+//   },
+//   item: {
+//     hidden: {
+//       opacity: 0,
+//       filter: "blur(10px) brightness(0%)",
+//       y: 0,
+//     },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       filter: "blur(0px) brightness(100%)",
+//       transition: {
+//         duration: 0.4,
+//       },
+//     },
+//     exit: {
+//       opacity: 0,
+//       y: -30,
+//       filter: "blur(10px) brightness(0%)",
+//       transition: {
+//         duration: 0.4,
+//       },
+//     },
+//   },
+// };
 
 // function AnimatedHero2({
 //   className,
@@ -134,10 +134,6 @@ function AnimatedHero2({
         <span className="text-glow-xl text-purple-200">personalized</span>{" "}
         experiences, designed for real-world Arabic learning.
       </ScrollAnimatedText>
-
-      {/* <AnimatedText className="font-unbounded mx-auto max-w-4xl px-4 text-center text-3xl text-white md:text-4xl xl:text-5xl">
-       
-      </AnimatedText> */}
     </div>
   );
 }
