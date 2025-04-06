@@ -1,4 +1,6 @@
 ---
+import { WhyAralectsContent } from "@/components/animated/why-aralects-content";
+
 const features = [
   {
     title: "All-in-one learning hub",
@@ -52,23 +54,7 @@ const features = [
   <div
     class="my-[30px] flex w-full flex-col items-center justify-between gap-8 px-5 text-start md:my-[60px] md:flex-row md:px-20"
   >
-    <div class="md:w-1/2">
-      <h2 class="font-space text-2xl font-bold md:text-5xl">
-        Why{" "}
-        <span class="md:text-glow-xl md:text-purple-200">Aralects</span>?
-      </h2>
-      <p class="font-SpaceGroteskLight mt-6 font-thin text-gray-300 md:text-xl">
-        Learning Arabic today is challenging. Most apps focus on rigid lessons
-        and miss the immersive, life-scenario conversations that bring Arabic to
-        life.
-      </p>
-      <p
-        class="text-glow font-SpaceGroteskLight mt-4 font-light text-[#EADFFF] md:text-xl"
-      >
-        Aralects is changing that. We're creating an app that transforms how you
-        connect with the language.
-      </p>
-    </div>
+    <WhyAralectsContent client:load className="md:w-1/2" />
 
     <div class="hidden justify-center md:flex md:w-1/2 md:justify-end">
       <svg
@@ -171,4 +157,3 @@ const features = [
     scrollbar-width: none;
   }
 </style>
-

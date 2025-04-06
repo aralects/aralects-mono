@@ -6,6 +6,7 @@ import { useScrollContext } from "../scroll-context";
 import { motion, useTransform } from "motion/react";
 import TextScrollReveal2 from "../text-scroll-reveal-2";
 import TextScrollReveal from "../text-scroll-reveal";
+import { ScrollAnimatedText } from "../scroll-animated-text";
 
 const blurSlideVariants = {
   container: {
@@ -96,28 +97,46 @@ function AnimatedHero2({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("bg-[#272727]", className)} {...props}>
-      <div className="flex flex-row items-center">
-        <AnimatedText
-          per="char"
-          preset="blur"
-          speedReveal={1}
-          className="font-unbounded mx-auto inline-block px-4 text-center text-3xl text-white md:text-4xl xl:text-5xl"
-        >
-          Aralects
-        </AnimatedText>
-        <AnimatedText
-          per="char"
-          preset="blur"
-          speedReveal={1}
-          className="font-unbounded mx-auto inline-block max-w-4xl px-4 text-center text-3xl text-white md:text-4xl xl:text-5xl"
-        >
-          transforms the way Arabic is learned, spoken, and understood.
-        </AnimatedText>
-      </div>
+    <div
+      className={cn(
+        "relative flex flex-col bg-[#272727] py-40",
+        // 'before:content-[" "] before:absolute before:inset-0 before:-translate-y-full before:bg-gradient-to-b before:from-transparent before:to-[#272727]',
+        className,
+      )}
+      {...props}
+    >
+      <ScrollAnimatedText
+        viewport={{
+          once: true,
+          amount: 1,
+          margin: "0px 0px -25%",
+        }}
+        staggerDelay={0.025}
+        className="font-space container mx-auto inline-block px-10 text-center text-3xl font-semibold text-white md:px-20 md:text-4xl xl:text-6xl"
+      >
+        <span className="text-glow-xl text-purple-200">Aralects</span>{" "}
+        transforms the way Arabic is learned, spoken, and understood.
+      </ScrollAnimatedText>
+
+      <ScrollAnimatedText
+        className="font-space container mx-auto mt-60 inline-block px-10 text-center text-3xl font-semibold text-white md:px-20 md:text-4xl xl:text-6xl"
+        viewport={{
+          once: true,
+          amount: 1,
+          margin: "0px 0px -25%",
+        }}
+        staggerDelay={0.015}
+        transition={{
+          delay: 0.2,
+        }}
+      >
+        Empower your language journey with{" "}
+        <span className="text-glow-xl text-purple-200">personalized</span>{" "}
+        experiences, designed for real-world Arabic learning.
+      </ScrollAnimatedText>
+
       {/* <AnimatedText className="font-unbounded mx-auto max-w-4xl px-4 text-center text-3xl text-white md:text-4xl xl:text-5xl">
-        Empower your language journey with personalized, immersive experiences
-        designed for real-world Arabic learning.
+       
       </AnimatedText> */}
     </div>
   );
