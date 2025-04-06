@@ -6,7 +6,10 @@
   import Lenis from "lenis";
 
   // Initialize Lenis smooth scrolling
-  const lenis = new Lenis();
+  const lenis = new Lenis({
+    wheelMultiplier: 3,
+    // easing: easeOutCirc,
+  });
 
   function raf(time: number) {
     lenis.raf(time);

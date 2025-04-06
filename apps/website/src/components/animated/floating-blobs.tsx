@@ -11,7 +11,7 @@ import {
 import React, { type PropsWithChildren, useEffect, useState } from "react";
 // import { useScrollContext } from "./scroll-context";
 
-const baseDelay = 0.5;
+const baseDelay = 0.3;
 
 const Plane = ({
   zIndex,
@@ -111,30 +111,9 @@ export const FloatingBlobs = ({
             className="scale-50 opacity-50 md:scale-100 md:opacity-100"
           />
         </motion.div>
-        <motion.div
-          className="absolute left-32 top-[1200px]"
-          initial={{ opacity: 0, y: -100, rotate: 120, scale: 0.8 }}
-          animate={{ y: 0, opacity: 0.8, rotate: 120, scale: 0.8 }}
-          transition={{ duration: 2, delay: baseDelay + 0.2, type: "spring" }}
-        >
-          <img src="/img/hero/blob-small.png" />
-        </motion.div>
-        <motion.div
-          className="absolute left-1/3 top-[1200px]"
-          initial={{ y: -40, opacity: 0, rotate: 140, scale: 0.65 }}
-          animate={{ y: 0, opacity: 1, rotate: 140, scale: 0.65 }}
-          transition={{ duration: 2, delay: baseDelay + 0.1, type: "spring" }}
-        >
-          <img src="/img/hero/blob-large.png" />
-        </motion.div>
-        <motion.div
-          className="absolute left-1/2 top-[1900px]"
-          initial={{ y: -40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 2, delay: baseDelay, type: "spring" }}
-        >
-          <img src="/img/hero/ellipse-1.png" />
-        </motion.div>
+        
+        
+        
         <motion.div
           className="absolute right-[10%] top-[2000px]"
           initial={{ y: -40, opacity: 0, rotate: 40, scale: 0.65 }}
@@ -251,17 +230,7 @@ export const FloatingBlobs = ({
       </Plane>
 
       <Plane mouseX={smoothX} mouseY={smoothY} movementFactor={60} zIndex={3}>
-        <motion.div
-          className="absolute left-1/4 top-[500px] md:top-[700px]"
-          initial={{ y: -40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 2, delay: baseDelay, type: "spring" }}
-        >
-          <img
-            src="/img/hero/ellipse-1.png"
-            className="scale-[0.7] md:scale-100"
-          />
-        </motion.div>
+
         <motion.div
           className="absolute -right-20 top-80 md:right-60 md:top-[650px]"
           initial={{ y: -40, opacity: 0 }}

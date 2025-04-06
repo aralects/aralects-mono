@@ -2,32 +2,39 @@ import {
   motion,
   MotionValue,
   useMotionTemplate,
+  useMotionValueEvent,
   useTransform,
+  type HTMLMotionProps,
 } from "motion/react";
 import { cn } from "@repo/ui";
 import { useMeasureOnce } from "src/hooks/use-measure-once";
-import { useScrollContext } from "../scroll-context";
-import { useMediaQuery } from "@hooks/use-media-query";
+import { ScrollContextProvider, useScrollContext } from "../scroll-context";
 
-import SVGMorph from "../svg-morph";
-import type React from "react";
-import { aralectsEnSvgData } from "./data/aralects-en-svg";
-import { aralectsArSvgData } from "./data/aralects-ar-svg";
+import { useRef } from "react";
+import IllustrationTransition from "./illutration-transition";
 
-// V2 animation ranges
-const WORDS_FADE_OUT_START = 300;
+import { AralectsFusion } from "./aralects-fusion";
+import { FloatingPlane } from "../floating-plane";
+import { HomingCursorProvider } from "../homing-cursor";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { LargeBlob } from "@/assets/large-blob";
+
+const BLOBS_DELAY = 0.3;
+const WORDS_FADE_OUT_START = 100;
 const WORDS_FADE_OUT_END = 1000;
 const CENTERING_START = 500;
 const CENTERING_END = 1000;
 const FUSION_START = 700;
 const FUSION_END = 1000;
-const SWITCH_START = 1100;
-const TRANSFORM_START = 1800;
-const TRANSFORM_END = 2200;
-// const ZOOM_START = 2000;
-// const ZOOM_END = 3000;
-// const HIDE_START = 2250;
-// const HIDE_END = 3000;
+const SWITCH_START = 1000;
+const TRANSFORM_START = 1400;
+const TRANSFORM_END = 2000;
+const HIDE_START = 1400;
+const HIDE_END = 1600;
+const ZOOM_START = 1200;
+const ZOOM_END = 3000;
+const REMOVE_START = 2700;
+const REMOVE_END = 3000;
 
 // V2 word stagger configuration (for hiding words)
 const FIRST_LINE_WORDS = [
@@ -41,10 +48,8 @@ const THIRD_LINE_WORDS = [
   { text: "time.", staggerStart: 0.5, staggerEnd: 0.65 },
 ];
 
-// Reusable animated word component
-
-// V2 version of AnimatedWord that starts visible and hides on scroll
-const AnimatedWordV2 = ({
+// starts visible and hides on scroll
+const AnimatedWord = ({
   text,
   staggerStart,
   staggerEnd,
@@ -77,168 +82,148 @@ const AnimatedWordV2 = ({
   );
 };
 
-// arabic dialect / aralects fusion animation
-
-// V2 version of the fusion animation that works with the reversed animation sequence
-const AralectsFusionAnimationV2 = ({
-  scrollY,
-  horizontalOffset = 0,
-  className,
-  ...props
-}: {
-  scrollY: MotionValue<number>;
-  horizontalOffset?: number;
-} & React.ComponentProps<typeof motion.div>) => {
-  const isMobile = false; //useMediaQuery("(max-width: 768px)");
-
-  // Fusion animation values for the arabic dialect part
-  const fusionProgress = useTransform(
-    scrollY,
-    [FUSION_START, FUSION_END],
-    [0, 1],
-  );
-  const fadeOut = useTransform(fusionProgress, [0, 1], [1, 0]);
-  const fadeIn = useTransform(fusionProgress, [0, 1], [0, 1]);
-  // const bg = useTransform(
-  //   scrollY,
-  //   [HIDE_START, HIDE_END],
-  //   ["#8262b0", "#272727"],
-  // );
-  // const bg2 = useTransform(
-  //   scrollY,
-  //   [ZOOM_START, ZOOM_END],
-  //   ["#ffffff", "#272727"],
-  // );
-
+const FloatingEllipses = (props: HTMLMotionProps<"div">) => {
   return (
-    <>
-      {/* <motion.div
-        className="fixed inset-0 -z-[1]"
-        style={{
-          backgroundColor: bg2,
-          willChange: "background-color",
-        }}
-      /> */}
+    <FloatingPlane zIndex={0} movementFactor={20} {...props}>
       <motion.div
-        variants={{
-          initial: { opacity: 0 },
-          show: { opacity: 1 },
-        }}
-        initial="initial"
-        animate="show"
-        className={cn("inline-flex", className)}
-        {...props}
+        className="absolute right-1/4 top-20 md:top-40 2xl:right-1/3"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 0.9 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
       >
-        <motion.div
-          className="inline-flex items-center justify-center"
-          // style={{
-          //   opacity: useTransform(scrollY, [HIDE_START, HIDE_END], [1, 0]),
-          // }}
-        >
-          {/* arabic */}
-          <motion.span className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pl-2 text-white">
-            {/* ara */}
-            <span className="inline-block">Ara</span>
-            {/* bic */}
-            <motion.span
-              className="inline-block whitespace-nowrap"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(
-                  fusionProgress,
-                  [0, 1],
-                  [isMobile ? 44.6172 : 71.3828125, 0],
-                ),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            >
-              bic
-            </motion.span>
-            {/* variable padding */}
-            <motion.span
-              className="inline-block h-full"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(fusionProgress, [0, 1], [8, 0]),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            />
-          </motion.span>
-          {/* dialects */}
-          <motion.span
-            className="font-SpaceGrotesk overflow-hidden bg-[#8262b0] py-2 pr-2 text-white"
-            style={{
-              x: useTransform(fusionProgress, [0, 1], [8, -1]),
-              marginRight: useTransform(
-                scrollY,
-                [CENTERING_START, CENTERING_END],
-                [8, 0],
-              ),
-            }}
-          >
-            {/* variable padding */}
-            <motion.span
-              className="inline-block h-full"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(fusionProgress, [0, 1], [8, 0]),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            />
-            {/* dia */}
-            <motion.span
-              className="inline-block whitespace-nowrap"
-              style={{
-                opacity: fadeOut,
-                scale: fadeOut,
-                width: useTransform(
-                  fusionProgress,
-                  [0, 1],
-                  [isMobile ? 43.9219 : 70.2734, 0],
-                ),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            >
-              dia
-            </motion.span>
-            {/* lect */}
-            <span className="inline-block">lect</span>
-            {/* s */}
-            <motion.span
-              style={{
-                opacity: fadeIn,
-                scale: fadeIn,
-                width: useTransform(
-                  fusionProgress,
-                  [0, 1],
-                  [0, isMobile ? 14 : 25.3],
-                ),
-              }}
-              transition={{ type: "spring", stiffness: 100, damping: 12 }}
-              className="inline-block whitespace-nowrap"
-            >
-              s
-            </motion.span>
-          </motion.span>
-        </motion.div>
+        <img
+          src="/img/hero/ellipse-2.png"
+          className="scale-50 md:opacity-100"
+        />
       </motion.div>
-    </>
+      <motion.div
+        className="absolute left-[10%] top-[600px] hidden 2xl:block"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 0.9 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img
+          src="/img/hero/ellipse-1.png"
+          className="scale-50 opacity-50 md:opacity-100"
+        />
+      </motion.div>
+      <motion.div
+        className="absolute left-1/4 top-[1200px]"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 0.9 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img
+          src="/img/hero/ellipse-1.png"
+          className="rotate-[60deg] scale-50 opacity-50 md:opacity-100"
+        />
+      </motion.div>
+      <motion.div
+        className="absolute right-1/4 top-[1400px]"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 0.9 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img
+          src="/img/hero/ellipse-2.png"
+          className="rotate-[70deg] scale-50 opacity-50 md:opacity-100"
+        />
+      </motion.div>
+    </FloatingPlane>
   );
 };
 
-export const AnimatedHero = ({ className }: { className?: string }) => {
+const FloatingBlobs = (props: HTMLMotionProps<"div">) => {
+  return (
+    <FloatingPlane
+      zIndex={0}
+      movementFactor={40}
+      // className="blur-sm"
+      {...props}
+    >
+      <motion.div
+        className="absolute left-1/4 top-10 hidden md:block"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img src="/img/hero/blob-medium.png" className="rotate-45 scale-75" />
+      </motion.div>
+      <motion.div
+        className="absolute -right-14 top-96 md:right-20 md:top-60 2xl:right-[15%] 2xl:top-[480px]"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img src="/img/hero/blob-small.png" className="scale-[80%]" />
+      </motion.div>
+      <motion.div
+        className="absolute -left-12 top-[9%] md:left-[unset] md:right-80 md:top-[900px] 2xl:right-1/3 2xl:top-[1100px]"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img
+          src="/img/hero/blob-medium.png"
+          className="scale-[80%] md:scale-90"
+        />
+      </motion.div>
+    </FloatingPlane>
+  );
+};
+
+const LargeFloatingBlobs = (props: HTMLMotionProps<"div">) => {
+  return (
+    <FloatingPlane
+      zIndex={0}
+      movementFactor={60}
+      // className="blur-[8px]"
+      {...props}
+    >
+      <motion.div
+        className="absolute left-20 top-[700px] 2xl:left-1/4 2xl:top-[820px]"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <LargeBlob className="opacity-15 sm:scale-150 xl:scale-[200%]" />
+      </motion.div>
+      <motion.div
+        className="absolute left-1/3 top-[1400px]"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 2, delay: BLOBS_DELAY, type: "spring" }}
+      >
+        <img src="/img/hero/blob-small.png" className="rotate-[145deg]" />
+      </motion.div>
+    </FloatingPlane>
+  );
+};
+
+const getScale = (isMobile: boolean, isTablet: boolean) => {
+  if (isMobile) return 3;
+  if (isTablet) return 4;
+  return 6;
+};
+
+const getTranslationFactor = (isMobile: boolean, isTablet: boolean) => {
+  if (isMobile) return -40;
+  if (isTablet) return 0;
+  return 40;
+};
+
+const AnimatedHeroInner = () => {
   const { scrollY } = useScrollContext();
-  // Word hiding animation progress
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  const isTablet = useMediaQuery("(max-width: 1024px)");
+
   const wordHideProgress = useTransform(
     scrollY,
     [WORDS_FADE_OUT_START, WORDS_FADE_OUT_END],
     [0, 1],
   );
-  const blur = useTransform(wordHideProgress, [0.7, 1], [0, 10]);
-  const surroundingTextBlur = useMotionTemplate`blur(${blur}px)`;
+
+  const surroundingTextBlur = useMotionTemplate`blur(${useTransform(wordHideProgress, [0.7, 1], [0, 10])}px)`;
   const surroundingTextOpacity = useTransform(
     wordHideProgress,
     [0.7, 1],
@@ -246,118 +231,177 @@ export const AnimatedHero = ({ className }: { className?: string }) => {
   );
 
   const [oneRef, { width: oneWidth }] = useMeasureOnce<HTMLSpanElement>();
-  const horizontalOffset = ((oneWidth ?? 0) - 2) / 2;
+  const horizontalOffset =
+    ((oneWidth ?? 0) - getTranslationFactor(isMobile, isTablet)) / 2;
+
+  const aralectsFusionRef = useRef<HTMLDivElement>(null);
+  const illustrationTransitionRef = useRef<HTMLDivElement>(null);
+  const switchted = useRef(false);
+
+  const bgOpacity = useTransform(scrollY, [FUSION_START, FUSION_END], [0, 1]);
+
+  // switch between aralects fusion and illustration transition
+  useMotionValueEvent(scrollY, "change", (value) => {
+    if (value > SWITCH_START && !switchted.current) {
+      aralectsFusionRef.current?.classList.add("invisible");
+      illustrationTransitionRef.current?.classList.remove("hidden");
+      switchted.current = true;
+    } else if (value < SWITCH_START && switchted.current) {
+      aralectsFusionRef.current?.classList.remove("invisible");
+      illustrationTransitionRef.current?.classList.add("hidden");
+      switchted.current = false;
+    }
+  });
 
   return (
-    <motion.h1
-      initial={{ opacity: 0, filter: "blur(10px)" }}
-      animate={{ opacity: 1, filter: "blur(0px)" }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "font-UnboundedRegular relative isolate inline-block font-semibold",
-        className,
-      )}
-    >
-      {/* connecting cultures, */}
-      <motion.span
-        className="block"
-        style={{
-          opacity: surroundingTextOpacity,
-          filter: surroundingTextBlur,
-        }}
-      >
-        {FIRST_LINE_WORDS.map((word, index) => (
-          <AnimatedWordV2
-            key={index}
-            text={word.text}
-            staggerStart={word.staggerStart}
-            staggerEnd={word.staggerEnd}
-            wordHideProgress={wordHideProgress}
-            className={index > 0 ? "ml-2 md:ml-4" : ""}
-          />
-        ))}
-      </motion.span>
+    <div className="relative isolate">
+      <div className="h-[4000px] w-full">
+        {/* -- blobs -- */}
+        <FloatingEllipses />
+        <FloatingBlobs />
+        <LargeFloatingBlobs />
 
-      {/* one arabic dialect */}
-      <motion.span className="block py-2">
-        {/* one */}
-        <motion.span
-          ref={oneRef}
-          className="inline-block pr-2"
-          style={{
-            opacity: useTransform(wordHideProgress, [0.2, 0.35], [1, 0]),
-            filter: useMotionTemplate`blur(${useTransform(wordHideProgress, [0.2, 0.35], [0, 10])}px)`,
-          }}
-        >
-          one
-        </motion.span>
+        {/* -- background -- */}
+        <motion.div
+          className="absolute inset-0 bg-[#272727]"
+          style={{ opacity: bgOpacity }}
+        />
 
-        {/* arabic dialect fusion animation */}
-        <span className="-mx-[70px] -my-4 inline-block translate-y-1 scale-[0.6] sm:-mx-10 sm:scale-75 md:-my-0 md:mx-0 md:scale-100 md:translate-y-0">
-          <motion.span
-            className="relative isolate inline-block"
-            style={{
-              x: useTransform(
-                scrollY,
-                [CENTERING_START, CENTERING_END],
-                [0, -horizontalOffset],
-              ),
-            }}
+        {/* -- content -- */}
+        <div className="sticky top-0 z-[1] flex h-svh items-center justify-center overflow-hidden">
+          {/* connecting cultures, one arabic dialect at a time */}
+          <motion.h1
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+            className={cn(
+              "font-unbounded relative isolate inline-block font-semibold",
+              "text-center text-2xl text-[#393939] sm:text-3xl md:text-5xl xl:scale-125",
+            )}
           >
-            <AralectsFusionAnimationV2
-              scrollY={scrollY}
-              horizontalOffset={horizontalOffset}
-              className="text-5xl"
+            {/* connecting cultures, */}
+            <motion.span
+              className="block"
               style={{
-                opacity: useTransform(
-                  scrollY,
-                  [SWITCH_START + 1, SWITCH_START + 2],
-                  [1, 0],
-                ),
-              }}
-            />
-            <motion.div
-              className="absolute inset-y-0 left-0 z-50"
-              style={{
-                opacity: useTransform(
-                  scrollY,
-                  [SWITCH_START - 1, SWITCH_START],
-                  [0, 1],
-                ),
+                opacity: surroundingTextOpacity,
+                filter: surroundingTextBlur,
               }}
             >
-              <SVGMorph
-                fromSvg={aralectsEnSvgData}
-                toSvg={aralectsArSvgData}
-                scrollY={scrollY}
-                scrollStart={TRANSFORM_START}
-                scrollEnd={TRANSFORM_END}
-                width={205}
-                height={64}
-              />
-            </motion.div>
-          </motion.span>
-        </span>
-      </motion.span>
+              {FIRST_LINE_WORDS.map((word, index) => (
+                <AnimatedWord
+                  key={index}
+                  text={word.text}
+                  staggerStart={word.staggerStart}
+                  staggerEnd={word.staggerEnd}
+                  wordHideProgress={wordHideProgress}
+                  className={index > 0 ? "ml-2 md:ml-4" : ""}
+                />
+              ))}
+            </motion.span>
 
-      {/* at a time. */}
-      <motion.span
-        style={{
-          opacity: surroundingTextOpacity,
-          filter: surroundingTextBlur,
-        }}
-      >
-        {THIRD_LINE_WORDS.map((word, index) => (
-          <AnimatedWordV2
-            key={index}
-            text={word.text}
-            staggerStart={word.staggerStart}
-            staggerEnd={word.staggerEnd}
-            wordHideProgress={wordHideProgress}
-            className={index > 0 ? "ml-2 md:ml-4" : ""}
-          />
-        ))}
-      </motion.span>
-    </motion.h1>
+            {/* one arabic dialect */}
+            <motion.span
+              style={
+                {
+                  // opacity: useTransform(
+                  //   scrollY,
+                  //   [REMOVE_START, REMOVE_END],
+                  //   [1, 0.1],
+                  // ),
+                  // filter: useMotionTemplate`blur(${useTransform(wordHideProgress, [0.2, 0.35], [0, 10])}px)`,
+                }
+              }
+              className="block py-2"
+            >
+              {/* one */}
+              <motion.span
+                ref={oneRef}
+                className="inline-block pr-2"
+                style={{
+                  opacity: useTransform(wordHideProgress, [0.2, 0.35], [1, 0]),
+                  filter: useMotionTemplate`blur(${useTransform(wordHideProgress, [0.2, 0.35], [0, 10])}px)`,
+                }}
+              >
+                one
+              </motion.span>
+
+              {/* arabic dialect fusion animation + illustration */}
+              <motion.span className="-mx-[70px] -my-4 inline-block translate-y-1 scale-[0.6] sm:-mx-10 sm:scale-75 md:-my-0 md:mx-0 md:translate-y-0 md:scale-100">
+                <motion.span
+                  className="relative isolate inline-block"
+                  style={{
+                    // filter: useMotionTemplate`blur(${useTransform(
+                    //   scrollY,
+                    //   [ZOOM_END - 200, ZOOM_END],
+                    //   [0, 1],
+                    // )}px)`,
+                    scale: useTransform(
+                      scrollY,
+                      [ZOOM_START, ZOOM_END],
+                      [1, getScale(isMobile, isTablet)],
+                    ),
+                    x: useTransform(
+                      scrollY,
+                      [CENTERING_START, CENTERING_END],
+                      [0, -horizontalOffset],
+                    ),
+                  }}
+                >
+                  {/* arabic + dialects = aralects */}
+                  <AralectsFusion
+                    ref={aralectsFusionRef}
+                    scrollY={scrollY}
+                    className="text-5xl"
+                    fusionStart={FUSION_START}
+                    fusionEnd={FUSION_END}
+                    centeringStart={CENTERING_START}
+                    centeringEnd={CENTERING_END}
+                  />
+
+                  {/* illustration */}
+                  <IllustrationTransition
+                    ref={illustrationTransitionRef}
+                    startScroll={TRANSFORM_START}
+                    endScroll={TRANSFORM_END}
+                    hideStart={HIDE_START}
+                    hideEnd={HIDE_END}
+                    className="font-space absolute inset-0 z-50 hidden p-2 text-5xl font-semibold text-white"
+                  />
+                </motion.span>
+              </motion.span>
+            </motion.span>
+
+            {/* at a time. */}
+            <motion.span
+              style={{
+                opacity: surroundingTextOpacity,
+                filter: surroundingTextBlur,
+              }}
+            >
+              {THIRD_LINE_WORDS.map((word, index) => (
+                <AnimatedWord
+                  key={index}
+                  text={word.text}
+                  staggerStart={word.staggerStart}
+                  staggerEnd={word.staggerEnd}
+                  wordHideProgress={wordHideProgress}
+                  className={index > 0 ? "ml-2 md:ml-4" : ""}
+                />
+              ))}
+            </motion.span>
+          </motion.h1>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const AnimatedHero = () => {
+  return (
+    <ScrollContextProvider>
+      <HomingCursorProvider>
+        <AnimatedHeroInner />
+      </HomingCursorProvider>
+    </ScrollContextProvider>
   );
 };

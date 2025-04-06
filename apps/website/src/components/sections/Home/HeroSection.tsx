@@ -1,29 +1,13 @@
 import { AnimatedHero } from "@components/animated/hero/animated-hero";
 import { FloatingBlobs } from "@components/animated/floating-blobs";
 import { ScrollContextProvider } from "@components/animated/scroll-context";
+import HeroBackground from "@/components/animated/hero/hero-background";
+import AnimatedHero2 from "@/components/animated/hero/animated-hero-2";
 // import TextScrollReveal from "@components/text-scroll-reveal";
 
 const HeroSection = () => {
   return (
-    <ScrollContextProvider>
-      {/* <FloatingBlobs className="absolute inset-0 z-0 overflow-hidden" /> */}
-      <div className="sticky inset-x-0 top-0 flex h-svh items-center justify-center overflow-hidden">
-        {/* scale-75 md:scale-100 lg:scale-125 */}
-        <AnimatedHero className="text-center text-[#393939] text-2xl sm:text-3xl md:text-5xl xl:scale-125" />
-      </div>
-
-      {/* <TextScrollReveal
-          paragraph="Arabic is a world of dialects, stories, and connections."
-          className="font-unbounded text-center mt-[3000px] container px-4 mx-auto text-3xl text-white md:text-4xl"
-          offset={["start 0.9", "start 0.4"]}
-        /> */}
-
-      {/* <TextScrollReveal
-          paragraph="While the focus is generally on Standard Arabic (Fusha), the real magic lies in spoken Arabic (Ammiyya) - the jokes, slang, and warmth of everyday life."
-          className="font-unbounded text-center container px-4 mx-auto mt-[800px] text-xl md:text-4xl text-white"
-          offset={["start 0.9", "start 0.4"]}
-        /> */}
-    </ScrollContextProvider>
+    
   );
 };
 {
