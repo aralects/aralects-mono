@@ -16,6 +16,9 @@ module.exports = {
         SpaceGroteskLight: ["SpaceGroteskLight", "sans-serif"],
         UnboundedRegular: ["UnboundedRegular", "sans-serif"],
         Rubbama: ["KoRubbama", "sans-serif"],
+        LivvicMedium: ["LivvicMedium", "sans-serif"],
+        LivvicBold: ["LivvicBold", "sans-serif"],
+        LivvicSemiBold: ["LivvicSemiBold", "sans-serif"],
       },
 
       animation: {

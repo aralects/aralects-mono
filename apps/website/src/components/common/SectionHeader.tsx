@@ -22,7 +22,7 @@ const SectionHeader: FC<SectionHeaderProps> = ({
     <div className={clsx('flex flex-col gap-4 pt-14', containerClassName)}>
       <h1 
         className={clsx(
-          'text-3xl font-SpaceGrotesk md:text-5xl font-bold',
+          'text-3xl font-LivvicMedium md:text-5xl font-bold',
           titleClassName
         )}
       >

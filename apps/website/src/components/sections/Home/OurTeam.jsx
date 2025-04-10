@@ -1,8 +1,15 @@
 import Blob from "src/assets/blob";
 import Blobs from "src/assets/blobs";
 import { smoothScrollTo } from "src/utils/newsletter";
+import { useState } from "react";
 
 const OurTeam = () => {
+  const [selectedDialect, setSelectedDialect] = useState(null);
+  
+  const handleDialectClick = (dialect) => {
+    setSelectedDialect(dialect);
+  };
+
   return (
     <section className="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
       <div className="px-2 md:px-20 ">
@@ -27,17 +34,9 @@ const OurTeam = () => {
           />
         </div>
 
-        <img
-          src="/img/OurTeamImage.png"
-          alt="image12"
-          width={700}
-          height={300}
-          className="mt-2 w-full rounded-2xl object-cover md:mt-[60px]"
-        />
-
         <div className="flex h-auto w-full flex-col items-center justify-between gap-6 overflow-hidden px-5 md:flex-row md:px-0">
           <div className="flex w-full flex-col py-5 text-start md:w-[50%] md:py-[60px]">
-            <h3 className="font-SpaceGrotesk text-2xl font-bold md:text-5xl">
+            <h3 className="font-LivvicMedium text-2xl font-bold md:text-5xl">
               Our Team
             </h3>
             <p className="font-SpaceGroteskLight mt-6 font-light text-[#D6D6D6] md:text-xl">
@@ -61,16 +60,63 @@ const OurTeam = () => {
       </div>
 
       <Blobs className="-my-6 mx-auto w-[95%] object-cover md:my-12" />
-
+      
       <div className="px-2 pb-2 md:px-20 md:pb-12">
         <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
-          <div className="hidden w-1/2 md:block"></div>
+          <div className="hidden w-1/2 md:flex items-center justify-center relative">
+            <img
+              src="/img/dialect-team.png"
+              alt="dialect"
+              className="z-10"
+            />
+            
+            {/* Buttons overlay on the image */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pt-[130px]">
+              <div className="flex gap-2 mb-3">
+                <button 
+                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "LEVANTINE" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  onClick={() => handleDialectClick("LEVANTINE")}
+                >
+                  LEVANTINE
+                </button>
+                <button 
+                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "EGYPTIAN" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  onClick={() => handleDialectClick("EGYPTIAN")}
+                >
+                  EGYPTIAN
+                </button>
+              </div>
+              
+              <div className="flex gap-2 mb-3">
+                <button 
+                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "GULF" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  onClick={() => handleDialectClick("GULF")}
+                >
+                  GULF
+                </button>
+                <button 
+                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "MAGHREBI" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  onClick={() => handleDialectClick("MAGHREBI")}
+                >
+                  MAGHREBI
+                </button>
+              </div>
+              
+              <div>
+                <button 
+                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "STANDARD ARABIC" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  onClick={() => handleDialectClick("STANDARD ARABIC")}
+                >
+                  STANDARD ARABIC
+                </button>
+              </div>
+            </div>  
+          </div>
           <img
             src="/img/art224.png"
             alt=""
             className="absolute bottom-0 left-0 hidden h-[750px] object-contain md:block lg:h-full"
           />
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="115"
@@ -121,12 +167,13 @@ const OurTeam = () => {
               />
             </g>
           </svg>
+          
           <div className="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[50%] md:px-12">
-            <h4 className="font-SpaceGrotesk text-2xl font-bold md:text-6xl">
-              We’re not just teaching Arabic
+            <h4 className="font-LivvicMedium text-2xl font-bold md:text-6xl">
+              We're not just teaching Arabic
             </h4>
             <p className="font-SpaceGrotesk font-thin text-gray-300 md:mt-6 md:text-xl">
-              We’re building a global community where learners from all
+              We're building a global community where learners from all
               backgrounds can connect, share stories, and dive into the language
               in all its forms.
             </p>

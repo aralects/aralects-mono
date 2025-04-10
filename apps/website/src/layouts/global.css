@@ -55,6 +55,30 @@
   font-family: SpaceGroteskLight;
 }
 
+@font-face {
+  font-family: LivvicMedium;
+  src: url("/fonts/Livvic-Medium.ttf");
+}
+.LivvicMedium {
+  font-family: LivvicMedium;
+}
+
+@font-face {
+  font-family: LivvicBold;
+  src: url("/fonts/Livvic-Bold.ttf");
+}
+.LivvicBold {
+  font-family: LivvicBold;
+}
+
+@font-face {
+  font-family: LivvicSemiBold;
+  src: url("/fonts/Livvic-SemiBold.ttf");
+}
+.LivvicSemiBold {
+  font-family: LivvicSemiBold;
+}
+
 /* scroll bar styling */
 /* width */
 ::-webkit-scrollbar {
