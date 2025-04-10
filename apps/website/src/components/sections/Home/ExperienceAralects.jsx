@@ -112,7 +112,7 @@ const ExperienceAralects = () => {
 
         <div className="flex w-full flex-row items-start px-5 py-[60px] md:px-12 xl:px-16">
           <div className="w-full lg:w-[70%]">
-            <h2 className="font-SpaceGroteskBold max-w-[600px] text-2xl font-bold md:text-left md:text-5xl">
+            <h2 className="font-LivvicMedium max-w-[600px] text-2xl font-bold md:text-left md:text-5xl">
               Want to be the first to experience Aralects?
             </h2>
 

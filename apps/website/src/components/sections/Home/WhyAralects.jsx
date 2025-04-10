@@ -62,7 +62,7 @@ const WhyAralects = () => {
       {/* Why Aralects Content */}
       <div className="my-[30px] flex w-full flex-col items-center justify-between gap-8 px-5 text-start md:my-[60px] md:flex-row md:px-20">
         <div className="md:w-1/2">
-          <h2 className="font-SpaceGrotesk text-2xl font-bold text-glow-xl md:text-5xl">
+          <h2 className="font-LivvicMedium text-2xl font-bold text-glow-xl md:text-5xl">
             Why Aralects?
           </h2>
           <p className="font-SpaceGroteskLight mt-6 font-thin text-gray-300 md:text-xl">
