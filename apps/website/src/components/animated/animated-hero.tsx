@@ -40,6 +40,7 @@ const BLUR_END = 5500;
 const TYPEWRITER_START = 3600;
 const TYPEWRITER_END = 5150;
 const TOTAL_HEIGHT = 6500;
+const TOTAL_HEIGHT_MOBILE = 6000;
 
 // V2 word stagger configuration (for hiding words)
 const FIRST_LINE_WORDS = [
@@ -308,7 +309,7 @@ const AnimatedHeroInner = () => {
       <div
         className="w-full"
         style={{
-          height: TOTAL_HEIGHT,
+          height: isMobile ? TOTAL_HEIGHT_MOBILE : TOTAL_HEIGHT,
         }}
       >
         {/* -- blobs -- */}

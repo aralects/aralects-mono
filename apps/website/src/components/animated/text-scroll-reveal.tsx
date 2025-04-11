@@ -181,7 +181,7 @@ const Char = ({
   const quarterPoint = rStart + rDuration / 4;
   const midPoint = rStart + rDuration / 2;
   const threeQuarterPoint = rStart + (rDuration * 3) / 4;
-  const translateAmount = 10; // Adjust this value as needed
+  const translateAmount = 5; // Adjust this value as needed
 
   const y = useTransform(
     progress,
