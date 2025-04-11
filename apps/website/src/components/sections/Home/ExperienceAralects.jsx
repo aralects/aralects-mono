@@ -112,22 +112,25 @@ const ExperienceAralects = () => {
 
         <div className="flex w-full flex-row items-start px-5 py-[60px] md:px-12 xl:px-16">
           <div className="w-full lg:w-[70%]">
-            <h2 className="font-LivvicMedium max-w-[600px] text-2xl font-bold md:text-left md:text-5xl">
+            <h2 className="font-LivvicMedium intersect-once intersect-half motion-safe:intersect:animate-fade-in-up max-w-[600px] text-2xl font-bold transition motion-safe:opacity-0 md:text-left md:text-5xl">
               Want to be the first to experience Aralects?
             </h2>
 
             <div className="mt-6 flex flex-col gap-4 md:w-[70%]">
-              <p className="font-SpaceGrotesk md:w-[90%] md:text-left md:text-xl">
+              <p className="font-SpaceGrotesk intersect-once intersect-half motion-safe:intersect:animate-fade-in-up transition motion-safe:opacity-0 md:w-[90%] md:text-left md:text-xl">
                 Step into a world where Arabic learning is real, personal, and
                 alive.
               </p>
-              <p className="font-SpaceGrotesk text-glow text-[#EADFFF] md:w-[90%] md:text-left md:text-xl">
+              <p className="font-SpaceGrotesk text-glow intersect-once intersect-half motion-safe:intersect:animate-fade-in-up text-[#EADFFF] transition motion-safe:opacity-0 md:w-[90%] md:text-left md:text-xl">
                 Sign up today and be part of our community as we prepare to
                 launch!
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6">
+            <form
+              onSubmit={handleSubmit}
+              className="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up mt-6 transition motion-safe:opacity-0"
+            >
               <div className="relative flex w-fit flex-col items-stretch justify-between gap-y-2 rounded-full sm:flex-row sm:border sm:border-[#8262B0]">
                 <input
                   type="email"

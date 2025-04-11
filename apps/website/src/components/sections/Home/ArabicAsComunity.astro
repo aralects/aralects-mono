@@ -1,61 +1,63 @@
 ---
 import WipPhoneMockup from "@components/wip-phone-mockup.astro";
+import CommunityIllustration from "@/assets/images/community-illustration.png";
+import Image from "astro/components/Image.astro";
 ---
 
-<!-- ArabicAsComunity.astro -->
-<div
-  class="relative my-10 flex w-full flex-col justify-between px-5 md:my-9 md:flex-row md:px-20 lg:px-20"
->
-  <!-- Background Image -->
-  <img
-    src="/img/ArabicAsComunityBg.jpg"
+<div class="relative isolate overflow-hidden bg-white">
+  <Image
+    src={CommunityIllustration}
     alt=""
-    class="absolute bottom-0 left-0 -z-10 hidden w-[150%] md:block"
+    class="absolute bottom-0 pt-4 inset-x-0 hidden w-full mx-auto md:block 2xl:hidden z-0"
   />
-
-  <!-- Text Content -->
-  <div class="z-30 flex w-full flex-col justify-center text-white md:w-[60%]">
-    <h2
-      class="font-LivvicMedium max-w-[540px] text-2xl font-bold md:text-5xl lg:text-6xl"
+  <div class="bg-[#8262b0]/90 relative z-[1] py-10">
+    <div
+      class="xl:container xl:mx-auto flex flex-col justify-between md:flex-row px-10 md:px-20 xl:px-40"
+    >
+      <div
+        class="flex w-full flex-col justify-center text-white md:w-[50%]"
+      >
+      <h2
+      class="font-LivvicMedium max-w-[540px] text-2xl font-bold md:text-5xl lg:text-6xl intersect-once intersect-half transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up"
     >
       Arabic, as a community, for the community.
     </h2>
 
     <p
-      class="font-LivvicMedium mt-6 w-full font-thin md:w-[80%] md:text-xl"
+      class="font-LivvicMedium mt-6 w-full font-thin md:w-[80%] md:text-xl intersect-once intersect-half transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up"
     >
       Want to be the first to experience Aralects? Sign up now to be among the
       first to explore Aralects as we get ready to launch!
     </p>
-
     <button
-      id="joinWaitingList"
-      class="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2
-             rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md
-             transition-all hover:bg-white/90 md:text-xl"
+    id="joinWaitingList"
+    class="font-SpaceGrotesk tex-lg group mt-6 flex w-fit cursor-pointer items-center gap-2
+           rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md
+           hover:bg-white/90 md:text-xl intersect-once intersect-half transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up"
+  >
+    Join waiting list
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="ml-2 -translate-x-1 transition-transform group-hover:translate-x-0 rotate-90"
     >
-      Join waiting list
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="ml-2 -translate-x-1 transition-transform group-hover:translate-x-0"
-      >
-        <path d="M5 12h14"></path>
-        <path d="m12 5 7 7-7 7"></path>
-      </svg>
-    </button>
-  </div>
+      <path d="M5 12h14"></path>
+      <path d="m12 5 7 7-7 7"></path>
+    </svg>
+  </button>
+      </div>
 
-  <!-- phone mockup -->
-  <div class="mx-auto hidden justify-center md:flex">
-    <WipPhoneMockup class="ml-4" withWipMarquees />
+      <div class="ml-auto hidden justify-center md:flex intersect-once intersect-half transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up">
+        <WipPhoneMockup class="ml-4" withWipMarquees />
+      </div>
+    </div>
   </div>
 </div>
 

@@ -5,6 +5,7 @@ import PostHog from "@components/posthog.astro";
 import Gtm from "@components/gtm.astro";
 
 import "./global.css";
+import LenisScroll from "@components/animated/lenis-scroll.astro";
 const { title = "Aralects" } = Astro.props;
 
 const home = Astro.url.pathname === "/";
@@ -65,6 +66,7 @@ const imageUrl = `${baseUrl}/aralects-og-image.png`;
       <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLRBDC3T"
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <LenisScroll />
     <Header client:load />
     <slot />
     {home && <Footer client:visible />}

@@ -1,4 +1,5 @@
 import baseConfig from "@repo/tailwind-config";
+import plugin from "tailwindcss/plugin";
 
 module.exports = {
   content: [
@@ -22,9 +23,34 @@ module.exports = {
       },
 
       animation: {
+        "fade-in": "fadeIn 0.5s both",
+        "fade-in-up": "fadeInUp 0.5s both",
+        "fade-in-down": "fadeInDown 0.5s both",
+        "fade-in-left": "fadeInLeft 0.5s both",
+        "fade-in-right": "fadeInRight 0.5s both",
         "infinite-scroll": "infinite-scroll 45s linear infinite",
       },
       keyframes: {
+        fadeInUp: {
+          "0%": { opacity: 0, transform: "translateY(2rem)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        fadeInDown: {
+          "0%": { opacity: 0, transform: "translateY(-2rem)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        fadeInLeft: {
+          "0%": { opacity: 0, transform: "translateX(-2rem)" },
+          "100%": { opacity: 1, transform: "translateX(0)" },
+        },
+        fadeInRight: {
+          "0%": { opacity: 0, transform: "translateX(2rem)" },
+          "100%": { opacity: 1, transform: "translateX(0)" },
+        },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
         "infinite-scroll": {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },
@@ -33,6 +59,9 @@ module.exports = {
     },
   },
   plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("intersect", "&:not([no-intersect])");
+    }),
     function ({ addUtilities }) {
       addUtilities({
         ".glow": {

@@ -2,27 +2,32 @@
 import MarqueeStrip from "@components/sections/Home/MarqueeStrip";
 import ExperienceAralects from "../components/sections/Home/ExperienceAralects";
 import FAQs from "../components/sections/Home/Faqs";
-import HeroSection from "../components/sections/Home/HeroSection";
 import OurTeam from "../components/sections/Home/OurTeam";
 import SocialSidebar from "../components/sections/Home/SocialSidebar";
-import TextSection from "../components/sections/Home/TextSection";
-import WhyAralects from "../components/sections/Home/WhyAralects";
+import WhyAralects from "../components/sections/Home/WhyAralects.astro";
 import Layout from "../layouts/Layout.astro";
 import ArabicAsComunity from "@components/sections/Home/ArabicAsComunity.astro";
+import { AnimatedHero } from "@/components/animated/animated-hero";
+
+// move this to the layout component if you want to use it on all pages
+import BasicScripts from "@components/common/BasicScripts.astro";
 ---
 
 <Layout>
   <SocialSidebar className="absolute left-4 z-10 top-[200px]" />
-  <div class="relative xl:container xl:mx-auto">
-    <HeroSection client:visible />
-    <TextSection />
-    <div class="bg-[#8262b0] bg-opacity-90 rounded-t-[2rem]">
+  <AnimatedHero client:load />
+
+  <div class="relative overflow-hidden">
+    <div class="bg-[#272727]">
       <WhyAralects />
       <ArabicAsComunity />
       <OurTeam client:visible />
     </div>
   </div>
   <MarqueeStrip />
-  <FAQs client:load />
-  <ExperienceAralects client:visible />
+  <div class="relative xl:container xl:mx-auto">
+    <FAQs client:load />
+    <ExperienceAralects client:visible />
+  </div>
+  <BasicScripts />
 </Layout>

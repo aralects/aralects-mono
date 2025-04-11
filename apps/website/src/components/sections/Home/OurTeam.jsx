@@ -5,14 +5,14 @@ import { useState } from "react";
 
 const OurTeam = () => {
   const [selectedDialect, setSelectedDialect] = useState(null);
-  
+
   const handleDialectClick = (dialect) => {
     setSelectedDialect(dialect);
   };
 
   return (
-    <section className="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
-      <div className="px-2 md:px-20 ">
+    <section class="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
+      <div class="px-2 xl:container md:px-20 xl:mx-auto">
         <div className="md:glow relative flex items-center justify-between overflow-hidden rounded-2xl border-[#8262B0] bg-[#222222] text-start shadow-[0px_0px_8px_#C8AED340] md:h-[200px] md:border-2 lg:h-[160px]">
           <p className="font-SpaceGroteskLight m-5 w-full align-middle text-lg font-thin text-gray-300 md:ml-10 lg:text-2xl">
             <span className="font-Melodrama lg:text-3xl">50%</span> of learners
@@ -36,10 +36,10 @@ const OurTeam = () => {
 
         <div className="flex h-auto w-full flex-col items-center justify-between gap-6 overflow-hidden px-5 md:flex-row md:px-0">
           <div className="flex w-full flex-col py-5 text-start md:w-[50%] md:py-[60px]">
-            <h3 className="font-LivvicMedium text-2xl font-bold md:text-5xl">
+            <h3 className="font-LivvicMedium intersect-once intersect-half motion-safe:intersect:animate-fade-in-up text-2xl font-bold transition motion-safe:opacity-0 md:text-5xl">
               Our Team
             </h3>
-            <p className="font-SpaceGroteskLight mt-6 font-light text-[#D6D6D6] md:text-xl">
+            <p className="font-SpaceGroteskLight intersect-once intersect-half motion-safe:intersect:animate-fade-in-up mt-6 font-light text-[#D6D6D6] transition motion-safe:opacity-0 md:text-xl">
               Aralects is being designed by a team of experts in{" "}
               <span className="font-SpaceGroteskBold font-medium md:text-white">
                 linguistics, generative AI
@@ -50,7 +50,7 @@ const OurTeam = () => {
               </span>{" "}
               who are determined to make Arabic learning engaging and authentic.
             </p>
-            <p className="text-glow font-SpaceGroteskLight mt-4 font-light text-[#EADFFF] md:text-xl">
+            <p className="text-glow font-SpaceGroteskLight intersect-once intersect-half motion-safe:intersect:animate-fade-in-up mt-4 font-light text-[#EADFFF] transition motion-safe:opacity-0 md:text-xl">
               We believe the best way to learn a language is to live it—and
               that’s exactly the journey we’re creating for you.
             </p>
@@ -60,57 +60,57 @@ const OurTeam = () => {
       </div>
 
       <Blobs className="-my-6 mx-auto w-[95%] object-cover md:my-12" />
-      
-      <div className="px-2 pb-2 md:px-20 md:pb-12">
-        <div className="relative flex h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] md:flex-row md:py-[60px]">
-          <div className="hidden w-1/2 md:flex items-center justify-center relative">
+
+      <div class="px-2 pb-2 md:px-20 md:pb-12">
+        <div class="relative flex h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] xl:container md:flex-row md:py-[60px] xl:mx-auto">
+          <div className="relative hidden w-1/2 items-center justify-center md:flex">
             <img
               src="/img/dialect-team.png"
               alt="dialect"
-              className="z-10"
+              className="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up z-10 transition motion-safe:opacity-0"
             />
-            
+
             {/* Buttons overlay on the image */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pt-[130px]">
-              <div className="flex gap-2 mb-3">
-                <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "LEVANTINE" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pt-[130px]">
+              <div className="mb-3 flex gap-2">
+                <button
+                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "LEVANTINE" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
                   onClick={() => handleDialectClick("LEVANTINE")}
                 >
                   LEVANTINE
                 </button>
-                <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "EGYPTIAN" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                <button
+                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "EGYPTIAN" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
                   onClick={() => handleDialectClick("EGYPTIAN")}
                 >
                   EGYPTIAN
                 </button>
               </div>
-              
-              <div className="flex gap-2 mb-3">
-                <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "GULF" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+
+              <div className="mb-3 flex gap-2">
+                <button
+                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "GULF" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
                   onClick={() => handleDialectClick("GULF")}
                 >
                   GULF
                 </button>
-                <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "MAGHREBI" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                <button
+                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "MAGHREBI" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
                   onClick={() => handleDialectClick("MAGHREBI")}
                 >
                   MAGHREBI
                 </button>
               </div>
-              
+
               <div>
-                <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "STANDARD ARABIC" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                <button
+                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "STANDARD ARABIC" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
                   onClick={() => handleDialectClick("STANDARD ARABIC")}
                 >
                   STANDARD ARABIC
                 </button>
               </div>
-            </div>  
+            </div>
           </div>
           <img
             src="/img/art224.png"
@@ -167,23 +167,23 @@ const OurTeam = () => {
               />
             </g>
           </svg>
-          
+
           <div className="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[50%] md:px-12">
-            <h4 className="font-LivvicMedium text-2xl font-bold md:text-6xl">
+            <h4 className="font-LivvicMedium intersect-once intersect-half motion-safe:intersect:animate-fade-in-up text-2xl font-bold transition motion-safe:opacity-0 md:text-6xl">
               We're not just teaching Arabic
             </h4>
-            <p className="font-SpaceGrotesk font-thin text-gray-300 md:mt-6 md:text-xl">
+            <p className="font-SpaceGrotesk intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-thin text-gray-300 transition motion-safe:opacity-0 md:mt-6 md:text-xl">
               We're building a global community where learners from all
               backgrounds can connect, share stories, and dive into the language
               in all its forms.
             </p>
-            <p className="text-glow font-SpaceGrotesk font-light text-[#EADFFF] md:mt-4 md:text-xl">
+            <p className="text-glow font-SpaceGrotesk intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-light text-[#EADFFF] transition motion-safe:opacity-0 md:mt-4 md:text-xl">
               Start learning Arabic for free, with access to all the tools and
               lessons you need!
             </p>
             <button
               onClick={() => smoothScrollTo("newsletter", 80)}
-              className="font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition-all hover:bg-[#8262b0] hover:text-white md:mt-6 md:text-xl"
+              className="font-SpaceGrotesk tex-lg intersect-once intersect-half motion-safe:intersect:animate-fade-in-up group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] px-5 py-2 text-[#8262b0] shadow-md transition hover:bg-[#8262b0] hover:text-white motion-safe:opacity-0 md:mt-6 md:text-xl"
             >
               Join waiting list
               <svg
@@ -196,7 +196,7 @@ const OurTeam = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="ml-2 -translate-x-1 transition-transform group-hover:translate-x-0"
+                className="ml-2 -translate-x-1 rotate-90 transition-transform group-hover:translate-x-0"
               >
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
