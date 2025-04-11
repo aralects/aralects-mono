@@ -14,27 +14,27 @@ import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
   <ContactLayout>
     <div class="bg-white w-full lg:py-12 pt-14 pb-10">
       <div class="xl:container xl:mx-auto">
-        <div class="flex flex-col lg:flex-row justify-between relative">
+        <div class="flex flex-col xl:flex-row justify-between relative">
           <!-- Left Section with Text -->
-          <div class="w-full lg:w-1/2 relative z-10">
+          <div class="w-full xl:w-1/2 relative z-10">
             <Image 
                 src={demoHeroLeftSectionBg} 
                 alt="" 
-                class="absolute -z-10 top-0 left-0 w-full h-auto" 
+                class="absolute -z-10 top-0 left-0 w-full h-auto md:object-cover md:object-center" 
               />
-            <div class="relative pt-10 lg:pt-24 lg:px-20 px-4 md:px-20">
-              <h1 class="text-4xl md:text-5xl lg:text-[79px] text-[#4a2b82] font-LivvicMedium mb-3 lg:mb-6">Get a taste of <span class="block font-LivvicSemiBold text-[#8262B0]">Aralects</span></h1>
+            <div class="relative pt-10 md:pt-16 lg:pt-24 lg:px-20 px-4 md:px-12">
+              <h1 class="text-4xl md:text-5xl lg:text-[79px] text-[#4a2b82] font-LivvicMedium mb-3 md:mb-4 lg:mb-6">Get a taste of <span class="block font-LivvicSemiBold text-[#8262B0]">Aralects</span></h1>
               <Image 
                 src={demoHeroLeftCenter} 
                 alt="" 
-                class="w-full max-w-[80%] md:max-w-[60%] h-auto my-8 lg:block hidden" 
+                class="w-full max-w-[80%] md:max-w-[60%] md:object-contain my-8 lg:block hidden" 
               />
-              <p class="text-lg md:text-[32px] lg:mb-8 mb-4 font-SpaceGrotesk leading-[125%]">
+              <p class="text-lg md:text-2xl lg:text-[32px] md:mb-6 lg:mb-8 mb-4 font-SpaceGrotesk leading-[125%]">
                 Say hello <span class="text-[#8262B0]">(or rather, "مرحبا"!)</span> to a tiny taste of what Aralects has in store. This interactive pronunciation demo gives you instant feedback on your Arabic accent across multiple dialects.
               </p>
-              <button id="start-demo-btn" class="inline-flex items-center bg-[#8262B0] text-white py-3 px-6 rounded-full font-SpaceGrotesk transition-all hover:bg-[#6c49a7]">
+              <button id="start-demo-btn" class="inline-flex items-center bg-[#8262B0] text-white py-3 px-6 md:py-4 md:px-8 rounded-full font-SpaceGrotesk transition-all hover:bg-[#6c49a7] group">
                 Try Demo now
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
@@ -42,32 +42,32 @@ import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
           </div>
           
           <!-- Right Section with Images -->
-          <div class="lg:pt-24 lg:pr-20 lg:flex hidden">
+          <div class="lg:pt-24 lg:pr-20 md:pt-16 md:pr-12 lg:flex md:flex hidden">
             <Image 
               src={demoHero} 
               alt="Aralects Demo" 
-              class="w-full h-auto" 
+              class="w-full h-auto md:object-contain md:max-h-[600px]" 
             />
           </div>
         </div>
         
         <!-- Notice Banner -->
-        <div class="mt-6 lg:mt-12 bg-[#6c49a7] text-white p-5 md:py-12 md:px-20 rounded-xl mx-4 lg:mx-20">
-            <p class="text-base md:text-[32px] leading-snug font-SpaceGrotesk">
+        <div class="mt-6 md:mt-10 lg:mt-12 bg-[#6c49a7] text-white p-5 md:py-8 md:px-12 lg:py-12 lg:px-20 rounded-xl mx-4 md:mx-12 lg:mx-20">
+            <p class="text-base md:text-xl lg:text-[32px] leading-snug font-SpaceGrotesk">
               <span class="font-SpaceGroteskBold">Heads up:&nbsp;</span>
               This demo is just a glimpse into the magic we're cooking up at Aralects. It's still a work in progress, so bear with us as we tweak and fine-tune to perfection.
             </p>
         </div>
-        <div class="mx-4 lg:hidden mt-8 flex flex-col items-center">
+        <div class="mx-4 md:mx-12 lg:hidden md:hidden mt-8 flex flex-col items-center">
           <Image 
             src={demoHeroMobile} 
             alt="Aralects Demo" 
-            class="w-full h-auto" 
+            class="w-full h-auto md:w-3/4 md:mx-auto" 
           />
           <Image 
             src={demoMobileBg} 
             alt="Aralects Demo" 
-            class="w-full h-auto mt-7" 
+            class="w-full h-auto mt-7 md:w-3/4 md:mx-auto" 
           />
         </div>
       </div>

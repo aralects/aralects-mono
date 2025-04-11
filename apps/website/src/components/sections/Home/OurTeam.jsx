@@ -7,7 +7,11 @@ const OurTeam = () => {
   const [selectedDialect, setSelectedDialect] = useState(null);
   
   const handleDialectClick = (dialect) => {
-    setSelectedDialect(dialect);
+    if (selectedDialect === dialect) {
+      setSelectedDialect(null);
+    } else {
+      setSelectedDialect(dialect);
+    }
   };
 
   return (
@@ -74,14 +78,30 @@ const OurTeam = () => {
             <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pt-[130px]">
               <div className="flex gap-2 mb-3">
                 <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "LEVANTINE" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={`border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${
+                    selectedDialect === "LEVANTINE" 
+                      ? "!bg-black !text-white" 
+                      : "bg-transparent hover:bg-black hover:text-white"
+                  }`}
                   onClick={() => handleDialectClick("LEVANTINE")}
+                  type="button"
+                  style={{
+                    backgroundColor: selectedDialect === "LEVANTINE" ? "black" : "transparent"
+                  }}
                 >
                   LEVANTINE
                 </button>
                 <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "EGYPTIAN" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={`border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${
+                    selectedDialect === "EGYPTIAN" 
+                      ? "!bg-black !text-white" 
+                      : "bg-transparent hover:bg-black hover:text-white"
+                  }`}
                   onClick={() => handleDialectClick("EGYPTIAN")}
+                  type="button"
+                  style={{
+                    backgroundColor: selectedDialect === "EGYPTIAN" ? "black" : "transparent"
+                  }}
                 >
                   EGYPTIAN
                 </button>
@@ -89,14 +109,30 @@ const OurTeam = () => {
               
               <div className="flex gap-2 mb-3">
                 <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "GULF" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={`border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${
+                    selectedDialect === "GULF" 
+                      ? "!bg-black !text-white" 
+                      : "bg-transparent hover:bg-black hover:text-white"
+                  }`}
                   onClick={() => handleDialectClick("GULF")}
+                  type="button"
+                  style={{
+                    backgroundColor: selectedDialect === "GULF" ? "black" : "transparent"
+                  }}
                 >
                   GULF
                 </button>
                 <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "MAGHREBI" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={`border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${
+                    selectedDialect === "MAGHREBI" 
+                      ? "!bg-black !text-white" 
+                      : "bg-transparent hover:bg-black hover:text-white"
+                  }`}
                   onClick={() => handleDialectClick("MAGHREBI")}
+                  type="button"
+                  style={{
+                    backgroundColor: selectedDialect === "MAGHREBI" ? "black" : "transparent"
+                  }}
                 >
                   MAGHREBI
                 </button>
@@ -104,8 +140,16 @@ const OurTeam = () => {
               
               <div>
                 <button 
-                  className={`bg-transparent border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${selectedDialect === "STANDARD ARABIC" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={`border font-SpaceGroteskBold border-white rounded-full px-6 py-1.5 text-white transition-colors text-[22px] ${
+                    selectedDialect === "STANDARD ARABIC" 
+                      ? "!bg-black !text-white" 
+                      : "bg-transparent hover:bg-black hover:text-white"
+                  }`}
                   onClick={() => handleDialectClick("STANDARD ARABIC")}
+                  type="button"
+                  style={{
+                    backgroundColor: selectedDialect === "STANDARD ARABIC" ? "black" : "transparent"
+                  }}
                 >
                   STANDARD ARABIC
                 </button>
