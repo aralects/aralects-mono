@@ -327,8 +327,8 @@ const AnimatedHeroInner = () => {
         <div className="sticky top-0 z-10 flex h-svh items-center justify-center overflow-hidden">
           {/* connecting cultures, one arabic dialect at a time */}
           <motion.h1
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
             className={cn(
               "font-LivvicMedium relative isolate inline-block font-semibold",
