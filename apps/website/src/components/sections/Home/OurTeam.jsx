@@ -2,12 +2,17 @@ import Blob from "src/assets/blob";
 import Blobs from "src/assets/blobs";
 import { smoothScrollTo } from "src/utils/newsletter";
 import { useState } from "react";
+import { cn } from "@repo/ui";
 
 const OurTeam = () => {
-  const [selectedDialect, setSelectedDialect] = useState(null);
+  const [selectedDialects, setSelectedDialects] = useState([]);
 
   const handleDialectClick = (dialect) => {
-    setSelectedDialect(dialect);
+    setSelectedDialects((prevSelected) =>
+      prevSelected.includes(dialect)
+        ? prevSelected.filter((d) => d !== dialect)
+        : [...prevSelected, dialect],
+    );
   };
 
   return (
@@ -52,7 +57,7 @@ const OurTeam = () => {
             </p>
             <p className="text-glow font-SpaceGroteskLight intersect-once intersect-half motion-safe:intersect:animate-fade-in-up mt-4 font-light text-[#EADFFF] transition motion-safe:opacity-0 md:text-xl">
               We believe the best way to learn a language is to live it—and
-              that’s exactly the journey we’re creating for you.
+              that's exactly the journey we're creating for you.
             </p>
           </div>
           <Blob className="hidden w-full object-contain md:block md:h-full md:w-[40%]" />
@@ -74,13 +79,23 @@ const OurTeam = () => {
             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pt-[130px]">
               <div className="mb-3 flex gap-2">
                 <button
-                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "LEVANTINE" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={cn(
+                    "intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0",
+                    selectedDialects.includes("LEVANTINE")
+                      ? "bg-[#252424] text-white hover:bg-[#252424]/80"
+                      : "hover:bg-[#222222] hover:text-[#fffff]",
+                  )}
                   onClick={() => handleDialectClick("LEVANTINE")}
                 >
                   LEVANTINE
                 </button>
                 <button
-                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "EGYPTIAN" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={cn(
+                    "intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0",
+                    selectedDialects.includes("EGYPTIAN")
+                      ? "bg-[#252424] text-white hover:bg-[#252424]/80"
+                      : "hover:bg-[#222222] hover:text-[#fffff]",
+                  )}
                   onClick={() => handleDialectClick("EGYPTIAN")}
                 >
                   EGYPTIAN
@@ -89,13 +104,23 @@ const OurTeam = () => {
 
               <div className="mb-3 flex gap-2">
                 <button
-                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "GULF" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={cn(
+                    "intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0",
+                    selectedDialects.includes("GULF")
+                      ? "bg-[#252424] text-white hover:bg-[#252424]/80"
+                      : "hover:bg-[#222222] hover:text-[#fffff]",
+                  )}
                   onClick={() => handleDialectClick("GULF")}
                 >
                   GULF
                 </button>
                 <button
-                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "MAGHREBI" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={cn(
+                    "intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0",
+                    selectedDialects.includes("MAGHREBI")
+                      ? "bg-[#252424] text-white hover:bg-[#252424]/80"
+                      : "hover:bg-[#222222] hover:text-[#fffff]",
+                  )}
                   onClick={() => handleDialectClick("MAGHREBI")}
                 >
                   MAGHREBI
@@ -104,7 +129,12 @@ const OurTeam = () => {
 
               <div>
                 <button
-                  className={`intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0 ${selectedDialect === "STANDARD ARABIC" ? "bg-[#252424] text-white" : "hover:bg-[#222222] hover:text-[#fffff]"}`}
+                  className={cn(
+                    "intersect-once intersect-half motion-safe:intersect:animate-fade-in-up font-SpaceGroteskBold rounded-full border border-white bg-transparent px-6 py-1.5 text-[22px] text-white transition motion-safe:opacity-0",
+                    selectedDialects.includes("STANDARD ARABIC")
+                      ? "bg-[#252424] text-white hover:bg-[#252424]/80"
+                      : "hover:bg-[#222222] hover:text-[#fffff]",
+                  )}
                   onClick={() => handleDialectClick("STANDARD ARABIC")}
                 >
                   STANDARD ARABIC
