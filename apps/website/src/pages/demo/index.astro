@@ -1,52 +1,89 @@
 ---
-import SocialSidebar from "@components/sections/Home/SocialSidebar";
 import Layout from "@layouts/Layout.astro";
-import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
-import { DEMO_CONTENT, DEMO_COLORS } from "../../constants/demo";
-import SectionHeader from "@components/common/SectionHeader";
+import ContactLayout from "@components/layouts/ContactLayout";
+import { Image } from 'astro:assets';
+import demoHero from "../../assets/images/demo-hero.png";
+import demoHeroMobile from "../../assets/images/demo-sm.png";
+import demoMobileBg from "../../assets/images/demo-sm-bg.png";
+import demoHeroLeftCenter from "../../assets/images/demo-hero-left-center.png";
+import demoHeroLeftSectionBg from "../../assets/images/demo-hero-left-section-bg.png";
 import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
-import DemoSection from "@components/sections/Demo/DemoSection";
 ---
 
 <Layout>
-    <ContactLayout>
-      <WhiteSection >
-        <SectionHeader
-          title={DEMO_CONTENT.TITLE.MAIN}
-          description={DEMO_CONTENT.TITLE.SUB}
-          titleClassName={`text-[${DEMO_COLORS.TITLE}]`}
-          descriptionClassName={DEMO_COLORS.DESCRIPTION}
-          useDefaultDescriptionClasses={false}
-        />
-      </WhiteSection>
-
-      <PurpleSection>
-        <div class="xl:container xl:mx-auto">
-          <SocialSidebar 
-            className="fixed left-6 z-10 top-[35%]"
-            iconClassName="text-white hover:text-gray-200 opacity-50 hover:opacity-100" 
-          />
-          <div class="md:w-[60%] flex flex-col lg:flex-row items-center justify-center gap-10 w-full bg-[#8262B0]">
-            <div>
-              <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
-                {DEMO_CONTENT.DESCRIPTION}
+  <ContactLayout>
+    <div class="bg-white w-full lg:py-12 pt-14 pb-10">
+      <div class="xl:container xl:mx-auto">
+        <div class="flex flex-col lg:flex-row justify-between relative">
+          <!-- Left Section with Text -->
+          <div class="w-full lg:w-1/2 relative z-10">
+            <Image 
+                src={demoHeroLeftSectionBg} 
+                alt="" 
+                class="absolute -z-10 top-0 left-0 w-full h-auto" 
+              />
+            <div class="relative pt-10 lg:pt-24 lg:px-20 px-4 md:px-20">
+              <h1 class="text-4xl md:text-5xl lg:text-[79px] text-[#4a2b82] font-LivvicMedium mb-3 lg:mb-6">Get a taste of <span class="block font-LivvicSemiBold text-[#8262B0]">Aralects</span></h1>
+              <Image 
+                src={demoHeroLeftCenter} 
+                alt="" 
+                class="w-full max-w-[80%] md:max-w-[60%] h-auto my-8 lg:block hidden" 
+              />
+              <p class="text-lg md:text-[32px] lg:mb-8 mb-4 font-SpaceGrotesk leading-[125%]">
+                Say hello <span class="text-[#8262B0]">(or rather, "مرحبا"!)</span> to a tiny taste of what Aralects has in store. This interactive pronunciation demo gives you instant feedback on your Arabic accent across multiple dialects.
               </p>
-              {DEMO_CONTENT.SECOND_DESCRIPTION &&
-                <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal mt-6">
-                  {DEMO_CONTENT.SECOND_DESCRIPTION}
-                </p>
-              }
-            </div>
-            <div class="md:absolute md:top-[-20%] md:right-[10%] lg:right-[15%]">
-              <DemoSection client:load />
+              <button id="start-demo-btn" class="inline-flex items-center bg-[#8262B0] text-white py-3 px-6 rounded-full font-SpaceGrotesk transition-all hover:bg-[#6c49a7]">
+                Try Demo now
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
             </div>
           </div>
+          
+          <!-- Right Section with Images -->
+          <div class="lg:pt-24 lg:pr-20 lg:flex hidden">
+            <Image 
+              src={demoHero} 
+              alt="Aralects Demo" 
+              class="w-full h-auto" 
+            />
+          </div>
         </div>
-      </PurpleSection>
-      <div class="bg-[#8262B0] w-full pb-[2.5%] md:pt-[2.5%] ">
+        
+        <!-- Notice Banner -->
+        <div class="mt-6 lg:mt-12 bg-[#6c49a7] text-white p-5 md:py-12 md:px-20 rounded-xl mx-4 lg:mx-20">
+            <p class="text-base md:text-[32px] leading-snug font-SpaceGrotesk">
+              <span class="font-SpaceGroteskBold">Heads up:&nbsp;</span>
+              This demo is just a glimpse into the magic we're cooking up at Aralects. It's still a work in progress, so bear with us as we tweak and fine-tune to perfection.
+            </p>
+        </div>
+        <div class="mx-4 lg:hidden mt-8 flex flex-col items-center">
+          <Image 
+            src={demoHeroMobile} 
+            alt="Aralects Demo" 
+            class="w-full h-auto" 
+          />
+          <Image 
+            src={demoMobileBg} 
+            alt="Aralects Demo" 
+            class="w-full h-auto mt-7" 
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-full pb-[2.5%] md:pt-[2.5%] ">
         <div class="xl:container xl:mx-auto">
           <ExperienceAralects />
         </div>
       </div>
-    </ContactLayout>
+  </ContactLayout>
 </Layout>
+
+<script>
+  document.getElementById("start-demo-btn")?.addEventListener("click", () => {
+    setTimeout(() => {
+      window.location.href = 'https://demo.aralects.com';
+    }, 800);
+  });
+</script>

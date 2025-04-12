@@ -1,0 +1,52 @@
+---
+import SocialSidebar from "@components/sections/Home/SocialSidebar";
+import Layout from "@layouts/Layout.astro";
+import ContactLayout, { WhiteSection, PurpleSection } from "@components/layouts/ContactLayout";
+import { DEMO_CONTENT, DEMO_COLORS } from "../../constants/demo";
+import SectionHeader from "@components/common/SectionHeader";
+import ExperienceAralects from "@components/sections/Home/ExperienceAralects";
+import DemoSection from "@components/sections/Demo/DemoSection";
+---
+
+<Layout>
+    <ContactLayout>
+      <WhiteSection >
+        <SectionHeader
+          title={DEMO_CONTENT.TITLE.MAIN}
+          description={DEMO_CONTENT.TITLE.SUB}
+          titleClassName={`text-[${DEMO_COLORS.TITLE}]`}
+          descriptionClassName={DEMO_COLORS.DESCRIPTION}
+          useDefaultDescriptionClasses={false}
+        />
+      </WhiteSection>
+
+      <PurpleSection>
+        <div class="xl:container xl:mx-auto">
+          <SocialSidebar 
+            className="fixed left-6 z-10 top-[35%]"
+            iconClassName="text-white hover:text-gray-200 opacity-50 hover:opacity-100" 
+          />
+          <div class="md:w-[60%] flex flex-col lg:flex-row items-center justify-center gap-10 w-full bg-[#8262B0]">
+            <div>
+              <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal">
+                {DEMO_CONTENT.DESCRIPTION}
+              </p>
+              {DEMO_CONTENT.SECOND_DESCRIPTION &&
+                <p class="text-white w-full font-SpaceGrotesk text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight sm:leading-none tracking-[0.03em] font-normal mt-6">
+                  {DEMO_CONTENT.SECOND_DESCRIPTION}
+                </p>
+              }
+            </div>
+            <div class="md:absolute md:top-[-20%] md:right-[10%] lg:right-[15%]">
+              <DemoSection client:load />
+            </div>
+          </div>
+        </div>
+      </PurpleSection>
+      <div class="bg-[#8262B0] w-full pb-[2.5%] md:pt-[2.5%] ">
+        <div class="xl:container xl:mx-auto">
+          <ExperienceAralects />
+        </div>
+      </div>
+    </ContactLayout>
+</Layout>
