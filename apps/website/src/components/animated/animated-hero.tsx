@@ -453,7 +453,7 @@ const AnimatedHeroInner = () => {
             <TextScrollReveal
               startScroll={TYPEWRITER_START}
               endScroll={TYPEWRITER_END}
-              className="max-w-[1400px] text-xl font-bold text-white sm:text-4xl lg:text-6xl xl:text-7xl"
+              className="font-LivvicMedium max-w-[1400px] text-xl font-bold text-white sm:text-4xl lg:text-5xl"
             >
               <span className="text-glow-xl text-purple-200">Aralects</span>{" "}
               transforms the way Arabic is learned, spoken, and understood.
