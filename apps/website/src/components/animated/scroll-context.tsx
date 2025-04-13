@@ -11,7 +11,11 @@ export const ScrollContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { scrollY: scrollYValue } = useScroll();
-  const scrollY = useSpring(scrollYValue, { damping: 30, stiffness: 200 });
+  const scrollY = useSpring(scrollYValue, {
+    stiffness: 500,
+    damping: 50,
+    mass: 0.1,
+  });
 
   return (
     <ScrollContext.Provider value={{ scrollY }}>
