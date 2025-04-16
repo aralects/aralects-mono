@@ -273,6 +273,94 @@ import Blobs from "src/assets/blobs.astro";
       <div
         class="relative flex h-full w-full flex-1 flex-col justify-center gap-4 px-4 text-start md:w-[50%] md:px-12"
       >
+
+      <div class="relative flex w-full items-center justify-center md:hidden">
+        <img
+          src="/img/dialect-team.png"
+          alt="dialect"
+          class="w-[80%] intersect-once intersect-half motion-safe:intersect:animate-fade-in-up z-10 transition motion-safe:opacity-0"
+        />
+
+        {/* Buttons overlay on the image */}
+        <div
+          class="absolute inset-0 z-20 flex flex-col items-center justify-center pt-[100px]"
+        >
+          <div class="mb-2 flex flex-wrap gap-2">
+            <div
+              class="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up transition motion-safe:opacity-0"
+            >
+              <button
+                data-dialect="LEVANTINE"
+                class:list={[
+                  "bg-transparent",
+                  "px-4 py-[6px] font-SpaceGroteskBold rounded-full border border-white text-[14px] transition-colors text-white hover:bg-[#222222]",
+                ]}
+              >
+                LEVANTINE
+              </button>
+            </div>
+            <div
+              class="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up transition motion-safe:opacity-0"
+            >
+              <button
+                data-dialect="EGYPTIAN"
+                class:list={[
+                  "bg-transparent",
+                  "px-4 py-[6px] font-SpaceGroteskBold rounded-full border border-white text-[14px] transition-colors text-white hover:bg-[#222222]",
+                ]}
+              >
+                EGYPTIAN
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-2 flex gap-2">
+            <div
+              class="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up transition motion-safe:opacity-0"
+            >
+              <button
+                data-dialect="GULF"
+                class:list={[
+                    "bg-transparent",
+                  "px-4 py-[6px] font-SpaceGroteskBold rounded-full border border-white text-[14px] transition-colors text-white hover:bg-[#222222]",
+                ]}
+              >
+                GULF
+              </button>
+            </div>
+            <div
+              class="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up transition motion-safe:opacity-0"
+            >
+              <button
+                data-dialect="MAGHREBI"
+                class:list={[
+                  "bg-transparent",
+                  "px-4 py-[6px] font-SpaceGroteskBold rounded-full border border-white text-[14px] transition-colors text-white hover:bg-[#222222]",
+                ]}
+              >
+                MAGHREBI
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="intersect-once intersect-half motion-safe:intersect:animate-fade-in-up transition motion-safe:opacity-0"
+            >
+              <button
+                data-dialect="STANDARD ARABIC"
+                class:list={[
+                  "bg-transparent",
+                  "px-4 py-[6px] font-SpaceGroteskBold rounded-full border border-white text-[14px] transition-colors text-white hover:bg-[#222222]",
+                ]}
+              >
+                STANDARD ARABIC
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <h4
           class="font-LivvicMedium intersect-once intersect-half motion-safe:intersect:animate-fade-in-up text-2xl font-bold transition motion-safe:opacity-0 md:text-6xl"
         >
