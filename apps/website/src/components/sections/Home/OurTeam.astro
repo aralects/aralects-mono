@@ -3,7 +3,7 @@ import WaitingListButton from "@components/ui/WaitingListButton.astro";
 import Blobs from "src/assets/blobs.astro";
 
 const buttonBaseClasses =
-  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]";
+  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] sm:text-[22px] transition-colors text-white md:hover:bg-[#222222]";
 ---
 
 <section class="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
@@ -347,12 +347,12 @@ const buttonBaseClasses =
 
       // Base classes (now applied directly to the button)
       const baseClasses =
-        "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]";
+        "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] sm:text-[22px] transition-colors text-white md:hover:bg-[#222222]";
 
       // Conditional classes (hover styles are applied directly here or via base hover)
       const conditionalClasses = isSelected
-        ? "bg-[#252424] text-white hover:bg-[#252424]/80"
-        : "hover:bg-[#222222] hover:text-[#fffff]";
+        ? "bg-[#252424] text-white md:hover:bg-[#252424]/80"
+        : "hover:text-[#fffff]";
 
       // Use cn to merge and apply classes
       // Make sure cn is available in the client-side scope or replace with manual class manipulation
