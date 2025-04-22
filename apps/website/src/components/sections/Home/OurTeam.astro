@@ -1,6 +1,9 @@
 ---
 import WaitingListButton from "@components/ui/WaitingListButton.astro";
 import Blobs from "src/assets/blobs.astro";
+
+const buttonBaseClasses =
+  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]";
 ---
 
 <section class="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
@@ -146,7 +149,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  buttonBaseClasses,
                 ]}
               >
                 LEVANTINE
@@ -160,7 +163,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  buttonBaseClasses,
                 ]}
               >
                 EGYPTIAN
@@ -177,7 +180,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  buttonBaseClasses,
                 ]}
               >
                 GULF
@@ -191,7 +194,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  buttonBaseClasses,
                 ]}
               >
                 MAGHREBI
@@ -208,7 +211,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  buttonBaseClasses,
                 ]}
               >
                 STANDARD ARABIC
@@ -343,19 +346,8 @@ import Blobs from "src/assets/blobs.astro";
       const isSelected = selectedDialects.includes(dialect);
 
       // Base classes (now applied directly to the button)
-      const baseClasses = [
-        "dialect-button",
-        "font-SpaceGroteskBold",
-        "rounded-full",
-        "border",
-        "border-white",
-        "bg-transparent",
-        "px-6",
-        "py-2", // Standardized padding
-        "text-[22px]",
-        "text-white",
-        "transition-colors",
-      ];
+      const baseClasses =
+        "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]";
 
       // Conditional classes (hover styles are applied directly here or via base hover)
       const conditionalClasses = isSelected
@@ -366,7 +358,7 @@ import Blobs from "src/assets/blobs.astro";
       // Make sure cn is available in the client-side scope or replace with manual class manipulation
       // Assuming cn is globally available or imported appropriately for client-side use
       // If not, replace the next line with manual classList add/remove logic
-      button.className = cn(...baseClasses, conditionalClasses);
+      button.className = cn(baseClasses, conditionalClasses);
     });
   }
 
