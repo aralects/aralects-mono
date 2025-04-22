@@ -129,7 +129,9 @@ const buttonBaseClasses =
     <div
       class="relative flex flex-col h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] xl:container md:flex-row md:py-[60px] xl:mx-auto"
     >
-      <div class="relative flex items-center justify-center px-8 md:px-0 mb-4 md:mb-0 md:w-1/2">
+      <div
+        class="relative flex items-center justify-center px-8 md:px-0 mb-4 md:mb-0 md:w-1/2"
+      >
         <img
           src="/img/dialect-team.png"
           alt="dialect"
@@ -345,20 +347,19 @@ const buttonBaseClasses =
       if (dialect === null) return;
       const isSelected = selectedDialects.includes(dialect);
 
-      // Base classes (now applied directly to the button)
-      const baseClasses =
-        "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] sm:text-[22px] transition-colors text-white md:hover:bg-[#222222]";
+      const selectedClasses =
+        "bg-[#252424] text-white md:hover:bg-[#252424]/80";
+      const unselectedClasses = "bg-transparent";
 
       // Conditional classes (hover styles are applied directly here or via base hover)
-      const conditionalClasses = isSelected
-        ? "bg-[#252424] text-white md:hover:bg-[#252424]/80"
-        : "hover:text-[#fffff]";
-
-      // Use cn to merge and apply classes
-      // Make sure cn is available in the client-side scope or replace with manual class manipulation
-      // Assuming cn is globally available or imported appropriately for client-side use
-      // If not, replace the next line with manual classList add/remove logic
-      button.className = cn(baseClasses, conditionalClasses);
+      // Toggle classes based on selection state
+      if (isSelected) {
+        button.classList.remove(...unselectedClasses.split(" "));
+        button.classList.add(...selectedClasses.split(" "));
+      } else {
+        button.classList.remove(...selectedClasses.split(" "));
+        button.classList.add(...unselectedClasses.split(" "));
+      }
     });
   }
 
