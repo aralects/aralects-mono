@@ -1,6 +1,6 @@
 ---
 import WaitingListButton from "@components/ui/WaitingListButton.astro";
-import Blobs from "src/assets/blobs.astro"; 
+import Blobs from "src/assets/blobs.astro";
 ---
 
 <section class="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
@@ -124,9 +124,9 @@ import Blobs from "src/assets/blobs.astro";
 
   <div class="px-2 pb-2 md:px-20 md:pb-12">
     <div
-      class="relative flex h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] xl:container md:flex-row md:py-[60px] xl:mx-auto"
+      class="relative flex flex-col h-fit items-center justify-between overflow-hidden rounded-3xl border border-gray-700 bg-[#222222] py-5 text-center shadow-[rgba(17,_17,_26,_0.1)_0px_0px_10px] shadow-[#C8AED340] xl:container md:flex-row md:py-[60px] xl:mx-auto"
     >
-      <div class="relative hidden w-1/2 items-center justify-center md:flex">
+      <div class="relative flex items-center justify-center px-8 md:px-0 mb-4 md:mb-0 md:w-1/2">
         <img
           src="/img/dialect-team.png"
           alt="dialect"
@@ -135,7 +135,7 @@ import Blobs from "src/assets/blobs.astro";
 
         {/* Buttons overlay on the image */}
         <div
-          class="absolute inset-0 z-20 flex flex-col items-center justify-center pt-[130px]"
+          class="absolute inset-0 z-20 flex flex-col items-center justify-center pt-[90px] md:pt-[130px]"
         >
           <div class="mb-2 flex flex-wrap gap-2">
             <div
@@ -146,7 +146,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-6 py-2 font-SpaceGroteskBold rounded-full border border-white text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
                 ]}
               >
                 LEVANTINE
@@ -160,7 +160,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-6 py-2 font-SpaceGroteskBold rounded-full border border-white text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
                 ]}
               >
                 EGYPTIAN
@@ -177,7 +177,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-6 py-2 font-SpaceGroteskBold rounded-full border border-white text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
                 ]}
               >
                 GULF
@@ -191,7 +191,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-6 py-2 font-SpaceGroteskBold rounded-full border border-white text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
                 ]}
               >
                 MAGHREBI
@@ -208,7 +208,7 @@ import Blobs from "src/assets/blobs.astro";
                 class:list={[
                   "dialect-button",
                   "bg-transparent",
-                  "px-6 py-2 font-SpaceGroteskBold rounded-full border border-white text-[22px] transition-colors text-white hover:bg-[#222222]",
+                  "px-3 py-1 md:px-6 md:py-2 font-SpaceGroteskBold rounded-full border border-white text-[16px] md:text-[22px] transition-colors text-white hover:bg-[#222222]",
                 ]}
               >
                 STANDARD ARABIC
