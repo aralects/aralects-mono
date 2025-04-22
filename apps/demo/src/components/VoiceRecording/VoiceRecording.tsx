@@ -40,7 +40,7 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   const MIN_RECORDING_TIME = 1500; // 1.5 seconds in milliseconds
   const MAX_RECORDING_TIME = 10000; // 10 seconds in milliseconds
-  
+
   const recordingStartTimeRef = useRef<number>(0);
 
   // HTTP request to get the media with fallback
@@ -52,14 +52,15 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       // For Safari/iOS, we need to handle audio session differently
       if (isIOS || isSafari) {
         // Ensure audio context is created and resumed on user interaction
-      if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-      }
-      
-      if (audioContextRef.current.state === 'suspended') {
-        await audioContextRef.current.resume();
-      }
-      
+        if (!audioContextRef.current) {
+          audioContextRef.current = new (window.AudioContext ||
+            (window as any).webkitAudioContext)();
+        }
+
+        if (audioContextRef.current.state === "suspended") {
+          await audioContextRef.current.resume();
+        }
+
         // iOS Safari specific constraints
         const constraints = {
           audio: {
@@ -68,8 +69,8 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
             autoGainControl: true,
             // Safari/iOS specific settings
             sampleRate: 44100,
-            channelCount: 1
-          }
+            channelCount: 1,
+          },
         };
 
         const stream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -79,40 +80,48 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       // Standard approach for other browsers
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       return stream;
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.name === "NotAllowedError" &&
+        !window.isSecureContext
+      ) {
+        console.warn(
+          "Running in insecure context. This should only be used for testing!",
+        );
 
-      } catch (error) {
-      if (error instanceof Error && error.name === 'NotAllowedError' && !window.isSecureContext) {
-        console.warn('Running in insecure context. This should only be used for testing!');
-        
         // Legacy fallback (mainly for older browsers)
         if (navigator.mediaDevices === undefined) {
           type LegacyGetUserMedia = (
             constraints: MediaStreamConstraints,
             successCallback: (stream: MediaStream) => void,
-            errorCallback: (error: Error) => void
+            errorCallback: (error: Error) => void,
           ) => void;
 
-          const oldGetUserMedia = (
-            (navigator as any).getUserMedia ||
+          const oldGetUserMedia = ((navigator as any).getUserMedia ||
             (navigator as any).webkitGetUserMedia ||
             (navigator as any).mozGetUserMedia ||
-            (navigator as any).msGetUserMedia
-          ) as LegacyGetUserMedia | undefined;
-          
+            (navigator as any).msGetUserMedia) as
+            | LegacyGetUserMedia
+            | undefined;
+
           if (oldGetUserMedia) {
             return new Promise<MediaStream>((resolve, reject) => {
               oldGetUserMedia(
-                { 
-                  audio: isIOS || isSafari ? {
-                    echoCancellation: true,
-                    noiseSuppression: true,
-                    autoGainControl: true,
-                    sampleRate: 44100,
-                    channelCount: 1
-                  } : true 
+                {
+                  audio:
+                    isIOS || isSafari
+                      ? {
+                          echoCancellation: true,
+                          noiseSuppression: true,
+                          autoGainControl: true,
+                          sampleRate: 44100,
+                          channelCount: 1,
+                        }
+                      : true,
                 },
                 (stream) => resolve(stream),
-                (err) => reject(err)
+                (err) => reject(err),
               );
             });
           }
@@ -123,19 +132,25 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       if (isIOS || isSafari) {
         if (error instanceof Error) {
           switch (error.name) {
-            case 'NotAllowedError':
-              console.error('Microphone access denied. On iOS, check your Safari settings and ensure microphone access is enabled.');
+            case "NotAllowedError":
+              console.error(
+                "Microphone access denied. On iOS, check your Safari settings and ensure microphone access is enabled.",
+              );
               break;
-            case 'NotFoundError':
-              console.error('No microphone found. Please ensure your device has a working microphone.');
+            case "NotFoundError":
+              console.error(
+                "No microphone found. Please ensure your device has a working microphone.",
+              );
               break;
-            case 'NotReadableError':
-              console.error('Microphone is already in use or not working properly.');
+            case "NotReadableError":
+              console.error(
+                "Microphone is already in use or not working properly.",
+              );
               break;
           }
         }
       }
-      
+
       throw error;
     }
   };
@@ -145,22 +160,24 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     // Create audio context early to reduce delay on first click
     if (!audioContextRef.current) {
       try {
-        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-        
-        if (audioContextRef.current.state === 'suspended' && 
-            !(/iPad|iPhone|iPod/.test(navigator.userAgent))) {
+        audioContextRef.current = new (window.AudioContext ||
+          (window as any).webkitAudioContext)();
+
+        if (
+          audioContextRef.current.state === "suspended" &&
+          !/iPad|iPhone|iPod/.test(navigator.userAgent)
+        ) {
           audioContextRef.current.resume().catch(console.error);
         }
-        
+
         // Pre-create analyzer
         analyserRef.current = audioContextRef.current.createAnalyser();
         analyserRef.current.fftSize = 1024;
         analyserRef.current.minDecibels = -90;
         analyserRef.current.maxDecibels = -10;
         analyserRef.current.smoothingTimeConstant = 0.85;
-        
       } catch (error) {
-        console.warn('Failed to pre-initialize audio context:', error);
+        console.warn("Failed to pre-initialize audio context:", error);
       }
     }
 
@@ -170,20 +187,20 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
         // Directly request microphone access
         // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         const stream = await requestMediaWithFallback();
-        stream.getAudioTracks().forEach(track => track.stop());
+        stream.getAudioTracks().forEach((track) => track.stop());
         setHasPermission(true);
       } catch (error) {
-        console.warn('Failed to request microphone permission:', error);
+        console.warn("Failed to request microphone permission:", error);
       }
     };
 
     requestPermission();
-    
+
     // Check for MediaRecorder API support
     if (!window.MediaRecorder) {
-      console.warn('MediaRecorder API is not supported on this browser.');
+      console.warn("MediaRecorder API is not supported on this browser.");
     }
-    
+
     // Clean up on unmount
     return () => {
       stopRecording();
@@ -192,7 +209,7 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   useEffect(() => {
     if (isHolding) {
-        startRealLevelMonitoring();
+      startRealLevelMonitoring();
     }
   }, [isHolding]);
 
@@ -205,26 +222,26 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [isHolding]);
 
   // Immediately start capturing audio on press
   const startRecording = async () => {
-    console.log('Starting recording...');
-    
+    console.log("Starting recording...");
+
     cleanupExistingResources();
-    
+
     recordingStartTimeRef.current = Date.now();
     setIsHolding(true);
     setIsRecording(true);
     setIsInitializing(true);
-    
+
     setLevels(new Array(10).fill(3));
     setLevelsHeight(3);
-    
+
     try {
       setAudioURL(null);
       audioChunksRef.current = [];
@@ -233,17 +250,18 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const stream = await requestMediaWithFallback();
       streamRef.current = stream;
-      
+
       // Setup audio context if not already initialized
       if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        audioContextRef.current = new (window.AudioContext ||
+          (window as any).webkitAudioContext)();
       }
-      
+
       // iOS Safari often initializes AudioContext in suspended state
-      if (audioContextRef.current.state === 'suspended') {
+      if (audioContextRef.current.state === "suspended") {
         await audioContextRef.current.resume();
       }
-      
+
       // Setup analyzer if not already initialized
       if (!analyserRef.current) {
         analyserRef.current = audioContextRef.current.createAnalyser();
@@ -252,9 +270,10 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
         analyserRef.current.maxDecibels = -10;
         analyserRef.current.smoothingTimeConstant = 0.85;
       }
-      
+
       // Connect source to analyzer
-      sourceRef.current = audioContextRef.current.createMediaStreamSource(stream);
+      sourceRef.current =
+        audioContextRef.current.createMediaStreamSource(stream);
       sourceRef.current.connect(analyserRef.current);
 
       // Set up media recorder
@@ -273,10 +292,10 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
       mediaRecorder.onstop = () => {
         try {
           const recordingDuration = Date.now() - recordingStartTimeRef.current;
-          
+
           // Check duration before processing the audio
           if (recordingDuration < MIN_RECORDING_TIME) {
-            console.log('Recording too short, discarding...');
+            console.log("Recording too short, discarding...");
             return;
           }
 
@@ -287,7 +306,7 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
             callGradioApi(audioBlob);
           }
         } catch (error) {
-          console.error('Error handling recorded audio:', error);
+          console.error("Error handling recorded audio:", error);
         }
       };
 
@@ -296,13 +315,12 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
       // Finally, start the timer AFTER everything else is set up
       recordingTimerRef.current = setInterval(() => {
-        setRecordingDuration(prev => {
+        setRecordingDuration((prev) => {
           const newDuration = prev + 100;
-          console.log('Timer tick, updating duration to:', newDuration);
+          console.log("Timer tick, updating duration to:", newDuration);
           return newDuration;
         });
       }, 100);
-
     } catch (error) {
       console.error("Error in recording setup:", error);
       setIsHolding(false);
@@ -314,173 +332,180 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   // Faster cleanup method to use when starting a new recording
   const cleanupExistingResources = () => {
-    console.log('Cleaning up resources');
-    
+    console.log("Cleaning up resources");
+
     // Clear timer first
     if (recordingTimerRef.current) {
-        clearInterval(recordingTimerRef.current);
-        recordingTimerRef.current = null;
+      clearInterval(recordingTimerRef.current);
+      recordingTimerRef.current = null;
     }
 
     // Reset duration
     setRecordingDuration(0);
-    
+
     // Stop media recorder and tracks
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state !== "inactive"
+    ) {
       try {
         mediaRecorderRef.current.stop();
       } catch (e) {
-        console.warn('Error stopping media recorder:', e);
+        console.warn("Error stopping media recorder:", e);
       }
     }
-    
+
     // Release media tracks
     if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => {
+      streamRef.current.getTracks().forEach((track) => {
         track.stop();
         track.enabled = false;
       });
       streamRef.current = null;
     }
-    
+
     // Disconnect but don't close audio context
     if (sourceRef.current) {
       try {
         sourceRef.current.disconnect();
       } catch (e) {
-        console.warn('Error disconnecting source:', e);
+        console.warn("Error disconnecting source:", e);
       }
       sourceRef.current = null;
     }
-    
+
     // Keep analyser but reset
-    
+
     // Clear animation frame
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     }
-    
+
     // Reset audio chunks
     audioChunksRef.current = [];
-    
   };
 
-  
   const startRealLevelMonitoring = () => {
     if (!analyserRef.current) return;
-    
+
     const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-    
+
     const updateLevels = () => {
       // Check if we should continue monitoring
       if (!isHolding) {
         return;
       }
-      
+
       if (!analyserRef.current) {
-        console.error('Analyser no longer available. Stopping level monitoring.');
+        console.error(
+          "Analyser no longer available. Stopping level monitoring.",
+        );
         return;
       }
 
       try {
         analyserRef.current.getByteFrequencyData(dataArray);
-        
+
         // Calculate average volume level
-        const average = dataArray.reduce((acc, value) => acc + value, 0) / dataArray.length;
+        const average =
+          dataArray.reduce((acc, value) => acc + value, 0) / dataArray.length;
         const normalizedLevel = Math.min(20, (average / 8) * 20); // Even more sensitive normalization
-        
+
         // Set a minimum level when holding but not speaking
         const finalLevel = normalizedLevel < 4 ? 2 : normalizedLevel;
-        
+
         setLevels(new Array(10).fill(finalLevel));
         setLevelsHeight(finalLevel);
-        
+
         // Continue monitoring
         animationFrameRef.current = requestAnimationFrame(updateLevels);
       } catch (error) {
-        console.error('Error in updateLevels:', error);
+        console.error("Error in updateLevels:", error);
         // Still try to continue monitoring
         animationFrameRef.current = requestAnimationFrame(updateLevels);
       }
     };
-    
+
     updateLevels();
   };
 
   const stopRecording = () => {
     // Clear timer first
     if (recordingTimerRef.current) {
-        clearInterval(recordingTimerRef.current);
-        recordingTimerRef.current = null;
+      clearInterval(recordingTimerRef.current);
+      recordingTimerRef.current = null;
     }
 
     // Reset duration immediately
     setRecordingDuration(0);
 
     const recordingDuration = Date.now() - recordingStartTimeRef.current;
-    
+
     // If recording is too short, just cleanup
     if (recordingDuration < MIN_RECORDING_TIME) {
-        console.log('Recording too short, discarding...');
-        // Release media tracks
-        if (streamRef.current) {
-            streamRef.current.getTracks().forEach(track => {
-                track.stop();
-                track.enabled = false;
-            });
-            streamRef.current = null;
-        }
-        
-        // Reset visual states
-        setLevels(new Array(10).fill(3));
-        setLevelsHeight(0);
-        setIsInitializing(false);
-        return;
+      console.log("Recording too short, discarding...");
+      // Release media tracks
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => {
+          track.stop();
+          track.enabled = false;
+        });
+        streamRef.current = null;
+      }
+
+      // Reset visual states
+      setLevels(new Array(10).fill(3));
+      setLevelsHeight(0);
+      setIsInitializing(false);
+      return;
     }
 
     try {
-        // Only stop mediaRecorder if recording is long enough
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
-            mediaRecorderRef.current.stop();
-        }
-        
-        // Clean up audio context and nodes
-        if (sourceRef.current) {
-            sourceRef.current.disconnect();
-            sourceRef.current = null;
-        }
+      // Only stop mediaRecorder if recording is long enough
+      if (
+        mediaRecorderRef.current &&
+        mediaRecorderRef.current.state !== "inactive"
+      ) {
+        mediaRecorderRef.current.stop();
+      }
 
-        // Clean up animation frame
-        if (animationFrameRef.current) {
-            cancelAnimationFrame(animationFrameRef.current);
-            animationFrameRef.current = null;
-        }
+      // Clean up audio context and nodes
+      if (sourceRef.current) {
+        sourceRef.current.disconnect();
+        sourceRef.current = null;
+      }
 
-        // Reset states
-        setLevels(new Array(10).fill(3));
-        setLevelsHeight(0);
-        setIsInitializing(false);
-        
-        // Release media tracks
-        if (streamRef.current) {
-            streamRef.current.getTracks().forEach(track => {
-                track.stop();
-                track.enabled = false;
-            });
-            streamRef.current = null;
-        }
+      // Clean up animation frame
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
 
-        // Keep audioContextRef and analyserRef alive for faster initialization next time
+      // Reset states
+      setLevels(new Array(10).fill(3));
+      setLevelsHeight(0);
+      setIsInitializing(false);
+
+      // Release media tracks
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => {
+          track.stop();
+          track.enabled = false;
+        });
+        streamRef.current = null;
+      }
+
+      // Keep audioContextRef and analyserRef alive for faster initialization next time
     } catch (error) {
-        console.error('Error during cleanup:', error);
+      console.error("Error during cleanup:", error);
     }
   };
 
   // Add effect to handle max recording time
   useEffect(() => {
     let maxRecordingTimeout: NodeJS.Timeout;
-    
+
     if (isHolding) {
       maxRecordingTimeout = setTimeout(() => {
         if (isHolding) {
@@ -533,11 +558,11 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
   // GRADIO
   const callGradioApi = async (audioBlob: Blob) => {
     if (!client) {
-      console.warn('Gradio client not available');
+      console.warn("Gradio client not available");
       setLoadingGradio(false);
       return;
     }
-    
+
     setLoadingGradio(true);
     setResult(null);
     try {
@@ -570,14 +595,14 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
 
   const handlePointerUp = (e: React.PointerEvent) => {
     e.preventDefault();
-    
+
     // Clear timer and reset duration first
     if (recordingTimerRef.current) {
-        clearInterval(recordingTimerRef.current);
-        recordingTimerRef.current = null;
+      clearInterval(recordingTimerRef.current);
+      recordingTimerRef.current = null;
     }
     setRecordingDuration(0);
-    
+
     // Then update other states
     setIsHolding(false);
     setIsRecording(false);
@@ -589,28 +614,30 @@ const VoiceRecording: React.FC<VoiceRecordingProps> = ({
     e.preventDefault();
   };
 
-  console.log('Render: recordingDuration =', recordingDuration);
+  console.log("Render: recordingDuration =", recordingDuration);
 
   return (
     <div className={classes.container}>
       <p className={classes.micTitle}>
-        {isGradioLoading
-          ? "Connecting to server..."
-          : loadingGradio
-            ? "Processing..."
-            : isHolding
-              ? <div className={classes.recordingStatus}>
-                  {(isInitializing || recordingDuration < MIN_RECORDING_TIME) ?
-                    <span className={classes.minTimeHint}>
-                      Keep holding...
-                    </span>
-                    :
-                    <span className={classes.timer}>
-                      Recording{".".repeat(Math.floor(recordingDuration / 300) % 4)}
-                    </span>
-                  }
-                </div>
-              : "Hold to record"}
+        {isGradioLoading ? (
+          "Connecting to server..."
+        ) : loadingGradio ? (
+          "Processing..."
+        ) : isHolding ? (
+          <div className={classes.recordingStatus}>
+            {isInitializing || recordingDuration < MIN_RECORDING_TIME ? (
+              <span className={classes.minTimeHint}>
+                Don't start just yet...
+              </span>
+            ) : (
+              <span className={classes.timer}>
+                Recording{".".repeat(Math.floor(recordingDuration / 300) % 4)}
+              </span>
+            )}
+          </div>
+        ) : (
+          "Hold to record"
+        )}
       </p>
       <div className="flex flex-col items-center space-y-4">
         <motion.button

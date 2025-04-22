@@ -1,7 +1,6 @@
 ---
 import Footer from "@components/layout/Footer";
 import Header from "@components/layout/Header";
-import PostHog from "@components/posthog.astro";
 import Gtm from "@components/gtm.astro";
 
 import "./global.css";
@@ -59,7 +58,6 @@ const imageUrl = `${baseUrl}/aralects-og-image.png`;
 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <PostHog />
   </head>
   <body class="min-h-dvh">
     <!-- Google Tag Manager (noscript) -->
