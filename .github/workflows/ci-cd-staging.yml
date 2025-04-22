@@ -1,4 +1,4 @@
-name: Aralects Monorepo CI/CD
+name: Aralects Monorepo Staging CI/CD
 
 on:
   push:
