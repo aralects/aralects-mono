@@ -1,5 +1,5 @@
 import { Fragment } from "react/jsx-runtime";
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import { capitalize, cn } from "~/lib/utils";
 import {
   ColorModeSelect,
@@ -22,10 +22,10 @@ const AppContainer = ({
 } & React.HTMLAttributes<HTMLElement>) => {
   return (
     <Fragment>
-      <Helmet>
+      {/* <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
-      </Helmet>
+      </Helmet> */}
       <div
         className={cn(
           "grid h-full [grid-template-areas:'app-header''app-content''app-footer'] [grid-template-rows:min-content_1fr_min-content]",
