@@ -1,0 +1,18 @@
+---
+import Layout from "@layouts/Layout.astro";
+import AboutHero from "@components/sections/About/AboutHero.astro";
+import OurStory from "@components/sections/About/OurStory.astro";
+import TeamSection from "@components/sections/About/TeamSection.astro";
+import ContactCallout from "@components/sections/About/ContactCallout.astro";
+import MarqueeStrip from "@components/sections/Home/MarqueeStrip";
+import Footer from "@components/layout/Footer";
+---
+
+<Layout title="About Us - Aralects">
+  <AboutHero />
+  <OurStory />
+  <TeamSection />
+  <ContactCallout />
+  <MarqueeStrip />
+  <Footer client:visible />
+</Layout>
