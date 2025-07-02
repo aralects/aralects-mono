@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const links = [
   { href: "/", label: "Home" },
   { href: "/demo", label: "Demo" },
+  { href: "/about", label: "About" },
   { href: "https://blog.aralects.com", label: "Blog" },
   { href: "/contact", label: "Contact Us" },
   {
