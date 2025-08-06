@@ -182,6 +182,10 @@ body {
   --slide-spacing: 1rem;
   --slide-size: 80%;
 }
+.embla-small {
+  --slide-size: 60%;
+
+}
 .embla__viewport {
   overflow: hidden;
 }
@@ -279,6 +283,9 @@ body {
 }
 .embla__dot--selected {
   background-color: #272727;
+}
+.embla__dots__purple .embla__dot--selected {
+  background-color: #8262B0;
 }
 .embla__dot:after {
   box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
