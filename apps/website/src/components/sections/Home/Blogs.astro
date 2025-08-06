@@ -1,0 +1,173 @@
+---
+import CommunityIllustration from "@/assets/images/community-illustration.png";
+import Image from "astro/components/Image.astro";
+import WaitingListButton from "@/components/ui/WaitingListButton.astro";
+---
+
+<div class="relative isolate overflow-hidden bg-white font-LivvicMedium">
+  <Image
+    src={CommunityIllustration}
+    alt=""
+    class="absolute bottom-0 pt-4 inset-x-0 hidden w-full mx-auto md:block 2xl:hidden z-0"
+  />
+
+  <div class="bg-[#8262b0]/90 relative z-[1] py-16 px-6">
+    <div class="text-center text-white max-w-4xl mx-auto mb-7">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+        Arabic, as a community, for the community.
+      </h2>
+      <p class="mt-6 text-lg md:text-xl font-light">
+        Read the latest on dialects, culture, and community-powered projects
+      </p>
+    </div>
+
+    <div class="mt-16 md:mt-32 grid grid-cols-1 md:grid-cols-3 gap-9 max-w-5xl mx-auto">
+      <div class={`relative flex flex-col items-center`}>
+        <div class={`bg-white rounded-[25px] shadow-xl p-6 text-center flex flex-col items-center transition-all duration-300`}>
+          <div class="relative w-full h-60 rounded-[25px] border border-[#8262b0] mb-5 overflow-visible">
+            <img
+              src="/img/blogs-1.jpg"
+              alt="Card image"
+              class="w-full h-full object-cover rounded-[25px]"
+            />
+            <div
+              class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-[#8262b0] text-white text-xs px-3 py-1 rounded-full shadow-md">
+              SPOTLIGHTS
+            </div>
+          </div>
+
+          <h3 class="text-lg font-semibold text-black mb-3 mt-2">
+            What is the Best Arabic Dialect for You to Learn
+          </h3>
+          <p class="text-xs text-gray-500 mb-5 text-left">
+            Choosing a dialect to learn depends on your goals - choosing what works for your goals will always be right
+            for you.
+          </p>
+
+          <div class="text-sm text-[#8262b0] mb-5 flex items-center justify-center gap-1">
+            <img src="/img/message-text.svg" alt="Comments" class="w-4 h-4" />
+            <span>20 comments</span>
+          </div>
+
+          <div class="flex items-center justify-center text-[#8262b0] text-xs gap-2">
+            <span>23 Jan 2025</span>
+            <span class="font-bold">·</span>
+            <img
+              src="/img/author.png"
+              alt="Author"
+              class="w-6 h-6 rounded-full"
+            />
+            <span>Muhammad Sallah</span>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class={`relative flex flex-col items-center`}>
+        <div class={`bg-white rounded-[25px] shadow-xl p-6 text-center flex flex-col items-center transition-all duration-300 md:mt-[-40px] md:z-10 `}>
+          <div class="relative w-full h-60 rounded-[25px] border border-[#8262b0] mb-5 overflow-visible">
+            <img
+              src="/img/blogs-2.jpg"
+              alt="Card image"
+              class="w-full h-full object-cover rounded-[25px]"
+            />
+            <div
+              class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-[#8262b0] text-white text-xs px-3 py-1 rounded-full shadow-md">
+              SPOTLIGHTS
+            </div>
+          </div>
+
+          <h3 class="text-lg font-semibold text-black mb-3 mt-2">
+            Mapping Palestinian Arabic
+          </h3>
+          <p class="text-xs text-gray-500 mb-5 text-left">
+            This article recounts the author’s efforts with the Maknuune project - an open lexicon dedicated to documenting and..
+          </p>
+
+          <div class="text-sm text-[#8262b0] mb-5 flex items-center justify-center gap-1">
+            <img src="/img/message-text.svg" alt="Comments" class="w-4 h-4" />
+            <span>12 comments</span>
+          </div>
+
+          <div class="flex items-center justify-center text-[#8262b0] text-xs gap-2">
+            <span>12 Feb 2025</span>
+            <span class="font-bold">·</span>
+            <img
+              src="/img/author.png"
+              alt="Author"
+              class="w-6 h-6 rounded-full"
+            />
+            <span>Muhammad Sallah</span>
+          </div>
+        </div>
+
+        <a href="https://blog.aralects.com" class="mt-7 hidden md:block bg-white text-[#8262b0] border border-[#8262b0] px-6 py-2 rounded-full shadow hover:bg-[#f2eafa] transition">
+          View Blogs
+        </a>
+      </div>
+
+      <div class={`relative flex flex-col items-center`}>
+        <div class={`bg-white rounded-[25px] shadow-xl p-6 text-center flex flex-col items-center transition-all duration-300`}>
+          <div class="relative w-full h-60 rounded-[25px] border border-[#8262b0] mb-5 overflow-visible">
+            <img
+              src="/img/blogs-1.jpg"
+              alt="Card image"
+              class="w-full h-full object-cover rounded-[25px]"
+            />
+            <div
+              class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-[#8262b0] text-white text-xs px-3 py-1 rounded-full shadow-md">
+              SPOTLIGHTS
+            </div>
+          </div>
+
+          <h3 class="text-lg font-semibold text-black mb-3 mt-2">
+            Standard Arabic vs Dialects: What Should You Learn First?
+          </h3>
+          <p class="text-xs text-gray-500 mb-5 text-left">
+            Standard Arabic suits formal reading and a dialect handles daily talk. Either works—choose what meets your goals.
+
+          </p>
+
+          <div class="text-sm text-[#8262b0] mb-5 flex items-center justify-center gap-1">
+            <img src="/img/message-text.svg" alt="Comments" class="w-4 h-4" />
+            <span>32 comments</span>
+          </div>
+
+          <div class="flex items-center justify-center text-[#8262b0] text-xs gap-2">
+            <span>2 April 2025</span>
+            <span class="font-bold">·</span>
+            <img
+              src="/img/author.png"
+              alt="Author"
+              class="w-6 h-6 rounded-full"
+            />
+            <span>Muhammad Sallah</span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <a href="https://blog.aralects.com" class="mt-2 md:hidden mx-auto bg-white text-[#8262b0] border border-[#8262b0] px-6 py-2 rounded-full shadow hover:bg-[#f2eafa] transition">
+        View Blogs
+      </a>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+  import { smoothScrollTo } from "src/utils/newsletter";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("joinWaitingList");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        smoothScrollTo("newsletter", 80);
+      });
+    }
+  });
+</script>

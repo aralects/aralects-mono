@@ -159,3 +159,16 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+
+.slick-dots .dots-bg {
+  background-color: #D9D9D9;
+}
+
+.slick-dots .slick-active .dots-bg {
+  background-color: #8262B0;
+}
+
+
+.slick-dots li {
+  margin: 0 1px !important;
+}

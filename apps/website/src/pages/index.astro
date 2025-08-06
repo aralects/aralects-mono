@@ -5,12 +5,15 @@ import FAQs from "../components/sections/Home/Faqs";
 import OurTeam from "../components/sections/Home/OurTeam.astro";
 import SocialSidebar from "../components/sections/Home/SocialSidebar";
 import WhyAralects from "../components/sections/Home/WhyAralects.astro";
+import KeyFeatures from "@components/sections/Home/KeyFeatures.astro";
+import Dialects from "@components/sections/Home/Dialects.astro";
 import Layout from "../layouts/Layout.astro";
 import ArabicAsComunity from "@components/sections/Home/ArabicAsComunity.astro";
 import { AnimatedHero } from "@/components/animated/animated-hero";
 
 // move this to the layout component if you want to use it on all pages
 import BasicScripts from "@components/common/BasicScripts.astro";
+import Blogs from "../components/sections/Home/Blogs.astro";
 ---
 
 <Layout>
@@ -19,9 +22,12 @@ import BasicScripts from "@components/common/BasicScripts.astro";
 
   <div class="relative overflow-hidden">
     <div class="bg-[#272727]">
-      <WhyAralects />
-      <ArabicAsComunity />
-      <OurTeam />
+      <!--<WhyAralects />-->
+      <KeyFeatures />
+      <!--<ArabicAsComunity />-->
+      <Blogs />
+      <Dialects />
+      <!--<OurTeam />-->
     </div>
   </div>
   <MarqueeStrip />
