@@ -9,7 +9,7 @@ function HomepageSlider({ isFirstPromo = false }) {
   const settings = {
     dots: true,
     infinite: false,
-    speed: 500,
+    speed: 100,
     slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
@@ -32,11 +32,11 @@ function HomepageSlider({ isFirstPromo = false }) {
     <div className="slider-container mt-[20px]">
       {isFirstPromo ? (
         <Slider {...settings}>
-          <div className="pb-[30px] pr-[10px]">
+          <div className="px-[5px] pb-[30px]">
             <img
               src="/img/homepage-promo-1-prompt.png"
               alt=""
-              className="h-[56px] max-w-[150px] translate-x-[-6px] object-contain"
+              className="h-[56px] w-[150px] max-w-full translate-x-[-6px] object-contain"
             />
             <div className="font-LivvicMedium text-glow-xl text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-bold transition motion-safe:opacity-0 md:text-lg">
               AI-Powered Customization
@@ -45,11 +45,11 @@ function HomepageSlider({ isFirstPromo = false }) {
               Move at your own speed with customizable lessons.
             </p>
           </div>
-          <div className="pb-[30px]">
+          <div className="px-[5px] pb-[30px]">
             <img
               src="/img/homepage-promo-1-script.png"
               alt=""
-              className="h-[56px] max-w-[100px]  translate-x-[-6px] object-contain"
+              className="h-[56px] w-[100px] max-w-full translate-x-[-6px] object-contain"
             />
             <div className="font-LivvicMedium text-glow-xl text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-bold transition motion-safe:opacity-0 md:text-lg">
               Script Settings
@@ -59,11 +59,11 @@ function HomepageSlider({ isFirstPromo = false }) {
               view so you learn in the format that works best for you.
             </p>
           </div>
-          <div className="pb-[30px] pl-[10px]">
+          <div className="px-[5px] pb-[30px]">
             <img
               src="/img/homepage-promo-1-dialects.png"
               alt=""
-              className="h-[56px] max-w-[190px]  translate-x-[-6px] object-contain"
+              className="h-[56px] w-[190px] max-w-full translate-x-[-6px] object-contain"
             />
             <div className="font-LivvicMedium text-glow-xl text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-bold transition motion-safe:opacity-0 md:text-lg">
               Main & Secondary Dialect
@@ -76,11 +76,11 @@ function HomepageSlider({ isFirstPromo = false }) {
         </Slider>
       ) : (
         <Slider {...settings}>
-          <div className="pb-[30px] pr-[10px]">
+          <div className="px-[5px] pb-[30px]">
             <img
               src="/img/homepage-promo-2-audio.png"
               alt=""
-              className="h-[56px] max-w-[60px] translate-x-[-6px] object-contain"
+              className="h-[56px] w-[60px] max-w-full translate-x-[-6px] object-contain"
             />
             <div className="font-LivvicMedium text-glow-xl text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-bold transition motion-safe:opacity-0 md:text-lg">
               Audio Pronunciation
@@ -89,11 +89,11 @@ function HomepageSlider({ isFirstPromo = false }) {
               Hear every word and phrase spoken by native speakers.
             </p>
           </div>
-          <div className="pb-[30px]">
+          <div className="px-[5px] pb-[30px]">
             <img
               src="/img/homepage-promo-2-explain.png"
               alt=""
-              className="h-[56px] max-w-[100px]  translate-x-[-6px] object-contain"
+              className="h-[56px] w-[100px] max-w-full translate-x-[-6px] object-contain"
             />
             <div className="font-LivvicMedium text-glow-xl text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-bold transition motion-safe:opacity-0 md:text-lg">
               “Explain Answer” Feature
@@ -103,11 +103,11 @@ function HomepageSlider({ isFirstPromo = false }) {
               breakdown, great for curious students who want more nuance.
             </p>
           </div>
-          <div className="pb-[30px] pl-[10px]">
+          <div className="px-[5px] pb-[30px]">
             <img
               src="/img/homepage-promo-2-dialect.png"
               alt=""
-              className="h-[56px] max-w-[190px]  translate-x-[-6px] object-contain"
+              className="h-[56px] w-[190px] max-w-full translate-x-[-6px] object-contain"
             />
             <div className="font-LivvicMedium text-glow-xl text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-bold transition motion-safe:opacity-0 md:text-lg">
               Secondary Dialect

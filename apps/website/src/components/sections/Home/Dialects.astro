@@ -9,7 +9,7 @@ const buttonBaseClasses =
 <section class="w-full rounded-t-3xl bg-[#272727] pt-2 text-white md:pt-[60px]">
   <div class="px-2 xl:container md:px-20 xl:mx-auto">
     <div
-      class="md:glow relative flex items-center justify-between overflow-hidden rounded-2xl border-[#8262B0] bg-[#222222] text-start shadow-[0px_0px_8px_#C8AED340] md:h-[200px] md:border-2 lg:h-[160px]"
+      class="md:glow mt-[-70px] md:mt-0 relative flex items-center justify-between overflow-hidden rounded-2xl border-[#8262B0] bg-[#222222] text-start shadow-[0px_0px_8px_#C8AED340] md:h-[200px] md:border-2 lg:h-[160px]"
     >
       <p
         class="font-SpaceGroteskLight m-5 w-full align-middle text-lg font-thin text-gray-300 md:ml-10 lg:text-2xl"
@@ -123,12 +123,18 @@ const buttonBaseClasses =
           Explore the different dialects you can learn!
         </p>
         <div
-          class="intersect-once intersect-half transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up"
+          class="intersect-once intersect-half flex flex-row gap-[15px] transition motion-safe:opacity-0 motion-safe:intersect:animate-fade-in-up"
         >
+          <a
+            href="/about"
+            class={"font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full px-5 py-2 tex-lg transition-colors border border-[#8262b0] text-[#8262b0] bg-transparent shadow-md hover:bg-[#8262b0] hover:text-white md:mt-6 md:text-xl"}
+          >
+            Learn more
+          </a>
           <WaitingListButton
-            text="Join waiting list"
+            text="Subscribe Now"
             id="join-waiting-list-button"
-            class="tex-lg transition-colors border border-[#8262b0] text-[#8262b0] bg-transparent shadow-md hover:bg-[#8262b0] hover:text-white md:mt-6 md:text-xl"
+            class="tex-lg transition-colors border shadow-md  md:mt-6 md:text-xl"
           />
         </div>
       </div>

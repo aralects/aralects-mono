@@ -2,9 +2,10 @@
 import CommunityIllustration from "@/assets/images/community-illustration.png";
 import Image from "astro/components/Image.astro";
 import WaitingListButton from "@/components/ui/WaitingListButton.astro";
+import BlogsSlider from "@components/ui/BlogsSlider";
 ---
 
-<div class="relative isolate overflow-hidden bg-white font-LivvicMedium">
+<div class="relative isolate overflow-hidden bg-white font-LivvicMedium rounded-t-[30px]">
   <Image
     src={CommunityIllustration}
     alt=""
@@ -22,7 +23,7 @@ import WaitingListButton from "@/components/ui/WaitingListButton.astro";
     </div>
 
     <div class="mt-16 md:mt-32 grid grid-cols-1 md:grid-cols-3 gap-9 max-w-5xl mx-auto">
-      <div class={`relative flex flex-col items-center`}>
+      <div class={`relative hidden md:flex flex-col items-center`}>
         <div class={`bg-white rounded-[25px] shadow-xl p-6 text-center flex flex-col items-center transition-all duration-300`}>
           <div class="relative w-full h-60 rounded-[25px] border border-[#8262b0] mb-5 overflow-visible">
             <img
@@ -65,7 +66,7 @@ import WaitingListButton from "@/components/ui/WaitingListButton.astro";
       </div>
 
 
-      <div class={`relative flex flex-col items-center`}>
+      <div class={`relative hidden md:flex flex-col items-center`}>
         <div class={`bg-white rounded-[25px] shadow-xl p-6 text-center flex flex-col items-center transition-all duration-300 md:mt-[-40px] md:z-10 `}>
           <div class="relative w-full h-60 rounded-[25px] border border-[#8262b0] mb-5 overflow-visible">
             <img
@@ -108,7 +109,7 @@ import WaitingListButton from "@/components/ui/WaitingListButton.astro";
         </a>
       </div>
 
-      <div class={`relative flex flex-col items-center`}>
+      <div class={`relative hidden md:flex flex-col items-center`}>
         <div class={`bg-white rounded-[25px] shadow-xl p-6 text-center flex flex-col items-center transition-all duration-300`}>
           <div class="relative w-full h-60 rounded-[25px] border border-[#8262b0] mb-5 overflow-visible">
             <img
@@ -150,7 +151,13 @@ import WaitingListButton from "@/components/ui/WaitingListButton.astro";
 
       </div>
 
-      <a href="https://blog.aralects.com" class="mt-2 md:hidden mx-auto bg-white text-[#8262b0] border border-[#8262b0] px-6 py-2 rounded-full shadow hover:bg-[#f2eafa] transition">
+
+      <div class="block md:hidden">
+
+        <BlogsSlider client:load />
+      </div>
+
+      <a href="https://blog.aralects.com" class="mt-2 md:mb-0 mb-6 md:hidden mx-auto bg-white text-[#8262b0] border border-[#8262b0] px-6 py-2 rounded-full shadow hover:bg-[#f2eafa] transition">
         View Blogs
       </a>
 
