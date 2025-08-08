@@ -49,7 +49,9 @@ function HomepageSlider({ isFirstPromo = false }) {
                 AI-Powered Customization
               </div>
               <p className="font-SpaceGroteskLight md:text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-thin text-white transition motion-safe:opacity-0">
-                Move at your own speed with customizable lessons.
+                Chat with your personal tutor to customize lessons that fit your
+                immediate needs and interests—right when you need them. Update
+                your focus anytime, and your plan instantly adapts.
               </p>
             </div>
             <div className="embla__slide">
@@ -62,9 +64,9 @@ function HomepageSlider({ isFirstPromo = false }) {
                 Script Settings
               </div>
               <p className="font-SpaceGroteskLight md:text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-thin text-white transition motion-safe:opacity-0">
-                Toggle between Arabic script, Latin transliteration, or a
-                combined view so you learn in the format that works best for
-                you.
+                Switch seamlessly between the Arabic and Latin alphabet, or both
+                at once, so you can learn in the format that feels most natural
+                to you, and that helps you meet your goals.
               </p>
             </div>
             <div className="embla__slide">
@@ -77,8 +79,9 @@ function HomepageSlider({ isFirstPromo = false }) {
                 Main & Secondary Dialect
               </div>
               <p className="font-SpaceGroteskLight md:text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-thin text-white transition motion-safe:opacity-0">
-                Choose a primary and secondary dialect, every lesson dynamically
-                shows vocabulary and phrases side‑by‑side.
+                Pick your primary and secondary dialect, and see vocabulary and
+                phrases displayed side-by-side in every lesson—making
+                comparisons effortless and learning faster.
               </p>
             </div>
           </div>
@@ -94,7 +97,8 @@ function HomepageSlider({ isFirstPromo = false }) {
                 Audio Pronunciation
               </div>
               <p className="font-SpaceGroteskLight md:text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-thin text-white transition motion-safe:opacity-0">
-                Hear every word and phrase spoken by native speakers.
+                Hear every word and phrase spoken by native speakers for
+                authentic pronunciation and natural rhythm.
               </p>
             </div>
             <div className="embla__slide">
@@ -107,8 +111,9 @@ function HomepageSlider({ isFirstPromo = false }) {
                 “Explain Answer” Feature
               </div>
               <p className="font-SpaceGroteskLight md:text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-thin text-white transition motion-safe:opacity-0">
-                Tappable chat icon that opens the AI bot for an in‑depth
-                breakdown, great for curious students who want more nuance.
+                Tap the chat icon to get an AI-powered breakdown of your
+                answer—perfect for learners who want deeper insights and
+                context.
               </p>
             </div>
             <div className="embla__slide">
@@ -121,8 +126,8 @@ function HomepageSlider({ isFirstPromo = false }) {
                 Secondary Dialect
               </div>
               <p className="font-SpaceGroteskLight md:text-md intersect-once motion-safe:intersect:animate-fade-in-up mt-1 font-thin text-white transition motion-safe:opacity-0">
-                Every lesson shows the word being learned in the secondary
-                dialect chosen by you.
+                See every new word in your chosen secondary dialect, making it
+                easier to compare and connect across dialects as you learn.
               </p>
             </div>
           </div>
