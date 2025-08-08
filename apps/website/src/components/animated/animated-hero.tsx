@@ -20,6 +20,7 @@ import { AralectsFusion } from "./aralects-fusion";
 import { FloatingPlane } from "./floating-plane";
 import { HomingCursorProvider } from "./homing-cursor";
 import TextScrollReveal from "./text-scroll-reveal";
+import { smoothScrollTo } from "src/utils/newsletter";
 
 const BLOBS_DELAY = 0.3;
 const WORDS_FADE_OUT_START = 120;
@@ -425,6 +426,9 @@ const AnimatedHeroInner = () => {
               style={{
                 opacity: surroundingTextOpacity,
                 filter: surroundingTextBlur,
+                pointerEvents: useTransform(surroundingTextOpacity, (value) =>
+                  value === 0 ? "none" : "auto",
+                ),
               }}
             >
               {THIRD_LINE_WORDS.map((word, index) => (
@@ -437,11 +441,55 @@ const AnimatedHeroInner = () => {
                   className={index > 0 ? "ml-2 md:ml-4" : ""}
                 />
               ))}
+              <button
+                onClick={() => {
+                  smoothScrollTo("newsletter", 80);
+                }}
+                id={"join-waiting-list-button-hero"}
+                className={cn(
+                  "font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md hover:bg-gray-200 md:text-xl",
+                  "tex-lg z-[100] mx-auto mt-6  border shadow-md transition-colors md:text-xl",
+                )}
+              >
+                Subscribe Now
+                <div className="relative h-6 w-6 overflow-hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="absolute inset-0 rotate-90 transform transition-transform duration-300 ease-in-out group-hover:translate-y-full"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="absolute inset-0 -translate-y-full rotate-90 transform transition-transform duration-300 ease-in-out group-hover:translate-y-0"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </div>
+              </button>
             </motion.span>
           </motion.h1>
 
           <motion.span
-            className="absolute inset-0 flex items-center justify-center p-8 md:p-24"
+            className="pointer-events-none absolute inset-0 flex items-center justify-center p-8 md:p-24"
             style={{
               opacity: useTransform(
                 scrollY,
