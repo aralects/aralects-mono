@@ -441,18 +441,22 @@ const AnimatedHeroInner = () => {
                   className={index > 0 ? "ml-2 md:ml-4" : ""}
                 />
               ))}
-              <button
+              <motion.button
+                style={{
+                  opacity: surroundingTextOpacity,
+                  filter: surroundingTextBlur,
+                }}
                 onClick={() => {
                   smoothScrollTo("newsletter", 80);
                 }}
                 id={"join-waiting-list-button-hero"}
                 className={cn(
-                  "font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] bg-white px-5 py-2 text-[#8262b0] shadow-md hover:bg-gray-200 md:text-xl",
-                  "tex-lg z-[100] mx-auto mt-6  border shadow-md transition-colors md:text-xl",
+                  "font-SpaceGrotesk tex-lg group flex w-fit cursor-pointer items-center gap-2 rounded-full border border-[#8262b0] bg-white px-4 py-[6px] text-[#8262b0] shadow-md hover:bg-gray-200 md:px-5 md:py-2 md:text-xl",
+                  "tex-lg z-[100] mx-auto mt-6 border  text-sm shadow-md transition-colors md:text-xl",
                 )}
               >
                 Subscribe Now
-                <div className="relative h-6 w-6 overflow-hidden">
+                <div className="relative h-4 w-4 overflow-hidden md:h-5 md:w-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -463,7 +467,7 @@ const AnimatedHeroInner = () => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    className="absolute inset-0 rotate-90 transform transition-transform duration-300 ease-in-out group-hover:translate-y-full"
+                    className="absolute inset-0 h-full w-full rotate-90 transform transition-transform duration-300 ease-in-out group-hover:translate-y-full"
                   >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
@@ -484,7 +488,7 @@ const AnimatedHeroInner = () => {
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
                 </div>
-              </button>
+              </motion.button>
             </motion.span>
           </motion.h1>
 
